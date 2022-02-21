@@ -1,3 +1,3 @@
 import { IProfile } from "./profile.model";
 
-export type IUpdateProfile = Partial<Pick<IProfile, "discordUserId" | "points">>;
+export type IUpdateProfile = Partial<Pick<IProfile, "nickname">>;

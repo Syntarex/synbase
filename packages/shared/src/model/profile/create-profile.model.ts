@@ -1,3 +1,3 @@
 import { IProfile } from "./profile.model";
 
-export type ICreateProfile = Pick<IProfile, "discordUserId" | "points">;
+export type ICreateProfile = Pick<IProfile, "nickname">;
