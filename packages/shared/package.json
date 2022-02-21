@@ -1,0 +1,22 @@
+{
+    "name": "@synbase/shared",
+    "version": "0.0.1",
+    "private": true,
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
+    "files": [
+        "lib"
+    ],
+    "dependencies": {
+        "lodash": "^4.17.21"
+    },
+    "devDependencies": {
+        "@types/lodash": "^4.14.178"
+    },
+    "scripts": {
+        "prebuild": "yarn clean",
+        "prepack": "yarn build",
+        "build": "tsc --build",
+        "clean": "rimraf lib && rimraf tsconfig.tsbuildinfo"
+    }
+}

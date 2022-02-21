@@ -1,0 +1,46 @@
+{
+    "name": "@synbase/api",
+    "version": "0.0.1",
+    "private": true,
+    "author": "Dominic Fuchs <dominic.fuchs@lansco.de>",
+    "scripts": {
+        "prebuild": "yarn clean",
+        "build": "nest build --path tsconfig.json",
+        "preserve": "yarn clean",
+        "serve": "env-cmd -f ../../.env nest start --path tsconfig.json --watch",
+        "start": "node lib/main.js",
+        "clean": "rimraf lib && rimraf tsconfig.tsbuildinfo"
+    },
+    "dependencies": {
+        "@discordjs/builders": "^0.12.0",
+        "@discordjs/rest": "^0.3.0",
+        "@nestjs/common": "^8.3.1",
+        "@nestjs/config": "^1.2.0",
+        "@nestjs/core": "^8.3.1",
+        "@nestjs/passport": "^8.2.1",
+        "@nestjs/platform-express": "^8.3.1",
+        "@nestjs/typeorm": "^8.0.3",
+        "@synbase/shared": "^0.0.1",
+        "class-transformer": "^0.5.1",
+        "class-validator": "^0.13.2",
+        "discord-api-types": "^0.27.2",
+        "express": "^4.17.3",
+        "keycloak-connect": "^17.0.0",
+        "lodash": "^4.17.21",
+        "multer": "^1.4.4",
+        "mysql": "^2.18.1",
+        "nest-keycloak-connect": "^1.8.0",
+        "passport": "^0.5.2",
+        "reflect-metadata": "^0.1.13",
+        "rxjs": "^7.5.4",
+        "typeorm": "^0.2.43"
+    },
+    "devDependencies": {
+        "@nestjs/cli": "^8.2.1",
+        "@types/express": "^4.17.13",
+        "@types/lodash": "^4.14.178",
+        "@types/multer": "^1.4.7",
+        "@types/node": "^17.0.19",
+        "@types/validator": "^13.7.1"
+    }
+}

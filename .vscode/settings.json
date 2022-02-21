@@ -1,0 +1,28 @@
+{
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+    },
+    "files.eol": "\n",
+    "editor.tabSize": 4,
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "askForPassword": true,
+            "driver": "MariaDB",
+            "name": "Localhost",
+            "database": "synbase",
+            "username": "root"
+        }
+    ]
+}
