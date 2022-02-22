@@ -9,6 +9,7 @@ import { Routes } from "discord-api-types/v9";
 export class DiscordService {
     public static COMMANDS: SlashCommandBuilder[] = [
         new SlashCommandBuilder().setName(DiscordCommand.Ping).setDescription("Antwortet mit Pong!"),
+        new SlashCommandBuilder().setName(DiscordCommand.Info).setDescription("Gibt Infos zu synbase.io"),
     ];
 
     private token: string;

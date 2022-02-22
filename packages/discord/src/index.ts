@@ -1,6 +1,6 @@
 import { DiscordCommand } from "@synbase/shared";
 import { Client, Intents } from "discord.js";
-import { init } from "./client";
+import { init, synbase } from "./client";
 import { Env } from "./constants";
 
 const client: Client = new Client({ intents: [Intents.FLAGS.GUILDS] });
@@ -16,8 +16,10 @@ client.on("interactionCreate", async (interaction) => {
 
     switch (command) {
         case DiscordCommand.Ping:
-            console.log(interaction);
             await interaction.reply("Pong!");
+        case DiscordCommand.Info:
+            const app = await synbase.app.get();
+            await interaction.reply(`Ich habe Version v${app.version}`);
     }
 });
 
