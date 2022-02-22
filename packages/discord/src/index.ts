@@ -1,16 +1,12 @@
 import { DiscordCommand } from "@synbase/shared";
 import { Client, Intents } from "discord.js";
-import { getToken } from "./client";
+import { init } from "./client";
 import { Env } from "./constants";
 
 const client: Client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 client.once("ready", async () => {
-    console.log("Hello Discord!");
-
-    const token = await getToken();
-
-    console.log(token);
+    await init();
 });
 
 client.on("interactionCreate", async (interaction) => {

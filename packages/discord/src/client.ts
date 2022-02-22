@@ -1,9 +1,13 @@
+import { Synbase } from "@synbase/shared";
+import _ from "lodash";
 import { Issuer } from "openid-client";
-import { Env } from "./constants";
+import { Config, Env } from "./constants";
+
+export const synbase = new Synbase(Env.apiUrl);
 
 const issuerUrl = `${Env.keycloakUrl}/realms/${Env.keycloakRealm}`;
 
-export const getToken = async () => {
+const getToken = async () => {
     const keycloakIssuer = await Issuer.discover(issuerUrl);
 
     const client = new keycloakIssuer.Client({
@@ -15,4 +19,22 @@ export const getToken = async () => {
     return await client.grant({
         grant_type: "client_credentials",
     });
+};
+
+export const init = async () => {
+    const authenticate = async () => {
+        const { access_token } = await getToken();
+
+        if (_.isUndefined(access_token)) {
+            synbase.logout();
+            /* TODO: Hier muss mehr passieren */
+            throw new Error("Es ist ein Fehler beim Authentifizieren aufgetreten.");
+        }
+
+        synbase.login(access_token);
+    };
+
+    await authenticate();
+
+    setInterval(authenticate, Config.tokenRefreshInterval);
 };
