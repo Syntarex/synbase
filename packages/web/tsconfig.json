@@ -1,0 +1,18 @@
+{
+    "extends": "../../tsconfig.build.json",
+    "compilerOptions": {
+        "module": "esnext",
+        "skipLibCheck": true,
+        "noEmit": true,
+        "target": "es5",
+        "lib": ["esnext", "dom", "dom.iterable"],
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "incremental": true,
+        "allowJs": false,
+        "forceConsistentCasingInFileNames": false
+    },
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "server.js"],
+    "exclude": ["node_modules"]
+}
