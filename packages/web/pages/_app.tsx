@@ -1,10 +1,7 @@
 import { CacheProvider, EmotionCache } from "@emotion/react";
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import type { AppProps } from "next/app";
+import Head from "next/head";
 import React from "react";
 import "../styles/globals.css";
 import synbaseTheme from "../styles/theme/synbase.theme";
@@ -21,6 +18,10 @@ const MyApp = (props: IMyAppProps) => {
 
     return (
         <CacheProvider value={emotionCache}>
+            <Head>
+                <meta name="viewport" content="initial-scale=1, width=device-width" />
+            </Head>
+
             <ThemeProvider theme={synbaseTheme}>
                 <CssBaseline />
                 <Component {...pageProps} />
