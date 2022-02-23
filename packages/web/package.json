@@ -5,7 +5,7 @@
     "scripts": {
         "clean": "rimraf .next",
         "prebuild": "yarn clean",
-        "dev:server": "env-cmd -f ../../.env next dev -p 8079",
+        "dev:server": "NODE_EXTRA_CA_CERTS=\"$(mkcert -CAROOT)/rootCA.pem\" env-cmd -f ../../.env next dev -p 8079",
         "dev:proxy": "local-ssl-proxy --key ../../ssl-key.pem --cert ../../ssl-cert.pem --source 8080 --target 8079",
         "serve": "npm-run-all --parallel dev:**",
         "build": "next build",
@@ -19,6 +19,7 @@
         "@emotion/styled": "^11.8.1",
         "@mui/icons-material": "^5.4.2",
         "@mui/material": "^5.4.3",
+        "@synbase/shared": "^0.0.1",
         "next": "^12.1.0",
         "react": "^17.0.2",
         "react-dom": "^17.0.2"

@@ -3,9 +3,9 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import React from "react";
+import createEmotionCache from "../src/util/create-emotion-cache.util";
 import "../styles/globals.css";
 import synbaseTheme from "../styles/theme/synbase.theme";
-import createEmotionCache from "../util/create-emotion-cache.util";
 
 interface IMyAppProps extends AppProps {
     emotionCache?: EmotionCache;

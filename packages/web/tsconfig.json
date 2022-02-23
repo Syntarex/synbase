@@ -14,5 +14,10 @@
         "forceConsistentCasingInFileNames": false
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "server.js"],
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules"],
+    "references": [
+        {
+            "path": "../shared"
+        }
+    ]
 }
