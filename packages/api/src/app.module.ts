@@ -17,8 +17,8 @@ import { EnvMiddleware } from "./util/middleware/env.middleware";
             useFactory: (configService: ConfigService) => ({
                 authServerUrl: ensure(configService.get("KEYCLOAK_URL")),
                 realm: ensure(configService.get("KEYCLOAK_REALM")),
-                clientId: ensure(configService.get("API_KEYCLOAK_CLIENT_ID")),
-                secret: ensure(configService.get("API_KEYCLOAK_CLIENT_SECRET")),
+                clientId: ensure(configService.get("KEYCLOAK_CLIENT_ID")),
+                secret: ensure(configService.get("KEYCLOAK_CLIENT_SECRET")),
                 useNestLogger: true,
             }),
         }),

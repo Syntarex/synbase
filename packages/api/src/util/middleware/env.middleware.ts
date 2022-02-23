@@ -10,7 +10,7 @@ export class EnvMiddleware implements NestMiddleware {
     constructor(private readonly configService: ConfigService) {}
 
     async use(req: IRequest, res: Response, next: NextFunction) {
-        const keycloakClientId = ensure(this.configService.get<string>("API_KEYCLOAK_CLIENT_ID"));
+        const keycloakClientId = ensure(this.configService.get<string>("KEYCLOAK_CLIENT_ID"));
 
         req.env = {
             keycloakClientId,

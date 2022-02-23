@@ -9,6 +9,6 @@ export const Env = {
     apiUrl: ensure(process.env.API_URL),
     keycloakUrl: ensure(process.env.KEYCLOAK_URL),
     keycloakRealm: ensure(process.env.KEYCLOAK_REALM),
-    keycloakClientId: ensure(process.env.DISCORD_KEYCLOAK_CLIENT_ID),
-    keycloakClientSecret: ensure(process.env.DISCORD_KEYCLOAK_CLIENT_SECRET),
+    keycloakClientId: ensure(process.env.KEYCLOAK_CLIENT_ID),
+    keycloakClientSecret: ensure(process.env.KEYCLOAK_CLIENT_SECRET),
 };
