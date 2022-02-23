@@ -12,7 +12,7 @@
         "incremental": true,
         "strict": true,
         "importHelpers": true,
-        "lib": ["es2017", "dom"],
+        "lib": ["es2017"],
         "jsx": "react"
     }
 }
