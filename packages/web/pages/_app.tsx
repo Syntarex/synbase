@@ -5,6 +5,7 @@ import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import React from "react";
+import { RecoilRoot } from "recoil";
 import createEmotionCache from "../src/util/create-emotion-cache.util";
 import "../styles/globals.css";
 import synbaseTheme from "../styles/theme/synbase.theme";
@@ -20,18 +21,20 @@ const MyApp = (props: IMyAppProps) => {
     const { session, Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
     return (
-        <SessionProvider session={session}>
-            <CacheProvider value={emotionCache}>
-                <Head>
-                    <meta name="viewport" content="initial-scale=1, width=device-width" />
-                </Head>
+        <RecoilRoot>
+            <SessionProvider session={session}>
+                <CacheProvider value={emotionCache}>
+                    <Head>
+                        <meta name="viewport" content="initial-scale=1, width=device-width" />
+                    </Head>
 
-                <ThemeProvider theme={synbaseTheme}>
-                    <CssBaseline />
-                    <Component {...pageProps} />
-                </ThemeProvider>
-            </CacheProvider>
-        </SessionProvider>
+                    <ThemeProvider theme={synbaseTheme}>
+                        <CssBaseline />
+                        <Component {...pageProps} />
+                    </ThemeProvider>
+                </CacheProvider>
+            </SessionProvider>
+        </RecoilRoot>
     );
 };
 
