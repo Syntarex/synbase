@@ -3,6 +3,7 @@ import NextAuth from "next-auth";
 import KeycloakProvider from "next-auth/providers/keycloak";
 import { Env } from "../../../src/constants";
 
+/* TODO: AccessToken wird nicht automatisch aktualisiert */
 export default NextAuth({
     providers: [
         KeycloakProvider({
