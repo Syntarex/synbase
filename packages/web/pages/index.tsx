@@ -2,9 +2,9 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { useKeycloak } from "@react-keycloak/nextjs";
 import { IApp } from "@synbase/shared";
 import _ from "lodash";
+import { signIn, signOut, useSession } from "next-auth/react";
 import React from "react";
 import { synbase } from "../src/client";
 
@@ -15,39 +15,24 @@ export interface IHomeProps {
 const Home = (props: IHomeProps) => {
     const { app } = props;
 
-    const { keycloak, initialized } = useKeycloak();
-
-    const isLoggedIn = React.useMemo(() => {
-        if (_.isUndefined(keycloak) || !initialized) {
-            return false;
-        }
-
-        return keycloak.authenticated;
-    }, [keycloak, initialized]);
+    const { data: session } = useSession();
 
     const onButtonPressed = React.useCallback(() => {
-        if (_.isUndefined(keycloak) || !initialized) {
-            alert("Nicht initialisiert.");
+        if (_.isNull(session)) {
+            signIn();
             return;
         }
 
-        if (isLoggedIn) {
-            keycloak.logout();
-            return;
-        }
-
-        keycloak.login();
-    }, [keycloak, initialized, isLoggedIn]);
+        signOut();
+    }, [session]);
 
     return (
         <Container fixed>
             <Grid container spacing={2}>
                 <Grid item justifyContent={"center"} alignItems={"center"}>
                     <Typography variant={"h1"}>Hello Synbase v{app.version}!</Typography>
-                    <Typography>{isLoggedIn ? "Du bist eingeloggt." : "Du bist NICHT eingeloggt."}</Typography>
-                    <Button disabled={!initialized} onClick={onButtonPressed}>
-                        {isLoggedIn ? "Logout" : "Login"}
-                    </Button>
+                    <Typography>{!_.isNull(session) ? "Du bist eingeloggt." : "Du bist NICHT eingeloggt."}</Typography>
+                    <Button onClick={onButtonPressed}>{!_.isNull(session) ? "Logout" : "Login"}</Button>
                 </Grid>
             </Grid>
         </Container>

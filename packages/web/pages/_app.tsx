@@ -1,27 +1,26 @@
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { KeycloakCookies, Persistors, SSRKeycloakProvider } from "@react-keycloak/nextjs";
-import type { AppContext, AppProps } from "next/app";
+import { Session } from "next-auth";
+import { SessionProvider } from "next-auth/react";
+import type { AppProps } from "next/app";
 import Head from "next/head";
 import React from "react";
-import { keycloakConfig } from "../src/auth/keycloak.config";
-import { parseCookies } from "../src/auth/keycloak.function";
 import createEmotionCache from "../src/util/create-emotion-cache.util";
 import "../styles/globals.css";
 import synbaseTheme from "../styles/theme/synbase.theme";
 
 interface IMyAppProps extends AppProps {
     emotionCache?: EmotionCache;
-    cookies: KeycloakCookies;
+    session: Session;
 }
 
 const clientSideEmotionCache = createEmotionCache();
 
 const MyApp = (props: IMyAppProps) => {
-    const { cookies, Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+    const { session, Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
     return (
-        <SSRKeycloakProvider keycloakConfig={keycloakConfig} persistor={Persistors.Cookies(cookies)}>
+        <SessionProvider session={session}>
             <CacheProvider value={emotionCache}>
                 <Head>
                     <meta name="viewport" content="initial-scale=1, width=device-width" />
@@ -32,14 +31,8 @@ const MyApp = (props: IMyAppProps) => {
                     <Component {...pageProps} />
                 </ThemeProvider>
             </CacheProvider>
-        </SSRKeycloakProvider>
+        </SessionProvider>
     );
 };
 
-export async function getInitialProps(context: AppContext) {
-    console.log("works");
-    return {
-        cookies: parseCookies(context?.ctx?.req),
-    };
-}
 export default MyApp;
