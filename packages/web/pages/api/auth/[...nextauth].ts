@@ -1,17 +1,18 @@
 import NextAuth from "next-auth";
 import KeycloakProvider from "next-auth/providers/keycloak";
+import { Env } from "../../../src/constants";
 
 export default NextAuth({
     providers: [
         KeycloakProvider({
-            clientId: "synbase",
+            clientId: Env.keycloakClientId,
             authorization: {
                 params: {
                     scope: "openid profile email",
                 },
             },
-            clientSecret: "59nxSYNcAtScZo9EpoGdevkn3q3julFG",
-            issuer: "https://id.synbase.io/auth/realms/synbase",
+            clientSecret: Env.keycloakClientSecret,
+            issuer: `${Env.keycloakUrl}/realms/${Env.keycloakRealm}`,
         }),
     ],
 });
