@@ -16,6 +16,8 @@ export class Synbase {
     public app: AppClient;
 
     constructor(baseUrl: string) {
+        console.log("RUNS CONSTRUCTOR");
+
         this.httpClient = axios.create({
             baseURL: baseUrl,
             responseType: "json",
