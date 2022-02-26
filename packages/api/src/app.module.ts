@@ -3,7 +3,7 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { APP_GUARD } from "@nestjs/core";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ensure } from "@synbase/shared";
-import { AuthGuard, KeycloakConnectModule, RoleGuard } from "nest-keycloak-connect";
+import { AuthGuard, KeycloakConnectModule, ResourceGuard, RoleGuard } from "nest-keycloak-connect";
 import { AppController } from "./app.controller";
 import { DiscordModule } from "./discord/discord.module";
 import { EnvMiddleware } from "./util/middleware/env.middleware";
@@ -43,6 +43,10 @@ import { EnvMiddleware } from "./util/middleware/env.middleware";
         {
             provide: APP_GUARD,
             useClass: AuthGuard,
+        },
+        {
+            provide: APP_GUARD,
+            useClass: ResourceGuard,
         },
         {
             provide: APP_GUARD,

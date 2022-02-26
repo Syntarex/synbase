@@ -1,4 +1,4 @@
-import { Role } from "@synbase/shared";
+import { ApiRole } from "@synbase/shared";
 
 export interface IAuthenticatedUser {
     sub: string;
@@ -7,7 +7,7 @@ export interface IAuthenticatedUser {
     email: string;
     resource_access: {
         [clientId: string]: {
-            roles: Role[];
+            roles: ApiRole[];
         };
     };
 }
