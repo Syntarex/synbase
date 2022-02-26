@@ -5,7 +5,7 @@
     "scripts": {
         "clean": "rimraf .next",
         "prebuild": "yarn clean",
-        "dev:server": "NEXTAUTH_URL=https://localhost:8080 NODE_EXTRA_CA_CERTS=\"$(mkcert -CAROOT)/rootCA.pem\" env-cmd -f ../../.env next dev -p 8079",
+        "dev:server": "NODE_EXTRA_CA_CERTS=\"$(mkcert -CAROOT)/rootCA.pem\" env-cmd -f ../../.env next dev -p 8079",
         "dev:proxy": "local-ssl-proxy --key ../../ssl-key.pem --cert ../../ssl-cert.pem --source 8080 --target 8079",
         "serve": "npm-run-all --parallel dev:**",
         "build": "next build",
