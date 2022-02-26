@@ -1,9 +1,8 @@
 import { IClientCredentialsOptions, Synbase } from "@synbase/shared";
-import { Env } from "./constants";
+import { ServerEnv } from "../constants/constants.server";
 
 const { apiUrl, keycloakClientId, keycloakClientSecret, keycloakRealm, keycloakUrl, keycloakTokenRefreshInterval } =
-    Env;
-
+    ServerEnv;
 const clientCredentials: IClientCredentialsOptions = {
     keycloakClientId,
     keycloakClientSecret,
@@ -11,10 +10,10 @@ const clientCredentials: IClientCredentialsOptions = {
     keycloakUrl,
 };
 
-export const synbase = new Synbase(apiUrl);
+export const serverSynbase = new Synbase(apiUrl);
 
 export const init = async () => {
-    await synbase.loginAsClient(clientCredentials);
+    await serverSynbase.loginAsClient(clientCredentials);
 
-    setInterval(() => synbase.loginAsClient(clientCredentials), keycloakTokenRefreshInterval);
+    setInterval(() => serverSynbase.loginAsClient(clientCredentials), keycloakTokenRefreshInterval);
 };

@@ -1,7 +1,7 @@
 import _ from "lodash";
 import { useSession } from "next-auth/react";
 import React from "react";
-import { clientSynbase } from "../../../client/client.client";
+import { clientSynbase } from "../../../client/synbase.client";
 import { ISession } from "../../../model/session.model";
 
 interface IAuthHandler {

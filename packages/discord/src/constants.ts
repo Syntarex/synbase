@@ -11,4 +11,5 @@ export const Env = {
     keycloakRealm: ensure(process.env.KEYCLOAK_REALM),
     keycloakClientId: ensure(process.env.KEYCLOAK_CLIENT_ID),
     keycloakClientSecret: ensure(process.env.KEYCLOAK_CLIENT_SECRET),
+    keycloakTokenRefreshInterval: Number(ensure(process.env.KEYCLOAK_TOKEN_REFRESH_INTERVAL)),
 };
