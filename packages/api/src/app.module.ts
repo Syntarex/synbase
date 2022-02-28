@@ -6,6 +6,7 @@ import { ensure } from "@synbase/shared";
 import { AuthGuard, KeycloakConnectModule, ResourceGuard, RoleGuard } from "nest-keycloak-connect";
 import { AppController } from "./app.controller";
 import { DiscordModule } from "./discord/discord.module";
+import { DiscordVerification } from "./discord/model/discord-verification.entity";
 import { EnvMiddleware } from "./util/middleware/env.middleware";
 
 @Module({
@@ -34,7 +35,7 @@ import { EnvMiddleware } from "./util/middleware/env.middleware";
                 password: ensure(configService.get("MARIADB_PASSWORD")),
                 database: ensure(configService.get("MARIADB_DATABASE")),
                 synchronize: true,
-                entities: [],
+                entities: [DiscordVerification],
             }),
         }),
         DiscordModule,

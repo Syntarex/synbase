@@ -1,5 +1,5 @@
 export interface IDiscordVerification {
-    profileId: string | null;
-    discordUserId: string;
+    profileId: string;
+    discordUserId: string | null;
     verificationCode: string;
 }
