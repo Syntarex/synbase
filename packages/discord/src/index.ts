@@ -14,12 +14,15 @@ client.on("interactionCreate", async (interaction) => {
 
     const command: DiscordCommand = interaction.commandName as DiscordCommand;
 
+    /* TODO: Discord.js Command Handler nutzen */
     switch (command) {
         case DiscordCommand.Ping:
             await interaction.reply("Pong!");
+            break;
         case DiscordCommand.Info:
             const app = await synbase.app.get();
             await interaction.reply(`Ich habe Version v${app.version}`);
+            break;
     }
 });
 
