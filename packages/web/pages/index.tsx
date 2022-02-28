@@ -6,7 +6,6 @@ import { IApp } from "@synbase/shared";
 import _ from "lodash";
 import { signIn, signOut, useSession } from "next-auth/react";
 import React from "react";
-import { serverSynbase } from "../src/client/synbase.server";
 import { Fetch } from "../src/component/common/fetch.component";
 import { testFetch } from "../src/data/test.selectors";
 
@@ -44,7 +43,9 @@ const Home = (props: IHomeProps) => {
 };
 
 export async function getStaticProps() {
-    const app = await serverSynbase.app.get();
+    const app: IApp = {
+        version: "mocked",
+    };
 
     return {
         props: {
