@@ -7,7 +7,8 @@ import _ from "lodash";
 import { signIn, signOut, useSession } from "next-auth/react";
 import React from "react";
 import { Fetch } from "../src/component/common/fetch.component";
-import { testFetch } from "../src/data/test.selectors";
+import { getApp } from "../src/data/app/app.selectors";
+import { getAllDiscordVerifications } from "../src/data/discord-verification/discord-verification.selectors";
 
 export interface IHomeProps {
     app: IApp;
@@ -35,7 +36,8 @@ const Home = (props: IHomeProps) => {
                     <Typography>{!_.isNull(session) ? "Du bist eingeloggt." : "Du bist NICHT eingeloggt."}</Typography>
                     <Button onClick={onButtonPressed}>{!_.isNull(session) ? "Logout" : "Login"}</Button>
 
-                    <Fetch selector={testFetch}>{(app) => <Typography>{app.version}</Typography>}</Fetch>
+                    <Fetch selector={getApp}>{(app) => <Typography>{app.version}</Typography>}</Fetch>
+                    <Fetch selector={getAllDiscordVerifications({})}></Fetch>
                 </Grid>
             </Grid>
         </Container>

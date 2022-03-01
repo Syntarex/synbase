@@ -1,7 +1,7 @@
 import _ from "lodash";
 import { useSession } from "next-auth/react";
 import React from "react";
-import { clientSynbase } from "../../../client/synbase.client";
+import { synbase } from "../../../client/synbase.client";
 import { ISession } from "../../../model/session.model";
 
 interface IAuthHandler {
@@ -21,9 +21,9 @@ export const AuthHandler = (props: IAuthHandler) => {
         }
 
         if (!_.isNull(session)) {
-            clientSynbase.login((session as ISession).accessToken);
+            synbase.login((session as ISession).accessToken);
         } else {
-            clientSynbase.logout();
+            synbase.logout();
         }
 
         setInitialized(true);

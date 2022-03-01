@@ -1,11 +1,13 @@
 import axios, { AxiosInstance } from "axios";
 import _ from "lodash";
 import { AppClient } from "./app/app.client";
+import { DiscordVerificationClient } from "./discord-verification/discord-verification.client";
 
 export class Synbase {
     private httpClient: AxiosInstance;
 
     public app: AppClient;
+    public discordVerifications: DiscordVerificationClient;
 
     constructor(baseUrl: string) {
         this.httpClient = axios.create({
@@ -35,6 +37,7 @@ export class Synbase {
         );
 
         this.app = new AppClient(this.httpClient);
+        this.discordVerifications = new DiscordVerificationClient(this.httpClient);
     }
 
     public login(token: string): void {
