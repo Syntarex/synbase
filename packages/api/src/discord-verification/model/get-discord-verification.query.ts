@@ -1,10 +1,10 @@
-import { IUpdateDiscordVerification } from "@synbase/shared";
+import { IGetDiscordVerification } from "@synbase/shared";
 import { IsString, IsUUID, MaxLength } from "class-validator";
 import { IsNullable } from "../../util/validation/is-nullable.decorator";
 import { IsUndefinedable } from "../../util/validation/is-undefinedable.decorator";
 import { DiscordVerification } from "./discord-verification.entity";
 
-export class UpdateDiscordVerification implements IUpdateDiscordVerification {
+export class GetDiscordVerification implements IGetDiscordVerification {
     @IsUndefinedable()
     @IsNullable()
     @IsString()
@@ -12,11 +12,7 @@ export class UpdateDiscordVerification implements IUpdateDiscordVerification {
     discordUserId?: string | null;
 
     @IsUndefinedable()
-    @IsString()
-    @MaxLength(DiscordVerification.PROFILE_ID_LENGTH)
-    profileId?: string;
-
-    @IsUndefinedable()
+    @IsNullable()
     @IsUUID()
     verificationCode?: string;
 }

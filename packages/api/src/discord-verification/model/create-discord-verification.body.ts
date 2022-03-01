@@ -10,10 +10,6 @@ export class CreateDiscordVerification implements ICreateDiscordVerification {
     discordUserId: string | null;
 
     @IsString()
-    @MaxLength(DiscordVerification.PROFILE_ID_LENGTH)
-    profileId: string;
-
-    @IsString()
     @IsUUID()
     verificationCode: string;
 }

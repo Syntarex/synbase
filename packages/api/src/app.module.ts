@@ -5,8 +5,9 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { ensure } from "@synbase/shared";
 import { AuthGuard, KeycloakConnectModule, ResourceGuard, RoleGuard } from "nest-keycloak-connect";
 import { AppController } from "./app.controller";
-import { DiscordModule } from "./discord/discord.module";
-import { DiscordVerification } from "./discord/model/discord-verification.entity";
+import { DiscordCommandModule } from "./discord-command/discord-command.module";
+import { DiscordVerificationModule } from "./discord-verification/discord-verification.module";
+import { DiscordVerification } from "./discord-verification/model/discord-verification.entity";
 import { EnvMiddleware } from "./util/middleware/env.middleware";
 
 @Module({
@@ -38,7 +39,8 @@ import { EnvMiddleware } from "./util/middleware/env.middleware";
                 entities: [DiscordVerification],
             }),
         }),
-        DiscordModule,
+        DiscordCommandModule,
+        DiscordVerificationModule,
     ],
     providers: [
         {

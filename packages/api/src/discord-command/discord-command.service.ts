@@ -6,7 +6,7 @@ import { DiscordCommand, ensure } from "@synbase/shared";
 import { Routes } from "discord-api-types/v9";
 
 @Injectable()
-export class DiscordService {
+export class DiscordCommandService {
     public static COMMANDS: SlashCommandBuilder[] = [
         new SlashCommandBuilder().setName(DiscordCommand.Ping).setDescription("Antwortet mit Pong!"),
         new SlashCommandBuilder().setName(DiscordCommand.Info).setDescription("Gibt Infos zu synbase.io"),
@@ -27,7 +27,7 @@ export class DiscordService {
     }
 
     public async ensureCommands(): Promise<void> {
-        const commandsAsJson = DiscordService.COMMANDS.map((command) => command.toJSON());
+        const commandsAsJson = DiscordCommandService.COMMANDS.map((command) => command.toJSON());
 
         /* TODO: Auf globalGuildCommands umstellen wenn produktiv */
         await this.rest.put(Routes.applicationGuildCommands(this.clientId, this.guildId), { body: commandsAsJson });
