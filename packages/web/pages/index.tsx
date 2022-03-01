@@ -4,11 +4,12 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { IApp } from "@synbase/shared";
 import _ from "lodash";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import React from "react";
 import { Fetch } from "../src/component/common/fetch.component";
 import { getApp } from "../src/data/app/app.selectors";
 import { getAllDiscordVerifications } from "../src/data/discord-verification/discord-verification.selectors";
+import { useSession } from "../src/hook/use-session.hook";
 
 export interface IHomeProps {
     app: IApp;
@@ -17,7 +18,7 @@ export interface IHomeProps {
 const Home = (props: IHomeProps) => {
     const { app } = props;
 
-    const { data: session } = useSession();
+    const session = useSession();
 
     const onButtonPressed = React.useCallback(() => {
         if (_.isNull(session)) {

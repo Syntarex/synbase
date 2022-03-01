@@ -34,14 +34,10 @@ export class DiscordVerificationController {
 
     @Get()
     @Scopes(ApiScope.Read, ApiScope.ReadAll)
-    public async getAll(
-        @Query() query: GetDiscordVerification,
-        @AuthenticatedUser() user: IAuthenticatedUser,
-    ): Promise<DiscordVerification[]> {
+    public async getAll(@Query() query: GetDiscordVerification): Promise<DiscordVerification[]> {
         Logger.log(query, "DiscordVerificationController");
-        Logger.log(user, "DiscordVerificationController");
 
-        throw new NotFoundException();
+        return [];
     }
 
     @Get(":id")
