@@ -30,14 +30,14 @@ export default NextAuth({
         },
         jwt: async ({ token, account }) => {
             if (!_.isUndefined(account) && !_.isUndefined(account.access_token)) {
-                token = { accessToken: account.access_token };
+                token = { accessToken: account.access_token, userId: token.sub };
             }
 
             return token;
         },
         session: async ({ session, token }) => {
             session.accessToken = token.accessToken;
-            session.userId = token.sub;
+            session.userId = token.userId;
 
             return session;
         },
