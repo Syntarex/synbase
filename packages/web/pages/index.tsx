@@ -4,11 +4,11 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { IApp } from "@synbase/shared";
 import _ from "lodash";
+import { GetStaticProps } from "next";
 import { signIn, signOut } from "next-auth/react";
 import React from "react";
-import { publicClient } from "../src/client/synbase.client";
+import { getServerClient } from "../src/client/server.client";
 import { useSession } from "../src/hook/use-session.hook";
-import { IPageProps } from "../src/model/page-props.model";
 
 export interface IHomePageProps {
     app: IApp;
@@ -40,14 +40,16 @@ const HomePage = (props: IHomePageProps) => {
     );
 };
 
-export async function getStaticProps(): Promise<IPageProps<IHomePageProps>> {
-    const app: IApp = await publicClient.app.get();
+export const getStaticProps: GetStaticProps<IHomePageProps> = async () => {
+    const client = await getServerClient();
+
+    const app: IApp = await client.app.get();
 
     return {
         props: {
             app,
         },
     };
-}
+};
 
 export default HomePage;

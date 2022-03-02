@@ -1,7 +1,7 @@
 import { selector } from "recoil";
-import { client } from "../../client/synbase.client";
+import { browserClient } from "../../client/browser.client";
 
 export const getApp = selector({
     key: "get-app",
-    get: async () => await client.app.get(),
+    get: async () => await browserClient.app.get(),
 });
