@@ -4,9 +4,6 @@ import { IsNullable } from "../../util/validation/is-nullable.decorator";
 import { DiscordVerification } from "./discord-verification.entity";
 
 export class CreateDiscordVerification implements ICreateDiscordVerification {
-    @IsUUID()
-    id: string;
-
     @IsNullable()
     @IsString()
     @MaxLength(DiscordVerification.DISCORD_USER_ID_LENGTH)

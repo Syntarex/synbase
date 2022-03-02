@@ -1,3 +1,3 @@
 import { IDiscordVerification } from ".";
 
-export type ICreateDiscordVerification = Pick<IDiscordVerification, "id" | "discordUserId" | "verificationCode">;
+export type ICreateDiscordVerification = Pick<IDiscordVerification, "discordUserId" | "verificationCode">;
