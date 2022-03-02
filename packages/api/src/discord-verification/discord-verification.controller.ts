@@ -1,66 +1,101 @@
-import {
-    Body,
-    ConflictException,
-    Controller,
-    Get,
-    Logger,
-    NotFoundException,
-    Param,
-    Post,
-    Put,
-    Query,
-} from "@nestjs/common";
+import { Body, Controller, Get, NotFoundException, Param, Post, Put, Query } from "@nestjs/common";
 import { ApiResource, ApiScope, IDiscordVerification } from "@synbase/shared";
+import _ from "lodash";
 import { AuthenticatedUser, Resource, Scopes } from "nest-keycloak-connect";
 import { IAuthenticatedUser } from "../auth/model/authenticated-user.model";
+import { DiscordVerificationService } from "./discord-verification.service";
 import { CreateDiscordVerification } from "./model/create-discord-verification.body";
-import { DiscordVerification } from "./model/discord-verification.entity";
 import { GetDiscordVerification } from "./model/get-discord-verification.query";
+import { UpdateDiscordVerification } from "./model/update-discord-verification.body";
 
-@Controller(ApiResource.DiscordVerification)
-@Resource(ApiResource.DiscordVerification)
+const { DiscordVerification: resource } = ApiResource;
+
+@Controller(resource)
+@Resource(resource)
 export class DiscordVerificationController {
-    @Post()
-    @Scopes(ApiScope.Create, ApiScope.CreateAll)
+    constructor(private readonly discordVerificationService: DiscordVerificationService) {}
+
+    @Post(":id")
+    @Scopes(ApiScope.CreateAll)
     public async create(
+        @Param("id") id: string,
+        @Body() body: CreateDiscordVerification,
+    ): Promise<IDiscordVerification> {
+        return await this.discordVerificationService.create({
+            id,
+            ...body,
+        });
+    }
+
+    @Post("mine")
+    @Scopes(ApiScope.Create)
+    public async createMine(
         @Body() body: CreateDiscordVerification,
         @AuthenticatedUser() user: IAuthenticatedUser,
     ): Promise<IDiscordVerification> {
-        Logger.log(body, "DiscordVerificationController");
-        Logger.log(user, "DiscordVerificationController");
-
-        throw new ConflictException();
+        return await this.discordVerificationService.create({
+            id: user.sub,
+            ...body,
+        });
     }
 
     @Get()
-    @Scopes(ApiScope.Read, ApiScope.ReadAll)
-    public async getAll(@Query() query: GetDiscordVerification): Promise<DiscordVerification[]> {
-        Logger.log(query, "DiscordVerificationController");
-
-        return [];
+    @Scopes(ApiScope.ReadAll)
+    public async getAll(@Query() query: GetDiscordVerification): Promise<IDiscordVerification[]> {
+        return await this.discordVerificationService.getAll(query);
     }
 
     @Get(":id")
-    @Scopes(ApiScope.Read, ApiScope.ReadAll)
-    public async get(
-        @Param("id") id: string,
-        @AuthenticatedUser() user: IAuthenticatedUser,
-    ): Promise<DiscordVerification> {
-        Logger.log(id, "DiscordVerificationController");
-        Logger.log(user, "DiscordVerificationController");
+    @Scopes(ApiScope.ReadAll)
+    public async get(@Param("id") id: string): Promise<IDiscordVerification> {
+        const discordVerification = await this.discordVerificationService.get(id);
 
-        throw new NotFoundException();
+        if (_.isNull(discordVerification)) {
+            throw new NotFoundException();
+        }
+
+        return discordVerification;
+    }
+
+    @Get("mine")
+    @Scopes(ApiScope.Read)
+    public async getMine(@AuthenticatedUser() user: IAuthenticatedUser): Promise<IDiscordVerification> {
+        const discordVerification = await this.discordVerificationService.get(user.sub);
+
+        if (_.isNull(discordVerification)) {
+            throw new NotFoundException();
+        }
+
+        return discordVerification;
     }
 
     @Put(":id")
-    @Scopes(ApiScope.Update, ApiScope.UpdateAll)
+    @Scopes(ApiScope.UpdateAll)
     public async update(
         @Param("id") id: string,
-        @AuthenticatedUser() user: IAuthenticatedUser,
-    ): Promise<DiscordVerification> {
-        Logger.log(id, "DiscordVerificationController");
-        Logger.log(user, "DiscordVerificationController");
+        @Body() body: UpdateDiscordVerification,
+    ): Promise<IDiscordVerification> {
+        const discordVerification = await this.discordVerificationService.update(id, body);
 
-        throw new NotFoundException();
+        if (_.isNull(discordVerification)) {
+            throw new NotFoundException();
+        }
+
+        return discordVerification;
+    }
+
+    @Put("mine")
+    @Scopes(ApiScope.Update)
+    public async updateMine(
+        @Body() body: UpdateDiscordVerification,
+        @AuthenticatedUser() user: IAuthenticatedUser,
+    ): Promise<IDiscordVerification> {
+        const discordVerification = await this.discordVerificationService.update(user.sub, body);
+
+        if (_.isNull(discordVerification)) {
+            throw new NotFoundException();
+        }
+
+        return discordVerification;
     }
 }
