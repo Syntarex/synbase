@@ -5,6 +5,7 @@ import {
     IUpdateDiscordVerification,
 } from "@synbase/shared";
 import { selector, selectorFamily } from "recoil";
+import { v4 as uuid } from "uuid";
 import { browserClient } from "../../client/browser.client";
 
 export const getAllDiscordVerifications = selectorFamily<IDiscordVerification[], IGetDiscordVerification>({
@@ -40,4 +41,22 @@ export const updateMyDiscordVerification = selectorFamily<IDiscordVerification, 
 export const updateDiscordVerification = selectorFamily<IDiscordVerification, [string, IUpdateDiscordVerification]>({
     key: "update-discord-verification",
     get: (data) => async () => await browserClient.discordVerifications.update(data[0], data[1]),
+});
+
+export const ensureMyDiscordVerification = selector<IDiscordVerification>({
+    key: "ensure-my-discord-verification",
+    get: async () => {
+        let discordVerification: IDiscordVerification | undefined;
+
+        try {
+            discordVerification = await browserClient.discordVerifications.getMy();
+        } catch (ex) {
+            discordVerification = await browserClient.discordVerifications.createMy({
+                discordUserId: null,
+                verificationCode: uuid(),
+            });
+        }
+
+        return discordVerification;
+    },
 });

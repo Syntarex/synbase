@@ -2,8 +2,10 @@ import { Controller, Get } from "@nestjs/common";
 import { ApiResource, ensure, IApp } from "@synbase/shared";
 import { Public, Resource } from "nest-keycloak-connect";
 
-@Controller(ApiResource.App)
-@Resource(ApiResource.App)
+const { App: resource } = ApiResource;
+
+@Controller(resource)
+@Resource(resource)
 export class AppController {
     @Get()
     @Public()

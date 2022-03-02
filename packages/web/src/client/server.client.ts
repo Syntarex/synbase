@@ -1,13 +1,12 @@
 import { Synbase } from "@synbase/shared";
 import _ from "lodash";
-import { NextPageContext } from "next";
-import { getSession } from "next-auth/react";
+import { getSession, GetSessionParams } from "next-auth/react";
 import { ClientEnv } from "../constants/constants.client";
 import { ISession } from "../model/session.model";
 
 const publicClient = new Synbase(ClientEnv.apiUrl);
 
-export const getServerClient = async (context?: NextPageContext): Promise<Synbase> => {
+export const getServerClient = async (context?: GetSessionParams): Promise<Synbase> => {
     if (_.isUndefined(context)) {
         return publicClient;
     }

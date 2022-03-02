@@ -11,9 +11,9 @@ export class DiscordVerification extends Resource implements IDiscordVerificatio
     @PrimaryColumn("uuid")
     id: string;
 
-    @Column({ type: "varchar", length: DiscordVerification.DISCORD_USER_ID_LENGTH, nullable: true })
+    @Column({ type: "varchar", length: DiscordVerification.DISCORD_USER_ID_LENGTH, nullable: true, unique: true })
     discordUserId: string | null;
 
-    @Column({ type: "uuid", length: Length.UUID })
+    @Column({ type: "uuid", length: Length.UUID, unique: true })
     verificationCode: string;
 }
