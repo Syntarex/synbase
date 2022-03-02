@@ -7,24 +7,38 @@ import {
 } from "../..";
 import { RestClient } from "../rest.client";
 
+const { DiscordVerification: url } = ApiResource;
+
 export class DiscordVerificationClient extends RestClient {
-    public async create(body: ICreateDiscordVerification): Promise<IDiscordVerification> {
-        return (await this.httpClient.post(ApiResource.DiscordVerification, body)).data;
+    public async create(id: string, body: ICreateDiscordVerification): Promise<IDiscordVerification> {
+        return (await this.httpClient.post(`${url}/${id}`, body)).data;
+    }
+
+    public async createMy(body: ICreateDiscordVerification): Promise<IDiscordVerification> {
+        return (await this.httpClient.post(`${url}/my`, body)).data;
     }
 
     public async getAll(query: IGetDiscordVerification): Promise<IDiscordVerification[]> {
         return (
-            await this.httpClient.get(ApiResource.DiscordVerification, {
+            await this.httpClient.get(url, {
                 params: query,
             })
         ).data;
     }
 
     public async get(id: string): Promise<IDiscordVerification> {
-        return (await this.httpClient.get(`${ApiResource.DiscordVerification}/${id}`)).data;
+        return (await this.httpClient.get(`${url}/${id}`)).data;
+    }
+
+    public async getMy(): Promise<IDiscordVerification> {
+        return (await this.httpClient.get(`${url}/my`)).data;
     }
 
     public async update(id: string, body: IUpdateDiscordVerification): Promise<IDiscordVerification> {
-        return (await this.httpClient.put(`${ApiResource.DiscordVerification}/${id}`, body)).data;
+        return (await this.httpClient.put(`${url}/${id}`, body)).data;
+    }
+
+    public async updateMy(body: IUpdateDiscordVerification): Promise<IDiscordVerification> {
+        return (await this.httpClient.put(`${url}/my`, body)).data;
     }
 }
