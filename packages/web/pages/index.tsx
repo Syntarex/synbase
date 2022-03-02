@@ -6,16 +6,15 @@ import { IApp } from "@synbase/shared";
 import _ from "lodash";
 import { signIn, signOut } from "next-auth/react";
 import React from "react";
-import { Fetch } from "../src/component/common/fetch.component";
-import { getApp } from "../src/data/app/app.selectors";
-import { getAllDiscordVerifications } from "../src/data/discord-verification/discord-verification.selectors";
+import { publicClient } from "../src/client/synbase.client";
 import { useSession } from "../src/hook/use-session.hook";
+import { IPageProps } from "../src/model/page-props.model";
 
-export interface IHomeProps {
+export interface IHomePageProps {
     app: IApp;
 }
 
-const Home = (props: IHomeProps) => {
+const HomePage = (props: IHomePageProps) => {
     const { app } = props;
 
     const session = useSession();
@@ -34,21 +33,15 @@ const Home = (props: IHomeProps) => {
             <Grid container spacing={2}>
                 <Grid item justifyContent={"center"} alignItems={"center"}>
                     <Typography variant={"h1"}>Hello Synbase v{app.version}!</Typography>
-                    <Typography>{!_.isNull(session) ? "Du bist eingeloggt." : "Du bist NICHT eingeloggt."}</Typography>
                     <Button onClick={onButtonPressed}>{!_.isNull(session) ? "Logout" : "Login"}</Button>
-
-                    <Fetch selector={getApp}>{(app) => <Typography>{app.version}</Typography>}</Fetch>
-                    <Fetch selector={getAllDiscordVerifications({})}></Fetch>
                 </Grid>
             </Grid>
         </Container>
     );
 };
 
-export async function getStaticProps() {
-    const app: IApp = {
-        version: "mocked",
-    };
+export async function getStaticProps(): Promise<IPageProps<IHomePageProps>> {
+    const app: IApp = await publicClient.app.get();
 
     return {
         props: {
@@ -57,4 +50,4 @@ export async function getStaticProps() {
     };
 }
 
-export default Home;
+export default HomePage;
