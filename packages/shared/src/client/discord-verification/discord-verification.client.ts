@@ -16,11 +16,11 @@ export class DiscordVerificationClient extends RestClient {
         ).data;
     }
 
-    public async getMy(): Promise<IDiscordVerification> {
+    public async getMy(): Promise<IDiscordVerification | null> {
         return (await this.httpClient.get(`${ApiResource.DiscordVerification}/my`)).data;
     }
 
-    public async get(id: string): Promise<IDiscordVerification> {
+    public async get(id: string): Promise<IDiscordVerification | null> {
         return (await this.httpClient.get(`${ApiResource.DiscordVerification}/${id}`)).data;
     }
 
@@ -32,11 +32,11 @@ export class DiscordVerificationClient extends RestClient {
         return (await this.httpClient.post(`${ApiResource.DiscordVerification}/${id}`, body)).data;
     }
 
-    public async updateMy(body: IUpdateDiscordVerification): Promise<IDiscordVerification> {
+    public async updateMy(body: IUpdateDiscordVerification): Promise<IDiscordVerification | null> {
         return (await this.httpClient.put(`${ApiResource.DiscordVerification}/my`, body)).data;
     }
 
-    public async update(id: string, body: IUpdateDiscordVerification): Promise<IDiscordVerification> {
+    public async update(id: string, body: IUpdateDiscordVerification): Promise<IDiscordVerification | null> {
         return (await this.httpClient.put(`${ApiResource.DiscordVerification}/${id}`, body)).data;
     }
 }

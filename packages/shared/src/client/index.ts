@@ -18,21 +18,16 @@ export class Synbase {
         this.httpClient.interceptors.response.use(
             (response) => response,
             (error) => {
-                const message = error.response?.data?.message;
+                const { response } = error;
 
-                if (!_.isUndefined(message)) {
-                    if (_.isString(message)) {
-                        throw new Error(message);
-                    }
-
-                    if (_.isArray(message)) {
-                        throw new Error(message.join("\n"));
-                    }
-
-                    throw new Error(_.toString(message));
+                if (_.isEqual(response.status, 404)) {
+                    return Promise.resolve({
+                        ...response,
+                        data: null,
+                    });
                 }
 
-                throw error;
+                return Promise.reject(error);
             },
         );
 
