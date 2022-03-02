@@ -27,9 +27,9 @@ export class DiscordVerificationController {
         });
     }
 
-    @Post("mine")
+    @Post("my")
     @Scopes(ApiScope.Create)
-    public async createMine(
+    public async createMy(
         @Body() body: CreateDiscordVerification,
         @AuthenticatedUser() user: IAuthenticatedUser,
     ): Promise<IDiscordVerification> {
@@ -57,9 +57,9 @@ export class DiscordVerificationController {
         return discordVerification;
     }
 
-    @Get("mine")
+    @Get("my")
     @Scopes(ApiScope.Read)
-    public async getMine(@AuthenticatedUser() user: IAuthenticatedUser): Promise<IDiscordVerification> {
+    public async getMy(@AuthenticatedUser() user: IAuthenticatedUser): Promise<IDiscordVerification> {
         const discordVerification = await this.discordVerificationService.get(user.sub);
 
         if (_.isNull(discordVerification)) {
@@ -84,9 +84,9 @@ export class DiscordVerificationController {
         return discordVerification;
     }
 
-    @Put("mine")
+    @Put("my")
     @Scopes(ApiScope.Update)
-    public async updateMine(
+    public async updateMy(
         @Body() body: UpdateDiscordVerification,
         @AuthenticatedUser() user: IAuthenticatedUser,
     ): Promise<IDiscordVerification> {
