@@ -1,62 +1,48 @@
-import {
-    ICreateDiscordVerification,
-    IDiscordVerification,
-    IGetDiscordVerification,
-    IUpdateDiscordVerification,
-} from "@synbase/shared";
+import { ICreateDiscordVerification, IGetDiscordVerification, IUpdateDiscordVerification } from "@synbase/shared";
+import _ from "lodash";
 import { selector, selectorFamily } from "recoil";
 import { v4 as uuid } from "uuid";
 import { browserClient } from "../../client/browser.client";
 
-export const getAllDiscordVerifications = selectorFamily<IDiscordVerification[], IGetDiscordVerification>({
+export const getAllDiscordVerifications = selectorFamily({
     key: "get-all-discord-verifications",
-    get: (query) => async () => await browserClient.discordVerifications.getAll(query),
+    get: (query: IGetDiscordVerification) => async () => await browserClient.discordVerifications.getAll(query),
 });
 
-export const getMyDiscordVerification = selector<IDiscordVerification>({
-    key: "get-my-discord-verification",
-    get: async () => await browserClient.discordVerifications.getMy(),
-});
-
-export const getDiscordVerification = selectorFamily<IDiscordVerification, string>({
+export const getDiscordVerification = selectorFamily({
     key: "get-discord-verification",
-    get: (id) => async () => await browserClient.discordVerifications.get(id),
+    get: (id: string) => async () => await browserClient.discordVerifications.get(id),
 });
 
-export const createMyDiscordVerification = selectorFamily<IDiscordVerification, ICreateDiscordVerification>({
-    key: "create-my-discord-verification",
-    get: (body) => async () => await browserClient.discordVerifications.createMy(body),
-});
-
-export const createDiscordVerification = selectorFamily<IDiscordVerification, [string, ICreateDiscordVerification]>({
+export const createDiscordVerification = selectorFamily({
     key: "create-discord-verification",
-    get: (data) => async () => await browserClient.discordVerifications.create(data[0], data[1]),
+    get: (data: [string, ICreateDiscordVerification]) => async () =>
+        await browserClient.discordVerifications.create(data[0], data[1]),
 });
 
-export const updateMyDiscordVerification = selectorFamily<IDiscordVerification, IUpdateDiscordVerification>({
+export const updateMyDiscordVerification = selectorFamily({
     key: "update-my-discord-verification",
-    get: (body) => async () => await browserClient.discordVerifications.updateMy(body),
+    get: (body: IUpdateDiscordVerification) => async () => await browserClient.discordVerifications.updateMy(body),
 });
 
-export const updateDiscordVerification = selectorFamily<IDiscordVerification, [string, IUpdateDiscordVerification]>({
+export const updateDiscordVerification = selectorFamily({
     key: "update-discord-verification",
-    get: (data) => async () => await browserClient.discordVerifications.update(data[0], data[1]),
+    get: (data: [string, IUpdateDiscordVerification]) => async () =>
+        await browserClient.discordVerifications.update(data[0], data[1]),
 });
 
-export const ensureMyDiscordVerification = selector<IDiscordVerification>({
+export const ensureMyDiscordVerification = selector({
     key: "ensure-my-discord-verification",
     get: async () => {
-        let discordVerification: IDiscordVerification | undefined;
+        let result = await browserClient.discordVerifications.getMy();
 
-        try {
-            discordVerification = await browserClient.discordVerifications.getMy();
-        } catch (ex) {
-            discordVerification = await browserClient.discordVerifications.createMy({
+        if (_.isNull(result)) {
+            result = await browserClient.discordVerifications.createMy({
                 discordUserId: null,
                 verificationCode: uuid(),
             });
         }
 
-        return discordVerification;
+        return result;
     },
 });
