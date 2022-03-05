@@ -2,6 +2,7 @@ export { IApp } from "./app/app.model";
 export * from "./auth";
 export { DiscordCommand } from "./discord-command/discord-command.model";
 export * from "./discord-verification";
+export * from "./image";
 export * from "./profile";
 export { IResource } from "./resource/resource.model";
 export * from "./transaction";

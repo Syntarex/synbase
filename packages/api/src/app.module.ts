@@ -8,6 +8,8 @@ import { AppController } from "./app.controller";
 import { DiscordCommandModule } from "./discord-command/discord-command.module";
 import { DiscordVerificationModule } from "./discord-verification/discord-verification.module";
 import { DiscordVerification } from "./discord-verification/model/discord-verification.entity";
+import { ImageModule } from "./image/image.module";
+import { Image } from "./image/model/image.entity";
 import { EnvMiddleware } from "./util/middleware/env.middleware";
 
 @Module({
@@ -36,11 +38,12 @@ import { EnvMiddleware } from "./util/middleware/env.middleware";
                 password: ensure(configService.get("MARIADB_PASSWORD")),
                 database: ensure(configService.get("MARIADB_DATABASE")),
                 synchronize: true,
-                entities: [DiscordVerification],
+                entities: [DiscordVerification, Image],
             }),
         }),
         DiscordCommandModule,
         DiscordVerificationModule,
+        ImageModule,
     ],
     providers: [
         {
