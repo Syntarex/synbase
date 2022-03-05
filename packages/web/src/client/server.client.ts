@@ -6,7 +6,7 @@ import { ISession } from "../model/auth/session.model";
 
 const publicClient = new Synbase(ClientEnv.apiUrl);
 
-export const getServerClient = async (context?: GetSessionParams): Promise<Synbase> => {
+export const getPublicClient = async (context?: GetSessionParams): Promise<Synbase> => {
     if (_.isUndefined(context)) {
         return publicClient;
     }

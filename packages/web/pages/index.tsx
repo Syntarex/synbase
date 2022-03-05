@@ -4,14 +4,14 @@ import Typography from "@mui/material/Typography";
 import { IApp } from "@synbase/shared";
 import { GetStaticProps } from "next";
 import React from "react";
-import { getServerClient } from "../src/client/server.client";
+import { getPublicClient } from "../src/client/server.client";
 import { AuthButton } from "../src/component/auth/auth-button/auth-button.component";
 
-export interface IHomePageProps {
+export interface IIndexPageProps {
     app: IApp;
 }
 
-const HomePage = (props: IHomePageProps) => {
+const IndexPage = (props: IIndexPageProps) => {
     const { app } = props;
 
     return (
@@ -26,16 +26,14 @@ const HomePage = (props: IHomePageProps) => {
     );
 };
 
-export const getStaticProps: GetStaticProps<IHomePageProps> = async () => {
-    const client = await getServerClient();
-
-    const app: IApp = await client.app.get();
+export const getStaticProps: GetStaticProps<IIndexPageProps> = async () => {
+    const client = await getPublicClient();
 
     return {
         props: {
-            app,
+            app: await client.app.get(),
         },
     };
 };
 
-export default HomePage;
+export default IndexPage;
