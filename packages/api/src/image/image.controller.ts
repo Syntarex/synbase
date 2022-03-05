@@ -1,8 +1,9 @@
 import { Controller, Get } from "@nestjs/common";
+import { ApiResource } from "@synbase/shared";
 import { Public } from "nest-keycloak-connect";
 import { ImageService } from "./image.service";
 
-@Controller()
+@Controller(ApiResource.Image)
 export class ImageController {
     constructor(private readonly imageService: ImageService) {}
 
