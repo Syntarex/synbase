@@ -2,8 +2,8 @@ import { ensure } from "@synbase/shared";
 import _ from "lodash";
 import NextAuth from "next-auth";
 import KeycloakProvider from "next-auth/providers/keycloak";
-import { ServerEnv } from "../../../src/constants/constants.server";
-import { IToken } from "../../../src/model/auth/token.model";
+import { ServerEnv } from "../../../constants/constants.server";
+import { IToken } from "../../../model/auth/token.model";
 
 const refreshAccessToken = async (token: IToken): Promise<IToken> => {
     try {

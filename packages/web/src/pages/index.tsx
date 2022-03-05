@@ -4,8 +4,8 @@ import Typography from "@mui/material/Typography";
 import { IApp } from "@synbase/shared";
 import { GetStaticProps } from "next";
 import React from "react";
-import { getPublicClient } from "../src/client/server.client";
-import { AuthButton } from "../src/component/auth/auth-button/auth-button.component";
+import { getPublicClient } from "../client/server.client";
+import { AuthButton } from "../component/auth/auth-button/auth-button.component";
 
 export interface IIndexPageProps {
     app: IApp;

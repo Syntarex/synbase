@@ -3,7 +3,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import NextLink from "next/link";
 import React from "react";
-import { Logo } from "../src/component/layout/logo/logo.component";
+import { Logo } from "../component/layout/logo/logo.component";
 
 const Custom404Page = () => {
     return (

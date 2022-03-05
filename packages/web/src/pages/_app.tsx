@@ -7,10 +7,10 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import React from "react";
 import { RecoilRoot } from "recoil";
-import { AuthHandler } from "../src/component/auth/auth-handler/auth-handler.component";
-import createEmotionCache from "../src/util/create-emotion-cache.util";
-import "../styles/globals.css";
-import synbaseTheme from "../styles/theme/synbase.theme";
+import "../../styles/globals.css";
+import synbaseTheme from "../../styles/theme/synbase.theme";
+import { AuthHandler } from "../component/auth/auth-handler/auth-handler.component";
+import createEmotionCache from "../util/create-emotion-cache.util";
 
 interface IMyAppProps extends AppProps {
     emotionCache?: EmotionCache;
