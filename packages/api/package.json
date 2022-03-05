@@ -2,7 +2,6 @@
     "name": "@synbase/api",
     "version": "0.0.1",
     "private": true,
-    "author": "Dominic Fuchs <dominic.fuchs@lansco.de>",
     "scripts": {
         "prebuild": "yarn clean",
         "build": "nest build --path tsconfig.json",
@@ -33,10 +32,10 @@
         "passport": "^0.5.2",
         "reflect-metadata": "^0.1.13",
         "rxjs": "^7.5.4",
-        "typeorm": "^0.2.43"
+        "typeorm": "^0.2.45"
     },
     "devDependencies": {
-        "@nestjs/cli": "^8.2.1",
+        "@nestjs/cli": "^8.2.2",
         "@types/express": "^4.17.13",
         "@types/lodash": "^4.14.178",
         "@types/multer": "^1.4.7",
