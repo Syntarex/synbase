@@ -1,6 +1,5 @@
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import Container from "@mui/material/Container";
 import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
@@ -10,6 +9,7 @@ import { RecoilRoot } from "recoil";
 import "../../styles/globals.css";
 import synbaseTheme from "../../styles/theme/synbase.theme";
 import { AuthHandler } from "../component/auth/auth-handler/auth-handler.component";
+import { Layout } from "../component/layout";
 import createEmotionCache from "../util/create-emotion-cache.util";
 
 interface IMyAppProps extends AppProps {
@@ -33,9 +33,9 @@ const MyApp = (props: IMyAppProps) => {
 
                         <ThemeProvider theme={synbaseTheme}>
                             <CssBaseline />
-                            <Container>
+                            <Layout>
                                 <Component {...pageProps} />
-                            </Container>
+                            </Layout>
                         </ThemeProvider>
                     </AuthHandler>
                 </CacheProvider>

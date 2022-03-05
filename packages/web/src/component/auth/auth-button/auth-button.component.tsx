@@ -1,14 +1,15 @@
+import { SxProps } from "@mui/material";
 import Button from "@mui/material/Button";
 import _ from "lodash";
 import { signIn, signOut, useSession } from "next-auth/react";
 import React from "react";
 
 interface IAuthButtonProps {
-    className?: string;
+    sx?: SxProps;
 }
 
 export const AuthButton = (props: IAuthButtonProps) => {
-    const { className } = props;
+    const { sx } = props;
 
     const { data: session } = useSession();
 
@@ -22,7 +23,7 @@ export const AuthButton = (props: IAuthButtonProps) => {
     }, [session]);
 
     return (
-        <Button className={className} variant={"contained"} onClick={onButtonPressed}>
+        <Button sx={sx} variant={"contained"} onClick={onButtonPressed}>
             {!_.isNull(session) ? "Logout" : "Login"}
         </Button>
     );
