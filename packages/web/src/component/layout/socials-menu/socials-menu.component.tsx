@@ -13,7 +13,7 @@ export const SocialsMenu = (props: ISocialsMenuProps) => {
     const { sx } = props;
 
     return (
-        <Stack sx={sx} direction={"row"} alignItems={"center"}>
+        <Stack sx={sx} direction={"row"} spacing={2} alignItems={"center"}>
             <Link href={"/discord"}>
                 <IconButton>
                     <Icon icon={"radix-icons:discord-logo"} />
