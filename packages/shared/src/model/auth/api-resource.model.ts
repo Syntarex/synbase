@@ -1,4 +1,5 @@
 export enum ApiResource {
     App = "app",
-    DiscordVerification = "discord-verification",
+    DiscordVerification = "discord-verifications",
+    Image = "images",
 }
