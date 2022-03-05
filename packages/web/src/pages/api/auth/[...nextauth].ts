@@ -5,6 +5,8 @@ import KeycloakProvider from "next-auth/providers/keycloak";
 import { ServerEnv } from "../../../constants/constants.server";
 import { IToken } from "../../../model/auth/token.model";
 
+/* FIXME: Wenn der Refresh Token abgelaufen ist, muss der Login irgendwie abgebaut werden. */
+
 const refreshAccessToken = async (token: IToken): Promise<IToken> => {
     try {
         if (Date.now() > token.refreshTokenExpiresAt) throw Error;
