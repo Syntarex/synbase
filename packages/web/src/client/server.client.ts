@@ -2,7 +2,7 @@ import { Synbase } from "@synbase/shared";
 import _ from "lodash";
 import { getSession, GetSessionParams } from "next-auth/react";
 import { ClientEnv } from "../constants/constants.client";
-import { ISession } from "../model/session.model";
+import { ISession } from "../model/auth/session.model";
 
 const publicClient = new Synbase(ClientEnv.apiUrl);
 

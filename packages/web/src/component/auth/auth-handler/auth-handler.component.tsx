@@ -2,7 +2,7 @@ import _ from "lodash";
 import { useSession } from "next-auth/react";
 import React from "react";
 import { browserClient } from "../../../client/browser.client";
-import { ISession } from "../../../model/session.model";
+import { ISession } from "../../../model/auth/session.model";
 
 interface IAuthHandler {
     children: React.ReactNode;
