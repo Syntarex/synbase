@@ -2,7 +2,6 @@ import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 import React from "react";
-import { useAuth } from "../../hook/use-auth.hook";
 import { Link } from "../common/link.component";
 import { Breadcrumb } from "./breadcrumb/breadcrumb.component";
 import { Logo } from "./logo/logo.component";
@@ -14,8 +13,6 @@ interface ILayoutProps {
 
 export const Layout = (props: ILayoutProps) => {
     const { children } = props;
-
-    const auth = useAuth();
 
     return (
         <>
@@ -33,7 +30,7 @@ export const Layout = (props: ILayoutProps) => {
                 </Toolbar>
             </AppBar>
 
-            <Container>{children}</Container>
+            <Container sx={(theme) => ({ marginTop: theme.spacing(4) })}>{children}</Container>
         </>
     );
 };
