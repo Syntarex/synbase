@@ -7,4 +7,5 @@ export enum ApiScope {
     UpdateAll = "update.all",
     Delete = "delete",
     DeleteAll = "delete.all",
+    Upload = "upload",
 }

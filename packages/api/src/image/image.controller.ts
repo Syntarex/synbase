@@ -1,14 +1,17 @@
 import { Controller, Get } from "@nestjs/common";
-import { ApiResource } from "@synbase/shared";
-import { Public } from "nest-keycloak-connect";
+import { ApiResource, ApiScope } from "@synbase/shared";
+import { Resource, Scopes } from "nest-keycloak-connect";
 import { ImageService } from "./image.service";
 
-@Controller(ApiResource.Image)
+const { Image: resource } = ApiResource;
+
+@Controller(resource)
+@Resource(resource)
 export class ImageController {
     constructor(private readonly imageService: ImageService) {}
 
     @Get("auth")
-    @Public()
+    @Scopes(ApiScope.Upload)
     public auth() {
         return this.imageService.getAuthentication();
     }
