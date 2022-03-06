@@ -2,7 +2,6 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { IApp } from "@synbase/shared";
-import { IKUpload } from "imagekitio-react";
 import { GetStaticProps } from "next";
 import React from "react";
 import { getPublicClient } from "../client/server.client";
@@ -25,14 +24,8 @@ const IndexPage = (props: IIndexPageProps) => {
             <Grid container spacing={2}>
                 <Grid item justifyContent={"center"} alignItems={"center"}>
                     <Typography variant={"h1"}>Hello Synbase v{app.version}!</Typography>
-                    <AuthButton />
 
-                    <IKUpload
-                        fileName={"syntarex"}
-                        folder={"profiles"}
-                        onError={(error: any) => console.log(error)}
-                        onSuccess={(result: any) => console.log(result)}
-                    />
+                    <AuthButton />
 
                     <ImagekitImage src={"/profiles/syntarex_mU4CUlpWUXw"} width={500} />
                 </Grid>
