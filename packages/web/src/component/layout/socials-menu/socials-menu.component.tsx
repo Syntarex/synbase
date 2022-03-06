@@ -16,7 +16,7 @@ export const SocialsMenu = (props: ISocialsMenuProps) => {
 
     return (
         <Stack sx={sx} direction={"row"} spacing={2} alignItems={"center"}>
-            <Link href={[Urls.Discord, Urls.DiscordServer]}>
+            <Link href={Urls.DiscordServer}>
                 <Tooltip title={"Discord"}>
                     <IconButton>
                         <Icon icon={"radix-icons:discord-logo"} />
