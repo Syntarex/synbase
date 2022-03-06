@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { ApiResource } from "../..";
 import { ICreateProfile, IGetProfiles, IProfile, IUpdateProfile } from "../../model";
 import { RestClient } from "../rest.client";
@@ -9,6 +10,16 @@ export class ProfileClient extends RestClient {
                 params: query,
             })
         ).data;
+    }
+
+    public async getBySlug(slug: string): Promise<IProfile | null> {
+        const profiles = await this.getAll({ slug });
+
+        if (_.isEmpty(profiles)) {
+            return null;
+        }
+
+        return profiles[0];
     }
 
     public async getMy(): Promise<IProfile | null> {

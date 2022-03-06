@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put, Query } from "@nestjs/common";
 import { ApiResource, ApiScope, IProfile } from "@synbase/shared";
 import _ from "lodash";
-import { AuthenticatedUser, Resource, Scopes } from "nest-keycloak-connect";
+import { AuthenticatedUser, Public, Resource, Scopes } from "nest-keycloak-connect";
 import { IAuthenticatedUser } from "../auth/model/authenticated-user.model";
 import { CreateProfile } from "./model/create-profile.body";
 import { GetProfiles } from "./model/get-profiles.query";
@@ -16,7 +16,7 @@ export class ProfileController {
     constructor(private readonly profileService: ProfileService) {}
 
     @Get()
-    @Scopes(ApiScope.ReadAll)
+    @Public()
     public async getAll(@Query() query: GetProfiles): Promise<IProfile[]> {
         return await this.profileService.getAll(query);
     }
@@ -34,7 +34,7 @@ export class ProfileController {
     }
 
     @Get(":id")
-    @Scopes(ApiScope.ReadAll)
+    @Public()
     public async get(@Param("id") id: string): Promise<IProfile> {
         const profile = await this.profileService.get(id);
 
