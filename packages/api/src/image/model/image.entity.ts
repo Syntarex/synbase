@@ -12,5 +12,6 @@ export class Image extends Resource implements IImage {
 
     @Column({ type: "varchar", length: Image.FOLDER_LENGTH })
     folder: string;
+
     uploaderId: string;
 }
