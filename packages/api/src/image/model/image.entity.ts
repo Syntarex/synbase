@@ -1,5 +1,6 @@
 import { IImage } from "@synbase/shared";
-import { Column, Entity } from "typeorm";
+import { Column, Entity, ManyToOne } from "typeorm";
+import { Profile } from "../../profile/model/profile.entity";
 import { Resource } from "../../util/model/resource.entity";
 
 @Entity()
@@ -13,5 +14,9 @@ export class Image extends Resource implements IImage {
     @Column({ type: "varchar", length: Image.FOLDER_LENGTH })
     folder: string;
 
+    @ManyToOne(() => Profile)
+    uploader: Promise<Profile>;
+
+    @Column()
     uploaderId: string;
 }

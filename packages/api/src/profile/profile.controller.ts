@@ -1,8 +1,21 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put, Query } from "@nestjs/common";
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    NotFoundException,
+    Param,
+    Post,
+    Put,
+    Query,
+    UploadedFile,
+} from "@nestjs/common";
 import { ApiResource, ApiScope, IProfile } from "@synbase/shared";
 import _ from "lodash";
 import { AuthenticatedUser, Public, Resource, Scopes } from "nest-keycloak-connect";
 import { IAuthenticatedUser } from "../auth/model/authenticated-user.model";
+import { FileUpload } from "../image/decorator/file-upload.decorator";
+import { ImageService } from "../image/image.service";
 import { CreateProfile } from "./model/create-profile.body";
 import { GetProfiles } from "./model/get-profiles.query";
 import { UpdateProfile } from "./model/update-profile.body";
@@ -13,7 +26,7 @@ const { Profile: resource } = ApiResource;
 @Controller(resource)
 @Resource(resource)
 export class ProfileController {
-    constructor(private readonly profileService: ProfileService) {}
+    constructor(private readonly profileService: ProfileService, private readonly imageService: ImageService) {}
 
     @Get()
     @Public()
@@ -43,6 +56,16 @@ export class ProfileController {
         }
 
         return profile;
+    }
+
+    @Post("my/image")
+    @Scopes(ApiScope.Update, ApiScope.Upload)
+    @FileUpload()
+    public async updateMyImage(
+        @UploadedFile() file: Express.Multer.File,
+        @AuthenticatedUser() user: IAuthenticatedUser,
+    ) {
+        await this.imageService.upload(file, "profile", user.sub);
     }
 
     @Post("my")

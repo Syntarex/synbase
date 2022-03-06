@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { ensure } from "@synbase/shared";
 import ImageKit from "imagekit";
@@ -16,7 +16,15 @@ export class ImageService {
         });
     }
 
-    public getAuthentication() {
-        return this.imageKit.getAuthenticationParameters();
+    public async upload(file: Express.Multer.File, folder = "common", fileName: string): Promise<void> {
+        const response = await this.imageKit.upload({
+            file: file.buffer,
+            fileName,
+            folder,
+            overwriteFile: true,
+            useUniqueFileName: false,
+        });
+
+        Logger.log(response, "ImageService");
     }
 }
