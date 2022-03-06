@@ -2,13 +2,13 @@ import {
     ApiResource,
     ICreateDiscordVerification,
     IDiscordVerification,
-    IGetDiscordVerification,
+    IGetDiscordVerifications,
     IUpdateDiscordVerification,
 } from "../..";
 import { RestClient } from "../rest.client";
 
 export class DiscordVerificationClient extends RestClient {
-    public async getAll(query: IGetDiscordVerification): Promise<IDiscordVerification[]> {
+    public async getAll(query: IGetDiscordVerifications): Promise<IDiscordVerification[]> {
         return (
             await this.httpClient.get(ApiResource.DiscordVerification, {
                 params: query,

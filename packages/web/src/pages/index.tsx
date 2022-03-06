@@ -24,12 +24,13 @@ const IndexPage = (props: IIndexPageProps) => {
                     <AuthButton />
 
                     <IKUpload
-                        fileName={"profile/test-upload.png"}
+                        fileName={"syntarex"}
+                        folder={"profiles"}
                         onError={(error: any) => console.log(error)}
                         onSuccess={(result: any) => console.log(result)}
                     />
 
-                    <ImagekitImage src={"/profile_test-upload_Ou-4fDTQv.png"} width={500} />
+                    <ImagekitImage src={"/profiles/syntarex_mU4CUlpWUXw"} width={500} />
                 </Grid>
             </Grid>
         </Container>

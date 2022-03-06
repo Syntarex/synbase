@@ -5,7 +5,7 @@ import { AuthenticatedUser, Resource, Scopes } from "nest-keycloak-connect";
 import { IAuthenticatedUser } from "../auth/model/authenticated-user.model";
 import { DiscordVerificationService } from "./discord-verification.service";
 import { CreateDiscordVerification } from "./model/create-discord-verification.body";
-import { GetDiscordVerification } from "./model/get-discord-verification.query";
+import { GetDiscordVerifications } from "./model/get-discord-verifications.query";
 import { UpdateDiscordVerification } from "./model/update-discord-verification.body";
 
 const { DiscordVerification: resource } = ApiResource;
@@ -17,7 +17,7 @@ export class DiscordVerificationController {
 
     @Get()
     @Scopes(ApiScope.ReadAll)
-    public async getAll(@Query() query: GetDiscordVerification): Promise<IDiscordVerification[]> {
+    public async getAll(@Query() query: GetDiscordVerifications): Promise<IDiscordVerification[]> {
         return await this.discordVerificationService.getAll(query);
     }
 
