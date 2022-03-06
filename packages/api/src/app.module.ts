@@ -4,12 +4,12 @@ import { APP_GUARD } from "@nestjs/core";
 import { MulterModule } from "@nestjs/platform-express";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ensure } from "@synbase/shared";
-import { Request } from "express";
 import { AuthGuard, KeycloakConnectModule, ResourceGuard, RoleGuard } from "nest-keycloak-connect";
 import { AppController } from "./app.controller";
 import { DiscordCommandModule } from "./discord-command/discord-command.module";
 import { DiscordVerificationModule } from "./discord-verification/discord-verification.module";
 import { DiscordVerification } from "./discord-verification/model/discord-verification.entity";
+import { imageFileFilter } from "./image/filter/image-file.filter";
 import { ImageModule } from "./image/image.module";
 import { Image } from "./image/model/image.entity";
 import { Profile } from "./profile/model/profile.entity";
@@ -37,19 +37,7 @@ import { EnvMiddleware } from "./util/middleware/env.middleware";
                     files: 1,
                     fileSize: ensure(configService.get("API_IMAGE_SIZE_LIMIT")),
                 },
-                fileFilter: (req: Request, file, cb) => {
-                    const { mimetype } = file;
-
-                    const allowedFileTypes = ["image/png", "image/jpg", "image/jpeg"];
-
-                    if (!allowedFileTypes.includes(mimetype)) {
-                        cb(new Error("Nur .png, .jpg und .jpeg sind erlaubt."), false);
-
-                        return;
-                    }
-
-                    cb(null, true);
-                },
+                fileFilter: imageFileFilter,
             }),
             inject: [ConfigService],
         }),
