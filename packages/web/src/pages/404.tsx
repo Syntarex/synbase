@@ -3,8 +3,12 @@ import Typography from "@mui/material/Typography";
 import React from "react";
 import { Link } from "../component/common/link.component";
 import { Logo } from "../component/layout/logo/logo.component";
+import { Urls } from "../constants/constants.client";
+import { useBreadcrumb } from "../hook/use-breadcrumb.hook";
 
 const Custom404Page = () => {
+    useBreadcrumb([Urls.NotFound]);
+
     return (
         <Stack spacing={2} alignItems={"center"}>
             <Stack spacing={2} direction={"row"} alignItems={"center"}>
@@ -18,7 +22,7 @@ const Custom404Page = () => {
             <Typography>Die gesuchte Seite konnte nicht gefunden werden.</Typography>
 
             <Typography variant={"body2"}>
-                Die <Link href={"/"}>Startseite</Link> hilft dir sicher weiter.
+                Die <Link href={Urls.Home}>Startseite</Link> hilft dir sicher weiter.
             </Typography>
         </Stack>
     );

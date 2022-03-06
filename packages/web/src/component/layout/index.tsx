@@ -2,6 +2,7 @@ import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 import React from "react";
+import { Urls } from "../../constants/constants.client";
 import { Link } from "../common/link.component";
 import { Breadcrumb } from "./breadcrumb/breadcrumb.component";
 import { Logo } from "./logo/logo.component";
@@ -18,7 +19,7 @@ export const Layout = (props: ILayoutProps) => {
         <>
             <AppBar position={"static"}>
                 <Toolbar>
-                    <Link href={"/"}>
+                    <Link href={Urls.Home}>
                         <Logo width={26} height={26} />
                     </Link>
 

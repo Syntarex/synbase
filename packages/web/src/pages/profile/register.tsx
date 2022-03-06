@@ -4,14 +4,14 @@ import { AuthRequired } from "../../component/auth/auth-required/auth-required.c
 import { Urls } from "../../constants/constants.client";
 import { useBreadcrumb } from "../../hook/use-breadcrumb.hook";
 
-const MyProfilePage = () => {
+const RegisterPage = () => {
     useBreadcrumb([Urls.Profile]);
 
     return (
         <AuthRequired>
-            <Typography variant={"h1"}>Eigenes Profil!</Typography>
+            <Typography variant={"h1"}>Registrieren!</Typography>
         </AuthRequired>
     );
 };
 
-export default MyProfilePage;
+export default RegisterPage;

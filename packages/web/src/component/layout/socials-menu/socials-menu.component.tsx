@@ -4,6 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import Tooltip from "@mui/material/Tooltip";
 import React from "react";
+import { Urls } from "../../../constants/constants.client";
 import { Link } from "../../common/link.component";
 
 interface ISocialsMenuProps {
@@ -15,7 +16,7 @@ export const SocialsMenu = (props: ISocialsMenuProps) => {
 
     return (
         <Stack sx={sx} direction={"row"} spacing={2} alignItems={"center"}>
-            <Link href={"/discord"}>
+            <Link href={[Urls.Discord, Urls.DiscordServer]}>
                 <Tooltip title={"Discord"}>
                     <IconButton>
                         <Icon icon={"radix-icons:discord-logo"} />
@@ -23,7 +24,7 @@ export const SocialsMenu = (props: ISocialsMenuProps) => {
                 </Tooltip>
             </Link>
 
-            <Link href={"/twitch"}>
+            <Link href={Urls.Twitch}>
                 <Tooltip title={"Twitch"}>
                     <IconButton>
                         <Icon icon={"lucide:twitch"} />
