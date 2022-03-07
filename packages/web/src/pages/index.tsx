@@ -6,7 +6,7 @@ import { GetStaticProps } from "next";
 import React from "react";
 import { getPublicClient } from "../client/server.client";
 import { AuthButton } from "../component/auth/auth-button/auth-button.component";
-import ImagekitImage from "../component/common/imagekit-image.component";
+import { FileUpload } from "../component/common/file-upload.component";
 import { Urls } from "../constants/constants.client";
 import { useBreadcrumb } from "../hook/use-breadcrumb.hook";
 
@@ -27,7 +27,7 @@ const IndexPage = (props: IIndexPageProps) => {
 
                     <AuthButton />
 
-                    <ImagekitImage src={"/profiles/syntarex_mU4CUlpWUXw"} width={500} />
+                    <FileUpload />
                 </Grid>
             </Grid>
         </Container>

@@ -3,6 +3,7 @@ import {
     Controller,
     Delete,
     Get,
+    Logger,
     NotFoundException,
     Param,
     Post,
@@ -56,16 +57,6 @@ export class ProfileController {
         }
 
         return profile;
-    }
-
-    @Post("my/image")
-    @Scopes(ApiScope.Update, ApiScope.Upload)
-    @FileUpload()
-    public async updateMyImage(
-        @UploadedFile() file: Express.Multer.File,
-        @AuthenticatedUser() user: IAuthenticatedUser,
-    ) {
-        await this.imageService.upload(file, "profile", user.sub);
     }
 
     @Post("my")
@@ -122,5 +113,17 @@ export class ProfileController {
         if (!result) {
             throw new NotFoundException();
         }
+    }
+
+    @Post("my/image")
+    @Scopes(ApiScope.Update, ApiScope.Upload)
+    @FileUpload()
+    public async uploadMyImage(
+        @UploadedFile() file: Express.Multer.File,
+        @AuthenticatedUser() user: IAuthenticatedUser,
+    ) {
+        Logger.log(file, "ProfileController");
+        Logger.log(user, "ProfileController");
+        await this.imageService.upload(file, "profiles", user.sub);
     }
 }

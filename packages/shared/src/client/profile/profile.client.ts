@@ -53,4 +53,8 @@ export class ProfileClient extends RestClient {
 
         return true;
     }
+
+    public async uploadMyImage(file: File): Promise<void> {
+        await this.upload(`${ApiResource.Profile}/my/image`, file);
+    }
 }
