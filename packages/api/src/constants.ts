@@ -3,6 +3,7 @@ import * as path from "path";
 export const Length = {
     UUID: 36,
     URL: 2048,
+    MIMETYPE: 64,
 };
 
 export const Constants = {

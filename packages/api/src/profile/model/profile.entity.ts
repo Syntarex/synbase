@@ -1,5 +1,6 @@
 import { IProfile } from "@synbase/shared";
-import { Column, Entity } from "typeorm";
+import { Column, Entity, ManyToOne } from "typeorm";
+import { Image } from "../../image/model/image.entity";
 import { Resource } from "../../util/model/resource.entity";
 
 @Entity()
@@ -13,4 +14,10 @@ export class Profile extends Resource implements IProfile {
 
     @Column({ type: "varchar", length: Profile.SLUG_MAX_LENGTH, unique: true })
     slug: string;
+
+    @ManyToOne(() => Image, { nullable: true })
+    image: Promise<Image | null>;
+
+    @Column()
+    imageId: string | null;
 }

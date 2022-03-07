@@ -21,7 +21,7 @@ export const FileUpload = () => {
             return;
         }
 
-        await browserClient.profiles.uploadMyImage(file);
+        console.log(await browserClient.profiles.uploadMyImage(file));
     }, [file]);
 
     return (

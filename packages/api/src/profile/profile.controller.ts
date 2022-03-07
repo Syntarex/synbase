@@ -11,7 +11,7 @@ import {
     Query,
     UploadedFile,
 } from "@nestjs/common";
-import { ApiResource, ApiScope, IProfile } from "@synbase/shared";
+import { ApiResource, ApiScope, IImage, IProfile } from "@synbase/shared";
 import _ from "lodash";
 import { AuthenticatedUser, Public, Resource, Scopes } from "nest-keycloak-connect";
 import { IAuthenticatedUser } from "../auth/model/authenticated-user.model";
@@ -115,15 +115,62 @@ export class ProfileController {
         }
     }
 
+    /* TODO: Teste Upload-Funktionen */
     @Post("my/image")
     @Scopes(ApiScope.Update, ApiScope.Upload)
     @FileUpload()
     public async uploadMyImage(
         @UploadedFile() file: Express.Multer.File,
         @AuthenticatedUser() user: IAuthenticatedUser,
-    ) {
+    ): Promise<IImage> {
+        const profile = await this.profileService.get(user.sub);
+
         Logger.log(file, "ProfileController");
         Logger.log(user, "ProfileController");
-        await this.imageService.upload(file, "profiles", user.sub);
+
+        if (_.isNull(profile)) {
+            throw new NotFoundException();
+        }
+
+        const image = await this.imageService.upload({
+            file,
+            fileName: user.sub,
+            uploaderId: user.sub,
+            folder: resource,
+            id: profile.imageId,
+        });
+
+        console.log(image, "ProfileController");
+
+        if (_.isNull(image)) {
+            throw new NotFoundException();
+        }
+
+        return image;
+    }
+
+    @Post(":id/image")
+    @Scopes(ApiScope.UpdateAll, ApiScope.Upload)
+    @FileUpload()
+    public async uploadImage(@Param("id") id: string, @UploadedFile() file: Express.Multer.File) {
+        const profile = await this.profileService.get(id);
+
+        if (_.isNull(profile)) {
+            throw new NotFoundException();
+        }
+
+        const image = await this.imageService.upload({
+            file,
+            fileName: id,
+            uploaderId: id,
+            folder: resource,
+            id: profile.imageId,
+        });
+
+        if (_.isNull(image)) {
+            throw new NotFoundException();
+        }
+
+        return image;
     }
 }
