@@ -18,6 +18,6 @@ export class Profile extends Resource implements IProfile {
     @ManyToOne(() => Image, { nullable: true })
     image: Promise<Image | null>;
 
-    @Column()
+    @Column({ nullable: true })
     imageId: string | null;
 }

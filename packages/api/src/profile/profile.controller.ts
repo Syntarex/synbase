@@ -65,7 +65,9 @@ export class ProfileController {
         @Body() body: CreateProfile,
         @AuthenticatedUser() user: IAuthenticatedUser,
     ): Promise<IProfile> {
-        return await this.profileService.create({ ...body, id: user.sub });
+        Logger.log(body, "ProfileController");
+        Logger.log(user, "ProfileController");
+        return await this.profileService.create({ ...body, id: user.sub, imageId: null });
     }
 
     @Put("my")
@@ -115,7 +117,6 @@ export class ProfileController {
         }
     }
 
-    /* TODO: Teste Upload-Funktionen */
     @Post("my/image")
     @Scopes(ApiScope.Update, ApiScope.Upload)
     @FileUpload()
@@ -124,9 +125,6 @@ export class ProfileController {
         @AuthenticatedUser() user: IAuthenticatedUser,
     ): Promise<IImage> {
         const profile = await this.profileService.get(user.sub);
-
-        Logger.log(file, "ProfileController");
-        Logger.log(user, "ProfileController");
 
         if (_.isNull(profile)) {
             throw new NotFoundException();
@@ -140,11 +138,13 @@ export class ProfileController {
             id: profile.imageId,
         });
 
-        console.log(image, "ProfileController");
-
         if (_.isNull(image)) {
             throw new NotFoundException();
         }
+
+        await this.profileService.update(user.sub, {
+            imageId: image.id,
+        });
 
         return image;
     }
@@ -170,6 +170,10 @@ export class ProfileController {
         if (_.isNull(image)) {
             throw new NotFoundException();
         }
+
+        await this.profileService.update(id, {
+            imageId: image.id,
+        });
 
         return image;
     }

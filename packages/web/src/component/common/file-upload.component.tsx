@@ -1,10 +1,17 @@
+import { SxProps } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import _ from "lodash";
 import React from "react";
-import { browserClient } from "../../client/browser.client";
 
-export const FileUpload = () => {
+interface IFileUploadProps {
+    sx?: SxProps;
+    onSubmit: (file: File) => void;
+}
+
+export const FileUpload = (props: IFileUploadProps) => {
+    const { sx, onSubmit } = props;
+
     const [file, setFile] = React.useState<File | null>(null);
 
     const onChange = React.useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,18 +23,18 @@ export const FileUpload = () => {
         setFile(event.target.files.item(0));
     }, []);
 
-    const onSubmit = React.useCallback(async () => {
+    const onClick = React.useCallback(async () => {
         if (_.isNull(file)) {
             return;
         }
 
-        console.log(await browserClient.profiles.uploadMyImage(file));
+        onSubmit(file);
     }, [file]);
 
     return (
-        <Box>
+        <Box sx={sx}>
             <input type={"file"} name={"file"} onChange={onChange} />
-            <Button onClick={onSubmit} disabled={_.isNull(file)}>
+            <Button onClick={onClick} disabled={_.isNull(file)}>
                 Upload
             </Button>
         </Box>

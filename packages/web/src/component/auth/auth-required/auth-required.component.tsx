@@ -18,26 +18,16 @@ export const AuthRequired = (props: IAuthRequiredProps) => {
     const session = useAuth();
     const router = useRouter();
 
+    const isRegisterPage = React.useMemo(() => router.pathname.startsWith(Urls.ProfileRegister.path), [router]);
+
     const onProfileLoaded = React.useCallback(
         (profile: IProfile | null) => {
-            if (!_.isNull(profile)) {
-                return;
+            if (_.isNull(profile) && !isRegisterPage) {
+                router.push(Urls.ProfileRegister.path);
             }
-
-            const { pathname } = router;
-
-            if (pathname.startsWith(Urls.ProfileRegister.path)) {
-                return;
-            }
-
-            router.push(Urls.ProfileRegister.path);
         },
-        [router],
+        [router, isRegisterPage],
     );
-
-    React.useEffect(() => {
-        console.log(router.pathname);
-    }, [router]);
 
     React.useEffect(() => {
         if (_.isNull(session)) {
@@ -51,7 +41,7 @@ export const AuthRequired = (props: IAuthRequiredProps) => {
 
     return (
         <Fetch selector={getMyProfile} onLoaded={onProfileLoaded}>
-            {(profile) => (_.isNull(profile) ? null : <>{children}</>)}
+            {(profile) => (_.isNull(profile) && !isRegisterPage ? null : <>{children}</>)}
         </Fetch>
     );
 };
