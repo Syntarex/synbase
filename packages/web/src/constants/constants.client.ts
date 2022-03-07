@@ -27,8 +27,12 @@ export const Urls: { [index: string]: IUrl } = {
         title: "Twitch",
     },
     Profile: {
-        path: "/profile",
+        path: "/profiles",
         title: "Profil",
+    },
+    ProfileRegister: {
+        path: "/profiles/register",
+        title: "Registrieren",
     },
 };
 

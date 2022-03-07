@@ -12,6 +12,11 @@ export const getProfile = selectorFamily({
     get: (id: string) => async () => await browserClient.profiles.get(id),
 });
 
+export const getMyProfile = selector({
+    key: "get-my-profile",
+    get: async () => await browserClient.profiles.getMy(),
+});
+
 export const getProfileBySlug = selectorFamily({
     key: "get-profile-by-slug",
     get: (slug: string) => async () => await browserClient.profiles.getBySlug(slug),
