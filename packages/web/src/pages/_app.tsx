@@ -10,6 +10,7 @@ import "../../styles/globals.css";
 import synbaseTheme from "../../styles/theme/synbase.theme";
 import { AuthHandler } from "../component/auth/auth-handler/auth-handler.component";
 import { ErrorHandler } from "../component/error/error-handler/error-handler.component";
+import { ErrorList } from "../component/error/error-list/error-list.component";
 import { Layout } from "../component/layout";
 import createEmotionCache from "../util/create-emotion-cache.util";
 
@@ -36,6 +37,8 @@ const MyApp = (props: IMyAppProps) => {
                             <ThemeProvider theme={synbaseTheme}>
                                 <CssBaseline />
                                 <Layout>
+                                    <ErrorList />
+
                                     <Component {...pageProps} />
                                 </Layout>
                             </ThemeProvider>
