@@ -9,6 +9,7 @@ import { RecoilRoot } from "recoil";
 import "../../styles/globals.css";
 import synbaseTheme from "../../styles/theme/synbase.theme";
 import { AuthHandler } from "../component/auth/auth-handler/auth-handler.component";
+import { ErrorHandler } from "../component/error/error-handler/error-handler.component";
 import { Layout } from "../component/layout";
 import createEmotionCache from "../util/create-emotion-cache.util";
 
@@ -24,22 +25,24 @@ const MyApp = (props: IMyAppProps) => {
 
     return (
         <RecoilRoot>
-            <SessionProvider session={session}>
-                <CacheProvider value={emotionCache}>
-                    <AuthHandler>
-                        <Head>
-                            <meta name="viewport" content="initial-scale=1, width=device-width" />
-                        </Head>
+            <ErrorHandler>
+                <SessionProvider session={session}>
+                    <CacheProvider value={emotionCache}>
+                        <AuthHandler>
+                            <Head>
+                                <meta name="viewport" content="initial-scale=1, width=device-width" />
+                            </Head>
 
-                        <ThemeProvider theme={synbaseTheme}>
-                            <CssBaseline />
-                            <Layout>
-                                <Component {...pageProps} />
-                            </Layout>
-                        </ThemeProvider>
-                    </AuthHandler>
-                </CacheProvider>
-            </SessionProvider>
+                            <ThemeProvider theme={synbaseTheme}>
+                                <CssBaseline />
+                                <Layout>
+                                    <Component {...pageProps} />
+                                </Layout>
+                            </ThemeProvider>
+                        </AuthHandler>
+                    </CacheProvider>
+                </SessionProvider>
+            </ErrorHandler>
         </RecoilRoot>
     );
 };

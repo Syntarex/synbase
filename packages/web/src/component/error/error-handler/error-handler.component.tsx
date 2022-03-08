@@ -1,5 +1,6 @@
 import React from "react";
 import useErrorBoundary from "use-error-boundary";
+import { useAddError } from "../../../hook/use-errors.hook";
 
 interface IErrorHandlerProps {
     children: React.ReactNode;
@@ -8,21 +9,11 @@ interface IErrorHandlerProps {
 export const ErrorHandler = (props: IErrorHandlerProps) => {
     const { children } = props;
 
-    const { ErrorBoundary, didCatch, error, reset } = useErrorBoundary({
-        onDidCatch: (error: Error) => {
-            console.log("--- Catched");
-            console.log(error);
-            console.log("----------");
-        },
-    });
+    const addError = useAddError();
 
-    React.useEffect(() => {
-        console.log("--- Changed");
-        console.log(didCatch);
-        console.log(error);
-        console.log(reset);
-        console.log("----------");
-    }, [didCatch, error, reset]);
+    const { ErrorBoundary } = useErrorBoundary({
+        onDidCatch: (error) => addError(error),
+    });
 
     return <ErrorBoundary>{children}</ErrorBoundary>;
 };
