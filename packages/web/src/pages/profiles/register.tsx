@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useRecoilRefresher_UNSTABLE } from "recoil";
 import { AuthRequired } from "../../component/auth/auth-required/auth-required.component";
-import { Fetch } from "../../component/common/fetch.component";
+import { Fetch } from "../../component/common/fetch/fetch.component";
 import { Urls } from "../../constants/constants.client";
 import { createMyProfile, getMyProfile } from "../../data/profile/profile.selectors";
 import { useBreadcrumb } from "../../hook/use-breadcrumb.hook";

@@ -1,7 +1,7 @@
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import React from "react";
-import { Link } from "../component/common/link.component";
+import { Link } from "../component/common/link/link.component";
 import { Logo } from "../component/layout/logo/logo.component";
 import { Urls } from "../constants/constants.client";
 import { useBreadcrumb } from "../hook/use-breadcrumb.hook";

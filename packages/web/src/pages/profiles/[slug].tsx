@@ -3,7 +3,7 @@ import { IProfile } from "@synbase/shared";
 import _ from "lodash";
 import { useRouter } from "next/router";
 import React from "react";
-import { Fetch } from "../../component/common/fetch.component";
+import { Fetch } from "../../component/common/fetch/fetch.component";
 import { Urls } from "../../constants/constants.client";
 import { getProfileBySlug } from "../../data/profile/profile.selectors";
 import { useBreadcrumb } from "../../hook/use-breadcrumb.hook";

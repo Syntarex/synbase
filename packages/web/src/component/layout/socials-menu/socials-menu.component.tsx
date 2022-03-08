@@ -5,7 +5,7 @@ import Stack from "@mui/material/Stack";
 import Tooltip from "@mui/material/Tooltip";
 import React from "react";
 import { Urls } from "../../../constants/constants.client";
-import { Link } from "../../common/link.component";
+import { Link } from "../../common/link/link.component";
 
 interface ISocialsMenuProps {
     sx?: SxProps;

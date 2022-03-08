@@ -6,7 +6,7 @@ import React from "react";
 import { Urls } from "../../../constants/constants.client";
 import { getMyProfile } from "../../../data/profile/profile.selectors";
 import { useAuth } from "../../../hook/use-auth.hook";
-import { Fetch } from "../../common/fetch.component";
+import { Fetch } from "../../common/fetch/fetch.component";
 
 interface IAuthRequiredProps {
     children: React.ReactNode;

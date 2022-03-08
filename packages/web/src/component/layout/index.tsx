@@ -3,7 +3,7 @@ import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 import React from "react";
 import { Urls } from "../../constants/constants.client";
-import { Link } from "../common/link.component";
+import { Link } from "../common/link/link.component";
 import { Breadcrumb } from "./breadcrumb/breadcrumb.component";
 import { Logo } from "./logo/logo.component";
 import { SocialsMenu } from "./socials-menu/socials-menu.component";

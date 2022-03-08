@@ -3,8 +3,8 @@ import Box from "@mui/material/Box";
 import _ from "lodash";
 import React from "react";
 import { useDropzone } from "react-dropzone";
-import { ClientEnv } from "../../constants/constants.client";
-import { useAddError } from "../../hook/use-errors.hook";
+import { ClientEnv } from "../../../constants/constants.client";
+import { useAddError } from "../../../hook/use-errors.hook";
 
 interface IFileChooserProps {
     children: React.ReactNode;

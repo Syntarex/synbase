@@ -2,8 +2,8 @@ import { SxProps } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/system/Box";
 import React from "react";
-import { ensureMyDiscordVerification } from "../../data/discord-verification/discord-verification.selectors";
-import { Fetch } from "../common/fetch.component";
+import { ensureMyDiscordVerification } from "../../../data/discord-verification/discord-verification.selectors";
+import { Fetch } from "../../common/fetch/fetch.component";
 
 interface IVerificationCodeProps {
     sx?: SxProps;

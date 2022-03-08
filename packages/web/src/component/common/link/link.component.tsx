@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import _ from "lodash";
 import NextLink from "next/link";
 import React from "react";
-import { IUrl } from "../../model/url.model";
+import { IUrl } from "../../../model/url.model";
 
 interface ILinkProps extends Omit<LinkProps, "href"> {
     href: IUrl;

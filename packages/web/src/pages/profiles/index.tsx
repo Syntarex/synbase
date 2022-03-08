@@ -4,7 +4,7 @@ import _ from "lodash";
 import React from "react";
 import { browserClient } from "../../client/browser.client";
 import { AuthRequired } from "../../component/auth/auth-required/auth-required.component";
-import { FileChooser } from "../../component/common/file-chooser.component";
+import { FileChooser } from "../../component/common/file-chooser/file-chooser.component";
 import { Urls } from "../../constants/constants.client";
 import { useBreadcrumb } from "../../hook/use-breadcrumb.hook";
 
