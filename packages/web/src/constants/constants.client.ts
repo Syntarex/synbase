@@ -38,4 +38,5 @@ export const Urls: { [index: string]: IUrl } = {
 
 export const ClientEnv = {
     apiUrl: ensure(process.env.NEXT_PUBLIC_API_URL),
+    apiImageSizeLimit: Number(ensure(process.env.NEXT_PUBLIC_API_IMAGE_SIZE_LIMIT)),
 };

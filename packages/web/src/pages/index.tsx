@@ -6,7 +6,6 @@ import { GetStaticProps } from "next";
 import React from "react";
 import { getPublicClient } from "../client/server.client";
 import { AuthButton } from "../component/auth/auth-button/auth-button.component";
-import { FileUpload } from "../component/common/file-upload.component";
 import { Urls } from "../constants/constants.client";
 import { useBreadcrumb } from "../hook/use-breadcrumb.hook";
 
@@ -26,8 +25,6 @@ const IndexPage = (props: IIndexPageProps) => {
                     <Typography variant={"h1"}>Hello Synbase v{app.version}!</Typography>
 
                     <AuthButton />
-
-                    <FileUpload />
                 </Grid>
             </Grid>
         </Container>
