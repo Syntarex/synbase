@@ -1,4 +1,4 @@
-import { ICreateDiscordVerification, IGetDiscordVerification, IUpdateDiscordVerification } from "@synbase/shared";
+import { ICreateDiscordVerification, IGetDiscordVerifications, IUpdateDiscordVerification } from "@synbase/shared";
 import _ from "lodash";
 import { selector, selectorFamily } from "recoil";
 import { v4 as uuid } from "uuid";
@@ -6,7 +6,7 @@ import { browserClient } from "../../client/browser.client";
 
 export const getAllDiscordVerifications = selectorFamily({
     key: "get-all-discord-verifications",
-    get: (query: IGetDiscordVerification) => async () => await browserClient.discordVerifications.getAll(query),
+    get: (query: IGetDiscordVerifications) => async () => await browserClient.discordVerifications.getAll(query),
 });
 
 export const getDiscordVerification = selectorFamily({
