@@ -22,6 +22,10 @@ export class Synbase {
             (error) => {
                 const { response } = error;
 
+                if (_.isUndefined(response)) {
+                    return Promise.reject(error);
+                }
+
                 if (_.isEqual(response.status, 404)) {
                     return Promise.resolve({
                         ...response,
