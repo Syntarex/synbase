@@ -5,4 +5,5 @@ export interface IImage extends IResource {
     uploaderId: string;
     fileSize: number;
     mimeType: string;
+    imageKitId: string;
 }

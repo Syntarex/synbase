@@ -54,18 +54,35 @@ export class ProfileClient extends RestClient {
         return true;
     }
 
-    public getMyImageUrl(): string {
-        return `${ApiResource.Profile}/my/image`;
-    }
-
-    public async getMyImage(): Promise<string> {
+    public async getMyImage(): Promise<string | null> {
         const response = await this.httpClient.get(`${ApiResource.Profile}/my/image`, {
             responseType: "arraybuffer",
         });
 
+        if (_.isNull(response.data)) {
+            return null;
+        }
+
         const base64 = Buffer.from(response.data, "binary").toString("base64");
 
-        return `data:image/png;base64,${base64}`;
+        let dataType = "png";
+
+        switch (base64.charAt(0)) {
+            case "/":
+                dataType = "jpg";
+                break;
+            case "i":
+                dataType = "png";
+                break;
+            case "R":
+                dataType = "gif";
+                break;
+            case "U":
+                dataType = "webp";
+                break;
+        }
+
+        return `data:image/${dataType};base64,${base64}`;
     }
 
     public getImage(id: string): string {

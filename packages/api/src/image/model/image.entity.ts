@@ -23,4 +23,7 @@ export class Image extends Resource implements IImage {
 
     @Column({ type: "varchar", length: Length.MIMETYPE })
     mimeType: string;
+
+    @Column({ type: "varchar" })
+    imageKitId: string;
 }

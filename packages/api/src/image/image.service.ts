@@ -36,11 +36,12 @@ export class ImageService extends TypeOrmService<Image> {
             file: file.buffer,
             fileName,
             folder,
-            overwriteFile: true,
-            useUniqueFileName: false,
+            useUniqueFileName: true,
         };
 
-        if (!_.isNull(id) && !(await this.exists(id))) {
+        const image = _.isNull(id) ? null : await this.get(id);
+
+        if (!_.isNull(id) && _.isNull(image)) {
             return null;
         }
 
@@ -51,10 +52,16 @@ export class ImageService extends TypeOrmService<Image> {
             fileSize: response.size,
             mimeType: file.mimetype,
             uploaderId,
+            imageKitId: response.fileId,
         };
 
-        if (!_.isNull(id)) {
-            return await this.update(id, imageData);
+        if (!_.isNull(image)) {
+            await this.imageKit.deleteFile(image.imageKitId);
+            await fs.rm(`temp${image.path}`, {
+                force: true,
+            });
+
+            return await this.update(image.id, imageData);
         }
 
         return await this.create(imageData);
@@ -68,11 +75,13 @@ export class ImageService extends TypeOrmService<Image> {
         });
 
         await fs.outputFile(`temp${image.path}`, response.data);
+
         const file = await fs.readFile(`temp${image.path}`);
 
         return new StreamableFile(file);
     }
 
+    /* TODO: Use transformations */
     private getUrl(image: IImage): string {
         return this.imageKit.url({
             signed: true,
