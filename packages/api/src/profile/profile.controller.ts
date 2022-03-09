@@ -9,6 +9,7 @@ import {
     Post,
     Put,
     Query,
+    StreamableFile,
     UploadedFile,
 } from "@nestjs/common";
 import { ApiResource, ApiScope, IImage, IProfile } from "@synbase/shared";
@@ -115,6 +116,42 @@ export class ProfileController {
         if (!result) {
             throw new NotFoundException();
         }
+    }
+
+    @Get("my/image")
+    @Scopes(ApiScope.Read)
+    public async getMyImage(@AuthenticatedUser() user: IAuthenticatedUser): Promise<StreamableFile> {
+        const profile = await this.profileService.get(user.sub);
+
+        if (_.isNull(profile)) {
+            throw new NotFoundException();
+        }
+
+        const image = await profile.image;
+
+        if (_.isNull(image)) {
+            throw new NotFoundException();
+        }
+
+        return await this.imageService.download(image);
+    }
+
+    @Get(":id/image")
+    @Public()
+    public async getImage(@Param("id") id: string): Promise<StreamableFile> {
+        const profile = await this.profileService.get(id);
+
+        if (_.isNull(profile)) {
+            throw new NotFoundException();
+        }
+
+        const image = await profile.image;
+
+        if (_.isNull(image)) {
+            throw new NotFoundException();
+        }
+
+        return await this.imageService.download(image);
     }
 
     @Post("my/image")

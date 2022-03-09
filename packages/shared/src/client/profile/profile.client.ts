@@ -54,6 +54,24 @@ export class ProfileClient extends RestClient {
         return true;
     }
 
+    public getMyImageUrl(): string {
+        return `${ApiResource.Profile}/my/image`;
+    }
+
+    public async getMyImage(): Promise<string> {
+        const response = await this.httpClient.get(`${ApiResource.Profile}/my/image`, {
+            responseType: "arraybuffer",
+        });
+
+        const base64 = Buffer.from(response.data, "binary").toString("base64");
+
+        return `data:image/png;base64,${base64}`;
+    }
+
+    public getImage(id: string): string {
+        return `${this.httpClient.defaults.baseURL}/${ApiResource.Profile}/${id}/image`;
+    }
+
     public async uploadMyImage(file: File): Promise<IImage> {
         return await this.upload(`${ApiResource.Profile}/my/image`, file);
     }

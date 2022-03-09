@@ -10,10 +10,11 @@ interface IFileChooserProps {
     children: React.ReactNode;
     sx?: SxProps;
     onChange: (file: File | null) => void;
+    disabled?: boolean;
 }
 
 export const FileChooser = (props: IFileChooserProps) => {
-    const { sx, onChange, children } = props;
+    const { sx, onChange, children, disabled } = props;
 
     const addError = useAddError();
 
@@ -21,6 +22,7 @@ export const FileChooser = (props: IFileChooserProps) => {
         maxFiles: 1,
         maxSize: ClientEnv.apiImageSizeLimit,
         accept: ["image/png", "image/jpg", "image/jpeg"],
+        disabled,
     });
 
     React.useEffect(() => {

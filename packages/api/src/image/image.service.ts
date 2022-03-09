@@ -1,7 +1,9 @@
-import { Injectable } from "@nestjs/common";
+import { HttpService } from "@nestjs/axios";
+import { Injectable, StreamableFile } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { InjectRepository } from "@nestjs/typeorm";
-import { ensure } from "@synbase/shared";
+import { ensure, IImage } from "@synbase/shared";
+import * as fs from "fs-extra";
 import ImageKit from "imagekit";
 import { UploadOptions } from "imagekit/dist/libs/interfaces";
 import _ from "lodash";
@@ -17,6 +19,7 @@ export class ImageService extends TypeOrmService<Image> {
 
     constructor(
         configService: ConfigService,
+        private readonly httpService: HttpService,
         @InjectRepository(Image) protected readonly repository: Repository<Image>,
     ) {
         super(repository);
@@ -44,9 +47,8 @@ export class ImageService extends TypeOrmService<Image> {
         const response = await this.imageKit.upload(uploadOptions);
 
         const imageData: Partial<Image> = {
-            fileName,
+            path: response.filePath,
             fileSize: response.size,
-            folder,
             mimeType: file.mimetype,
             uploaderId,
         };
@@ -56,5 +58,25 @@ export class ImageService extends TypeOrmService<Image> {
         }
 
         return await this.create(imageData);
+    }
+
+    public async download(image: IImage): Promise<StreamableFile> {
+        const response = await this.httpService.axiosRef({
+            url: this.getUrl(image),
+            method: "GET",
+            responseType: "arraybuffer",
+        });
+
+        await fs.outputFile(`temp${image.path}`, response.data);
+        const file = await fs.readFile(`temp${image.path}`);
+
+        return new StreamableFile(file);
+    }
+
+    private getUrl(image: IImage): string {
+        return this.imageKit.url({
+            signed: true,
+            path: image.path,
+        });
     }
 }

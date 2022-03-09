@@ -1,3 +1,3 @@
 import { IImage } from "./image.model";
 
-export type IGetImages = Partial<Pick<IImage, "id" | "fileName" | "folder" | "uploaderId" | "mimeType">>;
+export type IGetImages = Partial<Pick<IImage, "id" | "path" | "uploaderId" | "mimeType">>;

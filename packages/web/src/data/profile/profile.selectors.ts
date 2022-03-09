@@ -46,3 +46,13 @@ export const deleteProfile = selectorFamily({
     key: "delete-profile",
     get: (id: string) => async () => await browserClient.profiles.delete(id),
 });
+
+export const getMyProfileImage = selector({
+    key: "get-my-profile-image",
+    get: async () => await browserClient.profiles.getMyImage(),
+});
+
+export const getProfileImage = selectorFamily({
+    key: "get-profile-image",
+    get: (id: string) => () => browserClient.profiles.getImage(id),
+});
