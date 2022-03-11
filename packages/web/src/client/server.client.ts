@@ -4,17 +4,17 @@ import { getSession, GetSessionParams } from "next-auth/react";
 import { ClientEnv } from "../constants/constants.client";
 import { ISession } from "../model/auth/session.model";
 
-const publicClient = new Synbase(ClientEnv.apiUrl);
+const unauthorizedClient = new Synbase(ClientEnv.apiUrl);
 
-export const getPublicClient = async (context?: GetSessionParams): Promise<Synbase> => {
+export const getClient = async (context?: GetSessionParams): Promise<Synbase> => {
     if (_.isUndefined(context)) {
-        return publicClient;
+        return unauthorizedClient;
     }
 
     const session = (await getSession(context)) as ISession | null;
 
     if (_.isNull(session)) {
-        return publicClient;
+        return unauthorizedClient;
     }
 
     const client = new Synbase(ClientEnv.apiUrl);

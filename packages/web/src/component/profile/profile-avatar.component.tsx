@@ -30,11 +30,21 @@ export const ProfileAvatar = (props: IProfileAvatarProps) => {
     return (
         <Fetch
             onLoaded={(src) => console.log(src)}
-            selector={_.isUndefined(profile) ? getMyProfileImage : getProfileImage(profile.id)}
+            selector={
+                _.isUndefined(profile)
+                    ? getMyProfileImage({
+                          width: 100,
+                          height: 100,
+                      })
+                    : getProfileImage([profile.id, { width: 100, height: 100 }])
+            }
         >
             {(src) => (
                 <FileChooser sx={sx} disabled={!editMode} onChange={setFile}>
-                    <Avatar alt={_.isUndefined(profile) ? "Mein Profilbild" : profile.nickname} src={src} />
+                    <Avatar
+                        alt={_.isUndefined(profile) ? "Mein Profilbild" : profile.nickname}
+                        src={_.isNull(src) ? undefined : src}
+                    />
                 </FileChooser>
             )}
         </Fetch>
