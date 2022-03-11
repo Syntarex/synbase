@@ -10,8 +10,8 @@ import { dehydrate, QueryClient, useQuery } from "react-query";
 import { getClient } from "../client/server.client";
 import { AuthButton } from "../component/auth/auth-button/auth-button.component";
 import { Urls } from "../constants/constants.client";
-import { useBreadcrumb } from "../hook/use-breadcrumb.hook";
-import { useSynbase } from "../hook/use-synbase.hook";
+import { useSynbase } from "../hook/client/use-synbase.hook";
+import { useBreadcrumb } from "../hook/layout/use-breadcrumb.hook";
 import { IWithDehydratedState } from "../model/page-props.model";
 
 const IndexPage = () => {

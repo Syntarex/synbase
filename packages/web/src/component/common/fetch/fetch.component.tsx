@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 import { RecoilValue, useRecoilValueLoadable } from "recoil";
-import { useAddError } from "../../../hook/use-errors.hook";
+import { useAddError } from "../../../hook/error/use-errors.hook";
 
 export function useFetch<ReturnType>(selector: RecoilValue<ReturnType>): ReturnType | undefined | Error {
     const [result, setResult] = React.useState<ReturnType | undefined | Error>(undefined);

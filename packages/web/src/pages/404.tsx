@@ -4,7 +4,7 @@ import React from "react";
 import Link from "../component/common/link/link.component";
 import Logo from "../component/layout/logo/logo.component";
 import { Urls } from "../constants/constants.client";
-import { useBreadcrumb } from "../hook/use-breadcrumb.hook";
+import { useBreadcrumb } from "../hook/layout/use-breadcrumb.hook";
 
 const Custom404Page = () => {
     useBreadcrumb([Urls.NotFound]);

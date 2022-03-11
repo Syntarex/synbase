@@ -6,7 +6,7 @@ import React from "react";
 import { Fetch } from "../../component/common/fetch/fetch.component";
 import { Urls } from "../../constants/constants.client";
 import { getProfileBySlug } from "../../data/profile/profile.selectors";
-import { useBreadcrumb } from "../../hook/use-breadcrumb.hook";
+import { useBreadcrumb } from "../../hook/layout/use-breadcrumb.hook";
 
 const ProfilePage = () => {
     useBreadcrumb([Urls.Profile]);

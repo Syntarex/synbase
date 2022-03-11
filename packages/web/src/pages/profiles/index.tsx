@@ -1,28 +1,57 @@
 import Stack from "@mui/material/Stack";
+import { ApiResource, IGetImage } from "@synbase/shared";
 import _ from "lodash";
+import { GetServerSideProps } from "next";
 import React from "react";
-import { useRecoilRefresher_UNSTABLE } from "recoil";
-import { browserClient } from "../../client/browser.client";
+import { dehydrate, QueryClient, useMutation, useQuery, useQueryClient } from "react-query";
+import { getClient } from "../../client/server.client";
 import { AuthRequired } from "../../component/auth/auth-required/auth-required.component";
 import { Fetch } from "../../component/common/fetch/fetch.component";
 import { ProfileAvatar } from "../../component/profile/profile-avatar.component";
 import { Urls } from "../../constants/constants.client";
-import { getMyProfile, getMyProfileImage } from "../../data/profile/profile.selectors";
-import { useBreadcrumb } from "../../hook/use-breadcrumb.hook";
+import { getMyProfile } from "../../data/profile/profile.selectors";
+import { useSynbase } from "../../hook/client/use-synbase.hook";
+import { useBreadcrumb } from "../../hook/layout/use-breadcrumb.hook";
+import { IWithDehydratedState } from "../../model/page-props.model";
+
+const imageParams: IGetImage = {
+    height: 200,
+    width: 200,
+};
 
 const MyProfilePage = () => {
     useBreadcrumb([Urls.Profile]);
 
-    const refreshImage = useRecoilRefresher_UNSTABLE(getMyProfileImage);
+    const synbase = useSynbase();
+    const queryClient = useQueryClient();
 
-    const onImageChange = React.useCallback((file: File | null) => {
-        if (_.isNull(file)) {
-            /* TODO: BILD LÖSCHEN! */
-            return;
-        }
+    const {
+        isLoading: profileIsLoading,
+        isError: profileHasError,
+        data: profile,
+    } = useQuery([ApiResource.Profile, "my"], synbase.profiles.getMy);
 
-        browserClient.profiles.uploadMyImage(file).then(() => refreshImage());
-    }, []);
+    const {
+        isLoading: imageIsLoading,
+        isError: imageHasError,
+        data: imageSrc,
+    } = useQuery([ApiResource.Profile, "my", "image"], () => synbase.profiles.getMyImage(imageParams));
+
+    const { mutate: changeImage } = useMutation(
+        async (file: File | null) => {
+            if (_.isNull(file)) {
+                /* TODO: Bild Löschen Schnittstelle! */
+                return;
+            }
+
+            return synbase.profiles.uploadMyImage(file);
+        },
+        {
+            onSuccess: () => {
+                queryClient.invalidateQueries([ApiResource.Profile, "my", "image"]);
+            },
+        },
+    );
 
     return (
         <AuthRequired>
@@ -36,7 +65,7 @@ const MyProfilePage = () => {
                                     height: 300,
                                 }}
                                 editMode={true}
-                                onChange={onImageChange}
+                                onChange={changeImage}
                             />
                         </Stack>
                     )
@@ -44,6 +73,22 @@ const MyProfilePage = () => {
             </Fetch>
         </AuthRequired>
     );
+};
+
+export const getServerSideProps: GetServerSideProps<IWithDehydratedState> = async (ctx) => {
+    const client = await getClient(ctx);
+    const queryClient = new QueryClient();
+
+    await queryClient.prefetchQuery([ApiResource.Profile, "my"], client.profiles.getMy);
+    await queryClient.prefetchQuery([ApiResource.Profile, "my", "image"], () =>
+        client.profiles.getMyImage(imageParams),
+    );
+
+    return {
+        props: {
+            dehydratedState: dehydrate(queryClient),
+        },
+    };
 };
 
 export default MyProfilePage;

@@ -1,5 +1,5 @@
 import { useSession } from "next-auth/react";
-import { ISession } from "../model/auth/session.model";
+import { ISession } from "../../model/auth/session.model";
 
 export const useAuth = (): ISession | null => {
     const { data: session } = useSession();

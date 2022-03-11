@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React from "react";
 import { useRecoilState } from "recoil";
-import { errorsAtom } from "../data/error/error.atoms";
+import { errorsAtom } from "../../data/error/error.atoms";
 
 export const useErrors = (): [Error[], (error: Error) => void, (error: Error) => void] => {
     const [errors, setErrors] = useRecoilState(errorsAtom);

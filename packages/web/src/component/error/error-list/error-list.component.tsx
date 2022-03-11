@@ -1,6 +1,6 @@
 import Stack from "@mui/material/Stack";
 import React from "react";
-import { useErrors } from "../../../hook/use-errors.hook";
+import { useErrors } from "../../../hook/error/use-errors.hook";
 import ErrorItem from "../error-item/error-item.component";
 
 const ErrorList = () => {

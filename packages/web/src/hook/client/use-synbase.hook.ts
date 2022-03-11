@@ -1,6 +1,6 @@
 import _ from "lodash";
 import { useContext } from "react";
-import { synbaseContext } from "../component/client/synbase.provider";
+import { synbaseContext } from "../../component/client/synbase.provider";
 
 export const useSynbase = () => {
     const synbase = useContext(synbaseContext);

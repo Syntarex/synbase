@@ -1,6 +1,6 @@
 import React from "react";
 import useErrorBoundary from "use-error-boundary";
-import { useAddError } from "../../../hook/use-errors.hook";
+import { useAddError } from "../../../hook/error/use-errors.hook";
 
 interface IErrorBoundaryProps {
     children: React.ReactNode;

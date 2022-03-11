@@ -2,7 +2,7 @@ import Typography from "@mui/material/Typography";
 import React from "react";
 import { AuthRequired } from "../../component/auth/auth-required/auth-required.component";
 import { Urls } from "../../constants/constants.client";
-import { useBreadcrumb } from "../../hook/use-breadcrumb.hook";
+import { useBreadcrumb } from "../../hook/layout/use-breadcrumb.hook";
 
 const DiscordVerifyPage = () => {
     useBreadcrumb([Urls.Discord, Urls.DiscordVerify]);

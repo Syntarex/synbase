@@ -2,7 +2,7 @@ import { Synbase } from "@synbase/shared";
 import _ from "lodash";
 import React, { createContext } from "react";
 import { ClientEnv } from "../../constants/constants.client";
-import { useAuth } from "../../hook/use-auth.hook";
+import { useAuth } from "../../hook/auth/use-auth.hook";
 
 export const synbaseContext = createContext<Synbase | null>(null);
 
