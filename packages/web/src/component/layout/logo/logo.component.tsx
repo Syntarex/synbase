@@ -8,7 +8,7 @@ interface ILogoProps {
     height: number;
 }
 
-export const Logo = (props: ILogoProps) => {
+const Logo = (props: ILogoProps) => {
     const { width, height } = props;
 
     return (
@@ -17,3 +17,5 @@ export const Logo = (props: ILogoProps) => {
         </Box>
     );
 };
+
+export default Logo;

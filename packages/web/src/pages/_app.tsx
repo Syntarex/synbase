@@ -10,9 +10,9 @@ import { RecoilRoot } from "recoil";
 import "../../styles/globals.css";
 import synbaseTheme from "../../styles/theme/synbase.theme";
 import { SynbaseProvider } from "../component/client/synbase.provider";
-import { ErrorHandler } from "../component/error/error-handler/error-handler.component";
-import { ErrorList } from "../component/error/error-list/error-list.component";
-import { Layout } from "../component/layout";
+import ErrorBoundary from "../component/error/error-boundary/error-boundary.component";
+import ErrorList from "../component/error/error-list/error-list.component";
+import Layout from "../component/layout";
 import createEmotionCache from "../util/create-emotion-cache.util";
 
 interface IMyAppProps extends AppProps {
@@ -42,7 +42,7 @@ const MyApp = (props: IMyAppProps) => {
     return (
         <CacheProvider value={emotionCache}>
             <RecoilRoot>
-                <ErrorHandler>
+                <ErrorBoundary>
                     <SessionProvider session={session}>
                         <SynbaseProvider>
                             <QueryClientProvider client={queryClient}>
@@ -63,7 +63,7 @@ const MyApp = (props: IMyAppProps) => {
                             </QueryClientProvider>
                         </SynbaseProvider>
                     </SessionProvider>
-                </ErrorHandler>
+                </ErrorBoundary>
             </RecoilRoot>
         </CacheProvider>
     );

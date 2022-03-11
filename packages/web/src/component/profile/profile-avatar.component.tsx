@@ -5,7 +5,7 @@ import _ from "lodash";
 import React from "react";
 import { getMyProfileImage, getProfileImage } from "../../data/profile/profile.selectors";
 import { Fetch } from "../common/fetch/fetch.component";
-import { FileChooser } from "../common/file-chooser/file-chooser.component";
+import FileChooser from "../common/file-chooser/file-chooser.component";
 
 interface IProfileAvatarProps {
     sx?: SxProps;

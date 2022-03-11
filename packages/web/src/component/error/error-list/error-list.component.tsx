@@ -1,9 +1,9 @@
 import Stack from "@mui/material/Stack";
 import React from "react";
 import { useErrors } from "../../../hook/use-errors.hook";
-import { ErrorItem } from "../error-item/error-item.component";
+import ErrorItem from "../error-item/error-item.component";
 
-export const ErrorList = () => {
+const ErrorList = () => {
     const [errors, , removeError] = useErrors();
 
     return (
@@ -14,3 +14,5 @@ export const ErrorList = () => {
         </Stack>
     );
 };
+
+export default ErrorList;

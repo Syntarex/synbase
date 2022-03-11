@@ -13,7 +13,7 @@ interface IFileChooserProps {
     disabled?: boolean;
 }
 
-export const FileChooser = (props: IFileChooserProps) => {
+const FileChooser = (props: IFileChooserProps) => {
     const { sx, onChange, children, disabled } = props;
 
     const addError = useAddError();
@@ -53,3 +53,5 @@ export const FileChooser = (props: IFileChooserProps) => {
         </Box>
     );
 };
+
+export default FileChooser;

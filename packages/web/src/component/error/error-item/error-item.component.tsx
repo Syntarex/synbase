@@ -8,7 +8,7 @@ interface IErrorItemProps {
     onRemove?: (error: Error) => void;
 }
 
-export const ErrorItem = (props: IErrorItemProps) => {
+const ErrorItem = (props: IErrorItemProps) => {
     const { error, onRemove } = props;
 
     const onClose = React.useCallback(() => {
@@ -27,3 +27,5 @@ export const ErrorItem = (props: IErrorItemProps) => {
         </Alert>
     );
 };
+
+export default ErrorItem;

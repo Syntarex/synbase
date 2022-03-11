@@ -21,3 +21,5 @@ export const Link = (props: ILinkProps) => {
         </NextLink>
     );
 };
+
+export default Link;

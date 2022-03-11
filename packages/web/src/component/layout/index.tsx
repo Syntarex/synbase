@@ -3,16 +3,16 @@ import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 import React from "react";
 import { Urls } from "../../constants/constants.client";
-import { Link } from "../common/link/link.component";
+import Link from "../common/link/link.component";
 import { Breadcrumb } from "./breadcrumb/breadcrumb.component";
-import { Logo } from "./logo/logo.component";
-import { SocialsMenu } from "./socials-menu/socials-menu.component";
+import Logo from "./logo/logo.component";
+import SocialsMenu from "./socials-menu/socials-menu.component";
 
 interface ILayoutProps {
     children: React.ReactNode;
 }
 
-export const Layout = (props: ILayoutProps) => {
+const Layout = (props: ILayoutProps) => {
     const { children } = props;
 
     return (
@@ -35,3 +35,5 @@ export const Layout = (props: ILayoutProps) => {
         </>
     );
 };
+
+export default Layout;

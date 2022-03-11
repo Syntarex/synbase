@@ -6,7 +6,7 @@ import React from "react";
 import { useRecoilValue } from "recoil";
 import { Urls } from "../../../constants/constants.client";
 import { breadcrumbAtom } from "../../../data/layout/breadcrumb.atoms";
-import { Link } from "../../common/link/link.component";
+import Link from "../../common/link/link.component";
 
 interface IBreadcrumbProps {
     sx?: SxProps<Theme>;
