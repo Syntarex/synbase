@@ -1,6 +1,6 @@
 import _ from "lodash";
 import { ApiResource } from "../..";
-import { ICreateProfile, IGetProfiles, IImage, IProfile, IUpdateProfile } from "../../model";
+import { ICreateProfile, IGetImage, IGetProfiles, IImage, IProfile, IUpdateProfile } from "../../model";
 import { RestClient } from "../rest.client";
 
 export class ProfileClient extends RestClient {
@@ -54,9 +54,10 @@ export class ProfileClient extends RestClient {
         return true;
     }
 
-    public async getMyImage(): Promise<string | null> {
+    public async getMyImage(query: IGetImage = {}): Promise<string | null> {
         const response = await this.httpClient.get(`${ApiResource.Profile}/my/image`, {
             responseType: "arraybuffer",
+            params: query,
         });
 
         if (_.isNull(response.data)) {
@@ -85,7 +86,12 @@ export class ProfileClient extends RestClient {
         return `data:image/${dataType};base64,${base64}`;
     }
 
-    public getImage(id: string): string {
+    public getImage(id: string, query: IGetImage = {}): string {
+        const params = new URLSearchParams(_.toPairs(query));
+
+        /* TODO: Testen! */
+        console.log(params.toString());
+
         return `${this.httpClient.defaults.baseURL}/${ApiResource.Profile}/${id}/image`;
     }
 

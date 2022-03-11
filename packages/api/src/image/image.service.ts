@@ -2,7 +2,7 @@ import { HttpService } from "@nestjs/axios";
 import { Injectable, StreamableFile } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { InjectRepository } from "@nestjs/typeorm";
-import { ensure, IImage } from "@synbase/shared";
+import { ensure, IGetImage } from "@synbase/shared";
 import * as fs from "fs-extra";
 import ImageKit from "imagekit";
 import { UploadOptions } from "imagekit/dist/libs/interfaces";
@@ -57,9 +57,6 @@ export class ImageService extends TypeOrmService<Image> {
 
         if (!_.isNull(image)) {
             await this.imageKit.deleteFile(image.imageKitId);
-            await fs.rm(`temp${image.path}`, {
-                force: true,
-            });
 
             return await this.update(image.id, imageData);
         }
@@ -67,25 +64,46 @@ export class ImageService extends TypeOrmService<Image> {
         return await this.create(imageData);
     }
 
-    public async download(image: IImage): Promise<StreamableFile> {
-        const response = await this.httpService.axiosRef({
-            url: this.getUrl(image),
-            method: "GET",
-            responseType: "arraybuffer",
-        });
+    public async download(image: Image, query: IGetImage): Promise<StreamableFile> {
+        /* TODO: Finde einen Weg query zu parsen */
+        const path = `temp/${image.id}/w-${query.width}-h-${query.height}-q-${query.quality}`;
 
-        await fs.outputFile(`temp${image.path}`, response.data);
+        try {
+            await fs.access(path);
+        } catch {
+            const response = await this.httpService.axiosRef({
+                url: this.getUrl(image, query),
+                method: "GET",
+                responseType: "arraybuffer",
+            });
 
-        const file = await fs.readFile(`temp${image.path}`);
+            await fs.outputFile(path, response.data);
+        }
+
+        const file = await fs.readFile(path);
 
         return new StreamableFile(file);
     }
 
-    /* TODO: Use transformations */
-    private getUrl(image: IImage): string {
+    public async purgeCache(image: Image): Promise<void> {
+        await fs.emptyDir(`temp/${image.id}`);
+    }
+
+    private getUrl(image: Image, query: IGetImage): string {
+        const { height, quality, width } = query;
+
         return this.imageKit.url({
             signed: true,
             path: image.path,
+            transformation: [
+                {
+                    width: width?.toString(),
+                    height: height?.toString(),
+                },
+                {
+                    quality: quality?.toString(),
+                },
+            ],
         });
     }
 }

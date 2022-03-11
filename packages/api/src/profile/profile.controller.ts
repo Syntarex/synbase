@@ -18,6 +18,7 @@ import { AuthenticatedUser, Public, Resource, Scopes } from "nest-keycloak-conne
 import { IAuthenticatedUser } from "../auth/model/authenticated-user.model";
 import { FileUpload } from "../image/decorator/file-upload.decorator";
 import { ImageService } from "../image/image.service";
+import { GetImage } from "../image/model/get-image.query";
 import { CreateProfile } from "./model/create-profile.body";
 import { GetProfiles } from "./model/get-profiles.query";
 import { UpdateProfile } from "./model/update-profile.body";
@@ -120,7 +121,10 @@ export class ProfileController {
 
     @Get("my/image")
     @Scopes(ApiScope.Read)
-    public async getMyImage(@AuthenticatedUser() user: IAuthenticatedUser): Promise<StreamableFile> {
+    public async getMyImage(
+        @AuthenticatedUser() user: IAuthenticatedUser,
+        @Query() query: GetImage,
+    ): Promise<StreamableFile> {
         const profile = await this.profileService.get(user.sub);
 
         if (_.isNull(profile)) {
@@ -133,12 +137,12 @@ export class ProfileController {
             throw new NotFoundException();
         }
 
-        return await this.imageService.download(image);
+        return await this.imageService.download(image, query);
     }
 
     @Get(":id/image")
     @Public()
-    public async getImage(@Param("id") id: string): Promise<StreamableFile> {
+    public async getImage(@Param("id") id: string, @Query() query: GetImage): Promise<StreamableFile> {
         const profile = await this.profileService.get(id);
 
         if (_.isNull(profile)) {
@@ -151,7 +155,7 @@ export class ProfileController {
             throw new NotFoundException();
         }
 
-        return await this.imageService.download(image);
+        return await this.imageService.download(image, query);
     }
 
     @Post("my/image")
@@ -178,6 +182,8 @@ export class ProfileController {
         if (_.isNull(image)) {
             throw new NotFoundException();
         }
+
+        await this.imageService.purgeCache(image);
 
         await this.profileService.update(user.sub, {
             imageId: image.id,
@@ -207,6 +213,8 @@ export class ProfileController {
         if (_.isNull(image)) {
             throw new NotFoundException();
         }
+
+        await this.imageService.purgeCache(image);
 
         await this.profileService.update(id, {
             imageId: image.id,
