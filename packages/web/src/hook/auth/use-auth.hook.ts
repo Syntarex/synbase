@@ -1,11 +1,12 @@
+import { ApiResource } from "@synbase/shared";
 import _ from "lodash";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/router";
 import React from "react";
 import { useQuery } from "react-query";
 import { Urls } from "../../constants/constants.client";
 import { IAuth } from "../../model/auth/auth.model";
 import { useSynbase } from "../client/use-synbase.hook";
+import { useRedirect } from "../use-redirect.hook";
 import { useSession } from "./use-session.hook";
 
 export const useAuth = (): IAuth => {
@@ -17,36 +18,24 @@ export const useAuth = (): IAuth => {
         }
     }, [session]);
 
-    if (_.isNull(session)) {
-        return {
-            session,
-            profile: null,
-        };
-    }
-
-    const router = useRouter();
-
-    const isRegisterPage = React.useMemo(() => router.pathname.startsWith(Urls.ProfileRegister.path), [router]);
+    const redirect = useRedirect();
 
     const synbase = useSynbase();
 
-    const { data: profile } = useQuery(["profile", "my"], synbase.profiles.getMy);
+    const { data: profile } = useQuery({
+        queryKey: [ApiResource.Profile, "my"],
+        queryFn: () => synbase.profiles.getMy(),
+        enabled: synbase.isLoggedIn(),
+    });
 
     React.useEffect(() => {
-        if (_.isNull(profile) && !isRegisterPage) {
-            router.push(Urls.ProfileRegister.path);
+        if (_.isNull(profile)) {
+            redirect(Urls.ProfileRegister);
         }
-    }, [profile, isRegisterPage]);
-
-    if (_.isUndefined(profile) || _.isNull(profile)) {
-        return {
-            profile: null,
-            session,
-        };
-    }
+    }, [profile]);
 
     return {
-        profile,
+        profile: _.isUndefined(profile) ? null : profile,
         session,
     };
 };

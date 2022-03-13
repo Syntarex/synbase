@@ -1,29 +1,23 @@
 import { IGetImage } from "@synbase/shared";
-import { IsNumber, Max, Min } from "class-validator";
+import { IsInt, IsPositive, Max } from "class-validator";
 import { IsUndefinedable } from "../../util/validation/is-undefinedable.decorator";
 
 export class GetImage implements IGetImage {
     @IsUndefinedable()
-    @Min(1)
+    @IsPositive()
     @Max(5000)
-    @IsNumber({
-        maxDecimalPlaces: 0,
-    })
+    @IsInt()
     height?: number;
 
     @IsUndefinedable()
-    @Min(1)
+    @IsPositive()
     @Max(100)
-    @IsNumber({
-        maxDecimalPlaces: 0,
-    })
+    @IsInt()
     quality?: number;
 
     @IsUndefinedable()
-    @Min(1)
+    @IsPositive()
     @Max(5000)
-    @IsNumber({
-        maxDecimalPlaces: 0,
-    })
+    @IsInt()
     width?: number;
 }

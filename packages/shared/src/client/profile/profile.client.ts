@@ -89,10 +89,7 @@ export class ProfileClient extends RestClient {
     public getImage(id: string, query: IGetImage = {}): string {
         const params = new URLSearchParams(_.toPairs(query));
 
-        /* TODO: Testen! */
-        console.log(params.toString());
-
-        return `${this.httpClient.defaults.baseURL}/${ApiResource.Profile}/${id}/image`;
+        return `${this.httpClient.defaults.baseURL}/${ApiResource.Profile}/${id}/image?${params.toString()}`;
     }
 
     public async uploadMyImage(file: File): Promise<IImage> {

@@ -1,5 +1,4 @@
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { ApiResource } from "@synbase/shared";
 import { GetStaticProps } from "next";
@@ -19,21 +18,17 @@ const IndexPage = () => {
     const synbase = useSynbase();
 
     return (
-        <Container fixed>
-            <Grid container spacing={2}>
-                <Grid item justifyContent={"center"} alignItems={"center"}>
-                    <Fetch
-                        selector={{
-                            queryKey: ApiResource.App,
-                            queryFn: synbase.app.get,
-                        }}
-                        renderOnSuccess={(app) => <Typography variant={"h1"}>Hello Synbase v{app.version}!</Typography>}
-                    />
+        <Stack>
+            <Fetch
+                selector={{
+                    queryKey: ApiResource.App,
+                    queryFn: () => synbase.app.get(),
+                }}
+                renderOnSuccess={(app) => <Typography variant={"h1"}>Hello Synbase v{app.version}!</Typography>}
+            />
 
-                    <AuthButton />
-                </Grid>
-            </Grid>
-        </Container>
+            <AuthButton />
+        </Stack>
     );
 };
 
@@ -41,7 +36,10 @@ export const getStaticProps: GetStaticProps<IWithDehydratedState> = async () => 
     const client = await getClient();
     const queryClient = new QueryClient();
 
-    await queryClient.prefetchQuery(ApiResource.App, client.app.get);
+    await queryClient.prefetchQuery({
+        queryKey: ApiResource.App,
+        queryFn: () => client.app.get(),
+    });
 
     return {
         props: {

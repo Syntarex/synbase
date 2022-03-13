@@ -3,7 +3,6 @@ import {
     Controller,
     Delete,
     Get,
-    Logger,
     NotFoundException,
     Param,
     Post,
@@ -67,8 +66,6 @@ export class ProfileController {
         @Body() body: CreateProfile,
         @AuthenticatedUser() user: IAuthenticatedUser,
     ): Promise<IProfile> {
-        Logger.log(body, "ProfileController");
-        Logger.log(user, "ProfileController");
         return await this.profileService.create({ ...body, id: user.sub, imageId: null });
     }
 

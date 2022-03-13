@@ -1,11 +1,13 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import { ApiResource, IGetImage } from "@synbase/shared";
 import _ from "lodash";
 import { GetServerSideProps } from "next";
 import React from "react";
-import { dehydrate, QueryClient, useMutation, useQuery, useQueryClient } from "react-query";
+import { dehydrate, QueryClient, useMutation, useQueryClient } from "react-query";
 import { getClient } from "../../client/server.client";
+import { Fetch } from "../../component/common/fetch/fetch.component";
 import ProfileAvatar from "../../component/profile/profile-avatar.component";
 import { Urls } from "../../constants/constants.client";
 import { useAuth } from "../../hook/auth/use-auth.hook";
@@ -26,14 +28,6 @@ const MyProfilePage = () => {
 
     const { profile } = useAuth();
 
-    if (_.isNull(profile)) {
-        return <CircularProgress />;
-    }
-
-    const { data: imageSrc } = useQuery([ApiResource.Profile, "my", "image"], () =>
-        synbase.profiles.getMyImage(imageParams),
-    );
-
     const { mutate: changeImage } = useMutation(
         async (file: File | null) => {
             if (_.isNull(file)) {
@@ -50,30 +44,49 @@ const MyProfilePage = () => {
         },
     );
 
+    if (_.isNull(profile)) {
+        return <CircularProgress />;
+    }
+
     return (
         <Stack>
-            <ProfileAvatar
-                sx={{
-                    width: 300,
-                    height: 300,
+            <Typography variant={"h1"}>{profile.nickname}</Typography>
+
+            <Fetch
+                selector={{
+                    queryKey: [ApiResource.Profile, "my", "image"],
+                    queryFn: () => synbase.profiles.getMyImage(),
                 }}
-                src={imageSrc}
-                profile={profile}
-                editMode={true}
-                onChange={changeImage}
+                renderOnSuccess={(imageSrc) => (
+                    <ProfileAvatar
+                        editMode
+                        sx={{
+                            width: 300,
+                            height: 300,
+                        }}
+                        src={imageSrc}
+                        profile={profile}
+                        onChange={changeImage}
+                    />
+                )}
             />
         </Stack>
     );
 };
 
 export const getServerSideProps: GetServerSideProps<IWithDehydratedState> = async (ctx) => {
-    const client = await getClient(ctx);
+    const synbase = await getClient(ctx);
     const queryClient = new QueryClient();
 
-    await queryClient.prefetchQuery([ApiResource.Profile, "my"], client.profiles.getMy);
-    await queryClient.prefetchQuery([ApiResource.Profile, "my", "image"], () =>
-        client.profiles.getMyImage(imageParams),
-    );
+    await queryClient.prefetchQuery({
+        queryKey: [ApiResource.Profile, "my"],
+        queryFn: () => synbase.profiles.getMy(),
+    });
+
+    await queryClient.prefetchQuery({
+        queryKey: [ApiResource.Profile, "my", "image"],
+        queryFn: () => synbase.profiles.getMyImage(),
+    });
 
     return {
         props: {

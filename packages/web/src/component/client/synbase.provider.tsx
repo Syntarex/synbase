@@ -4,7 +4,9 @@ import React, { createContext } from "react";
 import { ClientEnv } from "../../constants/constants.client";
 import { useSession } from "../../hook/auth/use-session.hook";
 
-export const synbaseContext = createContext<Synbase | null>(null);
+const synbase = new Synbase(ClientEnv.apiUrl);
+
+export const synbaseContext = createContext(synbase);
 
 interface ISynbaseProviderProps {
     children: React.ReactNode;
@@ -13,11 +15,13 @@ interface ISynbaseProviderProps {
 export const SynbaseProvider = (props: ISynbaseProviderProps) => {
     const { children } = props;
 
-    const synbase = React.useMemo(() => new Synbase(ClientEnv.apiUrl), []);
-
     const auth = useSession();
 
     React.useEffect(() => {
+        if (_.isUndefined(auth)) {
+            return;
+        }
+
         if (_.isNull(auth)) {
             synbase.logout();
             return;

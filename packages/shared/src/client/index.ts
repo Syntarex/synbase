@@ -51,4 +51,14 @@ export class Synbase {
         this.httpClient.defaults.withCredentials = false;
         delete this.httpClient.defaults.headers.common.Authorization;
     }
+
+    public isLoggedIn(): boolean {
+        const { withCredentials } = this.httpClient.defaults;
+
+        if (_.isUndefined(withCredentials)) {
+            return false;
+        }
+
+        return withCredentials;
+    }
 }

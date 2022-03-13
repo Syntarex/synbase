@@ -6,12 +6,14 @@ import _ from "lodash";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import React from "react";
-import { dehydrate, QueryClient, useQuery } from "react-query";
+import { dehydrate, QueryClient } from "react-query";
 import { getClient } from "../../client/server.client";
+import { Fetch } from "../../component/common/fetch/fetch.component";
 import ProfileAvatar from "../../component/profile/profile-avatar.component";
 import { Urls } from "../../constants/constants.client";
 import { useSynbase } from "../../hook/client/use-synbase.hook";
 import { useBreadcrumb } from "../../hook/layout/use-breadcrumb.hook";
+import { useRedirect } from "../../hook/use-redirect.hook";
 import { IWithDehydratedState } from "../../model/page-props.model";
 
 const imageParams: IGetImage = {
@@ -20,22 +22,19 @@ const imageParams: IGetImage = {
 };
 
 const ProfilePage = () => {
+    /* TODO: erweitere Breadcrumb um Profilname */
     useBreadcrumb([Urls.Profile]);
 
     const router = useRouter();
-
-    const redirectTo404 = React.useCallback(() => {
-        console.log("Redirect to 404");
-        router.push("/404");
-    }, [router]);
-
     const { slug } = router.query;
+
+    const redirect = useRedirect();
 
     React.useEffect(() => {
         if (_.isUndefined(slug) || _.isArray(slug)) {
-            redirectTo404();
+            redirect(Urls.NotFound);
         }
-    }, [slug, redirectTo404]);
+    }, [slug, redirect]);
 
     if (_.isUndefined(slug) || _.isArray(slug)) {
         return <CircularProgress />;
@@ -43,33 +42,40 @@ const ProfilePage = () => {
 
     const synbase = useSynbase();
 
-    const { data: profile } = useQuery([ApiResource.Profile, slug], () => synbase.profiles.getBySlug(slug));
-
-    React.useEffect(() => {
-        if (_.isNull(profile)) {
-            redirectTo404();
-        }
-    }, [profile, redirectTo404]);
-
-    if (_.isUndefined(profile) || _.isNull(profile)) {
-        return <CircularProgress />;
-    }
-
-    const { data: imageSrc } = useQuery([ApiResource.Profile, slug, "image"], () =>
-        synbase.profiles.getImage(profile.id, imageParams),
-    );
-
     return (
         <Stack>
-            <Typography variant={"h1"}>{profile.nickname}</Typography>
-
-            <ProfileAvatar
-                sx={{
-                    width: 300,
-                    height: 300,
+            <Fetch
+                selector={{
+                    queryKey: [ApiResource.Profile, slug],
+                    queryFn: () => synbase.profiles.getBySlug(slug),
                 }}
-                src={imageSrc}
-                profile={profile}
+                onSuccess={(profile) => (_.isNull(profile) ? redirect(Urls.NotFound) : undefined)}
+                renderOnSuccess={(profile) =>
+                    _.isNull(profile) ? (
+                        <CircularProgress />
+                    ) : (
+                        <Stack>
+                            <Typography variant={"h1"}>{profile.nickname}</Typography>
+
+                            <Fetch
+                                selector={{
+                                    queryKey: [ApiResource.Profile, slug, "image"],
+                                    queryFn: () => synbase.profiles.getImage(profile.id, imageParams),
+                                }}
+                                renderOnSuccess={(imageSrc) => (
+                                    <ProfileAvatar
+                                        sx={{
+                                            width: 300,
+                                            height: 300,
+                                        }}
+                                        src={imageSrc}
+                                        profile={profile}
+                                    />
+                                )}
+                            />
+                        </Stack>
+                    )
+                }
             />
         </Stack>
     );
