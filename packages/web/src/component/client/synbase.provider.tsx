@@ -2,7 +2,7 @@ import { Synbase } from "@synbase/shared";
 import _ from "lodash";
 import React, { createContext } from "react";
 import { ClientEnv } from "../../constants/constants.client";
-import { useAuth } from "../../hook/auth/use-auth.hook";
+import { useSession } from "../../hook/auth/use-session.hook";
 
 export const synbaseContext = createContext<Synbase | null>(null);
 
@@ -15,18 +15,14 @@ export const SynbaseProvider = (props: ISynbaseProviderProps) => {
 
     const synbase = React.useMemo(() => new Synbase(ClientEnv.apiUrl), []);
 
-    const auth = useAuth();
+    const auth = useSession();
 
     React.useEffect(() => {
-        console.log("AUTH ÄNDERT SICH");
-        console.log(auth);
         if (_.isNull(auth)) {
-            console.log("ausloggen.");
             synbase.logout();
             return;
         }
 
-        console.log("einloggen.");
         synbase.login(auth.accessToken);
     }, [auth]);
 

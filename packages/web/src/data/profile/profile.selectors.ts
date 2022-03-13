@@ -1,4 +1,4 @@
-import { ICreateProfile, IGetImage, IGetProfiles, IUpdateProfile } from "@synbase/shared";
+import { ICreateProfile, IGetProfiles, IUpdateProfile } from "@synbase/shared";
 import { selector, selectorFamily } from "recoil";
 import { browserClient } from "../../client/browser.client";
 
@@ -45,14 +45,4 @@ export const deleteMyProfile = selector({
 export const deleteProfile = selectorFamily({
     key: "delete-profile",
     get: (id: string) => async () => await browserClient.profiles.delete(id),
-});
-
-export const getMyProfileImage = selectorFamily({
-    key: "get-my-profile-image",
-    get: (query?: IGetImage) => async () => await browserClient.profiles.getMyImage(query),
-});
-
-export const getProfileImage = selectorFamily({
-    key: "get-profile-image",
-    get: (data: [string, IGetImage | undefined]) => () => browserClient.profiles.getImage(data[0], data[1]),
 });

@@ -1,61 +1,60 @@
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { IProfile } from "@synbase/shared";
+import { ApiResource, ICreateProfile } from "@synbase/shared";
 import _ from "lodash";
 import { useRouter } from "next/router";
 import React from "react";
-import { useRecoilRefresher_UNSTABLE } from "recoil";
-import { AuthRequired } from "../../component/auth/auth-required/auth-required.component";
-import { Fetch } from "../../component/common/fetch/fetch.component";
+import { useMutation, useQueryClient } from "react-query";
 import { Urls } from "../../constants/constants.client";
-import { createMyProfile, getMyProfile } from "../../data/profile/profile.selectors";
+import { useAuth } from "../../hook/auth/use-auth.hook";
+import { useSynbase } from "../../hook/client/use-synbase.hook";
 import { useBreadcrumb } from "../../hook/layout/use-breadcrumb.hook";
 
 const RegisterPage = () => {
     useBreadcrumb([Urls.Profile, Urls.ProfileRegister]);
 
+    const { profile } = useAuth();
+
     const router = useRouter();
 
-    const refreshProfile = useRecoilRefresher_UNSTABLE(getMyProfile);
+    React.useEffect(() => {
+        if (!_.isNull(profile)) {
+            router.push(Urls.Profile.path);
+        }
+    }, [profile]);
 
-    const [submit, setSubmit] = React.useState(false);
+    const synbase = useSynbase();
+    const queryClient = useQueryClient();
 
-    const onProfileLoaded = React.useCallback(
-        (profile: IProfile | null) => (_.isNull(profile) ? undefined : router.push(Urls.Profile.path)),
-        [router],
+    const { mutate: createProfile, isLoading } = useMutation(
+        async (body: ICreateProfile) => {
+            return synbase.profiles.createMy(body);
+        },
+        {
+            onSuccess: () => {
+                queryClient.invalidateQueries([ApiResource.Profile, "my"]);
+            },
+        },
     );
 
-    const onProfileCreated = React.useCallback(() => {
-        refreshProfile();
-        router.push(Urls.Profile.path);
-    }, [refreshProfile, router]);
-
-    const onSubmit = React.useCallback(() => setSubmit(true), []);
+    if (!_.isNull(profile)) {
+        return null;
+    }
 
     return (
-        <>
-            <AuthRequired>
-                <Fetch selector={getMyProfile} onLoaded={onProfileLoaded}>
-                    {(profile) =>
-                        !_.isNull(profile) ? null : (
-                            <Stack>
-                                <Button onClick={onSubmit}>Registrieren</Button>
-                            </Stack>
-                        )
-                    }
-                </Fetch>
-
-                {!submit ? null : (
-                    <Fetch
-                        selector={createMyProfile({
-                            nickname: "Syntarex",
-                            slug: "syntarex",
-                        })}
-                        onLoaded={onProfileCreated}
-                    />
-                )}
-            </AuthRequired>
-        </>
+        <Stack>
+            <Button
+                disabled={isLoading}
+                onClick={() =>
+                    createProfile({
+                        nickname: "Syntarex",
+                        slug: "syntarex",
+                    })
+                }
+            >
+                Registrieren
+            </Button>
+        </Stack>
     );
 };
 

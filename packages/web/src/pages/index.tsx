@@ -1,14 +1,13 @@
-import CircularProgress from "@mui/material/CircularProgress";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { ApiResource } from "@synbase/shared";
-import _ from "lodash";
 import { GetStaticProps } from "next";
 import React from "react";
-import { dehydrate, QueryClient, useQuery } from "react-query";
+import { dehydrate, QueryClient } from "react-query";
 import { getClient } from "../client/server.client";
 import { AuthButton } from "../component/auth/auth-button/auth-button.component";
+import { Fetch } from "../component/common/fetch/fetch.component";
 import { Urls } from "../constants/constants.client";
 import { useSynbase } from "../hook/client/use-synbase.hook";
 import { useBreadcrumb } from "../hook/layout/use-breadcrumb.hook";
@@ -18,23 +17,18 @@ const IndexPage = () => {
     useBreadcrumb([Urls.Home]);
 
     const synbase = useSynbase();
-    const result = useQuery(ApiResource.App, synbase.app.get);
-
-    const { data: app } = result;
-
-    if (_.isUndefined(app)) {
-        return <CircularProgress />;
-    }
-
-    if (result.isError) {
-        return null;
-    }
 
     return (
         <Container fixed>
             <Grid container spacing={2}>
                 <Grid item justifyContent={"center"} alignItems={"center"}>
-                    <Typography variant={"h1"}>Hello Synbase v{app.version}!</Typography>
+                    <Fetch
+                        selector={{
+                            queryKey: ApiResource.App,
+                            queryFn: synbase.app.get,
+                        }}
+                        renderOnSuccess={(app) => <Typography variant={"h1"}>Hello Synbase v{app.version}!</Typography>}
+                    />
 
                     <AuthButton />
                 </Grid>

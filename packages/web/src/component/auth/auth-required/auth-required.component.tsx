@@ -28,19 +28,16 @@ export const AuthRequired = (props: IAuthRequiredProps) => {
 
     const synbase = useSynbase();
 
-    const { data: profile, isError, isLoading } = useQuery(["profile", "my"], synbase.profiles.getMy);
+    const { data: profile } = useQuery(["profile", "my"], synbase.profiles.getMy);
 
     React.useEffect(() => {
-        if (_.isUndefined(profile)) {
-            return;
-        }
-
-        if (_.isNull(profile)) {
+        if (_.isNull(profile) && !isRegisterPage) {
             router.push(Urls.ProfileRegister.path);
+            return;
         }
     }, [profile, router, isRegisterPage]);
 
-    if (isLoading || isError || _.isNull(session) || _.isUndefined(profile) || (_.isNull(profile) && !isRegisterPage)) {
+    if (_.isNull(session) || _.isUndefined(profile) || (_.isNull(profile) && !isRegisterPage)) {
         return null;
     }
 
