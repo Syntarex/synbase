@@ -36,6 +36,6 @@ export const useAuth = (): IAuth => {
 
     return {
         profile: _.isUndefined(profile) ? null : profile,
-        session,
+        session: _.isUndefined(session) ? null : session,
     };
 };

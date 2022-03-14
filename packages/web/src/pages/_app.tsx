@@ -31,6 +31,7 @@ const MyApp = (props: IMyAppProps) => {
                 defaultOptions: {
                     queries: {
                         useErrorBoundary: true,
+                        refetchOnWindowFocus: false,
                     },
                     mutations: {
                         useErrorBoundary: true,

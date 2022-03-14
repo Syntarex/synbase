@@ -5,7 +5,6 @@ import { ClientEnv } from "../../constants/constants.client";
 import { useSession } from "../../hook/auth/use-session.hook";
 
 const synbase = new Synbase(ClientEnv.apiUrl);
-
 export const synbaseContext = createContext(synbase);
 
 interface ISynbaseProviderProps {
@@ -15,20 +14,29 @@ interface ISynbaseProviderProps {
 export const SynbaseProvider = (props: ISynbaseProviderProps) => {
     const { children } = props;
 
-    const auth = useSession();
+    const [initialized, setInitialized] = React.useState(false);
+
+    const session = useSession();
 
     React.useEffect(() => {
-        if (_.isUndefined(auth)) {
+        if (_.isUndefined(session)) {
             return;
         }
 
-        if (_.isNull(auth)) {
+        if (_.isNull(session)) {
             synbase.logout();
-            return;
+        } else {
+            synbase.login(session.accessToken);
         }
 
-        synbase.login(auth.accessToken);
-    }, [auth]);
+        if (!initialized) {
+            setInitialized(true);
+        }
+    }, [session, initialized]);
+
+    if (!initialized) {
+        return null;
+    }
 
     return <synbaseContext.Provider value={synbase}>{children}</synbaseContext.Provider>;
 };

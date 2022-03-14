@@ -1,7 +1,7 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { ApiResource, IGetImage } from "@synbase/shared";
+import { ApiResource } from "@synbase/shared";
 import _ from "lodash";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
@@ -15,11 +15,6 @@ import { useSynbase } from "../../hook/client/use-synbase.hook";
 import { useBreadcrumb } from "../../hook/layout/use-breadcrumb.hook";
 import { useRedirect } from "../../hook/use-redirect.hook";
 import { IWithDehydratedState } from "../../model/page-props.model";
-
-const imageParams: IGetImage = {
-    height: 300,
-    width: 300,
-};
 
 const ProfilePage = () => {
     /* TODO: erweitere Breadcrumb um Profilname */
@@ -60,7 +55,7 @@ const ProfilePage = () => {
                             <Fetch
                                 selector={{
                                     queryKey: [ApiResource.Profile, slug, "image"],
-                                    queryFn: () => synbase.profiles.getImage(profile.id, imageParams),
+                                    queryFn: () => synbase.profiles.getImage(profile.id),
                                 }}
                                 renderOnSuccess={(imageSrc) => (
                                     <ProfileAvatar
@@ -89,9 +84,6 @@ export const getServerSideProps: GetServerSideProps<IWithDehydratedState> = asyn
 
     if (!_.isUndefined(slug) && !_.isArray(slug)) {
         await queryClient.prefetchQuery([ApiResource.Profile, slug], () => client.profiles.getBySlug(slug));
-        await queryClient.prefetchQuery([ApiResource.Profile, slug, "image"], () =>
-            client.profiles.getMyImage(imageParams),
-        );
     }
 
     return {

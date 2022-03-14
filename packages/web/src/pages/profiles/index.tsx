@@ -1,7 +1,7 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { ApiResource, IGetImage } from "@synbase/shared";
+import { ApiResource } from "@synbase/shared";
 import _ from "lodash";
 import { GetServerSideProps } from "next";
 import React from "react";
@@ -14,11 +14,6 @@ import { useAuth } from "../../hook/auth/use-auth.hook";
 import { useSynbase } from "../../hook/client/use-synbase.hook";
 import { useBreadcrumb } from "../../hook/layout/use-breadcrumb.hook";
 import { IWithDehydratedState } from "../../model/page-props.model";
-
-const imageParams: IGetImage = {
-    height: 300,
-    width: 300,
-};
 
 const MyProfilePage = () => {
     useBreadcrumb([Urls.Profile]);

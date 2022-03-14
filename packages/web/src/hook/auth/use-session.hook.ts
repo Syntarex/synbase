@@ -4,7 +4,7 @@ import { ISession } from "../../model/auth/session.model";
 export const useSession = (): ISession | null | undefined => {
     const { data } = useNextSession();
 
-    const session = data as ISession | null | undefined;
+    const session = data as ISession | null;
 
     return session;
 };
