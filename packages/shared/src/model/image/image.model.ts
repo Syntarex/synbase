@@ -1,4 +1,4 @@
-import { IResource } from "../resource/resource.model";
+import { IResource } from "..";
 
 export interface IImage extends IResource {
     path: string;
