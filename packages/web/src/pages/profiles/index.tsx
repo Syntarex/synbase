@@ -7,9 +7,9 @@ import { GetServerSideProps } from "next";
 import React from "react";
 import { dehydrate, QueryClient, useMutation, useQueryClient } from "react-query";
 import { getClient } from "../../client/server.client";
-import { Fetch } from "../../component/common/fetch/fetch.component";
 import ProfileAvatar from "../../component/profile/profile-avatar.component";
 import { Urls } from "../../constants/constants.client";
+import { getMyProfile } from "../../data/profile/profile.selectors";
 import { useAuth } from "../../hook/auth/use-auth.hook";
 import { useSynbase } from "../../hook/client/use-synbase.hook";
 import { useBreadcrumb } from "../../hook/layout/use-breadcrumb.hook";
@@ -43,27 +43,21 @@ const MyProfilePage = () => {
         return <CircularProgress />;
     }
 
+    const { imageId } = profile;
+
     return (
         <Stack>
             <Typography variant={"h1"}>{profile.nickname}</Typography>
 
-            <Fetch
-                selector={{
-                    queryKey: [ApiResource.Profile, "my", "image"],
-                    queryFn: () => synbase.profiles.getMyImage(),
+            <ProfileAvatar
+                editMode
+                sx={{
+                    width: 300,
+                    height: 300,
                 }}
-                renderOnSuccess={(imageSrc) => (
-                    <ProfileAvatar
-                        editMode
-                        sx={{
-                            width: 300,
-                            height: 300,
-                        }}
-                        src={imageSrc}
-                        profile={profile}
-                        onChange={changeImage}
-                    />
-                )}
+                src={_.isNull(imageId) ? undefined : synbase.images.getImageUrl(imageId)}
+                profile={profile}
+                onChange={changeImage}
             />
         </Stack>
     );
@@ -73,15 +67,7 @@ export const getServerSideProps: GetServerSideProps<IWithDehydratedState> = asyn
     const synbase = await getClient(ctx);
     const queryClient = new QueryClient();
 
-    await queryClient.prefetchQuery({
-        queryKey: [ApiResource.Profile, "my"],
-        queryFn: () => synbase.profiles.getMy(),
-    });
-
-    await queryClient.prefetchQuery({
-        queryKey: [ApiResource.Profile, "my", "image"],
-        queryFn: () => synbase.profiles.getMyImage(),
-    });
+    await queryClient.prefetchQuery(getMyProfile(synbase));
 
     return {
         props: {

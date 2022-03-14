@@ -1,7 +1,7 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import _ from "lodash";
 import React from "react";
-import { useQuery, UseQueryOptions } from "react-query";
+import { QueryOptions, useQuery, UseQueryOptions } from "react-query";
 
 export function useFetch<ReturnType>(selector: UseQueryOptions<ReturnType>): ReturnType | undefined | Error {
     const [result, setResult] = React.useState<ReturnType | undefined | Error>(undefined);
@@ -32,7 +32,7 @@ export function useFetch<ReturnType>(selector: UseQueryOptions<ReturnType>): Ret
 }
 
 interface IFetchProps<ReturnType> {
-    selector: UseQueryOptions<ReturnType>;
+    selector: QueryOptions<ReturnType>;
     onSuccess?: (result: ReturnType) => void;
     onLoading?: () => void;
     onError?: (error: Error) => void;
@@ -51,6 +51,7 @@ export function Fetch<ReturnType>(props: IFetchProps<ReturnType>): JSX.Element |
     const [onSuccessTriggered, setOnSuccessTriggered] = React.useState<boolean>(false);
 
     React.useEffect(() => {
+        console.log("selector changed");
         setOnLoadingTriggered(false);
         setOnErrorTriggered(false);
         setOnSuccessTriggered(false);

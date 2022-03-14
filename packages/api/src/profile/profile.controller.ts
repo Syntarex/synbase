@@ -8,7 +8,6 @@ import {
     Post,
     Put,
     Query,
-    StreamableFile,
     UploadedFile,
 } from "@nestjs/common";
 import { ApiResource, ApiScope, IImage, IProfile } from "@synbase/shared";
@@ -17,7 +16,6 @@ import { AuthenticatedUser, Public, Resource, Scopes } from "nest-keycloak-conne
 import { IAuthenticatedUser } from "../auth/model/authenticated-user.model";
 import { FileUpload } from "../image/decorator/file-upload.decorator";
 import { ImageService } from "../image/image.service";
-import { GetImage } from "../image/model/get-image.query";
 import { CreateProfile } from "./model/create-profile.body";
 import { GetProfiles } from "./model/get-profiles.query";
 import { UpdateProfile } from "./model/update-profile.body";
@@ -114,45 +112,6 @@ export class ProfileController {
         if (!result) {
             throw new NotFoundException();
         }
-    }
-
-    @Get("my/image")
-    @Scopes(ApiScope.Read)
-    public async getMyImage(
-        @AuthenticatedUser() user: IAuthenticatedUser,
-        @Query() query: GetImage,
-    ): Promise<StreamableFile> {
-        const profile = await this.profileService.get(user.sub);
-
-        if (_.isNull(profile)) {
-            throw new NotFoundException();
-        }
-
-        const image = await profile.image;
-
-        if (_.isNull(image)) {
-            throw new NotFoundException();
-        }
-
-        return await this.imageService.download(image, query);
-    }
-
-    @Get(":id/image")
-    @Public()
-    public async getImage(@Param("id") id: string, @Query() query: GetImage): Promise<StreamableFile> {
-        const profile = await this.profileService.get(id);
-
-        if (_.isNull(profile)) {
-            throw new NotFoundException();
-        }
-
-        const image = await profile.image;
-
-        if (_.isNull(image)) {
-            throw new NotFoundException();
-        }
-
-        return await this.imageService.download(image, query);
     }
 
     @Post("my/image")

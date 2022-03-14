@@ -1,7 +1,7 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { ApiResource } from "@synbase/shared";
+import { ApiResource, IProfile } from "@synbase/shared";
 import _ from "lodash";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
@@ -11,6 +11,7 @@ import { getClient } from "../../client/server.client";
 import { Fetch } from "../../component/common/fetch/fetch.component";
 import ProfileAvatar from "../../component/profile/profile-avatar.component";
 import { Urls } from "../../constants/constants.client";
+import { getProfileBySlug } from "../../data/profile/profile.selectors";
 import { useSynbase } from "../../hook/client/use-synbase.hook";
 import { useBreadcrumb } from "../../hook/layout/use-breadcrumb.hook";
 import { useRedirect } from "../../hook/use-redirect.hook";
@@ -27,6 +28,21 @@ const ProfilePage = () => {
 
     const redirect = useRedirect();
 
+    const onProfileLoaded = React.useCallback(
+        (profile: IProfile | null) => {
+            if (_.isNull(profile)) {
+                redirect(Urls.NotFound);
+                return;
+            }
+
+            setProfileUrl({
+                path: `${Urls.Profile}/${profile.slug}`,
+                title: profile.nickname,
+            });
+        },
+        [redirect],
+    );
+
     React.useEffect(() => {
         if (_.isUndefined(slug) || _.isArray(slug)) {
             redirect(Urls.NotFound);
@@ -39,21 +55,13 @@ const ProfilePage = () => {
 
     const synbase = useSynbase();
 
+    const profileQuery = React.useMemo(() => getProfileBySlug(synbase, slug), [synbase, slug]);
+
     return (
         <Stack>
             <Fetch
-                selector={{
-                    queryKey: [ApiResource.Profile, slug],
-                    queryFn: () => synbase.profiles.getBySlug(slug),
-                }}
-                onSuccess={(profile) =>
-                    _.isNull(profile)
-                        ? redirect(Urls.NotFound)
-                        : setProfileUrl({
-                              path: `${Urls.Profile}/${profile.slug}`,
-                              title: profile.nickname,
-                          })
-                }
+                selector={profileQuery}
+                onSuccess={onProfileLoaded}
                 renderOnSuccess={(profile) =>
                     _.isNull(profile) ? (
                         <CircularProgress />
@@ -61,21 +69,15 @@ const ProfilePage = () => {
                         <Stack>
                             <Typography variant={"h1"}>{profile.nickname}</Typography>
 
-                            <Fetch
-                                selector={{
-                                    queryKey: [ApiResource.Profile, slug, "image"],
-                                    queryFn: () => synbase.profiles.getImage(profile.id),
+                            <ProfileAvatar
+                                sx={{
+                                    width: 300,
+                                    height: 300,
                                 }}
-                                renderOnSuccess={(imageSrc) => (
-                                    <ProfileAvatar
-                                        sx={{
-                                            width: 300,
-                                            height: 300,
-                                        }}
-                                        src={imageSrc}
-                                        profile={profile}
-                                    />
-                                )}
+                                src={
+                                    _.isNull(profile.imageId) ? undefined : synbase.images.getImageUrl(profile.imageId)
+                                }
+                                profile={profile}
                             />
                         </Stack>
                     )

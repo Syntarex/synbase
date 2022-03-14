@@ -1,10 +1,10 @@
 import _ from "lodash";
 import { ApiResource } from "../..";
-import { ICreateProfile, IGetImage, IGetProfiles, IImage, IProfile, IUpdateProfile } from "../../model";
+import { ICreateProfile, IGetProfiles, IImage, IProfile, IUpdateProfile } from "../../model";
 import { RestClient } from "../rest.client";
 
 export class ProfileClient extends RestClient {
-    public async getAll(query: IGetProfiles): Promise<IProfile[]> {
+    public async getAll(query: IGetProfiles = {}): Promise<IProfile[]> {
         return (
             await this.httpClient.get(ApiResource.Profile, {
                 params: query,
@@ -52,44 +52,6 @@ export class ProfileClient extends RestClient {
         await this.httpClient.delete(`${ApiResource.Profile}/${id}`);
 
         return true;
-    }
-
-    public async getMyImage(query: IGetImage = {}): Promise<string | null> {
-        const response = await this.httpClient.get(`${ApiResource.Profile}/my/image`, {
-            responseType: "arraybuffer",
-            params: query,
-        });
-
-        if (_.isNull(response.data)) {
-            return null;
-        }
-
-        const base64 = Buffer.from(response.data, "binary").toString("base64");
-
-        let dataType = "png";
-
-        switch (base64.charAt(0)) {
-            case "/":
-                dataType = "jpg";
-                break;
-            case "i":
-                dataType = "png";
-                break;
-            case "R":
-                dataType = "gif";
-                break;
-            case "U":
-                dataType = "webp";
-                break;
-        }
-
-        return `data:image/${dataType};base64,${base64}`;
-    }
-
-    public getImage(id: string, query: IGetImage = {}): string {
-        const params = new URLSearchParams(_.toPairs(query));
-
-        return `${this.httpClient.defaults.baseURL}/${ApiResource.Profile}/${id}/image?${params.toString()}`;
     }
 
     public async uploadMyImage(file: File): Promise<IImage> {
