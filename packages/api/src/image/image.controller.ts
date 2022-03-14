@@ -1,7 +1,7 @@
 import { Controller, Get, Logger, NotFoundException, Param, Query, StreamableFile } from "@nestjs/common";
 import { ApiResource, ApiScope, IImage } from "@synbase/shared";
 import _ from "lodash";
-import { Public, Scopes } from "nest-keycloak-connect";
+import { Public, Resource, Scopes } from "nest-keycloak-connect";
 import { ImageService } from "./image.service";
 import { GetImage } from "./model/get-image.query";
 import { GetImages } from "./model/get-images.query";
@@ -9,6 +9,7 @@ import { GetImages } from "./model/get-images.query";
 const { Image: resource } = ApiResource;
 
 @Controller(resource)
+@Resource(resource)
 export class ImageController {
     constructor(private readonly imageService: ImageService) {}
 

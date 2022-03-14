@@ -12,6 +12,8 @@ import { DiscordVerification } from "./discord-verification/model/discord-verifi
 import { imageFileFilter } from "./image/filter/image-file.filter";
 import { ImageModule } from "./image/image.module";
 import { Image } from "./image/model/image.entity";
+import { Points } from "./points/model/points.entity";
+import { PointsModule } from "./points/points.module";
 import { Profile } from "./profile/model/profile.entity";
 import { ProfileModule } from "./profile/profile.module";
 import { EnvMiddleware } from "./util/middleware/env.middleware";
@@ -53,13 +55,14 @@ import { EnvMiddleware } from "./util/middleware/env.middleware";
                 password: ensure(configService.get("MARIADB_PASSWORD")),
                 database: ensure(configService.get("MARIADB_DATABASE")),
                 synchronize: true,
-                entities: [DiscordVerification, Profile, Image],
+                entities: [DiscordVerification, Profile, Image, Points],
             }),
         }),
         DiscordCommandModule,
         DiscordVerificationModule,
         ProfileModule,
         ImageModule,
+        PointsModule,
     ],
     providers: [
         {

@@ -3,4 +3,5 @@ export enum ApiResource {
     DiscordVerification = "discord-verifications",
     Image = "images",
     Profile = "profiles",
+    Points = "points",
 }
