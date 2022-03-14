@@ -7,7 +7,7 @@ export const getAllDiscordVerifications: SynbaseQuery<IDiscordVerification[], IG
     synbase,
     query,
 ) => ({
-    queryKey: [ApiResource.DiscordVerification],
+    queryKey: [ApiResource.DiscordVerification, query],
     queryFn: () => synbase.discordVerifications.getAll(query),
 });
 

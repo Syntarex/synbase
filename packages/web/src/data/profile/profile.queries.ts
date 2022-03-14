@@ -2,7 +2,7 @@ import { ApiResource, IGetProfiles, IProfile } from "@synbase/shared";
 import { SynbaseQuery } from "../../model/client/synbase.query";
 
 export const getAllProfiles: SynbaseQuery<IProfile[], IGetProfiles> = (synbase, query) => ({
-    queryKey: [ApiResource.Profile],
+    queryKey: [ApiResource.Profile, query],
     queryFn: () => synbase.profiles.getAll(query),
 });
 
