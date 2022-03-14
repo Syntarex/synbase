@@ -6,7 +6,7 @@ import { ISession } from "../model/auth/session.model";
 
 const unauthorizedClient = new Synbase(ClientEnv.apiUrl);
 
-export const getClient = async (context?: GetSessionParams): Promise<Synbase> => {
+export const getSynbase = async (context?: GetSessionParams): Promise<Synbase> => {
     if (_.isUndefined(context)) {
         return unauthorizedClient;
     }

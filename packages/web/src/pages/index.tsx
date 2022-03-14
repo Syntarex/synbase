@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import { GetStaticProps } from "next";
 import React from "react";
 import { dehydrate, QueryClient } from "react-query";
-import { getClient } from "../client/server.client";
+import { getSynbase } from "../client/server.client";
 import { AuthButton } from "../component/auth/auth-button/auth-button.component";
 import { Fetch } from "../component/common/fetch/fetch.component";
 import { Urls } from "../constants/constants.client";
@@ -32,10 +32,10 @@ const IndexPage = () => {
 };
 
 export const getStaticProps: GetStaticProps<IWithDehydratedState> = async () => {
-    const client = await getClient();
+    const synbase = await getSynbase();
     const queryClient = new QueryClient();
 
-    await queryClient.prefetchQuery(getApp(client));
+    await queryClient.prefetchQuery(getApp(synbase));
 
     return {
         props: {

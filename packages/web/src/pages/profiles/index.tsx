@@ -6,7 +6,7 @@ import _ from "lodash";
 import { GetServerSideProps } from "next";
 import React from "react";
 import { dehydrate, QueryClient, useMutation, useQueryClient } from "react-query";
-import { getClient } from "../../client/server.client";
+import { getSynbase } from "../../client/server.client";
 import ProfileAvatar from "../../component/profile/profile-avatar.component";
 import { Urls } from "../../constants/constants.client";
 import { getMyProfile } from "../../data/profile/profile.queries";
@@ -64,7 +64,7 @@ const MyProfilePage = () => {
 };
 
 export const getServerSideProps: GetServerSideProps<IWithDehydratedState> = async (ctx) => {
-    const synbase = await getClient(ctx);
+    const synbase = await getSynbase(ctx);
     const queryClient = new QueryClient();
 
     await queryClient.prefetchQuery(getMyProfile(synbase));

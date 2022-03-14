@@ -1,13 +1,13 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { ApiResource, IProfile } from "@synbase/shared";
+import { IProfile } from "@synbase/shared";
 import _ from "lodash";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import React from "react";
 import { dehydrate, QueryClient } from "react-query";
-import { getClient } from "../../client/server.client";
+import { getSynbase } from "../../client/server.client";
 import { Fetch } from "../../component/common/fetch/fetch.component";
 import ProfileAvatar from "../../component/profile/profile-avatar.component";
 import { Urls } from "../../constants/constants.client";
@@ -88,13 +88,13 @@ const ProfilePage = () => {
 };
 
 export const getServerSideProps: GetServerSideProps<IWithDehydratedState> = async (ctx) => {
-    const client = await getClient(ctx);
+    const synbase = await getSynbase(ctx);
     const queryClient = new QueryClient();
 
     const { slug } = ctx.query;
 
     if (!_.isUndefined(slug) && !_.isArray(slug)) {
-        await queryClient.prefetchQuery([ApiResource.Profile, slug], () => client.profiles.getBySlug(slug));
+        await queryClient.prefetchQuery(getProfileBySlug(synbase, slug));
     }
 
     return {
