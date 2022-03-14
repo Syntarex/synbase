@@ -15,10 +15,12 @@ import { useSynbase } from "../../hook/client/use-synbase.hook";
 import { useBreadcrumb } from "../../hook/layout/use-breadcrumb.hook";
 import { useRedirect } from "../../hook/use-redirect.hook";
 import { IWithDehydratedState } from "../../model/page-props.model";
+import { IUrl } from "../../model/url.model";
 
 const ProfilePage = () => {
-    /* TODO: erweitere Breadcrumb um Profilname */
-    useBreadcrumb([Urls.Profile]);
+    const [profileUrl, setProfileUrl] = React.useState<IUrl | undefined>(undefined);
+
+    useBreadcrumb([Urls.Profile, profileUrl]);
 
     const router = useRouter();
     const { slug } = router.query;
@@ -44,7 +46,14 @@ const ProfilePage = () => {
                     queryKey: [ApiResource.Profile, slug],
                     queryFn: () => synbase.profiles.getBySlug(slug),
                 }}
-                onSuccess={(profile) => (_.isNull(profile) ? redirect(Urls.NotFound) : undefined)}
+                onSuccess={(profile) =>
+                    _.isNull(profile)
+                        ? redirect(Urls.NotFound)
+                        : setProfileUrl({
+                              path: `${Urls.Profile}/${profile.slug}`,
+                              title: profile.nickname,
+                          })
+                }
                 renderOnSuccess={(profile) =>
                     _.isNull(profile) ? (
                         <CircularProgress />
