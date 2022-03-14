@@ -6,7 +6,7 @@ import React from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { Fetch } from "../../component/common/fetch/fetch.component";
 import { Urls } from "../../constants/constants.client";
-import { getMyProfile } from "../../data/profile/profile.selectors";
+import { getMyProfile } from "../../data/profile/profile.queries";
 import { useSynbase } from "../../hook/client/use-synbase.hook";
 import { useBreadcrumb } from "../../hook/layout/use-breadcrumb.hook";
 import { useRedirect } from "../../hook/use-redirect.hook";

@@ -9,7 +9,7 @@ import { dehydrate, QueryClient, useMutation, useQueryClient } from "react-query
 import { getClient } from "../../client/server.client";
 import ProfileAvatar from "../../component/profile/profile-avatar.component";
 import { Urls } from "../../constants/constants.client";
-import { getMyProfile } from "../../data/profile/profile.selectors";
+import { getMyProfile } from "../../data/profile/profile.queries";
 import { useAuth } from "../../hook/auth/use-auth.hook";
 import { useSynbase } from "../../hook/client/use-synbase.hook";
 import { useBreadcrumb } from "../../hook/layout/use-breadcrumb.hook";

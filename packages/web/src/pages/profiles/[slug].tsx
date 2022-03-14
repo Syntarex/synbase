@@ -11,7 +11,7 @@ import { getClient } from "../../client/server.client";
 import { Fetch } from "../../component/common/fetch/fetch.component";
 import ProfileAvatar from "../../component/profile/profile-avatar.component";
 import { Urls } from "../../constants/constants.client";
-import { getProfileBySlug } from "../../data/profile/profile.selectors";
+import { getProfileBySlug } from "../../data/profile/profile.queries";
 import { useSynbase } from "../../hook/client/use-synbase.hook";
 import { useBreadcrumb } from "../../hook/layout/use-breadcrumb.hook";
 import { useRedirect } from "../../hook/use-redirect.hook";
