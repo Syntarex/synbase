@@ -37,6 +37,7 @@ export const Urls = {
 };
 
 export const ClientEnv = {
+    webUrl: ensure(process.env.NEXT_PUBLIC_WEB_URL),
     apiUrl: ensure(process.env.NEXT_PUBLIC_API_URL),
     apiImageSizeLimit: Number(ensure(process.env.NEXT_PUBLIC_API_IMAGE_SIZE_LIMIT)),
 };

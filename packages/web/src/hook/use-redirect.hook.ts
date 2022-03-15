@@ -8,8 +8,6 @@ export const useRedirect = () => {
 
     return React.useCallback(
         (url: IUrl) => {
-            console.log(router.pathname);
-            console.log(url);
             if (_.isUndefined(router) || _.isEqual(router.pathname, url.path)) {
                 return;
             }

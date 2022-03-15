@@ -1,10 +1,11 @@
-import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import { ApiResource, ICreateProfile } from "@synbase/shared";
 import _ from "lodash";
 import React from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { Fetch } from "../../component/common/fetch/fetch.component";
+import ProfileCreateForm from "../../component/profile/profile-create-form/profile-create-form.component";
 import { Urls } from "../../constants/constants.client";
 import { getMyProfile } from "../../data/profile/profile.queries";
 import { useSynbase } from "../../hook/client/use-synbase.hook";
@@ -38,18 +39,11 @@ const RegisterPage = () => {
             onSuccess={(profile) => (!_.isNull(profile) ? redirect(Urls.Profile) : undefined)}
             renderOnSuccess={(profile) =>
                 !_.isNull(profile) ? null : (
-                    <Stack>
-                        <Button
-                            disabled={isLoading}
-                            onClick={() =>
-                                createProfile({
-                                    nickname: "Syntarex",
-                                    slug: "syntarex",
-                                })
-                            }
-                        >
-                            Registrieren
-                        </Button>
+                    <Stack spacing={2}>
+                        <Typography variant={"h3"}>Profil erstellen</Typography>
+                        <Typography>Jeder sollte ein Profil haben. Du kanst später alles ändern.</Typography>
+
+                        <ProfileCreateForm disabled={isLoading} onSubmit={createProfile} />
                     </Stack>
                 )
             }
