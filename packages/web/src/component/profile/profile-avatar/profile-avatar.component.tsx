@@ -6,7 +6,8 @@ import React from "react";
 import FileChooser from "../../common/file-chooser/file-chooser.component";
 
 interface IProfileAvatarProps {
-    sx?: SxProps;
+    containerSx?: SxProps;
+    avatarSx?: SxProps;
     profile: IProfile;
     src?: string | null;
     editMode?: boolean;
@@ -14,7 +15,7 @@ interface IProfileAvatarProps {
 }
 
 const ProfileAvatar = (props: IProfileAvatarProps) => {
-    const { sx, profile, editMode, onChange, src } = props;
+    const { containerSx, avatarSx, profile, editMode, onChange, src } = props;
 
     const [file, setFile] = React.useState<File | null>(null);
 
@@ -26,9 +27,13 @@ const ProfileAvatar = (props: IProfileAvatarProps) => {
         onChange(file);
     }, [file, editMode, onChange]);
 
+    const { nickname } = profile;
+
     return (
-        <FileChooser sx={sx} disabled={!editMode} onChange={setFile}>
-            <Avatar alt={profile.nickname} src={_.isNull(src) ? undefined : src} />
+        <FileChooser sx={containerSx} disabled={!editMode} onChange={setFile}>
+            <Avatar alt={nickname} src={_.isNull(src) ? undefined : src} sx={avatarSx}>
+                {nickname.charAt(0)}
+            </Avatar>
         </FileChooser>
     );
 };

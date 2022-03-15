@@ -10,7 +10,7 @@ import { dehydrate, QueryClient, useMutation, useQueryClient } from "react-query
 import { getSynbase } from "../../client/server.client";
 import { Fetch } from "../../component/common/fetch/fetch.component";
 import PointsItem from "../../component/points/points-item/points-item.component";
-import ProfileAvatar from "../../component/profile/profile-avatar/profile-avatar.component";
+import ProfileItem from "../../component/profile/profile-item/profile-item.component";
 import { Urls } from "../../constants/constants.client";
 import { getAllMyPoints } from "../../data/points/points.queries";
 import { getMyProfile } from "../../data/profile/profile.queries";
@@ -52,19 +52,12 @@ const MyProfilePage = () => {
         return <CircularProgress />;
     }
 
-    const { imageId, id } = profile;
-
     return (
         <Stack spacing={4}>
             <Stack spacing={2}>
                 <Typography variant={"h3"}>Dein Profil</Typography>
 
-                <ProfileAvatar
-                    editMode
-                    src={_.isNull(imageId) ? undefined : synbase.images.getImageUrl(imageId)}
-                    profile={profile}
-                    onChange={changeImage}
-                />
+                <ProfileItem profile={profile} />
             </Stack>
 
             <Stack spacing={2}>
@@ -91,7 +84,7 @@ const MyProfilePage = () => {
                     onClick={() =>
                         createPoints({
                             amount: 500,
-                            profileId: id,
+                            profileId: profile.id,
                             source: PointsSource.ADMIN_ACTION,
                             notes: "Ich habe dir die Punkte gutgeschrieben, einfach weil ich dich gern habe. Ich hoffe es geht dir gut.",
                         })
