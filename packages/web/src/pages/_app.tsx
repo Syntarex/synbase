@@ -1,5 +1,7 @@
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
+import dayjs from "dayjs";
+import "dayjs/locale/de";
 import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { AppProps } from "next/app";
@@ -14,6 +16,8 @@ import ErrorBoundary from "../component/error/error-boundary/error-boundary.comp
 import ErrorList from "../component/error/error-list/error-list.component";
 import Layout from "../component/layout";
 import createEmotionCache from "../util/create-emotion-cache.util";
+
+dayjs.locale("de");
 
 interface IMyAppProps extends AppProps {
     emotionCache?: EmotionCache;

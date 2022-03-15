@@ -1,5 +1,5 @@
 import { ICreatePoints, PointsSource } from "@synbase/shared";
-import { IsEnum, IsInt, IsUUID, Max, Min } from "class-validator";
+import { IsEnum, IsInt, IsNotEmpty, IsString, IsUUID, Max, MaxLength, Min } from "class-validator";
 import { IsNullable } from "../../util/validation/is-nullable.decorator";
 import { Points } from "./points.entity";
 
@@ -12,10 +12,12 @@ export class CreatePoints implements ICreatePoints {
     @IsUUID()
     profileId: string;
 
-    @IsNullable()
-    @IsUUID()
-    senderId: string | null;
-
     @IsEnum(PointsSource)
     source: PointsSource;
+
+    @IsNullable()
+    @IsString()
+    @IsNotEmpty()
+    @MaxLength(Points.NOTES_LENGTH)
+    notes: string | null;
 }

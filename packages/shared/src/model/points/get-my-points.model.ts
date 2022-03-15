@@ -1,3 +1,3 @@
 import { IPoints } from "./points.model";
 
-export type IGetMyPoints = Partial<Pick<IPoints, "source" | "amount" | "senderId">>;
+export type IGetMyPoints = Partial<Pick<IPoints, "source" | "amount">>;

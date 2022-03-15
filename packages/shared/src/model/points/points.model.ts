@@ -8,6 +8,5 @@ export interface IPoints extends IResource {
     source: PointsSource;
     profileId: string;
     amount: number;
-    senderId: string | null;
     notes: string | null;
 }

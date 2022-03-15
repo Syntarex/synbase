@@ -26,6 +26,7 @@ const RegisterPage = () => {
         {
             onSuccess: () => {
                 queryClient.invalidateQueries([ApiResource.Profile, "my"]);
+                redirect(Urls.Profile);
             },
         },
     );

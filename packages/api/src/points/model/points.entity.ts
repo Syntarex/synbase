@@ -20,13 +20,6 @@ export class Points extends Resource implements IPoints {
     @Column()
     profileId: string;
 
-    /* TODO: Funktioniert das? */
-    @ManyToOne(() => Profile, { nullable: true })
-    sender: Promise<Profile | null>;
-
-    @Column({ nullable: true })
-    senderId: string | null;
-
     @Column({ type: "enum", enum: PointsSource })
     source: PointsSource;
 }

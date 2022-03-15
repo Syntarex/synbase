@@ -27,7 +27,6 @@ export class PointsController {
         @Query() query: GetMyPoints,
         @AuthenticatedUser() user: IAuthenticatedUser,
     ): Promise<IPoints[]> {
-        /* TODO: Mit oder nach senderId filtern */
         return await this.pointsService.getAll({
             ...query,
             profileId: user.sub,

@@ -1,6 +1,5 @@
 import { IGetPoints, PointsSource } from "@synbase/shared";
 import { IsEnum, IsInt, IsUUID, Max, Min } from "class-validator";
-import { IsNullable } from "../../util/validation/is-nullable.decorator";
 import { IsUndefinedable } from "../../util/validation/is-undefinedable.decorator";
 import { Points } from "./points.entity";
 
@@ -14,11 +13,6 @@ export class GetPoints implements IGetPoints {
     @IsUndefinedable()
     @IsUUID()
     profileId?: string;
-
-    @IsUndefinedable()
-    @IsNullable()
-    @IsUUID()
-    senderId?: string | null;
 
     @IsUndefinedable()
     @IsEnum(PointsSource)

@@ -28,7 +28,7 @@ export class PointsClient extends RestClient {
     }
 
     public async create(body: ICreatePoints): Promise<IPoints> {
-        return (await this.httpClient.post(`${ApiResource.Points}/my`, body)).data;
+        return (await this.httpClient.post(ApiResource.Points, body)).data;
     }
 
     public async delete(id: string): Promise<boolean> {
