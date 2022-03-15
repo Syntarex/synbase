@@ -1,5 +1,4 @@
-import { ICreatePoints } from "@synbase/shared";
-import { PointsSource } from "@synbase/shared/src/model/points/points.model";
+import { ICreatePoints, PointsSource } from "@synbase/shared";
 import { IsEnum, IsInt, IsUUID, Max, Min } from "class-validator";
 import { IsNullable } from "../../util/validation/is-nullable.decorator";
 import { Points } from "./points.entity";

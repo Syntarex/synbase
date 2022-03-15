@@ -1,5 +1,4 @@
-import { IGetMyPoints } from "@synbase/shared";
-import { PointsSource } from "@synbase/shared/src/model/points/points.model";
+import { IGetMyPoints, PointsSource } from "@synbase/shared";
 import { IsEnum, IsInt, IsUUID, Max, Min } from "class-validator";
 import { IsNullable } from "../../util/validation/is-nullable.decorator";
 import { IsUndefinedable } from "../../util/validation/is-undefinedable.decorator";

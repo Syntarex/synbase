@@ -1,9 +1,9 @@
-import { IPoints } from "@synbase/shared";
-import { PointsSource } from "@synbase/shared/src/model/points/points.model";
-import { Column, ManyToOne } from "typeorm";
+import { IPoints, PointsSource } from "@synbase/shared";
+import { Column, Entity, ManyToOne } from "typeorm";
 import { Profile } from "../../profile/model/profile.entity";
 import { Resource } from "../../util/model/resource.entity";
 
+@Entity()
 export class Points extends Resource implements IPoints {
     public static NOTES_LENGTH = 1000;
     public static AMOUNT_MAX = 1000000;
