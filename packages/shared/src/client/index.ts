@@ -3,6 +3,7 @@ import _ from "lodash";
 import { AppClient } from "./app/app.client";
 import { DiscordVerificationClient } from "./discord-verification/discord-verification.client";
 import { ImageClient } from "./image/image.client";
+import { PointsClient } from "./points/points.client";
 import { ProfileClient } from "./profile/profile.client";
 
 export class Synbase {
@@ -12,6 +13,7 @@ export class Synbase {
     public discordVerifications: DiscordVerificationClient;
     public profiles: ProfileClient;
     public images: ImageClient;
+    public points: PointsClient;
 
     constructor(baseUrl: string) {
         this.httpClient = axios.create({
@@ -43,6 +45,7 @@ export class Synbase {
         this.discordVerifications = new DiscordVerificationClient(this.httpClient);
         this.profiles = new ProfileClient(this.httpClient);
         this.images = new ImageClient(this.httpClient);
+        this.points = new PointsClient(this.httpClient);
     }
 
     public login(token: string): void {

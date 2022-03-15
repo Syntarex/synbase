@@ -23,7 +23,10 @@ export class PointsController {
 
     @Get("my")
     @Scopes(ApiScope.Read)
-    public async getMy(@Query() query: GetMyPoints, @AuthenticatedUser() user: IAuthenticatedUser): Promise<IPoints[]> {
+    public async getAllMy(
+        @Query() query: GetMyPoints,
+        @AuthenticatedUser() user: IAuthenticatedUser,
+    ): Promise<IPoints[]> {
         /* TODO: Mit oder nach senderId filtern */
         return await this.pointsService.getAll({
             ...query,
@@ -31,10 +34,9 @@ export class PointsController {
         });
     }
 
-    /* TODO: Der Name der Funktion ist nicht innerhalb der Konvention */
     @Get("my/:id")
     @Scopes(ApiScope.Read)
-    public async getMyById(@Param("id") id: string, @AuthenticatedUser() user: IAuthenticatedUser): Promise<IPoints> {
+    public async getMy(@Param("id") id: string, @AuthenticatedUser() user: IAuthenticatedUser): Promise<IPoints> {
         const points = await this.pointsService.get(id);
 
         if (_.isNull(points) || !_.isEqual(points.profileId, user.sub)) {
@@ -57,7 +59,7 @@ export class PointsController {
     }
 
     @Post()
-    @Scopes(ApiScope.Create)
+    @Scopes(ApiScope.CreateAll)
     public async create(@Body() body: CreatePoints): Promise<IPoints> {
         return await this.pointsService.create(body);
     }
