@@ -20,11 +20,10 @@ const RegisterPage = () => {
     const queryClient = useQueryClient();
 
     const { mutate: createProfile, isLoading } = useMutation(
-        async (body: ICreateProfile) => {
-            return synbase.profiles.createMy(body);
-        },
+        async (body: ICreateProfile) => synbase.profiles.createMy(body),
         {
-            onSuccess: () => {
+            onSuccess: (profile) => {
+                queryClient.invalidateQueries([ApiResource.Profile, profile.id]);
                 queryClient.invalidateQueries([ApiResource.Profile, "my"]);
                 redirect(Urls.Profile);
             },

@@ -9,14 +9,19 @@ import { useSynbase } from "../client/use-synbase.hook";
 import { useRedirect } from "../use-redirect.hook";
 import { useSession } from "./use-session.hook";
 
-export const useAuth = (): IAuth => {
+interface IUseAuthOptions {
+    redirectEnabled: boolean;
+}
+
+export const useAuth = (options: IUseAuthOptions = { redirectEnabled: true }): IAuth => {
+    const { redirectEnabled } = options;
     const session = useSession();
 
     React.useEffect(() => {
-        if (_.isNull(session)) {
+        if (redirectEnabled && _.isNull(session)) {
             signIn("keycloak");
         }
-    }, [session]);
+    }, [session, redirectEnabled]);
 
     const redirect = useRedirect();
 
@@ -29,10 +34,10 @@ export const useAuth = (): IAuth => {
     });
 
     React.useEffect(() => {
-        if (_.isNull(profile)) {
+        if (redirectEnabled && _.isNull(profile)) {
             redirect(Urls.ProfileRegister);
         }
-    }, [profile]);
+    }, [profile, redirectEnabled]);
 
     return {
         profile: _.isUndefined(profile) ? null : profile,

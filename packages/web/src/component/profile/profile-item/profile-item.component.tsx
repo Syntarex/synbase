@@ -43,7 +43,6 @@ const ProfileItem = (props: IProfileItemProps) => {
                             width: 56,
                             height: 56,
                         }}
-                        editMode={!_.isUndefined(onImageChange)}
                         src={_.isNull(imageId) ? undefined : synbase.images.getImageUrl(imageId)}
                         profile={profile}
                         onChange={onImageChange}
