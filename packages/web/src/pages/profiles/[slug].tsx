@@ -9,7 +9,7 @@ import React from "react";
 import { dehydrate, QueryClient } from "react-query";
 import { getSynbase } from "../../client/server.client";
 import { Fetch } from "../../component/common/fetch/fetch.component";
-import ProfileAvatar from "../../component/profile/profile-avatar.component";
+import ProfileAvatar from "../../component/profile/profile-avatar/profile-avatar.component";
 import { Urls } from "../../constants/constants.client";
 import { getProfileBySlug } from "../../data/profile/profile.queries";
 import { useSynbase } from "../../hook/client/use-synbase.hook";

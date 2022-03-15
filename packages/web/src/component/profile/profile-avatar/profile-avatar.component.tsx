@@ -3,7 +3,7 @@ import Avatar from "@mui/material/Avatar";
 import { IProfile } from "@synbase/shared";
 import _ from "lodash";
 import React from "react";
-import FileChooser from "../common/file-chooser/file-chooser.component";
+import FileChooser from "../../common/file-chooser/file-chooser.component";
 
 interface IProfileAvatarProps {
     sx?: SxProps;

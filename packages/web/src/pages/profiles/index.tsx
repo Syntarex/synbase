@@ -10,7 +10,7 @@ import { dehydrate, QueryClient, useMutation, useQueryClient } from "react-query
 import { getSynbase } from "../../client/server.client";
 import { Fetch } from "../../component/common/fetch/fetch.component";
 import PointsItem from "../../component/points/points-item/points-item.component";
-import ProfileAvatar from "../../component/profile/profile-avatar.component";
+import ProfileAvatar from "../../component/profile/profile-avatar/profile-avatar.component";
 import { Urls } from "../../constants/constants.client";
 import { getAllMyPoints } from "../../data/points/points.queries";
 import { getMyProfile } from "../../data/profile/profile.queries";
