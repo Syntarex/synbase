@@ -55,48 +55,51 @@ const MyProfilePage = () => {
     const { imageId, id } = profile;
 
     return (
-        <Stack>
-            <Typography variant={"h1"}>{profile.nickname}</Typography>
+        <Stack spacing={4}>
+            <Stack spacing={2}>
+                <Typography variant={"h3"}>Dein Profil</Typography>
 
-            <ProfileAvatar
-                editMode
-                sx={{
-                    width: 300,
-                    height: 300,
-                }}
-                src={_.isNull(imageId) ? undefined : synbase.images.getImageUrl(imageId)}
-                profile={profile}
-                onChange={changeImage}
-            />
+                <ProfileAvatar
+                    editMode
+                    src={_.isNull(imageId) ? undefined : synbase.images.getImageUrl(imageId)}
+                    profile={profile}
+                    onChange={changeImage}
+                />
+            </Stack>
 
-            <Fetch
-                selector={pointsQuery}
-                renderOnSuccess={(points) =>
-                    _.isEmpty(points) ? (
-                        <Typography>Keine Punkte verdient.</Typography>
-                    ) : (
-                        <Stack spacing={2}>
-                            {points.map((each) => (
-                                <PointsItem key={`points-${each.id}`} points={each} />
-                            ))}
-                        </Stack>
-                    )
-                }
-            />
+            <Stack spacing={2}>
+                <Typography variant={"h3"}>Punkte</Typography>
+                <Typography>Eine Liste aller Punkte die du bereits verdient oder ausgegeben hast.</Typography>
 
-            <Button
-                variant={"contained"}
-                onClick={() =>
-                    createPoints({
-                        amount: 500,
-                        profileId: id,
-                        source: PointsSource.ADMIN_ACTION,
-                        notes: "Ich habe dir die Punkte gutgeschrieben, einfach weil ich dich gern habe. Ich hoffe es geht dir gut.",
-                    })
-                }
-            >
-                Punkte hinzufügen
-            </Button>
+                <Fetch
+                    selector={pointsQuery}
+                    renderOnSuccess={(points) =>
+                        _.isEmpty(points) ? (
+                            <Typography>Du hast bisher keine Punkte.</Typography>
+                        ) : (
+                            <Stack spacing={2}>
+                                {points.map((each) => (
+                                    <PointsItem key={`points-${each.id}`} points={each} />
+                                ))}
+                            </Stack>
+                        )
+                    }
+                />
+
+                <Button
+                    variant={"contained"}
+                    onClick={() =>
+                        createPoints({
+                            amount: 500,
+                            profileId: id,
+                            source: PointsSource.ADMIN_ACTION,
+                            notes: "Ich habe dir die Punkte gutgeschrieben, einfach weil ich dich gern habe. Ich hoffe es geht dir gut.",
+                        })
+                    }
+                >
+                    Punkte hinzufügen
+                </Button>
+            </Stack>
         </Stack>
     );
 };
