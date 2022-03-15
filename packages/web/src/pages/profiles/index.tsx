@@ -53,11 +53,11 @@ const MyProfilePage = () => {
     }
 
     return (
-        <Stack spacing={4}>
+        <Stack spacing={8}>
             <Stack spacing={2}>
                 <Typography variant={"h3"}>Dein Profil</Typography>
 
-                <ProfileItem profile={profile} />
+                <ProfileItem profile={profile} onImageChange={changeImage} />
             </Stack>
 
             <Stack spacing={2}>

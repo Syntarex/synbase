@@ -30,25 +30,18 @@ const ProfileItem = (props: IProfileItemProps) => {
                 ...sx,
             }}
         >
-            <Grid container spacing={2}>
-                <Grid item xs={12} sm={"auto"}>
+            <Grid
+                container
+                sx={{
+                    alignItems: "center",
+                }}
+                spacing={2}
+            >
+                <Grid item xs={"auto"}>
                     <ProfileAvatar
-                        containerSx={{
-                            display: "flex",
-                            justifyContent: {
-                                xs: "center",
-                                sm: "inherit",
-                            },
-                        }}
                         avatarSx={{
-                            width: {
-                                xs: 112,
-                                sm: 56,
-                            },
-                            height: {
-                                xs: 112,
-                                sm: 56,
-                            },
+                            width: 56,
+                            height: 56,
                         }}
                         editMode={!_.isUndefined(onImageChange)}
                         src={_.isNull(imageId) ? undefined : synbase.images.getImageUrl(imageId)}
@@ -56,15 +49,8 @@ const ProfileItem = (props: IProfileItemProps) => {
                         onChange={onImageChange}
                     />
                 </Grid>
-                <Grid item xs={12} sm={true}>
-                    <Stack
-                        sx={{
-                            alignItems: {
-                                xs: "center",
-                                sm: "inherit",
-                            },
-                        }}
-                    >
+                <Grid item xs={true}>
+                    <Stack>
                         <Typography>{nickname}</Typography>
                         <Typography variant={"subtitle2"}>
                             Mitglied seit {dayjs(created).format("MMMM YYYY")}
