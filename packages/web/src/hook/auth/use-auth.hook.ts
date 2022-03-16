@@ -1,7 +1,7 @@
 import { ApiResource } from "@synbase/shared";
 import dayjs from "dayjs";
 import _ from "lodash";
-import { signIn, signOut } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import React from "react";
 import { useQuery } from "react-query";
 import { Urls } from "../../constants/constants.client";
@@ -30,12 +30,10 @@ export const useAuth = (options: IUseAuthOptions = { redirectEnabled: true }): I
     );
 
     React.useEffect(() => {
-        if (expired) {
-            signOut({
-                callbackUrl: Urls.Logout.path,
-            });
+        if (redirectEnabled && expired) {
+            redirect(Urls.AutoLogout);
         }
-    }, [expired]);
+    }, [expired, redirectEnabled]);
 
     React.useEffect(() => {
         if (redirectEnabled && _.isNull(session)) {
@@ -46,7 +44,7 @@ export const useAuth = (options: IUseAuthOptions = { redirectEnabled: true }): I
     const { data: profile } = useQuery({
         queryKey: [ApiResource.Profile, "my"],
         queryFn: () => synbase.profiles.getMy(),
-        enabled: synbase.isLoggedIn(),
+        enabled: synbase.isLoggedIn() && !expired,
     });
 
     React.useEffect(() => {
@@ -56,7 +54,7 @@ export const useAuth = (options: IUseAuthOptions = { redirectEnabled: true }): I
     }, [profile, redirectEnabled]);
 
     return {
-        profile: _.isUndefined(profile) ? null : profile,
-        session: _.isUndefined(session) ? null : session,
+        profile: expired || _.isUndefined(profile) ? null : profile,
+        session: expired || _.isUndefined(session) ? null : session,
     };
 };

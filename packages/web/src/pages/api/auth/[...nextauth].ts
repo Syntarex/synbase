@@ -7,8 +7,6 @@ import { ServerEnv } from "../../../constants/constants.server";
 import { ISession } from "../../../model/auth/session.model";
 import { IToken } from "../../../model/auth/token.model";
 
-/* FIXME: Wenn der Refresh Token abgelaufen ist, muss der Login irgendwie abgebaut werden. */
-
 const refreshAccessToken = async (token: IToken): Promise<IToken> => {
     try {
         if (Date.now() > token.refreshTokenExpiresAt) throw Error;
@@ -100,8 +98,9 @@ export default NextAuth({
 
                 token.accessToken = ensure(access_token);
                 token.refreshToken = ensure(refresh_token);
-                token.accessTokenExpiresAt = (ensure(expires_at) - 15) * 1000;
-                token.refreshTokenExpiresAt = Date.now() + (ensure(refresh_expires_in as number) - 15) * 1000;
+                token.accessTokenExpiresAt = (ensure(expires_at) - Constants.sessionRefetchInterval) * 1000;
+                token.refreshTokenExpiresAt =
+                    Date.now() + (ensure(refresh_expires_in as number) - Constants.sessionRefetchInterval) * 1000;
             }
 
             if (token.accessTokenExpiresAt < Date.now()) {
@@ -118,8 +117,6 @@ export default NextAuth({
                 ...anySession,
                 expires: new Date(token.refreshTokenExpiresAt).toISOString(),
             };
-
-            console.log("Session", session);
 
             return session;
         },

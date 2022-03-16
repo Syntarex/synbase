@@ -38,6 +38,10 @@ export const Urls = {
         path: "/logout",
         title: "Logout",
     } as IUrl,
+    AutoLogout: {
+        path: "/logout?auto=true",
+        title: "Logout",
+    },
 };
 
 export const Constants = {
