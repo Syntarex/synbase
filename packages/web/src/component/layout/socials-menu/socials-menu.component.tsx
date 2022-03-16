@@ -1,3 +1,4 @@
+import { Theme } from "@emotion/react";
 import { Icon } from "@iconify/react";
 import { SxProps } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
@@ -8,7 +9,7 @@ import { Urls } from "../../../constants/constants.client";
 import Link from "../../common/link/link.component";
 
 interface ISocialsMenuProps {
-    sx?: SxProps;
+    sx?: SxProps<Theme>;
 }
 
 const SocialsMenu = (props: ISocialsMenuProps) => {

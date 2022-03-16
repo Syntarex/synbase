@@ -1,3 +1,4 @@
+import { Theme } from "@emotion/react";
 import { SxProps } from "@mui/material";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
@@ -23,7 +24,7 @@ const validation = yup.object({
 });
 
 interface IProfileCreateFormProps {
-    sx?: SxProps;
+    sx?: SxProps<Theme>;
     disabled?: boolean;
     onSubmit: (data: ICreateProfile) => void;
 }

@@ -1,3 +1,4 @@
+import { Theme } from "@emotion/react";
 import { SxProps } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
@@ -7,8 +8,8 @@ import React from "react";
 import FileChooser from "../../common/file-chooser/file-chooser.component";
 
 interface IProfileAvatarProps {
-    containerSx?: SxProps;
-    avatarSx?: SxProps;
+    containerSx?: SxProps<Theme>;
+    avatarSx?: SxProps<Theme>;
     profile: IProfile;
     src?: string | null;
     onChange?: (file: File | null) => void;

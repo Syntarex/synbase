@@ -1,3 +1,4 @@
+import { Theme } from "@emotion/react";
 import { SxProps } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -9,7 +10,7 @@ import React from "react";
 import { pointsLoc } from "../../../localization/points.localization";
 
 interface IPointsItemProps {
-    sx?: SxProps;
+    sx?: SxProps<Theme>;
     points: IPoints;
 }
 

@@ -1,3 +1,4 @@
+import { Theme } from "@emotion/react";
 import { SxProps } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -11,7 +12,7 @@ import { useSynbase } from "../../../hook/client/use-synbase.hook";
 import ProfileAvatar from "../profile-avatar/profile-avatar.component";
 
 interface IProfileItemProps {
-    sx?: SxProps;
+    sx?: SxProps<Theme>;
     profile: IProfile;
     onImageChange?: (file: File | null) => void;
 }

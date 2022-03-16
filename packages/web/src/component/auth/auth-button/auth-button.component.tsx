@@ -1,3 +1,4 @@
+import { Theme } from "@emotion/react";
 import { SxProps } from "@mui/material";
 import Button from "@mui/material/Button";
 import _ from "lodash";
@@ -5,7 +6,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import React from "react";
 
 interface IAuthButtonProps {
-    sx?: SxProps;
+    sx?: SxProps<Theme>;
 }
 
 export const AuthButton = (props: IAuthButtonProps) => {

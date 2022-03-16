@@ -13,7 +13,6 @@ import "../../styles/globals.css";
 import synbaseTheme from "../../styles/theme/synbase.theme";
 import { SynbaseProvider } from "../component/client/synbase.provider";
 import ErrorBoundary from "../component/error/error-boundary/error-boundary.component";
-import ErrorList from "../component/error/error-list/error-list.component";
 import Layout from "../component/layout";
 import { Constants } from "../constants/constants.client";
 import createEmotionCache from "../util/create-emotion-cache.util";
@@ -60,8 +59,6 @@ const MyApp = (props: IMyAppProps) => {
                                     <ThemeProvider theme={synbaseTheme}>
                                         <CssBaseline />
                                         <Layout>
-                                            <ErrorList />
-
                                             <Component {...pageProps} />
                                         </Layout>
                                     </ThemeProvider>

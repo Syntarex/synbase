@@ -1,9 +1,11 @@
+import { useTheme } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 import React from "react";
 import { Urls } from "../../constants/constants.client";
 import Link from "../common/link/link.component";
+import ErrorList from "../error/error-list/error-list.component";
 import { Breadcrumb } from "./breadcrumb/breadcrumb.component";
 import Logo from "./logo/logo.component";
 import SocialsMenu from "./socials-menu/socials-menu.component";
@@ -14,6 +16,8 @@ interface ILayoutProps {
 
 const Layout = (props: ILayoutProps) => {
     const { children } = props;
+
+    const theme = useTheme();
 
     return (
         <>
@@ -31,7 +35,15 @@ const Layout = (props: ILayoutProps) => {
                 </Toolbar>
             </AppBar>
 
-            <Container sx={(theme) => ({ marginTop: theme.spacing(4) })}>{children}</Container>
+            <Container sx={(theme) => ({ marginTop: theme.spacing(4) })}>
+                <ErrorList
+                    sx={{
+                        marginBottom: theme.spacing(4),
+                    }}
+                />
+
+                {children}
+            </Container>
         </>
     );
 };

@@ -1,3 +1,4 @@
+import { Theme } from "@emotion/react";
 import { SxProps } from "@mui/material";
 import Box from "@mui/material/Box";
 import _ from "lodash";
@@ -8,7 +9,7 @@ import { useAddError } from "../../../hook/error/use-errors.hook";
 
 interface IFileChooserProps {
     children: React.ReactNode;
-    sx?: SxProps;
+    sx?: SxProps<Theme>;
     onChange: (file: File | null) => void;
     disabled?: boolean;
 }
@@ -39,7 +40,6 @@ const FileChooser = (props: IFileChooserProps) => {
             return;
         }
 
-        /* TODO: Funktioniert das? */
         for (const error of fileRejections[0].errors) {
             addError(new Error(error.message));
         }

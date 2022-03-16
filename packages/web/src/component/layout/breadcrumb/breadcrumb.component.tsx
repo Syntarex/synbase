@@ -1,5 +1,6 @@
+import { Theme } from "@emotion/react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { SxProps, Theme } from "@mui/material";
+import { SxProps } from "@mui/material";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import _ from "lodash";
 import React from "react";
