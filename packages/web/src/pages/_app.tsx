@@ -15,6 +15,7 @@ import { SynbaseProvider } from "../component/client/synbase.provider";
 import ErrorBoundary from "../component/error/error-boundary/error-boundary.component";
 import ErrorList from "../component/error/error-list/error-list.component";
 import Layout from "../component/layout";
+import { Constants } from "../constants/constants.client";
 import createEmotionCache from "../util/create-emotion-cache.util";
 
 dayjs.locale("de");
@@ -48,7 +49,7 @@ const MyApp = (props: IMyAppProps) => {
         <CacheProvider value={emotionCache}>
             <RecoilRoot>
                 <ErrorBoundary>
-                    <SessionProvider session={session}>
+                    <SessionProvider session={session} refetchInterval={Constants.sessionRefetchInterval}>
                         <SynbaseProvider>
                             <QueryClientProvider client={queryClient}>
                                 <Hydrate state={pageProps.dehydratedState}>

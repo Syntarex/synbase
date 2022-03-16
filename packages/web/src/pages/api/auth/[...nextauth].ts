@@ -2,6 +2,7 @@ import { ensure } from "@synbase/shared";
 import _ from "lodash";
 import NextAuth from "next-auth";
 import KeycloakProvider from "next-auth/providers/keycloak";
+import { Constants } from "../../../constants/constants.client";
 import { ServerEnv } from "../../../constants/constants.server";
 import { ISession } from "../../../model/auth/session.model";
 import { IToken } from "../../../model/auth/token.model";
@@ -47,9 +48,10 @@ const refreshAccessToken = async (token: IToken): Promise<IToken> => {
         return {
             ...token,
             accessToken: ensure(access_token),
-            accessTokenExpiresAt: Date.now() + (ensure(expires_in as number) - 15) * 1000,
+            accessTokenExpiresAt: Date.now() + (ensure(expires_in as number) - Constants.sessionRefetchInterval) * 1000,
             refreshToken: !_.isUndefined(refresh_token) ? refresh_token : token.refreshToken,
-            refreshTokenExpiresAt: Date.now() + (ensure(refresh_expires_in as number) - 15) * 1000,
+            refreshTokenExpiresAt:
+                Date.now() + (ensure(refresh_expires_in as number) - Constants.sessionRefetchInterval) * 1000,
         };
     } catch (error) {
         return {
@@ -114,7 +116,10 @@ export default NextAuth({
                 accessToken: token.accessToken,
                 userId: token.sub,
                 ...anySession,
+                expires: new Date(token.refreshTokenExpiresAt).toISOString(),
             };
+
+            console.log("Session", session);
 
             return session;
         },

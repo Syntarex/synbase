@@ -34,6 +34,14 @@ export const Urls = {
         path: "/profiles/register",
         title: "Registrieren",
     } as IUrl,
+    Logout: {
+        path: "/logout",
+        title: "Logout",
+    } as IUrl,
+};
+
+export const Constants = {
+    sessionRefetchInterval: 60 /* seconds */,
 };
 
 export const ClientEnv = {

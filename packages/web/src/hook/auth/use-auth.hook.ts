@@ -1,6 +1,7 @@
 import { ApiResource } from "@synbase/shared";
+import dayjs from "dayjs";
 import _ from "lodash";
-import { signIn } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import React from "react";
 import { useQuery } from "react-query";
 import { Urls } from "../../constants/constants.client";
@@ -20,6 +21,21 @@ export const useAuth = (options: IUseAuthOptions = { redirectEnabled: true }): I
     const redirect = useRedirect();
 
     const synbase = useSynbase();
+
+    React.useEffect(() => console.log(session), [session]);
+
+    const expired = React.useMemo(
+        () => !_.isNull(session) && !_.isUndefined(session) && dayjs(session.expires).isBefore(dayjs()),
+        [session],
+    );
+
+    React.useEffect(() => {
+        if (expired) {
+            signOut({
+                callbackUrl: Urls.Logout.path,
+            });
+        }
+    }, [expired]);
 
     React.useEffect(() => {
         if (redirectEnabled && _.isNull(session)) {
