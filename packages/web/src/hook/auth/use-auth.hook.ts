@@ -17,15 +17,15 @@ export const useAuth = (options: IUseAuthOptions = { redirectEnabled: true }): I
     const { redirectEnabled } = options;
     const session = useSession();
 
+    const redirect = useRedirect();
+
+    const synbase = useSynbase();
+
     React.useEffect(() => {
         if (redirectEnabled && _.isNull(session)) {
             signIn("keycloak");
         }
     }, [session, redirectEnabled]);
-
-    const redirect = useRedirect();
-
-    const synbase = useSynbase();
 
     const { data: profile } = useQuery({
         queryKey: [ApiResource.Profile, "my"],

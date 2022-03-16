@@ -3,6 +3,7 @@ import _ from "lodash";
 import NextAuth from "next-auth";
 import KeycloakProvider from "next-auth/providers/keycloak";
 import { ServerEnv } from "../../../constants/constants.server";
+import { ISession } from "../../../model/auth/session.model";
 import { IToken } from "../../../model/auth/token.model";
 
 /* FIXME: Wenn der Refresh Token abgelaufen ist, muss der Login irgendwie abgebaut werden. */
@@ -107,9 +108,13 @@ export default NextAuth({
 
             return token;
         },
-        session: async ({ session, token }) => {
-            session.accessToken = ensure(token.accessToken);
-            session.userId = ensure(token.sub);
+        session: async ({ session: anySession, token: anyJwt }) => {
+            const token: IToken = anyJwt as IToken;
+            const session: ISession = {
+                accessToken: token.accessToken,
+                userId: token.sub,
+                ...anySession,
+            };
 
             return session;
         },
