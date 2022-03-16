@@ -85,8 +85,11 @@ export const getServerSideProps: GetServerSideProps<IWithDehydratedState> = asyn
 
     const { slug } = ctx.query;
 
-    /* TODO: Redirecte auf 404 wenn slug ein Array oder undefined ist */
-    if (!_.isUndefined(slug) && !_.isArray(slug)) {
+    if (_.isUndefined(slug) || _.isArray(slug)) {
+        ctx.res.setHeader("location", Urls.NotFound.path);
+        ctx.res.statusCode = 302;
+        ctx.res.end();
+    } else {
         await queryClient.prefetchQuery(getProfileBySlug(synbase, slug));
     }
 
