@@ -6,3 +6,4 @@ export * from "./image";
 export * from "./points";
 export * from "./profile";
 export { IResource } from "./resource/resource.model";
+export * from "./tag";
