@@ -5,22 +5,27 @@ import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
-import { ApiResource, ICreateProfile } from "@synbase/shared";
+import { ApiResource, ICreateProfile, ProfileConstants } from "@synbase/shared";
 import { useFormik } from "formik";
 import _ from "lodash";
 import React from "react";
 import * as yup from "yup";
 import { ClientEnv } from "../../../constants/constants.client";
 
-/* TODO: Validierungs-Werte in shared auslagern und hier verwenden */
+const { NICKNAME_MAX_LENGTH, NICKNAME_MIN_LENGTH, SLUG_MAX_LENGTH, SLUG_MIN_LENGTH, SLUG_REGEX } = ProfileConstants;
+
 const validation = yup.object({
-    nickname: yup.string().max(100, "Maximum 100 Zeichen").min(3, "Minimum 3 Zeichen").required("Wichtig! AUSFÜLLEN!"),
+    nickname: yup
+        .string()
+        .max(NICKNAME_MAX_LENGTH, `Mach mal halblang! Maximale Zeichenanzahl: ${NICKNAME_MAX_LENGTH}`)
+        .min(NICKNAME_MIN_LENGTH, `Sprich bitte lauter. Minimale Zeichenanzahl: ${NICKNAME_MIN_LENGTH}`)
+        .required("Sag uns wer du bist! :)"),
     slug: yup
         .string()
-        .max(100, "Maximum 100 Zeichen")
-        .min(3, "Minimum 3 Zeichen")
-        .required("Wichtig! AUSFÜLLEN")
-        .matches(new RegExp("^[a-z0-9]+(?:-[a-z0-9]+)*$")),
+        .max(SLUG_MAX_LENGTH, `Mach mal halblang! Maximale Zeichenanzahl: ${SLUG_MAX_LENGTH}`)
+        .min(SLUG_MIN_LENGTH, `Sprich bitte lauter. Minimale Zeichenanzahl: ${SLUG_MIN_LENGTH}`)
+        .required("Schenk mir bitte Beachtung. <3")
+        .matches(SLUG_REGEX),
 });
 
 interface IProfileCreateFormProps {

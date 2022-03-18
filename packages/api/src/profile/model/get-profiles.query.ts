@@ -1,15 +1,15 @@
 import { IGetProfiles, ProfileConstants } from "@synbase/shared";
-import { IsNotEmpty, IsString, MaxLength, MinLength } from "class-validator";
+import { IsString, MaxLength, MinLength } from "class-validator";
 import { IsSlug } from "../../util/validation/is-slug.decorator";
 import { IsUndefinedable } from "../../util/validation/is-undefinedable.decorator";
 
-const { NICKNAME_LENGTH, SLUG_MAX_LENGTH, SLUG_MIN_LENGTH } = ProfileConstants;
+const { NICKNAME_MAX_LENGTH, NICKNAME_MIN_LENGTH, SLUG_MAX_LENGTH, SLUG_MIN_LENGTH } = ProfileConstants;
 
 export class GetProfiles implements IGetProfiles {
     @IsUndefinedable()
     @IsString()
-    @IsNotEmpty()
-    @MaxLength(NICKNAME_LENGTH)
+    @MinLength(NICKNAME_MIN_LENGTH)
+    @MaxLength(NICKNAME_MAX_LENGTH)
     nickname?: string;
 
     @IsUndefinedable()
