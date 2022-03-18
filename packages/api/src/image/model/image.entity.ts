@@ -1,15 +1,14 @@
-import { IImage } from "@synbase/shared";
+import { IImage, ImageConstants } from "@synbase/shared";
 import { Column, Entity, ManyToOne } from "typeorm";
 import { Length } from "../../constants";
 import { Profile } from "../../profile/model/profile.entity";
 import { Resource } from "../../util/model/resource.entity";
 
+const { PATH_LENGTH } = ImageConstants;
+
 @Entity()
 export class Image extends Resource implements IImage {
-    public static PATH_LENGTH = 128;
-    public static FOLDER_LENGTH = 32;
-
-    @Column({ type: "varchar", length: Image.PATH_LENGTH })
+    @Column({ type: "varchar", length: PATH_LENGTH })
     path: string;
 
     @ManyToOne(() => Profile)

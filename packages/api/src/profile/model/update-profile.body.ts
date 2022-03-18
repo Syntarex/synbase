@@ -1,19 +1,20 @@
-import { IUpdateProfile } from "@synbase/shared";
+import { IUpdateProfile, ProfileConstants } from "@synbase/shared";
 import { IsNotEmpty, IsString, MaxLength, MinLength } from "class-validator";
 import { IsSlug } from "../../util/validation/is-slug.decorator";
 import { IsUndefinedable } from "../../util/validation/is-undefinedable.decorator";
-import { Profile } from "./profile.entity";
+
+const { NICKNAME_LENGTH, SLUG_MAX_LENGTH, SLUG_MIN_LENGTH } = ProfileConstants;
 
 export class UpdateProfile implements IUpdateProfile {
     @IsUndefinedable()
     @IsString()
     @IsNotEmpty()
-    @MaxLength(Profile.NICKNAME_LENGTH)
+    @MaxLength(NICKNAME_LENGTH)
     nickname?: string;
 
     @IsUndefinedable()
     @IsSlug()
-    @MinLength(Profile.SLUG_MIN_LENGTH)
-    @MaxLength(Profile.SLUG_MAX_LENGTH)
+    @MinLength(SLUG_MIN_LENGTH)
+    @MaxLength(SLUG_MAX_LENGTH)
     slug?: string;
 }

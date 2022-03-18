@@ -1,13 +1,14 @@
-import { ICreateDiscordVerification } from "@synbase/shared";
+import { DiscordVerificationConstants, ICreateDiscordVerification } from "@synbase/shared";
 import { IsNotEmpty, IsString, IsUUID, MaxLength } from "class-validator";
 import { IsNullable } from "../../util/validation/is-nullable.decorator";
-import { DiscordVerification } from "./discord-verification.entity";
+
+const { DISCORD_USER_ID_LENGTH } = DiscordVerificationConstants;
 
 export class CreateDiscordVerification implements ICreateDiscordVerification {
     @IsNullable()
     @IsString()
     @IsNotEmpty()
-    @MaxLength(DiscordVerification.DISCORD_USER_ID_LENGTH)
+    @MaxLength(DISCORD_USER_ID_LENGTH)
     discordUserId: string | null;
 
     @IsUUID()

@@ -1,7 +1,8 @@
-import { IGetImages } from "@synbase/shared";
+import { IGetImages, ImageConstants } from "@synbase/shared";
 import { IsMimeType, IsNotEmpty, IsString, IsUUID, MaxLength } from "class-validator";
 import { IsUndefinedable } from "../../util/validation/is-undefinedable.decorator";
-import { Image } from "./image.entity";
+
+const { PATH_LENGTH } = ImageConstants;
 
 export class GetImages implements IGetImages {
     @IsUndefinedable()
@@ -15,6 +16,6 @@ export class GetImages implements IGetImages {
     @IsUndefinedable()
     @IsString()
     @IsNotEmpty()
-    @MaxLength(Image.PATH_LENGTH)
+    @MaxLength(PATH_LENGTH)
     path?: string;
 }
