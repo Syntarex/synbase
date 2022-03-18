@@ -10,6 +10,7 @@ interface ILinkProps extends Omit<LinkProps, "href"> {
     children?: React.ReactNode;
 }
 
+/* TODO: Triggern hier beide links? */
 export const Link = (props: ILinkProps) => {
     const { children, href } = props;
 

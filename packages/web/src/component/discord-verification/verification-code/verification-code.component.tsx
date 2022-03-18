@@ -1,7 +1,7 @@
 import { Theme } from "@emotion/react";
 import { SxProps } from "@mui/material";
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/system/Box";
 import React from "react";
 
 interface IVerificationCodeProps {
