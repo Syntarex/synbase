@@ -103,16 +103,12 @@ const Layout = (props: ILayoutProps) => {
             <Box
                 component={"main"}
                 sx={{
+                    padding: theme.spacing(4),
                     flexGrow: 1,
                     width: { sm: `calc(100% - ${drawerWidth}px)` },
                 }}
             >
-                <Box
-                    sx={{
-                        ...theme.mixins.toolbar,
-                        marginBottom: theme.spacing(4),
-                    }}
-                />
+                <Box sx={theme.mixins.toolbar} />
 
                 <Breadcrumb
                     sx={{
