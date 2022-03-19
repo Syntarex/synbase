@@ -4,6 +4,7 @@ import React from "react";
 import { dehydrate, QueryClient } from "react-query";
 import { getSynbase } from "../client/server.client";
 import { AuthButton } from "../component/auth/auth-button/auth-button.component";
+import MarkdownEditor from "../component/blog-item/markdown-editor/markdown-editor.component";
 import MarkdownViewer from "../component/blog-item/markdown-viewer/markdown-viewer.component";
 import { Urls } from "../constants/constants.client";
 import { getApp } from "../data/app/app.queries";
@@ -13,9 +14,12 @@ import { IWithDehydratedState } from "../model/page-props.model";
 const IndexPage = () => {
     useBreadcrumb([Urls.Home]);
 
+    const [value, setValue] = React.useState("");
+
     return (
         <Stack>
-            <MarkdownViewer />
+            <MarkdownEditor value={value} onChange={setValue} />
+            <MarkdownViewer value={value} />
 
             <AuthButton />
         </Stack>
