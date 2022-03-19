@@ -1,7 +1,6 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import { useMediaQuery, useTheme } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
-import Container from "@mui/material/Container";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
@@ -40,7 +39,7 @@ const Layout = (props: ILayoutProps) => {
                     marginLeft: { sm: `${drawerWidth}px` },
                 }}
             >
-                <Toolbar sx={{ justifyContent: "center" }}>
+                <Toolbar variant={desktop ? "regular" : "dense"} sx={{ justifyContent: "center" }}>
                     <IconButton
                         edge={"start"}
                         onClick={toggleMobileOpen}
@@ -101,11 +100,19 @@ const Layout = (props: ILayoutProps) => {
                 )}
             </Box>
 
-            <Container
+            <Box
                 component={"main"}
-                sx={{ marginTop: theme.spacing(4), flexGrow: 1, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+                sx={{
+                    flexGrow: 1,
+                    width: { sm: `calc(100% - ${drawerWidth}px)` },
+                }}
             >
-                <Box sx={theme.mixins.toolbar} />
+                <Box
+                    sx={{
+                        ...theme.mixins.toolbar,
+                        marginBottom: theme.spacing(4),
+                    }}
+                />
 
                 <Breadcrumb
                     sx={{
@@ -121,7 +128,7 @@ const Layout = (props: ILayoutProps) => {
                 />
 
                 {children}
-            </Container>
+            </Box>
         </Box>
     );
 };
