@@ -9,7 +9,5 @@ export const useBreadcrumb = (urls: Array<IUrl | undefined>) => {
 
     const filtered = React.useMemo<IUrl[]>(() => _.filter(urls, (url) => !_.isUndefined(url)) as IUrl[], [urls]);
 
-    React.useEffect(() => {
-        setBreadcrumb(filtered);
-    }, [filtered]);
+    React.useEffect(() => setBreadcrumb(filtered), [filtered]);
 };
