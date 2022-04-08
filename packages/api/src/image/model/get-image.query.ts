@@ -1,7 +1,6 @@
 import { IGetImage } from "@synbase/shared";
-import { Transform } from "class-transformer";
 import { IsInt, IsPositive, Max } from "class-validator";
-import _ from "lodash";
+import { TransformTo } from "../../util/transformation/transform-to.decorator";
 import { IsUndefinedable } from "../../util/validation/is-undefinedable.decorator";
 
 /* TODO: Transform Decorator verhübschen */
@@ -10,20 +9,20 @@ export class GetImage implements IGetImage {
     @IsInt()
     @IsPositive()
     @Max(5000)
-    @Transform(({ value }) => (_.isUndefined(value) ? undefined : _.toNumber(value)))
+    @TransformTo({ type: "number" })
     height?: number;
 
     @IsUndefinedable()
     @IsInt()
     @IsPositive()
     @Max(100)
-    @Transform(({ value }) => (_.isUndefined(value) ? undefined : _.toNumber(value)))
+    @TransformTo({ type: "number" })
     quality?: number;
 
     @IsUndefinedable()
     @IsInt()
     @IsPositive()
     @Max(5000)
-    @Transform(({ value }) => (_.isUndefined(value) ? undefined : _.toNumber(value)))
+    @TransformTo({ type: "number" })
     width?: number;
 }
