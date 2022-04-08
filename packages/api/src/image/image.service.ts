@@ -7,6 +7,7 @@ import * as fs from "fs-extra";
 import ImageKit from "imagekit";
 import { UploadOptions } from "imagekit/dist/libs/interfaces";
 import _ from "lodash";
+import Hash from "object-hash";
 import { Repository } from "typeorm";
 import { IUploadParams } from "../profile/model/upload.params";
 import { TypeOrmService } from "../util/service/typeorm.service";
@@ -65,8 +66,7 @@ export class ImageService extends TypeOrmService<Image> {
     }
 
     public async download(image: Image, query: IGetImage): Promise<StreamableFile> {
-        /* TODO: Finde einen Weg query zu parsen */
-        const path = `temp/${image.id}/w-${query.width}-h-${query.height}-q-${query.quality}`;
+        const path = `temp/${image.id}/${Hash(query)}`;
 
         try {
             await fs.access(path);

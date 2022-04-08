@@ -1,4 +1,4 @@
-import { Controller, Get, Logger, NotFoundException, Param, Query, StreamableFile } from "@nestjs/common";
+import { Controller, Get, NotFoundException, Param, Query, StreamableFile } from "@nestjs/common";
 import { ApiResource, ApiScope, IImage } from "@synbase/shared";
 import _ from "lodash";
 import { Public, Resource, Scopes } from "nest-keycloak-connect";
@@ -34,7 +34,6 @@ export class ImageController {
     @Get(":id/image")
     @Public()
     public async getImage(@Param("id") id: string, @Query() query: GetImage): Promise<StreamableFile> {
-        Logger.log("ImageController", query);
         const image = await this.imageService.get(id);
 
         if (_.isNull(image)) {

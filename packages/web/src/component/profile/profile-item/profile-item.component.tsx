@@ -44,7 +44,11 @@ const ProfileItem = (props: IProfileItemProps) => {
                             width: 56,
                             height: 56,
                         }}
-                        src={_.isNull(imageId) ? undefined : synbase.images.getImageUrl(imageId)}
+                        src={
+                            _.isNull(imageId)
+                                ? undefined
+                                : synbase.images.getImageUrl(imageId, { height: 50, width: 50 })
+                        }
                         profile={profile}
                         onChange={onImageChange}
                     />

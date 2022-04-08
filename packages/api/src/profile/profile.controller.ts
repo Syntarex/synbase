@@ -178,4 +178,6 @@ export class ProfileController {
 
         return image;
     }
+
+    /* TODO: Delete my Image */
 }
