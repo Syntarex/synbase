@@ -17,7 +17,7 @@ const MarkdownEditor = (props: IMarkdownEditorProps) => {
 
     const onTextChanged = React.useCallback(
         (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-            if (disabled || _.isUndefined(onChange) || _.isUndefined(event)) {
+            if (disabled || _.isUndefined(onChange)) {
                 return;
             }
 
@@ -31,6 +31,8 @@ const MarkdownEditor = (props: IMarkdownEditorProps) => {
             <TextField
                 fullWidth
                 multiline
+                label={"Markdown"}
+                rows={8}
                 variant={"outlined"}
                 disabled={disabled}
                 value={value}

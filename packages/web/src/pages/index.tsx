@@ -1,11 +1,10 @@
 import Stack from "@mui/material/Stack";
-import _ from "lodash";
 import { GetStaticProps } from "next";
 import React from "react";
 import { dehydrate, QueryClient } from "react-query";
 import { getSynbase } from "../client/server.client";
-import { AuthButton } from "../component/auth/auth-button/auth-button.component";
-import RichTextEditor from "../component/common/rich-text-editor/rich-text-editor.component";
+import MarkdownEditor from "../component/common/markdown-editor/markdown-editor.component";
+import MarkdownViewer from "../component/common/markdown-viewer/markdown-viewer.component";
 import { Urls } from "../constants/constants.client";
 import { getApp } from "../data/app/app.queries";
 import { useBreadcrumb } from "../hook/layout/use-breadcrumb.hook";
@@ -14,13 +13,13 @@ import { IWithDehydratedState } from "../model/page-props.model";
 const IndexPage = () => {
     useBreadcrumb([Urls.Home]);
 
-    const onChange = React.useCallback((value) => _.isString(value) && console.log(value), []);
+    const [markdown, setMarkdown] = React.useState("");
 
     return (
-        <Stack>
-            <RichTextEditor onChange={onChange} />
+        <Stack spacing={4}>
+            <MarkdownEditor value={markdown} onChange={setMarkdown} />
 
-            <AuthButton />
+            <MarkdownViewer>{markdown}</MarkdownViewer>
         </Stack>
     );
 };
