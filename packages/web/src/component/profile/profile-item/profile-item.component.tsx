@@ -6,9 +6,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { IProfile } from "@synbase/shared";
 import dayjs from "dayjs";
-import _ from "lodash";
 import React from "react";
-import { useSynbase } from "../../../hook/client/use-synbase.hook";
 import ProfileAvatar from "../profile-avatar/profile-avatar.component";
 
 interface IProfileItemProps {
@@ -20,9 +18,7 @@ interface IProfileItemProps {
 const ProfileItem = (props: IProfileItemProps) => {
     const { sx, profile, onImageChange } = props;
 
-    const synbase = useSynbase();
-
-    const { created, imageId, nickname } = profile;
+    const { created, nickname } = profile;
 
     return (
         <Paper
@@ -39,19 +35,7 @@ const ProfileItem = (props: IProfileItemProps) => {
                 spacing={2}
             >
                 <Grid item xs={"auto"}>
-                    <ProfileAvatar
-                        avatarSx={{
-                            width: 56,
-                            height: 56,
-                        }}
-                        src={
-                            _.isNull(imageId)
-                                ? undefined
-                                : synbase.images.getImageUrl(imageId, { height: 50, width: 50 })
-                        }
-                        profile={profile}
-                        onChange={onImageChange}
-                    />
+                    <ProfileAvatar profile={profile} onChange={onImageChange} />
                 </Grid>
                 <Grid item xs={true}>
                     <Stack>
