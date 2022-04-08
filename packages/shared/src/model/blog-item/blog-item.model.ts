@@ -1,10 +1,15 @@
 import { IResource } from "../resource/resource.model";
 
+export enum BlogItemFormat {
+    MARKDOWN = 0,
+}
+
 export interface IBlogItem extends IResource {
     title: string;
-    subTitle: string | null;
+    summary: string | null;
     authorId: string;
-    markdown: string;
+    content: string;
     isDraft: boolean;
     slug: string;
+    format: BlogItemFormat;
 }
