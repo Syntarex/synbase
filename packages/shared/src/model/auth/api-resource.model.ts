@@ -4,4 +4,5 @@ export enum ApiResource {
     Image = "images",
     Profile = "profiles",
     Points = "points",
+    BlogItem = "blog-item",
 }
