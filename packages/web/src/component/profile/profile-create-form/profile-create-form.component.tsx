@@ -5,12 +5,12 @@ import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
-import { ApiResource, ICreateProfile, ProfileConstants } from "@synbase/shared";
+import { ICreateProfile, ProfileConstants } from "@synbase/shared";
 import { useFormik } from "formik";
 import _ from "lodash";
 import React from "react";
 import * as yup from "yup";
-import { ClientEnv } from "../../../constants/constants.client";
+import { Urls } from "../../../constants/constants.client";
 
 const { NICKNAME_MAX_LENGTH, NICKNAME_MIN_LENGTH, SLUG_MAX_LENGTH, SLUG_MIN_LENGTH, SLUG_REGEX } = ProfileConstants;
 
@@ -72,8 +72,7 @@ const ProfileCreateForm = (props: IProfileCreateFormProps) => {
                         helperText={touched.slug && errors.slug}
                     />
                     <FormHelperText>
-                        Über diesen Link ist dein Profil zukünftig erreichbar: {ClientEnv.webUrl}/{ApiResource.Profile}/
-                        {values.slug}
+                        Über diesen Link ist dein Profil zukünftig erreichbar: {Urls.Profile(values).path}
                     </FormHelperText>
                 </FormControl>
 
