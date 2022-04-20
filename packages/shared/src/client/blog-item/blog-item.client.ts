@@ -23,24 +23,24 @@ export class BlogItemClient extends RestClient {
     }
 
     public async get(id: string): Promise<IBlogItem | null> {
-        return (await this.httpClient.get(`${ApiResource.Profile}/${id}`)).data;
+        return (await this.httpClient.get(`${ApiResource.BlogItem}/${id}`)).data;
     }
 
     public async create(body: ICreateBlogItem): Promise<IBlogItem> {
-        return (await this.httpClient.post(ApiResource.Profile, body)).data;
+        return (await this.httpClient.post(ApiResource.BlogItem, body)).data;
     }
 
     public async update(id: string, body: IUpdateBlogItem): Promise<IBlogItem | null> {
-        return (await this.httpClient.put(`${ApiResource.Profile}/${id}`, body)).data;
+        return (await this.httpClient.put(`${ApiResource.BlogItem}/${id}`, body)).data;
     }
 
     public async delete(id: string): Promise<boolean> {
-        await this.httpClient.delete(`${ApiResource.Profile}/${id}`);
+        await this.httpClient.delete(`${ApiResource.BlogItem}/${id}`);
 
         return true;
     }
 
     public async uploadImage(id: string, file: File): Promise<IImage> {
-        return await this.upload(`${ApiResource.Profile}/${id}/image`, file);
+        return await this.upload(`${ApiResource.BlogItem}/${id}/image`, file);
     }
 }
