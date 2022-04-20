@@ -1,4 +1,4 @@
-import { ensure } from "@synbase/shared";
+import { ensure, IBlogItem, IProfile } from "@synbase/shared";
 import { IUrl } from "../model/url.model";
 
 export const Urls = {
@@ -26,10 +26,18 @@ export const Urls = {
         path: "/twitch",
         title: "Twitch",
     } as IUrl,
-    Profile: {
+    Profiles: {
         path: "/profiles",
-        title: "Profil",
-    } as IUrl,
+        title: "Profile",
+    },
+    ProfileMy: {
+        path: "/profiles/my",
+        title: "Du",
+    },
+    Profile: (profile: IProfile): IUrl => ({
+        path: `/profiles/${profile.slug}`,
+        title: profile.nickname,
+    }),
     ProfileRegister: {
         path: "/profiles/register",
         title: "Registrieren",
@@ -41,6 +49,22 @@ export const Urls = {
     AutoLogout: {
         path: "/logout?auto=true",
         title: "Logout",
+    },
+    Blog: {
+        path: "/blog",
+        title: "Blog",
+    },
+    BlogItem: (blogItem: IBlogItem): IUrl => ({
+        path: `/blog/${blogItem.slug}`,
+        title: blogItem.title,
+    }),
+    BlogItemUpdate: (blogItem: IBlogItem): IUrl => ({
+        path: `/blog/${blogItem.slug}/edit`,
+        title: "Bearbeiten",
+    }),
+    BlogItemCreate: {
+        path: "/blog/new",
+        title: "Editor",
     },
 };
 

@@ -31,13 +31,13 @@ const ProfilePage = (props: IProfilePageProps) => {
 
     React.useEffect(() => {
         if (!_.isNull(profile) && _.isEqual(profile.slug, slug)) {
-            redirect(Urls.Profile);
+            redirect(Urls.ProfileMy);
         }
     }, [slug, profile]);
 
     const [profileUrl, setProfileUrl] = React.useState<IUrl | undefined>(undefined);
 
-    useBreadcrumb([Urls.Profile, profileUrl]);
+    useBreadcrumb([Urls.Profiles, profileUrl]);
 
     const onProfileLoaded = React.useCallback(
         (profile: IProfile | null) => {
@@ -46,10 +46,7 @@ const ProfilePage = (props: IProfilePageProps) => {
                 return;
             }
 
-            setProfileUrl({
-                path: `${Urls.Profile}/${profile.slug}`,
-                title: profile.nickname,
-            });
+            setProfileUrl(Urls.Profile(profile));
         },
         [redirect],
     );

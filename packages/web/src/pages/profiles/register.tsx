@@ -13,7 +13,7 @@ import { useBreadcrumb } from "../../hook/layout/use-breadcrumb.hook";
 import { useRedirect } from "../../hook/use-redirect.hook";
 
 const RegisterPage = () => {
-    useBreadcrumb([Urls.Profile, Urls.ProfileRegister]);
+    useBreadcrumb([Urls.Profiles, Urls.ProfileRegister]);
 
     const redirect = useRedirect();
 
@@ -26,7 +26,7 @@ const RegisterPage = () => {
             onSuccess: (profile) => {
                 queryClient.invalidateQueries([ApiResource.Profile, profile.id]);
                 queryClient.invalidateQueries([ApiResource.Profile, "my"]);
-                redirect(Urls.Profile);
+                redirect(Urls.ProfileMy);
             },
         },
     );
@@ -36,7 +36,7 @@ const RegisterPage = () => {
     return (
         <Fetch
             selector={profileQuery}
-            onSuccess={(profile) => (!_.isNull(profile) ? redirect(Urls.Profile) : undefined)}
+            onSuccess={(profile) => (!_.isNull(profile) ? redirect(Urls.ProfileMy) : undefined)}
             renderOnSuccess={(profile) =>
                 !_.isNull(profile) ? null : (
                     <Stack spacing={2}>
