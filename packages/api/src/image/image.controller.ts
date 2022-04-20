@@ -42,4 +42,6 @@ export class ImageController {
 
         return await this.imageService.download(image, query);
     }
+
+    /* TODO: Delete Schnittstelle. */
 }
