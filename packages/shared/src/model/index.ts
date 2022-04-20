@@ -1,5 +1,6 @@
 export { IApp } from "./app/app.model";
 export * from "./auth";
+export * from "./blog-item";
 export { DiscordCommand } from "./discord-command/discord-command.model";
 export * from "./discord-verification";
 export * from "./image";
