@@ -12,4 +12,5 @@ export interface IBlogItem extends IResource {
     isDraft: boolean;
     slug: string;
     format: BlogItemFormat;
+    imageId: string | null;
 }

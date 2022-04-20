@@ -1,5 +1,6 @@
 import { BlogItemConstants, BlogItemFormat, IBlogItem } from "@synbase/shared";
 import { Column, Entity, ManyToOne } from "typeorm";
+import { Image } from "../../image/model/image.entity";
 import { Profile } from "../../profile/model/profile.entity";
 import { Resource } from "../../util/model/resource.entity";
 
@@ -30,4 +31,10 @@ export class BlogItem extends Resource implements IBlogItem {
 
     @Column({ type: "enum", enum: BlogItemFormat })
     format: BlogItemFormat;
+
+    @ManyToOne(() => Image, { nullable: true, onDelete: "SET NULL" })
+    image: Promise<Image | null>;
+
+    @Column({ nullable: true })
+    imageId: string | null;
 }

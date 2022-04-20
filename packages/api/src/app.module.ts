@@ -6,6 +6,8 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { ensure } from "@synbase/shared";
 import { AuthGuard, KeycloakConnectModule, ResourceGuard, RoleGuard } from "nest-keycloak-connect";
 import { AppController } from "./app.controller";
+import { BlogItemModule } from "./blog-item/blog-item.module";
+import { BlogItem } from "./blog-item/model/blog-item.entity";
 import { DiscordCommandModule } from "./discord-command/discord-command.module";
 import { DiscordVerificationModule } from "./discord-verification/discord-verification.module";
 import { DiscordVerification } from "./discord-verification/model/discord-verification.entity";
@@ -55,7 +57,7 @@ import { EnvMiddleware } from "./util/middleware/env.middleware";
                 password: ensure(configService.get("MARIADB_PASSWORD")),
                 database: ensure(configService.get("MARIADB_DATABASE")),
                 synchronize: true,
-                entities: [DiscordVerification, Profile, Image, Points],
+                entities: [DiscordVerification, Profile, Image, Points, BlogItem],
             }),
         }),
         DiscordCommandModule,
@@ -63,6 +65,7 @@ import { EnvMiddleware } from "./util/middleware/env.middleware";
         ProfileModule,
         ImageModule,
         PointsModule,
+        BlogItemModule,
     ],
     providers: [
         {

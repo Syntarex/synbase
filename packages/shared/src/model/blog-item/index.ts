@@ -8,4 +8,7 @@ export const BlogItemConstants = {
     SUMMARY_LENGTH: 128 /* TODO: Maximale description länge für Google einsetzen */,
     SLUG_MIN_LENGTH: 3,
     SLUG_MAX_LENGTH: 32,
+    SLUG_REGEX: new RegExp(
+        "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+    ) /* TODO: Diese Konstanten gibt es beim Profil schon. Refactore! */,
 };
