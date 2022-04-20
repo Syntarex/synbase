@@ -8,9 +8,10 @@ const { SUMMARY_LENGTH, TITLE_LENGTH, SLUG_MAX_LENGTH, SLUG_MIN_LENGTH } = BlogI
 
 export class UpdateBlogItem implements IUpdateBlogItem {
     @IsUndefinedable()
+    @IsNullable()
     @IsString()
     @IsNotEmpty()
-    content?: string;
+    content?: string | null;
 
     @IsUndefinedable()
     @IsBoolean()

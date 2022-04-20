@@ -6,9 +6,10 @@ import { IsSlug } from "../../util/validation/is-slug.decorator";
 const { SUMMARY_LENGTH, TITLE_LENGTH, SLUG_MAX_LENGTH, SLUG_MIN_LENGTH } = BlogItemConstants;
 
 export class CreateBlogItem implements ICreateBlogItem {
+    @IsNullable()
     @IsString()
     @IsNotEmpty()
-    content: string;
+    content: string | null;
 
     @IsBoolean()
     isDraft: boolean;

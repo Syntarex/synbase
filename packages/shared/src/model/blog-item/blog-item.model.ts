@@ -8,7 +8,7 @@ export interface IBlogItem extends IResource {
     title: string;
     summary: string | null;
     authorId: string;
-    content: string;
+    content: string | null;
     isDraft: boolean;
     slug: string;
     format: BlogItemFormat;

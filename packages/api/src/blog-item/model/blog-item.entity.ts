@@ -20,8 +20,8 @@ export class BlogItem extends Resource implements IBlogItem {
     @Column()
     authorId: string;
 
-    @Column({ type: "text" })
-    content: string;
+    @Column({ type: "text", nullable: true })
+    content: string | null;
 
     @Column({ type: "boolean", default: true })
     isDraft: boolean;
