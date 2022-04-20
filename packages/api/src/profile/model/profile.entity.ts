@@ -13,7 +13,7 @@ export class Profile extends Resource implements IProfile {
     @Column({ type: "varchar", length: SLUG_MAX_LENGTH, unique: true })
     slug: string;
 
-    @ManyToOne(() => Image, { nullable: true })
+    @ManyToOne(() => Image, { nullable: true, onDelete: "SET NULL" })
     image: Promise<Image | null>;
 
     @Column({ nullable: true })
