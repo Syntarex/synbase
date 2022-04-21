@@ -1,4 +1,4 @@
-import yup from "yup";
+import * as yup from "yup";
 
 export { BlogItemFormat, IBlogItem } from "./blog-item.model";
 export { ICreateBlogItem } from "./create-blog-item.model";
