@@ -49,7 +49,7 @@ export const useAuth = (options: IUseAuthOptions = { redirectEnabled: true }): I
 
     React.useEffect(() => {
         if (redirectEnabled && _.isNull(profile)) {
-            redirect(Urls.ProfileRegister);
+            redirect(Urls.Register);
         }
     }, [profile, redirectEnabled]);
 

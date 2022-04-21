@@ -38,7 +38,7 @@ export const Urls = {
         path: `/profiles/${profile.slug}`,
         title: profile.nickname,
     }),
-    ProfileRegister: {
+    Register: {
         path: "/profiles/register",
         title: "Registrieren",
     } as IUrl,
@@ -58,11 +58,11 @@ export const Urls = {
         path: `/blog/${blogItem.slug}`,
         title: blogItem.title,
     }),
-    BlogItemUpdate: (blogItem: Pick<IBlogItem, "slug">): IUrl => ({
+    EditBlogItem: (blogItem: Pick<IBlogItem, "slug">): IUrl => ({
         path: `/blog/${blogItem.slug}/edit`,
         title: "Bearbeiten",
     }),
-    BlogItemCreate: {
+    NewBlogItem: {
         path: "/blog/new",
         title: "Editor",
     },

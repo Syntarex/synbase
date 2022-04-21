@@ -13,7 +13,7 @@ import { useBreadcrumb } from "../../hook/layout/use-breadcrumb.hook";
 import { useRedirect } from "../../hook/use-redirect.hook";
 
 const RegisterPage = () => {
-    useBreadcrumb([Urls.Profiles, Urls.ProfileRegister]);
+    useBreadcrumb([Urls.Profiles, Urls.Register]);
 
     const redirect = useRedirect();
 
