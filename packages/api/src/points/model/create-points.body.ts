@@ -1,6 +1,5 @@
 import { ICreatePoints, PointsConstants, PointsSource } from "@synbase/shared";
-import { IsEnum, IsInt, IsNotEmpty, IsString, IsUUID, Max, MaxLength, Min } from "class-validator";
-import { IsNullable } from "../../util/validation/is-nullable.decorator";
+import { IsEnum, IsInt, IsString, IsUUID, Max, MaxLength, Min } from "class-validator";
 
 const { NOTES_LENGTH, AMOUNT_MAX } = PointsConstants;
 
@@ -16,9 +15,7 @@ export class CreatePoints implements ICreatePoints {
     @IsEnum(PointsSource)
     source: PointsSource;
 
-    @IsNullable()
     @IsString()
-    @IsNotEmpty()
     @MaxLength(NOTES_LENGTH)
-    notes: string | null;
+    notes: string;
 }

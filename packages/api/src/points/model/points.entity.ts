@@ -10,8 +10,8 @@ export class Points extends Resource implements IPoints {
     @Column({ type: "integer" })
     amount: number;
 
-    @Column({ type: "varchar", length: NOTES_LENGTH, nullable: true })
-    notes: string | null;
+    @Column({ type: "varchar", length: NOTES_LENGTH })
+    notes: string;
 
     @ManyToOne(() => Profile)
     profile: Promise<Profile>;
