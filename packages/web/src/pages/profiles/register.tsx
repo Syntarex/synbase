@@ -26,7 +26,7 @@ const RegisterPage = () => {
             onSuccess: (profile) => {
                 queryClient.invalidateQueries([ApiResource.Profile, profile.id]);
                 queryClient.invalidateQueries([ApiResource.Profile, "my"]);
-                redirect(Urls.ProfileMy);
+                redirect(Urls.MyProfile);
             },
         },
     );
@@ -36,7 +36,7 @@ const RegisterPage = () => {
     return (
         <Fetch
             selector={profileQuery}
-            onSuccess={(profile) => (!_.isNull(profile) ? redirect(Urls.ProfileMy) : undefined)}
+            onSuccess={(profile) => (!_.isNull(profile) ? redirect(Urls.MyProfile) : undefined)}
             renderOnSuccess={(profile) =>
                 !_.isNull(profile) ? null : (
                     <Stack spacing={2}>

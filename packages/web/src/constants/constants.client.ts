@@ -30,7 +30,7 @@ export const Urls = {
         path: "/profiles",
         title: "Profile",
     },
-    ProfileMy: {
+    MyProfile: {
         path: "/profiles/my",
         title: "Du",
     },

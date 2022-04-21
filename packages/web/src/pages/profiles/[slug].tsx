@@ -31,7 +31,7 @@ const ProfilePage = (props: IProfilePageProps) => {
 
     React.useEffect(() => {
         if (!_.isNull(profile) && _.isEqual(profile.slug, slug)) {
-            redirect(Urls.ProfileMy);
+            redirect(Urls.MyProfile);
         }
     }, [slug, profile]);
 

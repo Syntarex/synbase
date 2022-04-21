@@ -20,7 +20,7 @@ import { useBreadcrumb } from "../../hook/layout/use-breadcrumb.hook";
 import { IWithDehydratedState } from "../../model/page-props.model";
 
 const MyProfilePage = () => {
-    useBreadcrumb([Urls.Profiles, Urls.ProfileMy]);
+    useBreadcrumb([Urls.Profiles, Urls.MyProfile]);
 
     const synbase = useSynbase();
     const queryClient = useQueryClient();
