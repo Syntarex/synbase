@@ -1,6 +1,5 @@
 import { BlogItemConstants, BlogItemFormat, IUpdateBlogItem } from "@synbase/shared";
 import { IsBoolean, IsEnum, IsNotEmpty, IsString, MaxLength, MinLength } from "class-validator";
-import { IsNullable } from "../../util/validation/is-nullable.decorator";
 import { IsSlug } from "../../util/validation/is-slug.decorator";
 import { IsUndefinedable } from "../../util/validation/is-undefinedable.decorator";
 
@@ -8,21 +7,17 @@ const { SUMMARY_LENGTH, TITLE_LENGTH, SLUG_MAX_LENGTH, SLUG_MIN_LENGTH } = BlogI
 
 export class UpdateBlogItem implements IUpdateBlogItem {
     @IsUndefinedable()
-    @IsNullable()
     @IsString()
-    @IsNotEmpty()
-    content?: string | null;
+    content?: string;
 
     @IsUndefinedable()
     @IsBoolean()
     isDraft?: boolean;
 
     @IsUndefinedable()
-    @IsNullable()
     @IsString()
-    @IsNotEmpty()
     @MaxLength(SUMMARY_LENGTH)
-    summary?: string | null;
+    summary?: string;
 
     @IsUndefinedable()
     @IsString()

@@ -6,9 +6,9 @@ export enum BlogItemFormat {
 
 export interface IBlogItem extends IResource {
     title: string;
-    summary: string | null;
+    summary: string;
     authorId: string;
-    content: string | null;
+    content: string;
     isDraft: boolean;
     slug: string;
     format: BlogItemFormat;

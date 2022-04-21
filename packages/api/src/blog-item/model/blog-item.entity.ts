@@ -11,8 +11,8 @@ export class BlogItem extends Resource implements IBlogItem {
     @Column({ type: "varchar", length: TITLE_LENGTH })
     title: string;
 
-    @Column({ type: "varchar", length: SUMMARY_LENGTH, nullable: true })
-    summary: string | null;
+    @Column({ type: "varchar", length: SUMMARY_LENGTH })
+    summary: string;
 
     @ManyToOne(() => Profile)
     author: Promise<Profile>;
@@ -20,8 +20,8 @@ export class BlogItem extends Resource implements IBlogItem {
     @Column()
     authorId: string;
 
-    @Column({ type: "text", nullable: true })
-    content: string | null;
+    @Column({ type: "text" })
+    content: string;
 
     @Column({ type: "boolean", default: true })
     isDraft: boolean;
