@@ -1,6 +1,6 @@
 import { Theme } from "@emotion/react";
 import { SxProps } from "@mui/material";
-import Avatar from "@mui/material/Avatar";
+import MuiAvatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import { IProfile } from "@synbase/shared";
 import _ from "lodash";
@@ -8,13 +8,13 @@ import React from "react";
 import { useSynbase } from "../../../hook/client/use-synbase.hook";
 import FileChooser from "../../common/file-chooser/file-chooser.component";
 
-interface IProfileAvatarProps {
+interface IAvatarProps {
     sx?: SxProps<Theme>;
     profile: IProfile;
     onChange?: (file: File | null) => void;
 }
 
-const ProfileAvatar = (props: IProfileAvatarProps) => {
+const Avatar = (props: IAvatarProps) => {
     const { sx, profile, onChange } = props;
 
     const { imageId } = profile;
@@ -36,7 +36,7 @@ const ProfileAvatar = (props: IProfileAvatarProps) => {
     return (
         <FileChooser sx={sx} disabled={_.isUndefined(onChange)} onChange={setFile}>
             <Tooltip open={_.isUndefined(onChange) ? false : undefined} title={"Klicke zum Bearbeiten"}>
-                <Avatar
+                <MuiAvatar
                     alt={nickname}
                     src={_.isNull(imageId) ? undefined : synbase.images.getImageUrl(imageId, { height: 64, width: 64 })}
                     sx={{
@@ -45,10 +45,10 @@ const ProfileAvatar = (props: IProfileAvatarProps) => {
                     }}
                 >
                     {nickname.charAt(0)}
-                </Avatar>
+                </MuiAvatar>
             </Tooltip>
         </FileChooser>
     );
 };
 
-export default ProfileAvatar;
+export default Avatar;

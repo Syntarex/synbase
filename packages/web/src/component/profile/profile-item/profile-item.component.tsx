@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import { IProfile } from "@synbase/shared";
 import dayjs from "dayjs";
 import React from "react";
-import ProfileAvatar from "../profile-avatar/profile-avatar.component";
+import Avatar from "../profile-avatar/profile-avatar.component";
 
 interface IProfileItemProps {
     sx?: SxProps<Theme>;
@@ -35,7 +35,7 @@ const ProfileItem = (props: IProfileItemProps) => {
                 spacing={2}
             >
                 <Grid item xs={"auto"}>
-                    <ProfileAvatar profile={profile} onChange={onImageChange} />
+                    <Avatar profile={profile} onChange={onImageChange} />
                 </Grid>
                 <Grid item xs={true}>
                     <Stack>
