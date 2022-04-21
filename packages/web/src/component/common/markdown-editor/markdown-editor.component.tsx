@@ -7,8 +7,8 @@ import React from "react";
 
 interface IMarkdownEditorProps {
     sx?: SxProps<Theme>;
-    value: string | null;
-    onChange?: (value: string | null) => void;
+    value: string;
+    onChange?: (value: string) => void;
     disabled?: boolean;
 }
 
@@ -16,12 +16,12 @@ const MarkdownEditor = (props: IMarkdownEditorProps) => {
     const { sx, value, onChange, disabled } = props;
 
     const onTextChanged = React.useCallback(
-        (value: string | null) => {
+        (event: React.ChangeEvent<HTMLTextAreaElement>) => {
             if (disabled || _.isUndefined(onChange)) {
                 return;
             }
 
-            onChange(value);
+            onChange(event.target.value);
         },
         [onChange, disabled],
     );
