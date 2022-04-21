@@ -5,7 +5,7 @@ import _ from "lodash";
 import React from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { Fetch } from "../../component/common/fetch/fetch.component";
-import ProfileCreateForm from "../../component/profile/profile-create-form/profile-create-form.component";
+import RegisterForm from "../../component/profile/register-form/register-form.component";
 import { Urls } from "../../constants/constants.client";
 import { getMyProfile } from "../../data/profile/profile.queries";
 import { useSynbase } from "../../hook/client/use-synbase.hook";
@@ -43,7 +43,7 @@ const RegisterPage = () => {
                         <Typography variant={"h3"}>Profil erstellen</Typography>
                         <Typography>Jeder sollte ein Profil haben. Du kanst später alles ändern.</Typography>
 
-                        <ProfileCreateForm disabled={isLoading} onSubmit={createProfile} />
+                        <RegisterForm disabled={isLoading} onSubmit={createProfile} />
                     </Stack>
                 )
             }

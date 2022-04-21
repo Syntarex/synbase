@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import { IProfile } from "@synbase/shared";
 import dayjs from "dayjs";
 import React from "react";
-import Avatar from "../profile-avatar/profile-avatar.component";
+import Avatar from "../avatar/avatar.component";
 
 interface IProfileItemProps {
     sx?: SxProps<Theme>;

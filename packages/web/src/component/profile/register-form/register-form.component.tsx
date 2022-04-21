@@ -28,13 +28,13 @@ const validation = yup.object({
         .matches(SLUG_REGEX),
 });
 
-interface IProfileCreateFormProps {
+interface IRegisterFormProps {
     sx?: SxProps<Theme>;
     disabled?: boolean;
     onSubmit: (data: ICreateProfile) => void;
 }
 
-const ProfileCreateForm = (props: IProfileCreateFormProps) => {
+const RegisterForm = (props: IRegisterFormProps) => {
     const { sx, disabled, onSubmit } = props;
 
     const { handleSubmit, values, handleChange, errors, touched } = useFormik<ICreateProfile>({
@@ -84,4 +84,4 @@ const ProfileCreateForm = (props: IProfileCreateFormProps) => {
     );
 };
 
-export default ProfileCreateForm;
+export default RegisterForm;
