@@ -10,7 +10,7 @@ import { useSynbase } from "../../hook/client/use-synbase.hook";
 import { useBreadcrumb } from "../../hook/layout/use-breadcrumb.hook";
 import { useRedirect } from "../../hook/use-redirect.hook";
 
-const NewPage = () => {
+const NewBlogItemPage = () => {
     useBreadcrumb([Urls.Blog, Urls.NewBlogItem]);
 
     const redirect = useRedirect();
@@ -43,4 +43,4 @@ const NewPage = () => {
     );
 };
 
-export default NewPage;
+export default NewBlogItemPage;

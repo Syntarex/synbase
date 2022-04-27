@@ -58,9 +58,9 @@ export const Urls = {
         path: `/blog/${blogItem.slug}`,
         title: blogItem.title,
     }),
-    EditBlogItem: (blogItem: Pick<IBlogItem, "slug">): IUrl => ({
+    EditBlogItem: (blogItem: Pick<IBlogItem, "slug" | "title">): IUrl => ({
         path: `/blog/${blogItem.slug}/edit`,
-        title: "Bearbeiten",
+        title: `Bearbeite ${blogItem.title}`,
     }),
     NewBlogItem: {
         path: "/blog/new",
