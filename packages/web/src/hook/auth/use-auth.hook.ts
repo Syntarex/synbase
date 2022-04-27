@@ -22,8 +22,6 @@ export const useAuth = (options: IUseAuthOptions = { redirectEnabled: true }): I
 
     const synbase = useSynbase();
 
-    React.useEffect(() => console.log(session), [session]);
-
     const expired = React.useMemo(
         () => !_.isNull(session) && !_.isUndefined(session) && dayjs(session.expires).isBefore(dayjs()),
         [session],
