@@ -29,11 +29,11 @@ export const Urls = {
     Profiles: {
         path: "/profiles",
         title: "Profile",
-    },
+    } as IUrl,
     MyProfile: {
         path: "/profiles/my",
         title: "Du",
-    },
+    } as IUrl,
     Profile: (profile: Pick<IProfile, "slug" | "nickname">): IUrl => ({
         path: `/profiles/${profile.slug}`,
         title: profile.nickname,
@@ -49,11 +49,16 @@ export const Urls = {
     AutoLogout: {
         path: "/logout?auto=true",
         title: "Logout",
-    },
+    } as IUrl,
+    ApiLogout: {
+        /* Wird augerufen um die KeyCloak Session abzubauen */
+        path: "/api/auth/logout",
+        title: "KeyCloak Logout",
+    } as IUrl,
     Blog: {
         path: "/blog",
         title: "Blog",
-    },
+    } as IUrl,
     BlogItem: (blogItem: Pick<IBlogItem, "slug" | "title">): IUrl => ({
         path: `/blog/${blogItem.slug}`,
         title: blogItem.title,
@@ -65,7 +70,7 @@ export const Urls = {
     NewBlogItem: {
         path: "/blog/new",
         title: "Editor",
-    },
+    } as IUrl,
 };
 
 export const Constants = {
