@@ -5,7 +5,7 @@ import { Resource } from "../model/resource.entity";
 export abstract class TypeOrmService<TEntity extends Resource> {
     constructor(protected readonly repository: Repository<TEntity>) {}
 
-    public async select(filter: DeepPartial<TEntity>): Promise<TEntity[]> {
+    public async getAll(filter: DeepPartial<TEntity>): Promise<TEntity[]> {
         return this.repository.find({
             where: filter,
         });
