@@ -7,4 +7,5 @@ export const ServerEnv = {
     keycloakClientSecret: ensure(process.env.KEYCLOAK_CLIENT_SECRET),
     keycloakRealm: ensure(process.env.KEYCLOAK_REALM),
     keycloakTokenRefreshInterval: Number(ensure(process.env.KEYCLOAK_TOKEN_REFRESH_INTERVAL)),
+    webUrl: ensure(process.env.WEB_URL),
 };
