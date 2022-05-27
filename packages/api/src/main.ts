@@ -3,6 +3,7 @@ import { HttpsOptions } from "@nestjs/common/interfaces/external/https-options.i
 import { NestFactory, Reflector } from "@nestjs/core";
 import { ensure } from "@synbase/shared";
 import * as fs from "fs";
+import "reflect-metadata";
 import { AppModule } from "./app.module";
 import { Constants } from "./constants";
 import { QueryFailedFilter } from "./error/filter/query-failed.filter";

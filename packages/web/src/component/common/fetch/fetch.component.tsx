@@ -51,7 +51,6 @@ export function Fetch<ReturnType>(props: IFetchProps<ReturnType>): JSX.Element |
     const [onSuccessTriggered, setOnSuccessTriggered] = React.useState<boolean>(false);
 
     React.useEffect(() => {
-        console.log("selector changed");
         setOnLoadingTriggered(false);
         setOnErrorTriggered(false);
         setOnSuccessTriggered(false);
