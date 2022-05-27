@@ -1,44 +1,36 @@
 import _ from "lodash";
-import { DeepPartial, FindOptionsWhere, In, Repository } from "typeorm";
+import { DeepPartial, Repository } from "typeorm";
 import { Resource } from "../model/resource.entity";
 
-/* Check this issue and get rid of the workaround if it's fixed. */
-/* https://github.com/typeorm/typeorm/issues/8939#issuecomment-1119476959 */
 export abstract class TypeOrmService<TEntity extends Resource> {
     constructor(protected readonly repository: Repository<TEntity>) {}
 
-    public async getAll(where: FindOptionsWhere<TEntity>): Promise<TEntity[]> {
+    public async select(filter: DeepPartial<TEntity>): Promise<TEntity[]> {
         return this.repository.find({
-            where,
+            where: filter,
         });
     }
 
     public async getByIds(ids: string[]): Promise<TEntity[]> {
-        let where: FindOptionsWhere<TEntity> = {};
-
-        where = Object.assign(where, { id: In(ids) });
-
-        return this.repository.findBy(where);
+        return this.repository.findByIds(ids);
     }
 
     public async get(id: string): Promise<TEntity | null> {
-        let where: FindOptionsWhere<TEntity> = {};
+        const entity: TEntity | undefined = await this.repository.findOne(id);
 
-        where = Object.assign(where, { id });
+        if (_.isUndefined(entity)) {
+            return null;
+        }
 
-        return await this.repository.findOneBy(where);
+        return entity;
     }
 
-    public async count(where: FindOptionsWhere<TEntity>): Promise<number> {
-        return this.repository.count({ where });
+    public async count(filter: DeepPartial<TEntity>): Promise<number> {
+        return this.repository.count({ where: filter });
     }
 
     public async exists(id: string): Promise<boolean> {
-        let where: FindOptionsWhere<TEntity> = {};
-
-        where = Object.assign(where, { id });
-
-        return (await this.repository.count({ where })) > 0;
+        return (await this.repository.count({ where: { id } })) > 0;
     }
 
     public async create(value: DeepPartial<TEntity>): Promise<TEntity> {
