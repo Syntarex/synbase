@@ -2,8 +2,9 @@ import { Theme } from "@emotion/react";
 import { SxProps } from "@mui/material";
 import Button from "@mui/material/Button";
 import _ from "lodash";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import React from "react";
+import { signOut } from "../../../util/sign-out.util";
 
 interface IAuthButtonProps {
     sx?: SxProps<Theme>;

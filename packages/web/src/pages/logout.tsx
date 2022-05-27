@@ -1,13 +1,13 @@
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import _ from "lodash";
-import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import React from "react";
 import Link from "../component/common/link/link.component";
 import { Urls } from "../constants/constants.client";
 import { useAuth } from "../hook/auth/use-auth.hook";
 import { useBreadcrumb } from "../hook/layout/use-breadcrumb.hook";
+import { signOut } from "../util/sign-out.util";
 
 const LogoutPage = () => {
     useBreadcrumb([Urls.Logout]);
@@ -20,7 +20,7 @@ const LogoutPage = () => {
 
     React.useEffect(() => {
         if (!_.isNull(session)) {
-            signOut({ redirect: false });
+            signOut();
             return;
         }
     }, [session]);
