@@ -11,6 +11,7 @@ import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
 import "../../styles/globals.css";
 import synbaseTheme from "../../styles/theme/synbase.theme";
+import AuthSuspense from "../component/auth/auth-suspense/auth-suspense.component";
 import { SynbaseProvider } from "../component/client/synbase.provider";
 import ErrorBoundary from "../component/error/error-boundary/error-boundary.component";
 import Layout from "../component/layout";
@@ -59,7 +60,9 @@ const MyApp = (props: IMyAppProps) => {
                                     <ThemeProvider theme={synbaseTheme}>
                                         <CssBaseline />
                                         <Layout>
-                                            <Component {...pageProps} />
+                                            <AuthSuspense>
+                                                <Component {...pageProps} />
+                                            </AuthSuspense>
                                         </Layout>
                                     </ThemeProvider>
                                 </Hydrate>
