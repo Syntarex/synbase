@@ -6,6 +6,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import { Urls } from "../../constants/constants.client";
 import { IAuth } from "../../model/auth/auth.model";
+import { signOut } from "../../util/sign-out.util";
 import { useSynbase } from "../client/use-synbase.hook";
 import { useRedirect } from "../use-redirect.hook";
 import { useSession } from "./use-session.hook";
@@ -27,18 +28,6 @@ export const useAuth = (options: IUseAuthOptions = { redirectEnabled: true }): I
         [session],
     );
 
-    React.useEffect(() => {
-        if (redirectEnabled && expired) {
-            redirect(Urls.AutoLogout);
-        }
-    }, [expired, redirectEnabled]);
-
-    React.useEffect(() => {
-        if (redirectEnabled && _.isNull(session)) {
-            signIn("keycloak");
-        }
-    }, [session, redirectEnabled]);
-
     const { data: profile } = useQuery({
         queryKey: [ApiResource.Profile, "my"],
         queryFn: () => synbase.profiles.getMy(),
@@ -46,10 +35,27 @@ export const useAuth = (options: IUseAuthOptions = { redirectEnabled: true }): I
     });
 
     React.useEffect(() => {
-        if (redirectEnabled && _.isNull(profile)) {
+        if (!redirectEnabled) {
+            return;
+        }
+
+        if (_.isNull(session)) {
+            signIn("keycloak");
+            return;
+        }
+
+        if (expired) {
+            signOut({
+                redirect: true,
+                autoLogout: true,
+            });
+            return;
+        }
+
+        if (_.isNull(profile)) {
             redirect(Urls.Register);
         }
-    }, [profile, redirectEnabled]);
+    }, [session, redirectEnabled, expired, profile]);
 
     return {
         profile: expired || _.isUndefined(profile) ? null : profile,

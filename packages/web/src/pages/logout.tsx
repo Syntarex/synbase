@@ -20,7 +20,7 @@ const LogoutPage = () => {
 
     React.useEffect(() => {
         if (!_.isNull(session)) {
-            signOut();
+            signOut({ redirect: false, autoLogout: false });
             return;
         }
     }, [session]);
