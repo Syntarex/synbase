@@ -46,7 +46,7 @@ const MyProfilePage = () => {
         onSuccess: () => queryClient.invalidateQueries([ApiResource.Points]),
     });
 
-    const pointsQuery = React.useMemo(() => getAllMyPoints(synbase, {}), []);
+    const pointsQuery = React.useMemo(() => getAllMyPoints(synbase, {}), [synbase]);
 
     if (_.isNull(profile)) {
         return <CircularProgress />;
