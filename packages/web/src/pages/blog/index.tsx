@@ -9,6 +9,7 @@ import BlogItemCard from "../../component/blog-item/blog-item-card/blog-item-car
 import { Fetch } from "../../component/common/fetch/fetch.component";
 import { Urls } from "../../constants/constants.client";
 import { getAllBlogItems } from "../../data/blog-item/blog-item.queries";
+import { getProfile } from "../../data/profile/profile.queries";
 import { useSynbase } from "../../hook/client/use-synbase.hook";
 import { useBreadcrumb } from "../../hook/layout/use-breadcrumb.hook";
 import { IWithDehydratedState } from "../../model/page-props.model";
@@ -18,7 +19,8 @@ const BlogPage = () => {
 
     const synbase = useSynbase();
 
-    const blogItemsQuery = React.useMemo(() => getAllBlogItems(synbase), []);
+    const blogItemsQuery = React.useMemo(() => getAllBlogItems(synbase), [synbase]);
+    const authorQuery = React.useCallback((id: string) => getProfile(synbase, id), [synbase]);
 
     return (
         <Stack spacing={2}>
@@ -32,7 +34,17 @@ const BlogPage = () => {
                     ) : (
                         <>
                             {blogItems.map((blogItem) => (
-                                <BlogItemCard key={`blog-item-${blogItem.id}`} blogItem={blogItem} />
+                                <Fetch
+                                    key={`blog-item-${blogItem.id}`}
+                                    selector={authorQuery(blogItem.authorId)}
+                                    renderOnSuccess={(author) => (
+                                        <>
+                                            {_.isNull(author) ? null : (
+                                                <BlogItemCard blogItem={blogItem} author={author} />
+                                            )}
+                                        </>
+                                    )}
+                                />
                             ))}
                         </>
                     )

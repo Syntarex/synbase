@@ -23,7 +23,6 @@ const NewBlogItemPage = () => {
         async (body: ICreateBlogItem) => synbase.blogItems.create(body),
         {
             onSuccess: (blogItem) => {
-                console.log(blogItem);
                 redirect(Urls.BlogItem(blogItem));
             },
         },
