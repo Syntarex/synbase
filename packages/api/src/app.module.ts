@@ -8,8 +8,6 @@ import { AuthGuard, KeycloakConnectModule, ResourceGuard, RoleGuard } from "nest
 import { AppController } from "./app.controller";
 import { BlogItemModule } from "./blog-item/blog-item.module";
 import { BlogItem } from "./blog-item/model/blog-item.entity";
-import { DiscordCommandModule } from "./discord-command/discord-command.module";
-import { DiscordVerificationModule } from "./discord-verification/discord-verification.module";
 import { DiscordVerification } from "./discord-verification/model/discord-verification.entity";
 import { imageFileFilter } from "./image/filter/image-file.filter";
 import { ImageModule } from "./image/image.module";
@@ -60,8 +58,6 @@ import { EnvMiddleware } from "./util/middleware/env.middleware";
                 entities: [DiscordVerification, Profile, Image, Points, BlogItem],
             }),
         }),
-        DiscordCommandModule,
-        DiscordVerificationModule,
         ProfileModule,
         ImageModule,
         PointsModule,
