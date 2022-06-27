@@ -13,6 +13,7 @@
         "start": "next start -p 8080"
     },
     "dependencies": {
+        "@auth0/auth0-react": "^1.10.2",
         "@emotion/cache": "^11.9.3",
         "@emotion/css": "^11.9.0",
         "@emotion/react": "^11.9.3",

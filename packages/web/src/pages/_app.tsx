@@ -1,3 +1,4 @@
+import { Auth0Provider } from "@auth0/auth0-react";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import dayjs from "dayjs";
@@ -42,24 +43,30 @@ const MyApp = (props: IMyAppProps) => {
 
     return (
         <CacheProvider value={emotionCache}>
-            <RecoilRoot>
-                <ErrorBoundary>
-                    <QueryClientProvider client={queryClient}>
-                        <Hydrate state={pageProps.dehydratedState}>
-                            <Head>
-                                <meta name="viewport" content="initial-scale=1, width=device-width" />
-                            </Head>
+            <Auth0Provider
+                domain={"synbase-dev.eu.auth0.com"}
+                clientId={"oHXq5yqvbubEPvu7Zs2CBw83Gdxe1Ix8"}
+                redirectUri={"https://localhost:8080"}
+            >
+                <RecoilRoot>
+                    <ErrorBoundary>
+                        <QueryClientProvider client={queryClient}>
+                            <Hydrate state={pageProps.dehydratedState}>
+                                <Head>
+                                    <meta name="viewport" content="initial-scale=1, width=device-width" />
+                                </Head>
 
-                            <ThemeProvider theme={synbaseTheme}>
-                                <CssBaseline />
-                                <Layout>
-                                    <Component {...pageProps} />
-                                </Layout>
-                            </ThemeProvider>
-                        </Hydrate>
-                    </QueryClientProvider>
-                </ErrorBoundary>
-            </RecoilRoot>
+                                <ThemeProvider theme={synbaseTheme}>
+                                    <CssBaseline />
+                                    <Layout>
+                                        <Component {...pageProps} />
+                                    </Layout>
+                                </ThemeProvider>
+                            </Hydrate>
+                        </QueryClientProvider>
+                    </ErrorBoundary>
+                </RecoilRoot>
+            </Auth0Provider>
         </CacheProvider>
     );
 };
