@@ -1,6 +1,7 @@
 import { Theme } from "@emotion/react";
 import { Box, SxProps, TextField } from "@mui/material";
 import _ from "lodash";
+import { useCallback } from "react";
 
 interface IMarkdownEditorProps {
     sx?: SxProps<Theme>;
@@ -12,7 +13,7 @@ interface IMarkdownEditorProps {
 const MarkdownEditor = (props: IMarkdownEditorProps) => {
     const { sx, value, onChange, disabled } = props;
 
-    const onTextChanged = React.useCallback(
+    const onTextChanged = useCallback(
         (event: React.ChangeEvent<HTMLTextAreaElement>) => {
             if (disabled || _.isUndefined(onChange)) {
                 return;

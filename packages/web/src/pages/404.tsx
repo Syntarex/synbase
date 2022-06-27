@@ -1,5 +1,4 @@
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
+import { Stack, Typography } from "@mui/material";
 import Link from "../component/common/link/link.component";
 import Logo from "../component/layout/logo/logo.component";
 import { URLS } from "../constants/constants.client";

@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/de";
 import { AppProps } from "next/app";
 import Head from "next/head";
+import { useState } from "react";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
 import "../../styles/globals.css";
@@ -23,7 +24,7 @@ const clientSideEmotionCache = createEmotionCache();
 const MyApp = (props: IMyAppProps) => {
     const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
-    const [queryClient] = React.useState(
+    const [queryClient] = useState(
         () =>
             new QueryClient({
                 defaultOptions: {

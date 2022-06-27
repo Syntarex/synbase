@@ -1,5 +1,6 @@
 import { Alert, AlertTitle } from "@mui/material";
 import _ from "lodash";
+import { useCallback } from "react";
 
 interface IErrorItemProps {
     error: Error;
@@ -9,7 +10,7 @@ interface IErrorItemProps {
 const ErrorItem = (props: IErrorItemProps) => {
     const { error, onRemove } = props;
 
-    const onClose = React.useCallback(() => {
+    const onClose = useCallback(() => {
         if (_.isUndefined(onRemove)) {
             return;
         }

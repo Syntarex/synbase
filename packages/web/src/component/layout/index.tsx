@@ -1,5 +1,6 @@
 import { Menu } from "@mui/icons-material";
 import { AppBar, Box, Drawer, IconButton, Toolbar, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { useCallback, useState } from "react";
 import { URLS } from "../../constants/constants.client";
 import Link from "../common/link/link.component";
 import ErrorList from "../error/error-list/error-list.component";
@@ -18,8 +19,8 @@ const Layout = (props: ILayoutProps) => {
 
     const theme = useTheme();
 
-    const [mobileOpen, setMobileOpen] = React.useState(false);
-    const toggleMobileOpen = React.useCallback(() => setMobileOpen(!mobileOpen), [mobileOpen]);
+    const [mobileOpen, setMobileOpen] = useState(false);
+    const toggleMobileOpen = useCallback(() => setMobileOpen(!mobileOpen), [mobileOpen]);
 
     const desktop = useMediaQuery(theme.breakpoints.up("sm"));
 
