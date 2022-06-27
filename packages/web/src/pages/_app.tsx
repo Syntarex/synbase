@@ -1,4 +1,3 @@
-import { UserProfile, UserProvider } from "@auth0/nextjs-auth0";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import dayjs from "dayjs";
@@ -18,13 +17,12 @@ dayjs.locale("de");
 
 interface IMyAppProps extends AppProps {
     emotionCache?: EmotionCache;
-    user?: UserProfile;
 }
 
 const clientSideEmotionCache = createEmotionCache();
 
 const MyApp = (props: IMyAppProps) => {
-    const { Component, emotionCache = clientSideEmotionCache, pageProps, user } = props;
+    const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
     /* TODO: Warum ein State und nicht ein Memo? */
     const [queryClient] = useState(
@@ -44,26 +42,24 @@ const MyApp = (props: IMyAppProps) => {
 
     return (
         <CacheProvider value={emotionCache}>
-            <UserProvider user={user}>
-                <RecoilRoot>
-                    <ErrorBoundary>
-                        <QueryClientProvider client={queryClient}>
-                            <Hydrate state={pageProps.dehydratedState}>
-                                <Head>
-                                    <meta name="viewport" content="initial-scale=1, width=device-width" />
-                                </Head>
+            <RecoilRoot>
+                <ErrorBoundary>
+                    <QueryClientProvider client={queryClient}>
+                        <Hydrate state={pageProps.dehydratedState}>
+                            <Head>
+                                <meta name="viewport" content="initial-scale=1, width=device-width" />
+                            </Head>
 
-                                <ThemeProvider theme={synbaseTheme}>
-                                    <CssBaseline />
-                                    <Layout>
-                                        <Component {...pageProps} />
-                                    </Layout>
-                                </ThemeProvider>
-                            </Hydrate>
-                        </QueryClientProvider>
-                    </ErrorBoundary>
-                </RecoilRoot>
-            </UserProvider>
+                            <ThemeProvider theme={synbaseTheme}>
+                                <CssBaseline />
+                                <Layout>
+                                    <Component {...pageProps} />
+                                </Layout>
+                            </ThemeProvider>
+                        </Hydrate>
+                    </QueryClientProvider>
+                </ErrorBoundary>
+            </RecoilRoot>
         </CacheProvider>
     );
 };
