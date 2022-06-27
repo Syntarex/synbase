@@ -2,7 +2,6 @@ import axios, { AxiosInstance } from "axios";
 import _ from "lodash";
 import { AppClient } from "./app/app.client";
 import { BlogItemClient } from "./blog-item/blog-item.client";
-import { DiscordVerificationClient } from "./discord-verification/discord-verification.client";
 import { ImageClient } from "./image/image.client";
 import { PointsClient } from "./points/points.client";
 import { ProfileClient } from "./profile/profile.client";
@@ -11,7 +10,6 @@ export class Synbase {
     private httpClient: AxiosInstance;
 
     public app: AppClient;
-    public discordVerifications: DiscordVerificationClient;
     public profiles: ProfileClient;
     public images: ImageClient;
     public points: PointsClient;
@@ -44,7 +42,6 @@ export class Synbase {
         );
 
         this.app = new AppClient(this.httpClient);
-        this.discordVerifications = new DiscordVerificationClient(this.httpClient);
         this.profiles = new ProfileClient(this.httpClient);
         this.images = new ImageClient(this.httpClient);
         this.points = new PointsClient(this.httpClient);
