@@ -12,11 +12,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
                 cache: true,
                 rateLimit: true,
                 jwksRequestsPerMinute: 5,
-                jwksUri: `${configService.getOrThrow<string>("AUTH0_ISSUER_URL")}/.well-known/jwks.json`,
+                jwksUri: `${configService.getOrThrow<string>("AUTH0_ISSUER_BASE_URL")}/.well-known/jwks.json`,
             }),
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
             audience: configService.getOrThrow<string>("AUTH0_AUDIENCE"),
-            issuer: configService.getOrThrow<string>("AUTH0_ISSUER_URL"),
+            issuer: configService.getOrThrow<string>("AUTH0_ISSUER_BASE_URL"),
             algorithms: ["RS256"],
         });
     }
