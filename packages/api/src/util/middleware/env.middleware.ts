@@ -1,7 +1,7 @@
 import { Injectable, NestMiddleware } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { ensure } from "@synbase/shared";
-import { NextFunction } from "express";
+import { NextFunction, Response } from "express";
 import { IRequest } from "../model/request.model";
 
 /** Injects environment variables into the Request object */
