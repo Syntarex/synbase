@@ -1,8 +1,6 @@
-import MuiLink, { LinkProps } from "@mui/material/Link";
-import Typography from "@mui/material/Typography";
+import { Link as MuiLink, LinkProps, Typography } from "@mui/material";
 import _ from "lodash";
 import NextLink from "next/link";
-import React from "react";
 import { IUrl } from "../../../model/url.model";
 
 interface ILinkProps extends Omit<LinkProps, "href"> {
@@ -10,7 +8,8 @@ interface ILinkProps extends Omit<LinkProps, "href"> {
     children?: React.ReactNode;
 }
 
-/* TODO: Triggern hier beide links? */
+/* TODO: Triggern hier beide Links? */
+/* TODO: Es gibt hier ein Best-Practice, welches hier nicht genutzt wird. */
 export const Link = (props: ILinkProps) => {
     const { children, href } = props;
 

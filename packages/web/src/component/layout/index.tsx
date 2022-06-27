@@ -1,16 +1,9 @@
-import MenuIcon from "@mui/icons-material/Menu";
-import { useMediaQuery, useTheme } from "@mui/material";
-import AppBar from "@mui/material/AppBar";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/system/Box";
-import React from "react";
-import { Urls } from "../../constants/constants.client";
+import { Menu } from "@mui/icons-material";
+import { AppBar, Box, Drawer, IconButton, Toolbar, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { URLS } from "../../constants/constants.client";
 import Link from "../common/link/link.component";
 import ErrorList from "../error/error-list/error-list.component";
-import { Breadcrumb } from "./breadcrumb/breadcrumb.component";
+import Breadcrumb from "./breadcrumb/breadcrumb.component";
 import DrawerMenu from "./drawer-menu/drawer-menu.component";
 import Logo from "./logo/logo.component";
 
@@ -45,7 +38,7 @@ const Layout = (props: ILayoutProps) => {
                         onClick={toggleMobileOpen}
                         sx={{ position: "absolute", left: theme.spacing(2), display: { sm: "none" } }}
                     >
-                        <MenuIcon />
+                        <Menu />
                     </IconButton>
 
                     <Link
@@ -55,7 +48,7 @@ const Layout = (props: ILayoutProps) => {
                             alignItems: "center",
                             flexGrow: 1,
                         }}
-                        href={Urls.Home}
+                        href={URLS.HOME}
                     >
                         <Logo width={26} height={26} />
 

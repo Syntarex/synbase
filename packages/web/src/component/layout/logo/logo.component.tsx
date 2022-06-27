@@ -1,6 +1,5 @@
-import Box from "@mui/material/Box";
+import { Box } from "@mui/material";
 import Image from "next/image";
-import React from "react";
 import ImageData from "../../../../public/logo.png";
 
 interface ILogoProps {

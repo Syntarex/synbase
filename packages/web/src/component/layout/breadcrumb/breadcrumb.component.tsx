@@ -1,11 +1,9 @@
 import { Theme } from "@emotion/react";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { SxProps } from "@mui/material";
-import Breadcrumbs from "@mui/material/Breadcrumbs";
+import { NavigateNext } from "@mui/icons-material";
+import { Breadcrumbs, SxProps } from "@mui/material";
 import _ from "lodash";
-import React from "react";
 import { useRecoilValue } from "recoil";
-import { Urls } from "../../../constants/constants.client";
+import { URLS } from "../../../constants/constants.client";
 import { breadcrumbAtom } from "../../../data/layout/breadcrumb.atoms";
 import Link from "../../common/link/link.component";
 
@@ -14,15 +12,15 @@ interface IBreadcrumbProps {
 }
 
 /* TODO: Sieht am Handy schrecklich aus */
-export const Breadcrumb = (props: IBreadcrumbProps) => {
+const Breadcrumb = (props: IBreadcrumbProps) => {
     const { sx } = props;
 
     const breadcrumb = useRecoilValue(breadcrumbAtom);
 
     return (
-        <Breadcrumbs sx={sx} separator={<NavigateNextIcon fontSize="small" />}>
+        <Breadcrumbs sx={sx} separator={<NavigateNext fontSize="small" />}>
             {_.isEmpty(breadcrumb) ? (
-                <Link href={Urls.Home} />
+                <Link href={URLS.HOME} />
             ) : (
                 breadcrumb.map((element, index) => {
                     const last = _.isEqual(index, breadcrumb.length - 1);
@@ -33,3 +31,5 @@ export const Breadcrumb = (props: IBreadcrumbProps) => {
         </Breadcrumbs>
     );
 };
+
+export default Breadcrumb;

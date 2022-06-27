@@ -14,10 +14,11 @@ module.exports = {
     rules: {
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
+        "react/react-in-jsx-scope": "off",
     },
     settings: {
         react: {
-            version: "latest",
+            version: "detect",
         },
     },
 };

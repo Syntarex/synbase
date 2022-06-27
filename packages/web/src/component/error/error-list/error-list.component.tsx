@@ -1,14 +1,13 @@
 import { Theme } from "@emotion/react";
-import { SxProps } from "@mui/material";
-import Stack from "@mui/material/Stack";
+import { Stack, SxProps } from "@mui/material";
 import _ from "lodash";
-import React from "react";
 import { useErrors } from "../../../hook/error/use-errors.hook";
 import ErrorItem from "../error-item/error-item.component";
 
 interface IErrorListProps {
     sx?: SxProps<Theme>;
 }
+
 const ErrorList = (props: IErrorListProps) => {
     const { sx } = props;
 

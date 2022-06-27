@@ -1,8 +1,6 @@
-import { SxProps, Theme } from "@mui/material";
-import Box from "@mui/material/Box";
+import { Box, SxProps, Theme } from "@mui/material";
 import _ from "lodash";
 import Markdown from "mui-markdown";
-import React from "react";
 
 interface IMarkdownViewerProps {
     sx?: SxProps<Theme>;

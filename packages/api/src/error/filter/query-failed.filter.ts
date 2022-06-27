@@ -2,6 +2,7 @@ import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus } from "@nestjs/commo
 import { Response } from "express";
 import { QueryFailedError } from "typeorm";
 
+/* TODO: Funktioniert das noch mit TypeORM 0.3.x? */
 @Catch(QueryFailedError)
 export class QueryFailedFilter implements ExceptionFilter<QueryFailedError> {
     public catch(exception: QueryFailedError, host: ArgumentsHost): void {
@@ -11,7 +12,7 @@ export class QueryFailedFilter implements ExceptionFilter<QueryFailedError> {
         if (exception.message.startsWith("ER_DUP_ENTRY")) {
             response.status(HttpStatus.CONFLICT).json({
                 statusCode: HttpStatus.CONFLICT,
-                message: "Duplicate found.",
+                message: "Diese Entität existiert bereits.",
             });
 
             return;
@@ -20,7 +21,7 @@ export class QueryFailedFilter implements ExceptionFilter<QueryFailedError> {
         if (exception.message.startsWith("ER_NO_REFERENCED_ROW")) {
             response.status(HttpStatus.NOT_FOUND).json({
                 statusCode: HttpStatus.NOT_FOUND,
-                message: "Reference entity couldn't be found.",
+                message: "Referenzierte Entität konnte nicht gefunden werden.",
             });
 
             return;

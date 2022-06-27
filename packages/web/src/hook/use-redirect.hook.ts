@@ -1,6 +1,5 @@
 import _ from "lodash";
 import { useRouter } from "next/router";
-import React from "react";
 import { IUrl } from "../model/url.model";
 
 export const useRedirect = () => {

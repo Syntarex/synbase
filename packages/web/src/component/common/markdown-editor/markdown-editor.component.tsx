@@ -1,9 +1,6 @@
 import { Theme } from "@emotion/react";
-import { SxProps } from "@mui/material";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
+import { Box, SxProps, TextField } from "@mui/material";
 import _ from "lodash";
-import React from "react";
 
 interface IMarkdownEditorProps {
     sx?: SxProps<Theme>;

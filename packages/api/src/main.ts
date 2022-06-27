@@ -5,20 +5,20 @@ import { ensure } from "@synbase/shared";
 import * as fs from "fs";
 import "reflect-metadata";
 import { AppModule } from "./app.module";
-import { Constants } from "./constants";
+import { SSL } from "./constants";
 import { QueryFailedFilter } from "./error/filter/query-failed.filter";
 
 function getHttpsOptions(): HttpsOptions | undefined {
-    const keyExists: boolean = fs.existsSync(Constants.SSL_KEY_PATH);
-    const certExists: boolean = fs.existsSync(Constants.SSL_CERT_PATH);
+    const keyExists: boolean = fs.existsSync(SSL.KEY_PATH);
+    const certExists: boolean = fs.existsSync(SSL.CERT_PATH);
 
     if (!keyExists || !certExists) {
         return undefined;
     }
 
     return {
-        key: fs.readFileSync(Constants.SSL_KEY_PATH),
-        cert: fs.readFileSync(Constants.SSL_CERT_PATH),
+        key: fs.readFileSync(SSL.KEY_PATH),
+        cert: fs.readFileSync(SSL.CERT_PATH),
     };
 }
 
