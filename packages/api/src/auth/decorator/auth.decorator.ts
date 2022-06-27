@@ -4,4 +4,4 @@ import { Permission } from "@synbase/shared";
 import { PermissionsGuard } from "../guard/permissions.guard";
 
 export const Auth = (...permissions: Permission[]) =>
-    applyDecorators(SetMetadata("permissions", permissions), UseGuards(AuthGuard, PermissionsGuard));
+    applyDecorators(SetMetadata("permissions", permissions), UseGuards(AuthGuard("jwt"), PermissionsGuard));
