@@ -10,6 +10,7 @@ import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
 import "../../styles/globals.css";
 import synbaseTheme from "../../styles/theme/synbase.theme";
+import { SynbaseProvider } from "../component/client/synbase.provider";
 import ErrorBoundary from "../component/error/error-boundary/error-boundary.component";
 import Layout from "../component/layout";
 import createEmotionCache from "../util/create-emotion-cache.util";
@@ -52,16 +53,18 @@ const MyApp = (props: IMyAppProps) => {
                     <ErrorBoundary>
                         <QueryClientProvider client={queryClient}>
                             <Hydrate state={pageProps.dehydratedState}>
-                                <Head>
-                                    <meta name="viewport" content="initial-scale=1, width=device-width" />
-                                </Head>
+                                <SynbaseProvider>
+                                    <Head>
+                                        <meta name="viewport" content="initial-scale=1, width=device-width" />
+                                    </Head>
 
-                                <ThemeProvider theme={synbaseTheme}>
-                                    <CssBaseline />
-                                    <Layout>
-                                        <Component {...pageProps} />
-                                    </Layout>
-                                </ThemeProvider>
+                                    <ThemeProvider theme={synbaseTheme}>
+                                        <CssBaseline />
+                                        <Layout>
+                                            <Component {...pageProps} />
+                                        </Layout>
+                                    </ThemeProvider>
+                                </SynbaseProvider>
                             </Hydrate>
                         </QueryClientProvider>
                     </ErrorBoundary>
