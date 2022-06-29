@@ -13,6 +13,7 @@ import synbaseTheme from "../../styles/theme/synbase.theme";
 import { SynbaseProvider } from "../component/client/synbase.provider";
 import ErrorBoundary from "../component/error/error-boundary/error-boundary.component";
 import Layout from "../component/layout";
+import { CLIENT_ENV } from "../constants/constants.client";
 import createEmotionCache from "../util/create-emotion-cache.util";
 
 dayjs.locale("de");
@@ -45,9 +46,11 @@ const MyApp = (props: IMyAppProps) => {
     return (
         <CacheProvider value={emotionCache}>
             <Auth0Provider
-                domain={"synbase-dev.eu.auth0.com"}
-                clientId={"oHXq5yqvbubEPvu7Zs2CBw83Gdxe1Ix8"}
-                redirectUri={"https://localhost:8080"}
+                useRefreshTokens
+                domain={CLIENT_ENV.AUTH0_DOMAIN}
+                clientId={CLIENT_ENV.AUTH0_CLIENT_ID}
+                redirectUri={CLIENT_ENV.WEB_URL}
+                audience={CLIENT_ENV.AUTH0_AUDIENCE}
             >
                 <RecoilRoot>
                     <ErrorBoundary>
