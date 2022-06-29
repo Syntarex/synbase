@@ -1,6 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { Button, SxProps, Theme } from "@mui/material";
 import { useCallback } from "react";
+import DiscordIcon from "../../icon/discord/discord-icon.component";
 
 interface IAuthButtonProps {
     sx?: SxProps<Theme>;
@@ -23,7 +24,13 @@ const AuthButton = (props: IAuthButtonProps) => {
     }, [loginWithRedirect, logout, isAuthenticated]);
 
     return (
-        <Button sx={sx} onClick={onButtonClicked}>
+        <Button
+            sx={sx}
+            variant={"contained"}
+            color={isAuthenticated ? "error" : "primary"}
+            onClick={onButtonClicked}
+            startIcon={isAuthenticated ? undefined : <DiscordIcon />}
+        >
             {isAuthenticated ? "Logout" : "Login"}
         </Button>
     );
