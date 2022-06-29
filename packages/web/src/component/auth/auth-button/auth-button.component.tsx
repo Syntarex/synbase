@@ -5,6 +5,7 @@ import { useCallback } from "react";
 interface IAuthButtonProps {
     sx?: SxProps<Theme>;
 }
+
 const AuthButton = (props: IAuthButtonProps) => {
     const { sx } = props;
 
@@ -16,7 +17,9 @@ const AuthButton = (props: IAuthButtonProps) => {
             return;
         }
 
-        loginWithRedirect();
+        loginWithRedirect({
+            connection: "discord",
+        });
     }, [loginWithRedirect, logout, isAuthenticated]);
 
     return (
