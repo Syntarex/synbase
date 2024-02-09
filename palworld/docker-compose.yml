@@ -1,0 +1,16 @@
+services:
+  palworld:
+    image: thijsvanloef/palworld-server-docker
+    restart: unless-stopped
+    container_name: palworld
+    volumes:
+      - /home/syntarex/palworld:/palworld
+    ports:
+      - 8211:8211/udp
+      - 27015:27015/udp
+      - 25575:25575/tcp
+    environment:
+      - PORT=8211
+      - PLAYERS=8
+      - MULTITHREADING=true
+      - COMMUNITY=false
