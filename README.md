@@ -1,7 +1,5 @@
 # Synbase.io
 
-
-
 ## Brainstorming
 
 Wir sammeln Ideen was man auf synbase.io machen könnte.

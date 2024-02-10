@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "editorconfig.editorconfig",
+        "christian-kohler.npm-intellisense",
+        "christian-kohler.path-intellisense",
+        "esbenp.prettier-vscode",
+        "redhat.vscode-yaml",
+        "wiggin77.codedox",
+        "dbaeumer.vscode-eslint",
+        "ms-ceintl.vscode-language-pack-de"
+    ]
+}
