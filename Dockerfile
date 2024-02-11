@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 # Builde Projekt
 FROM base AS build
 COPY . ./
-RUN bun install --frozen-lockfile --production
+RUN bun install --frozen-lockfile
 ENV NODE_ENV=production
 RUN bun run build
 
@@ -16,4 +16,4 @@ COPY --from=build /usr/src/app /usr/src/app
 # Starte Produktivbetrieb
 USER bun
 EXPOSE 3000/tcp
-ENTRYPOINT ["bun", "run", "start"]
+ENTRYPOINT ["ls", "-la", "/usr/src/app"]
