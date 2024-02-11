@@ -1,0 +1,14 @@
+.DS_Store
+.git
+.vscode
+node_modules
+.dockerignore
+.editorconfig
+.env*
+.gitattributes
+.gitignore
+.prettierrc.js
+docker-compose*
+Dockerfile*
+README.md
+CHANGELOG.md

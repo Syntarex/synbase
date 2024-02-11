@@ -1,6 +1,12 @@
 {
-    "name": "synbase",
+    "name": "@synbase/root",
     "private": true,
+    "version": "0.0.1",
+    "scripts": {
+        "build": "echo \"root build\"",
+        "dockerize": "docker build --no-cache --pull -t synbase .",
+        "start": "echo \"started\""
+    },
     "workspaces": [
         "packages/*"
     ],

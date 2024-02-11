@@ -7,6 +7,7 @@
         "redhat.vscode-yaml",
         "wiggin77.codedox",
         "dbaeumer.vscode-eslint",
-        "ms-ceintl.vscode-language-pack-de"
+        "ms-ceintl.vscode-language-pack-de",
+        "ms-azuretools.vscode-docker"
     ]
 }

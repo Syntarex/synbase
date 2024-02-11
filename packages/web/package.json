@@ -1,0 +1,10 @@
+{
+    "name": "@synbase/web",
+    "private": true,
+    "scripts": {
+        "build": "echo \"web built\""
+    },
+    "dependencies": {
+        "@synbase/database": "workspace:*"
+    }
+}
