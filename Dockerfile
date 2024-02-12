@@ -1,12 +1,14 @@
 # Nutze das offizielle Bun-Image
-FROM oven/bun:1 as base
+FROM oven/bun:latest as base
+ENV TURBO_TELEMETRY_DISABLED=1
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV NODE_ENV=production
 WORKDIR /usr/src/app
 
 # Builde Projekt
 FROM base AS build
 COPY . ./
 RUN bun install --frozen-lockfile
-ENV NODE_ENV=production
 RUN bun run build
 
 # Kopiere fertiges Projekt
@@ -16,4 +18,4 @@ COPY --from=build /usr/src/app /usr/src/app
 # Starte Produktivbetrieb
 USER bun
 EXPOSE 3000/tcp
-ENTRYPOINT ["ls", "-la", "/usr/src/app"]
+ENTRYPOINT ["bun", "run", "start"]
