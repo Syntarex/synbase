@@ -15,3 +15,4 @@ Dockerfile*
 next-env.d.ts
 README.md
 CHANGELOG.md
+*.log
