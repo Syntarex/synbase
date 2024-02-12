@@ -1,5 +1,7 @@
 .DS_Store
 .git
+.next
+.turbo
 .vscode
 node_modules
 .dockerignore
@@ -10,5 +12,6 @@ node_modules
 .prettierrc.js
 docker-compose*
 Dockerfile*
+next-env.d.ts
 README.md
 CHANGELOG.md
