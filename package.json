@@ -3,11 +3,10 @@
     "private": true,
     "version": "0.0.1",
     "scripts": {
+        "prebuild": "eslint src/*_/_.{js,ts,tsx} --no-error-on-unmatched-pattern",
         "build": "turbo run build",
         "dockerize": "docker build --no-cache --pull -t synbase .",
-        "dockerize:log": "bun run dockerize &> build.log",
-        "start": "turbo run start",
-        "lint": "turbo run lint"
+        "start": "turbo run start"
     },
     "workspaces": [
         "packages/*"

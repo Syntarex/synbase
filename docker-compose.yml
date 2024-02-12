@@ -1,4 +1,12 @@
 services:
+    web:
+        image: synbase
+        restart: unless-stopped
+        container_name: web
+        ports:
+            - 3000:3000/tcp
+        volumes:
+            - /home/syntarex/web:/usr/src/app
     palworld:
         image: thijsvanloef/palworld-server-docker
         restart: unless-stopped

@@ -16,6 +16,5 @@ FROM base AS release
 COPY --from=build /usr/src/app /usr/src/app
 
 # Starte Produktivbetrieb
-USER bun
 EXPOSE 3000/tcp
 ENTRYPOINT ["bun", "run", "start"]
