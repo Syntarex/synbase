@@ -11,5 +11,8 @@
         "editor.tabSize": 2
     },
     "files.eol": "\n",
-    "npm.packageManager": "bun"
+    "npm.packageManager": "bun",
+    "git.inputValidation": "always",
+    "git.inputValidationLength": 72,
+    "git.inputValidationSubjectLength": 50
 }
