@@ -3,23 +3,24 @@
     "private": true,
     "version": "0.0.1",
     "scripts": {
-        "build": "lerna run build",
-        "dockerize": "docker build --pull -t synbase .",
-        "start": "lerna run start"
+        "build": "turbo run build",
+        "dockerize": "docker build --no-cache --pull -t synbase .",
+        "dockerize:log": "bun run dockerize &> build.log",
+        "start": "turbo run start",
+        "lint": "turbo run lint"
     },
     "workspaces": [
         "packages/*"
     ],
     "devDependencies": {
-        "@next/eslint-plugin-next": "^14.1.0",
         "@types/bun": "^1.0.5",
         "@typescript-eslint/eslint-plugin": "^6.21.0",
         "@typescript-eslint/parser": "^6.21.0",
         "eslint": "^8.56.0",
         "eslint-config-prettier": "^9.1.0",
         "eslint-plugin-prettier": "^5.1.3",
-        "lerna": "^8.1.2",
         "prettier": "^3.2.5",
+        "turbo": "^1.12.3",
         "typescript": "^5.3.3"
     }
 }
