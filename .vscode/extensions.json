@@ -8,6 +8,7 @@
         "wiggin77.codedox",
         "dbaeumer.vscode-eslint",
         "ms-ceintl.vscode-language-pack-de",
-        "ms-azuretools.vscode-docker"
+        "ms-azuretools.vscode-docker",
+        "ahmadalli.vscode-nginx-conf"
     ]
 }

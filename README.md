@@ -29,6 +29,14 @@ Wir sammeln Ideen was man auf synbase.io machen könnte.
     -   Online-Spieler-Zahl
 -   (FFXIV Gilden Info)
 
-## Notes
+## Anleitungen
 
--   ESLint Kommando: eslint src/\*_/_.{js,ts,tsx} --no-error-on-unmatched-pattern
+-   NextJS + Nginx: [Anleitung](https://steveholgado.com/nginx-for-nextjs/)
+
+## Services
+
+TODO
+
+palworld
+nginx
+web

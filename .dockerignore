@@ -10,9 +10,10 @@ node_modules
 .gitattributes
 .gitignore
 .prettierrc.js
-docker-compose*
-Dockerfile*
 next-env.d.ts
 README.md
 CHANGELOG.md
 *.log
+nginx
+palworld
+docker
