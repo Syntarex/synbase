@@ -6,6 +6,7 @@ services:
         pull_policy: build
         restart: unless-stopped
         container_name: web
+
     nginx:
         build:
             context: ./
@@ -22,7 +23,7 @@ services:
         restart: unless-stopped
         container_name: palworld
         volumes:
-            - palworld:/palworld
+            - ./palworld:/palworld
         ports:
             - 8211:8211/udp
             - 27015:27015/udp
