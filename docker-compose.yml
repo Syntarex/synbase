@@ -1,14 +1,16 @@
 services:
     web:
-        build: ./Dockerfile.web
+        build: ./web
         pull_policy: build
         restart: unless-stopped
         container_name: web
         volumes:
             - /home/syntarex/web:/usr/src/app
     nginx:
-        build: ./Dockerfile.nginx
+        build: ./nginx
         pull_policy: build
+        restart: unless-stopped
+        container_name: nginx
         ports:
             - 80:80/tcp
     palworld:
