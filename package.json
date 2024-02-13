@@ -7,7 +7,7 @@
         "start": "turbo run start"
     },
     "workspaces": [
-        "web", "database"
+        "./web", "./database"
     ],
     "devDependencies": {
         "@types/bun": "^1.0.5",
