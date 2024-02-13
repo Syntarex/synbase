@@ -1,25 +1,28 @@
 services:
     web:
-        build: ./web
+        build:
+            context: ./
+            dockerfile: ./web/Dockerfile
         pull_policy: build
         restart: unless-stopped
         container_name: web
-        volumes:
-            - /home/syntarex/web:/usr/src/app
     nginx:
-        build: ./nginx
+        build:
+            context: ./
+            dockerfile: ./nginx/Dockerfile
         pull_policy: build
         restart: unless-stopped
         container_name: nginx
         ports:
             - 80:80/tcp
+
     palworld:
         image: thijsvanloef/palworld-server-docker
         pull_policy: always
         restart: unless-stopped
         container_name: palworld
         volumes:
-            - /home/syntarex/palworld:/palworld
+            - palworld:/palworld
         ports:
             - 8211:8211/udp
             - 27015:27015/udp

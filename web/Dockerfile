@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 
 # Builde Projekt
 FROM base AS build
-COPY ../. ./
+COPY . ./
 RUN bun install --frozen-lockfile
 RUN bun run build
 
@@ -15,6 +15,6 @@ RUN bun run build
 FROM base AS release
 COPY --from=build /usr/src/app /usr/src/app
 
-# Starte Produktivbetrieb
+# Starte NextJS
 EXPOSE 3000/tcp
 ENTRYPOINT ["bun", "run", "start"]

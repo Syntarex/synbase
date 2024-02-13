@@ -3,12 +3,11 @@
     "private": true,
     "version": "0.0.1",
     "scripts": {
-        "prebuild": "eslint web/*_/_.{js,ts,tsx} --no-error-on-unmatched-pattern",
         "build": "turbo run build",
         "start": "turbo run start"
     },
     "workspaces": [
-        "web/*"
+        "web", "database"
     ],
     "devDependencies": {
         "@types/bun": "^1.0.5",

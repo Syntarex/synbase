@@ -4,8 +4,8 @@ FROM nginx:alpine
 RUN rm /etc/nginx/conf.d/*
 
 # Kopiere Konfiguration
-COPY ./default.conf /etc/nginx/conf.d/
+COPY ./nginx/default.conf /etc/nginx/conf.d/
 
-EXPOSE 80
-
+# Starte Nginx
+EXPOSE 80/tcp
 CMD ["nginx", "-g", "daemon off;"]

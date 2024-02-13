@@ -2,6 +2,7 @@
     "name": "@synbase/web",
     "private": true,
     "scripts": {
+        "prebuild": "eslint src/*_/_.{js,ts,tsx} --no-error-on-unmatched-pattern",
         "build": "next build",
         "dev": "next dev",
         "start": "next start"
