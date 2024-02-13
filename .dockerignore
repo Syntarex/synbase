@@ -9,11 +9,10 @@ node_modules
 .env*
 .gitattributes
 .gitignore
-.prettierrc.js
 next-env.d.ts
 README.md
 CHANGELOG.md
 *.log
 nginx
 palworld
-docker
+database
