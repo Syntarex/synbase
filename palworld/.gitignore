@@ -1,3 +1,5 @@
+# Dieses Verzeichnis ist das Arbeitsverzeichnis des Palworld-Servers
+# Wir wollen lediglich die .gitignore und die Settings-Datei in Git
 *
 !.gitignore
 !PalWorldSettings.ini
