@@ -1,6 +1,6 @@
 import { LayoutProps } from "@/model/layout";
 import { synbaseTheme } from "@/style/theme";
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { Container, CssBaseline, ThemeProvider } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import { Metadata } from "next";
 
@@ -18,7 +18,7 @@ const RootLayout = ({ children }: LayoutProps) => {
                     <ThemeProvider theme={synbaseTheme}>
                         <CssBaseline />
 
-                        {children}
+                        <Container>{children}</Container>
                     </ThemeProvider>
                 </AppRouterCacheProvider>
             </body>
