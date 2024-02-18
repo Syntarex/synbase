@@ -1,31 +1,31 @@
 {
-  "name": "@synbase/web",
-  "private": true,
-  "scripts": {
-    "prebuild": "eslint src/*_/_.{js,ts,tsx} --no-error-on-unmatched-pattern",
-    "build": "next build",
-    "clean": "rimraf .next",
-    "dev": "next dev --experimental-https --experimental-https-cert ../ssl.crt --experimental-https-key ../ssl.key",
-    "start": "next start"
-  },
-  "dependencies": {
-    "@emotion/cache": "^11.11.0",
-    "@emotion/react": "^11.11.3",
-    "@emotion/styled": "^11.11.0",
-    "@icons-pack/react-simple-icons": "^9.3.0",
-    "@mui/icons-material": "^5.15.10",
-    "@mui/material": "^5.15.10",
-    "@mui/material-nextjs": "^5.15.9",
-    "@synbase/database": "workspace:*",
-    "next": "14.0.4",
-    "next-plausible": "^3.12.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
-  "devDependencies": {
-    "@types/node": "^20.11.17",
-    "@types/react": "^18.2.55",
-    "@types/react-dom": "^18.2.19",
-    "eslint-config-next": "^14.1.0"
-  }
+    "name": "@synbase/web",
+    "private": true,
+    "scripts": {
+        "prebuild": "eslint src/*_/_.{js,ts,tsx} --no-error-on-unmatched-pattern",
+        "build": "next build",
+        "clean": "rimraf .next",
+        "dev": "next dev -p 443 --experimental-https --experimental-https-cert ../ssl.crt --experimental-https-key ../ssl.key",
+        "start": "next start"
+    },
+    "dependencies": {
+        "@emotion/cache": "^11.11.0",
+        "@emotion/react": "^11.11.3",
+        "@emotion/styled": "^11.11.0",
+        "@icons-pack/react-simple-icons": "^9.3.0",
+        "@mui/icons-material": "^5.15.10",
+        "@mui/material": "^5.15.10",
+        "@mui/material-nextjs": "^5.15.9",
+        "@synbase/database": "workspace:*",
+        "next": "14.0.4",
+        "next-plausible": "^3.12.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20.11.17",
+        "@types/react": "^18.2.55",
+        "@types/react-dom": "^18.2.19",
+        "eslint-config-next": "^14.1.0"
+    }
 }
