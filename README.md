@@ -33,10 +33,6 @@ Wir sammeln Ideen was man auf synbase.io machen könnte.
 
 -   NextJS + Nginx: [Anleitung](https://steveholgado.com/nginx-for-nextjs/)
 
-## Services
+## TODOs
 
-TODO
-
-palworld
-nginx
-web
+-   Prüfe ob favicon.png auf dem Handy gut aussieht
