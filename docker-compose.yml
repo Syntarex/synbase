@@ -15,6 +15,7 @@ services:
         restart: unless-stopped
         container_name: nginx
         ports:
+            - 80:80/tcp
             - 443:443/tcp
 
     palworld:
@@ -33,3 +34,5 @@ services:
             - PLAYERS=16
             - MULTITHREADING=true
             - COMMUNITY=false
+            - AUTO_UPDATE_ENABLED=true
+            - DISABLE_GENERATE_SETTINGS=true

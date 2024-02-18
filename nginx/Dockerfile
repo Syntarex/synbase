@@ -7,6 +7,7 @@ COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./ssl.crt /etc/nginx/ssl.crt
 COPY ./ssl.key /etc/nginx/ssl.key
 
+EXPOSE 80/tcp
 EXPOSE 443/tcp
 
 # Starte Nginx im Vordergrund des Containers
