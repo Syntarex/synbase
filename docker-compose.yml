@@ -31,7 +31,6 @@ services:
             - 25575:25575/tcp
         environment:
             - PORT=8211
-            - PLAYERS=16
             - MULTITHREADING=true
             - COMMUNITY=false
             - AUTO_UPDATE_ENABLED=true
