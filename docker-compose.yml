@@ -15,7 +15,7 @@ services:
         restart: unless-stopped
         container_name: nginx
         ports:
-            - 80:80/tcp
+            - 443:443/tcp
 
     palworld:
         image: thijsvanloef/palworld-server-docker

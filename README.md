@@ -33,10 +33,6 @@ Wir sammeln Ideen was man auf synbase.io machen könnte.
 
 -   NextJS + Nginx: [Anleitung](https://steveholgado.com/nginx-for-nextjs/)
 
-## Fehlende Dokus
-
--   Lokal mkcert: `mkcert -key-file ssl.key -cert-file ssl.crt localhost` und `mkcert -install`
-
 ## Services
 
 TODO
