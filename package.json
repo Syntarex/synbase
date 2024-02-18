@@ -4,10 +4,12 @@
     "version": "0.0.1",
     "scripts": {
         "build": "turbo run build",
+        "clean": "turbo run clean",
         "start": "turbo run start"
     },
     "workspaces": [
-        "./web", "./database"
+        "./web",
+        "./database"
     ],
     "devDependencies": {
         "@types/bun": "^1.0.5",
@@ -17,6 +19,7 @@
         "eslint-config-prettier": "^9.1.0",
         "eslint-plugin-prettier": "^5.1.3",
         "prettier": "^3.2.5",
+        "rimraf": "^5.0.5",
         "turbo": "^1.12.3",
         "typescript": "^5.3.3"
     }
