@@ -35,3 +35,5 @@ services:
             - COMMUNITY=false
             - AUTO_UPDATE_ENABLED=true
             - DISABLE_GENERATE_SETTINGS=true
+            - DELETE_OLD_BACKUPS=true
+            - OLD_BACKUP_DAYS=7
