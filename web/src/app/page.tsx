@@ -1,5 +1,5 @@
 import { SiDiscord, SiGithub } from "@icons-pack/react-simple-icons";
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, Stack, SvgIcon, Typography } from "@mui/material";
 import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,14 +13,30 @@ const Home: NextPage = () => {
                 <Typography>Trete dem Synbase Discord bei und werde glücklich.</Typography>
 
                 <Link href={"https://discord.gg/RKNAJgkqyW"}>
-                    <Button variant={"contained"} startIcon={<SiDiscord />}>
+                    <Button
+                        variant={"contained"}
+                        startIcon={
+                            <SvgIcon>
+                                <SiDiscord />
+                            </SvgIcon>
+                        }
+                        color={"discord" as "inherit"} // TODO: https://mui.com/material-ui/customization/palette/#typescript 🥲
+                    >
                         Beitreten
                     </Button>
                 </Link>
             </Stack>
 
             <Link href={"https://github.com/Syntarex/synbase"} target={"_blank"}>
-                <Button variant={"text"} startIcon={<SiGithub />} size={"small"}>
+                <Button
+                    variant={"text"}
+                    startIcon={
+                        <SvgIcon>
+                            <SiGithub />
+                        </SvgIcon>
+                    }
+                    size={"small"}
+                >
                     Open Source auf GitHub
                 </Button>
             </Link>
