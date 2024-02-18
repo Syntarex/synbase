@@ -1,11 +1,9 @@
 FROM nginx:alpine
 
-# Lösche existierende Konfigurationen
-RUN rm /etc/nginx/conf.d/*
-
 # Kopiere Konfiguration
-COPY ./nginx/default.conf /etc/nginx/conf.d/
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 
-# Starte Nginx
 EXPOSE 80/tcp
+
+# Starte Nginx im Vordergrund des Containers
 CMD ["nginx", "-g", "daemon off;"]
