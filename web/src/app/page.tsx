@@ -1,9 +1,10 @@
+import { Typography } from "@mui/material";
 import { NextPage } from "next";
 
 const Home: NextPage = () => {
     return (
         <main>
-            <p>Nothing to see</p>
+            <Typography>Nothing to see</Typography>
         </main>
     );
 };

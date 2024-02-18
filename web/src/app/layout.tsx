@@ -1,8 +1,8 @@
 import { LayoutProps } from "@/model/layout";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import { synbaseTheme } from "@/style/theme";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: "Synbase",
@@ -13,7 +13,15 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: LayoutProps) => {
     return (
         <html lang={"de"}>
-            <body className={inter.className}>{children}</body>
+            <body>
+                <AppRouterCacheProvider>
+                    <ThemeProvider theme={synbaseTheme}>
+                        <CssBaseline />
+
+                        {children}
+                    </ThemeProvider>
+                </AppRouterCacheProvider>
+            </body>
         </html>
     );
 };
