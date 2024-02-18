@@ -1,5 +1,6 @@
 "use client";
 
+import { SiDiscordHex } from "@icons-pack/react-simple-icons";
 import { createTheme } from "@mui/material";
 import { deDE } from "@mui/material/locale";
 import { Roboto } from "next/font/google";
@@ -10,10 +11,10 @@ const roboto = Roboto({
     display: "swap",
 });
 
-export const synbaseTheme = createTheme(
+const theme = createTheme(
     {
         palette: {
-            mode: "dark",
+            mode: "dark", // Setze Dark-Mode global
         },
         typography: {
             fontFamily: roboto.style.fontFamily,
@@ -21,3 +22,15 @@ export const synbaseTheme = createTheme(
     },
     deDE,
 );
+
+export const synbaseTheme = createTheme(theme, {
+    palette: {
+        // Füge Discord-Farbe hinzu
+        discord: theme.palette.augmentColor({
+            color: {
+                main: SiDiscordHex,
+            },
+            name: "discord",
+        }),
+    },
+});
