@@ -36,3 +36,4 @@ Wir sammeln Ideen was man auf synbase.io machen könnte.
 ## TODOs
 
 -   Prüfe ob favicon.png auf dem Handy gut aussieht
+-   Plausible selbst hosten

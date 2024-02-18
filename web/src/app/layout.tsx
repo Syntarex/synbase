@@ -3,6 +3,7 @@ import { synbaseTheme } from "@/style/theme";
 import { Container, CssBaseline, ThemeProvider } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import { Metadata } from "next";
+import PlausibleProvider from "next-plausible";
 
 export const metadata: Metadata = {
     title: "Synbase",
@@ -13,6 +14,10 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: LayoutProps) => {
     return (
         <html lang={"de"}>
+            <head>
+                <PlausibleProvider domain={"synbase.io"} />
+            </head>
+
             <body>
                 <AppRouterCacheProvider>
                     <ThemeProvider theme={synbaseTheme}>
