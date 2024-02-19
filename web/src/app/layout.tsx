@@ -1,5 +1,6 @@
 import { LayoutProps } from "@/model/layout";
 import { synbaseTheme } from "@/style/theme";
+import { getEnv } from "@/util/env";
 import { Container, CssBaseline, ThemeProvider } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import { Metadata } from "next";
@@ -15,7 +16,7 @@ const RootLayout = ({ children }: LayoutProps) => {
     return (
         <html lang={"de"}>
             <head>
-                <PlausibleProvider domain={"synbase.io"} />
+                <PlausibleProvider domain={getEnv("PLAUSIBLE_DOMAIN")} />
             </head>
 
             <body>
