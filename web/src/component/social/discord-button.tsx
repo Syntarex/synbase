@@ -2,15 +2,13 @@ import { SiDiscord } from "@icons-pack/react-simple-icons";
 import { Button, SvgIcon } from "@mui/material";
 import Link from "next/link";
 
-// TODO: In Umgebungsvariable speichern
-const discordUrl = "https://discord.gg/RKNAJgkqyW";
-
+// TODO: Wie kann ich DISCORD_URL sicher abfragen?
 /**
  * Ein Button, welcher bei Klick auf den Discord-Server weiterleitet.
  */
 export const DiscordButton = () => {
     return (
-        <Link href={discordUrl} target={"_blank"}>
+        <Link href={process.env.DISCORD_URL as string} target={"_blank"}>
             <Button
                 variant={"contained"}
                 startIcon={

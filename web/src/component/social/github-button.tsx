@@ -2,15 +2,13 @@ import { SiGithub } from "@icons-pack/react-simple-icons";
 import { Button, SvgIcon } from "@mui/material";
 import Link from "next/link";
 
-// TODO: In Umgebungsvariable speichern
-const githubUrl = "https://github.com/syntarex/synbase";
-
+// TODO: Wie kann ich GITHUB_URL sicher abfragen?
 /**
  * Ein Button, welcher bei Klick auf das GitHub-Repository weiterleitet.
  */
 export const GithubButton = () => {
     return (
-        <Link href={githubUrl} target={"_blank"}>
+        <Link href={process.env.GITHUB_URL as string} target={"_blank"}>
             <Button
                 variant={"contained"}
                 startIcon={
