@@ -26,7 +26,6 @@ services:
     web:
         extends: env
         build:
-            context: ./
             dockerfile: ./web/Dockerfile
         pull_policy: build
         restart: unless-stopped
@@ -35,7 +34,6 @@ services:
     nginx:
         extends: env
         build:
-            context: ./
             dockerfile: ./nginx/Dockerfile
         pull_policy: build
         restart: unless-stopped
