@@ -8,6 +8,21 @@ services:
         build:
             context: ./
 
+    database:
+        extends: env
+        image: postgres
+        pull_policy: always
+        restart: unless-stopped
+        container_name: database
+        volumes:
+            - ./database/data:/var/lib/postgresql/data
+        ports:
+            - 5432:5432/tcp
+        environment:
+            - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_DB=${POSTGRES_DB}
+            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+
     web:
         extends: env
         build:
@@ -35,7 +50,6 @@ services:
         pull_policy: always
         restart: unless-stopped
         container_name: palworld
-
         volumes:
             - ./palworld:/palworld
         ports:
