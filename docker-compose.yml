@@ -1,15 +1,5 @@
 services:
-    env:
-        env_file:
-            - path: ./.env
-              required: true
-            - path: ./.env.production
-              required: true
-        build:
-            context: ./
-
     database:
-        extends: env
         image: postgres
         pull_policy: always
         restart: unless-stopped
@@ -24,16 +14,16 @@ services:
             - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
 
     web:
-        extends: env
         build:
+            context: ./
             dockerfile: ./web/Dockerfile
         pull_policy: build
         restart: unless-stopped
         container_name: web
 
     nginx:
-        extends: env
         build:
+            context: ./
             dockerfile: ./nginx/Dockerfile
         pull_policy: build
         restart: unless-stopped
@@ -43,7 +33,6 @@ services:
             - 443:443/tcp
 
     palworld:
-        extends: env
         image: thijsvanloef/palworld-server-docker
         pull_policy: always
         restart: unless-stopped

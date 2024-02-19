@@ -5,4 +5,4 @@ node_modules
 *.crt
 *.key
 *.csr
-.env.production
+.env
