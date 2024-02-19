@@ -29,10 +29,6 @@ Wir sammeln Ideen was man auf synbase.io machen könnte.
     -   Online-Spieler-Zahl
 -   (FFXIV Gilden Info)
 
-## Anleitungen
-
--   NextJS + Nginx: [Anleitung](https://steveholgado.com/nginx-for-nextjs/)
-
 ## TODOs
 
 -   Prüfe ob favicon.png auf dem Handy gut aussieht
