@@ -1,17 +1,17 @@
 "use client";
 
-import { SiDiscord, SiGithub } from "@icons-pack/react-simple-icons";
-import { Button, Fade, Stack, SvgIcon, Typography } from "@mui/material";
+import { DiscordButton } from "@/component/social/discord-button";
+import { GithubButton } from "@/component/social/github-button";
+import { Box, Fade, Stack, Typography } from "@mui/material";
 import { NextPage } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 import { useIntervalWhen } from "rooks";
 
 const Home: NextPage = () => {
     const [animated, setAnimated] = useState(0);
 
-    useIntervalWhen(() => setAnimated(animated + 1), 750, animated < 2);
+    useIntervalWhen(() => setAnimated(animated + 1), 1000, animated < 4);
 
     return (
         <Stack sx={{ height: "60vh" }} alignItems={"center"} justifyContent={"center"} spacing={8}>
@@ -23,36 +23,14 @@ const Home: NextPage = () => {
                 <Stack alignItems={"center"} spacing={2}>
                     <Typography>Trete dem Synbase Discord bei und werde glücklich.</Typography>
 
-                    <Link href={"https://discord.gg/RKNAJgkqyW"}>
-                        <Button
-                            variant={"contained"}
-                            startIcon={
-                                <SvgIcon>
-                                    <SiDiscord />
-                                </SvgIcon>
-                            }
-                            color={"discord" as "inherit"} // TODO: https://mui.com/material-ui/customization/palette/#typescript 🥲
-                        >
-                            Beitreten
-                        </Button>
-                    </Link>
+                    <DiscordButton />
                 </Stack>
             </Fade>
 
             <Fade in={animated >= 2} timeout={2000}>
-                <Link href={"https://github.com/Syntarex/synbase"} target={"_blank"}>
-                    <Button
-                        variant={"text"}
-                        startIcon={
-                            <SvgIcon>
-                                <SiGithub />
-                            </SvgIcon>
-                        }
-                        size={"small"}
-                    >
-                        Open Source auf GitHub
-                    </Button>
-                </Link>
+                <Box>
+                    <GithubButton />
+                </Box>
             </Fade>
         </Stack>
     );
