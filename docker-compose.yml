@@ -1,5 +1,15 @@
 services:
+    env:
+        env_file:
+            - path: ./.env
+              required: true
+            - path: ./.env.production
+              required: true
+        build:
+            context: ./
+
     web:
+        extends: env
         build:
             context: ./
             dockerfile: ./web/Dockerfile
@@ -8,6 +18,7 @@ services:
         container_name: web
 
     nginx:
+        extends: env
         build:
             context: ./
             dockerfile: ./nginx/Dockerfile
@@ -19,10 +30,12 @@ services:
             - 443:443/tcp
 
     palworld:
+        extends: env
         image: thijsvanloef/palworld-server-docker
         pull_policy: always
         restart: unless-stopped
         container_name: palworld
+
         volumes:
             - ./palworld:/palworld
         ports:
@@ -32,7 +45,7 @@ services:
         environment:
             - PORT=8211
             - MULTITHREADING=true
-            - COMMUNITY=false
+            - COMMUNITY=${PALWORLD_COMMUNITY}
             - AUTO_UPDATE_ENABLED=true
             - DISABLE_GENERATE_SETTINGS=true
             - DELETE_OLD_BACKUPS=true
