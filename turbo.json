@@ -1,17 +1,11 @@
 {
     "$schema": "https://turbo.build/schema.json",
-    "globalDotEnv": [".env"],
     "pipeline": {
         "clean": {},
         "build": {
-            "dotEnv": [".env.production"],
             "dependsOn": ["clean", "^build"]
         },
-        "dev": {
-            "dotEnv": [".env.development"]
-        },
-        "start": {
-            "dotEnv": [".env.production"]
-        }
+        "dev": {},
+        "start": {}
     }
 }
