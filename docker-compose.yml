@@ -2,6 +2,7 @@ services:
     database:
         image: postgres
         pull_policy: always
+        shm_size: 128mb # Beschränke Speichernutzung
         restart: unless-stopped
         container_name: database
         volumes:
