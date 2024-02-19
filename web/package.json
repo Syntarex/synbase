@@ -17,6 +17,7 @@
         "@mui/material": "^5.15.10",
         "@mui/material-nextjs": "^5.15.9",
         "@synbase/database": "workspace:*",
+        "dayjs": "^1.11.10",
         "mui-markdown": "^1.1.13",
         "next": "14.0.4",
         "next-plausible": "^3.12.0",
