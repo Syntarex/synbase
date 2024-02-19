@@ -1,6 +1,6 @@
 "use client";
 
-import { SiDiscordHex } from "@icons-pack/react-simple-icons";
+import { SiDiscordHex, SiGithubHex } from "@icons-pack/react-simple-icons";
 import { createTheme } from "@mui/material";
 import { deDE } from "@mui/material/locale";
 import dayjs from "dayjs";
@@ -39,6 +39,12 @@ export const synbaseTheme = createTheme(theme, {
                 main: SiDiscordHex,
             },
             name: "discord",
+        }),
+        github: theme.palette.augmentColor({
+            color: {
+                main: SiGithubHex,
+            },
+            name: "github",
         }),
     },
 });
