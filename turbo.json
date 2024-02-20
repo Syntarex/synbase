@@ -9,7 +9,7 @@
         "dev": {
             "cache": false,
             "persistent": true,
-            "dependsOn": ["@synbase/database:build"]
+            "dependsOn": ["@synbase/database#build"]
         },
         "lint": {},
         "start": {
