@@ -3,10 +3,10 @@
     "private": true,
     "version": "0.0.1",
     "scripts": {
-        "build": "turbo run build",
-        "clean": "turbo run clean",
-        "dev": "turbo run dev",
-        "start": "turbo run start"
+        "build": "dotenv -- turbo run build",
+        "clean": "dotenv -- turbo run clean",
+        "dev": "dotenv -- turbo run dev",
+        "start": "dotenv -- turbo run start"
     },
     "workspaces": [
         "./web",
