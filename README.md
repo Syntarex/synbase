@@ -34,3 +34,4 @@ Wir sammeln Ideen was man auf synbase.io machen könnte.
 -   Prüfe ob favicon.png auf dem Handy gut aussieht
 -   Plausible selbst hosten
 -   .dockerignore in Unterverzeichnissen möglich?
+-   Reduziere die Logs des Datenbank Containers
