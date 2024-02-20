@@ -10,6 +10,9 @@
         "editor.defaultFormatter": "redhat.vscode-yaml",
         "editor.tabSize": 2
     },
+    "[prisma]": {
+        "editor.defaultFormatter": "Prisma.prisma"
+    },
     "files.eol": "\n",
     "npm.packageManager": "bun",
     "git.inputValidation": "always",

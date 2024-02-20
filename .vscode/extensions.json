@@ -9,6 +9,7 @@
         "dbaeumer.vscode-eslint",
         "ms-ceintl.vscode-language-pack-de",
         "ms-azuretools.vscode-docker",
-        "ahmadalli.vscode-nginx-conf"
+        "ahmadalli.vscode-nginx-conf",
+        "prisma.prisma"
     ]
 }
