@@ -4,7 +4,7 @@
     "main": "src/index.ts",
     "scripts": {
         "build": "prisma generate",
-        "dev": "docker run --rm -p 5432:5432 --env-file ../.env --name synbasedb postgres",
+        "dev": "docker run --rm -p 5432:5432 --restart no --env-file ../.env postgres",
         "start": "prisma migrate deploy",
         "sync": "prisma migrate dev --name init"
     },
