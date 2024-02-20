@@ -2,10 +2,10 @@
     "name": "@synbase/web",
     "private": true,
     "scripts": {
-        "prebuild": "eslint src/*_/_.{js,ts,tsx} --no-error-on-unmatched-pattern",
         "build": "next build",
         "clean": "rimraf .next",
         "dev": "next dev -p 443 --experimental-https --experimental-https-cert ../ssl.crt --experimental-https-key ../ssl.key",
+        "lint": "eslint src/*_/_.{js,ts,tsx} --no-error-on-unmatched-pattern",
         "start": "next start"
     },
     "dependencies": {
