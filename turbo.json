@@ -4,9 +4,17 @@
     "pipeline": {
         "clean": {},
         "build": {
-            "dependsOn": ["clean", "^build"]
+            "dependsOn": ["clean", "lint", "^build"]
         },
-        "dev": {},
-        "start": {}
+        "dev": {
+            "cache": false,
+            "persistent": true,
+            "dependsOn": ["@synbase/database:build"]
+        },
+        "lint": {},
+        "start": {
+            "dependsOn": ["^start"]
+        },
+        "sync": {}
     }
 }
