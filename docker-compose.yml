@@ -19,8 +19,7 @@ services:
             context: ./
             dockerfile: ./web/Dockerfile
         depends_on:
-            database:
-                condition: service_healthy
+            - database
         pull_policy: build
         restart: unless-stopped
         container_name: web
