@@ -7,8 +7,7 @@
         "clean": "dotenv -- turbo run clean",
         "dev": "dotenv -- turbo run dev",
         "lint": "dotenv -- turbo run lint",
-        "start": "dotenv -- turbo run start",
-        "sync": "dotenv -- turbo run sync"
+        "start": "dotenv -- turbo run start"
     },
     "workspaces": [
         "./web",
