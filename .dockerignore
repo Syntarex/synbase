@@ -6,7 +6,6 @@
 node_modules
 .dockerignore
 .editorconfig
-.env.development
 .gitattributes
 .gitignore
 next-env.d.ts
