@@ -15,7 +15,7 @@ try {
         user: process.env.POSTGRES_USER,
         password: process.env.POSTGRES_PASSWORD,
         database: process.env.POSTGRES_DB,
-        timeout: 30 * 1000, // 30 Sekunden
+        timeout: 120 * 1000, // 2 Minuten
     });
 
     console.log("Datenbank ist erreichbar 🚀");
