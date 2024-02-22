@@ -26,11 +26,16 @@ services:
         pull_policy: build
         restart: unless-stopped
         container_name: web
+        healthcheck:
+            test: "curl -f localhost:3000"
 
     nginx:
         build:
             context: ./
             dockerfile: ./nginx/Dockerfile
+        depends_on:
+            web:
+                condition: service_healthy
         pull_policy: build
         restart: unless-stopped
         container_name: nginx
