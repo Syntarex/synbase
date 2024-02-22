@@ -4,11 +4,13 @@
     "main": "src/index.ts",
     "scripts": {
         "build": "prisma generate",
-        "dev": "docker run --rm -p 5432:5432 --restart no --env-file ../.env postgres",
+        "dev": "prisma migrate dev",
+        "dev:startdb": "docker compose -f ../docker-compose.yml up database -d --wait",
         "start": "prisma migrate deploy",
-        "sync": "prisma migrate dev --name init"
+        "wait-for-database": "bun run wait-for-postgres.ts"
     },
     "devDependencies": {
+        "@jcoreio/wait-for-postgres": "^2.0.0",
         "prisma": "^5.9.1",
         "ts-node": "^10.9.2"
     },
