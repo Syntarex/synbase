@@ -25,5 +25,3 @@ Wir sammeln Ideen was man auf synbase.io machen könnte.
 -   Prüfe ob favicon.png auf dem Handy gut aussieht
 -   Plausible selbst hosten
 -   .dockerignore in Unterverzeichnissen möglich?
-
--   Prüfe regelmäßig: https://github.com/prisma/prisma/issues/21241 denn oven/bun:latest kann mit prisma generate nicht umgehen und beginnt next.js zu früh zu bauen. imbios/bun-node hat node mit drinnen, allerdings buildet er dann alles über node

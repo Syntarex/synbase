@@ -1,5 +1,8 @@
+# TODO: Aktuell nutze ich nicht das offizielle Image aufgrund dieses Bugs mit Prisma:
+# https://github.com/prisma/prisma/issues/21241
+
 # Nutze das offizielle Bun-Image
-FROM oven/bun:latest as base
+FROM imbios/bun-node:latest as base
 ENV TURBO_TELEMETRY_DISABLED=1
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production

@@ -14,7 +14,7 @@
         "dev:startdb": {},
         "lint": {},
         "start": {
-            "dependsOn": ["@synbase/database#wait-for-database, ^start"]
+            "dependsOn": ["@synbase/database#wait-for-database", "^start"]
         },
         "wait-for-database": {}
     }
