@@ -5,6 +5,7 @@
     "scripts": {
         "build": "prisma generate",
         "dev": "prisma migrate dev",
+        "dev:resetdb": "prisma migrate reset -f",
         "dev:startdb": "docker compose -f ../docker-compose.yml up database -d --wait",
         "start": "prisma migrate deploy",
         "wait-for-database": "bun run wait-for-postgres.ts"

@@ -6,6 +6,7 @@
         "build": "dotenv -- turbo run build",
         "clean": "dotenv -- turbo run clean",
         "dev": "dotenv -- turbo run dev",
+        "dev:resetdb": "dotenv -- turbo run dev:resetdb",
         "lint": "dotenv -- turbo run lint",
         "start": "dotenv -- turbo run start"
     },

@@ -17,6 +17,8 @@ try {
         database: process.env.POSTGRES_DB,
         timeout: 30 * 1000, // 30 Sekunden
     });
+
+    console.log("Datenbank ist erreichbar 🚀");
 } catch (ex) {
     throw new Error(`Wir haben gewartet und gewartet.. Die Datenbank ist einfach nicht erreichbar. 😢`);
 }

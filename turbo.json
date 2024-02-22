@@ -8,13 +8,14 @@
         },
         "dev": {
             "cache": false,
-            "persistent": true,
-            "dependsOn": ["@synbase/database#build"]
+            "dependsOn": ["@synbase/database#dev:startdb", "@synbase/database#wait-for-database", "^dev"]
         },
+        "dev:resetdb": {},
+        "dev:startdb": {},
         "lint": {},
         "start": {
-            "dependsOn": ["^start"]
+            "dependsOn": ["@synbase/database#wait-for-database, ^start"]
         },
-        "sync": {}
+        "wait-for-database": {}
     }
 }
