@@ -10,15 +10,6 @@ Wir sammeln Ideen was man auf synbase.io machen könnte.
     -   Simpel
     -   Markdown + Bilder einblenden
     -   Überschrift, Inhalt des Blog-Artikels, Thumbnail
--   Fußbilder von Elias (jede Woche neue)
-    -   Elias macht Fußbilder in vielen verschiedenen kreativen Settings
-        -   Frisch aus der Dusche
-        -   Hochgelegte Füße auf der Couch
-        -   Im Gras?
-        -   Im Rewe beim Bierholen
-        -   Im Streichelzoo
-    -   Voting System
-        -   Ohne Login
 -   Clone Hero Playlist
     -   Songs als Liste exportieren
     -   Song-Queue
@@ -34,4 +25,5 @@ Wir sammeln Ideen was man auf synbase.io machen könnte.
 -   Prüfe ob favicon.png auf dem Handy gut aussieht
 -   Plausible selbst hosten
 -   .dockerignore in Unterverzeichnissen möglich?
--   Reduziere die Logs des Datenbank Containers
+
+-   Prüfe regelmäßig: https://github.com/prisma/prisma/issues/21241 denn oven/bun:latest kann mit prisma generate nicht umgehen und beginnt next.js zu früh zu bauen. imbios/bun-node hat node mit drinnen, allerdings buildet er dann alles über node
