@@ -26,10 +26,6 @@ services:
         pull_policy: build
         restart: unless-stopped
         container_name: web
-        ports:
-            - 3000:3000/tcp
-        healthcheck:
-            test: "curl -f web:3000"
 
     nginx:
         build:
