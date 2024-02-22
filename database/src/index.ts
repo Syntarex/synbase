@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../prisma/client";
 
 // Erstellt Datenbank-Client
 const prismaClientSingleton = () => {
@@ -23,7 +23,7 @@ const Database = globalThis.Database ?? prismaClientSingleton();
 export default Database;
 
 // Exportiere Datenbank-Models
-export * from "@prisma/client";
+export * from "../prisma/client";
 
 // Nutze Singleton nur, wenn wir im lokalen Betrieb sind
 // Im lokalen Betrieb startet der Next.js-Server neu, wenn eine Änderung am Code vorgenommen wird.

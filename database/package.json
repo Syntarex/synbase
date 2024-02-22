@@ -4,6 +4,7 @@
     "main": "src/index.ts",
     "scripts": {
         "build": "prisma generate",
+        "clean": "rimraf prisma/client",
         "dev": "prisma migrate dev",
         "dev:resetdb": "prisma migrate reset -f",
         "dev:startdb": "docker compose -f ../docker-compose.yml up database -d --wait",
