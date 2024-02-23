@@ -63,44 +63,68 @@ clients:
           rotation_type: non-rotating
       sso_disabled: false
       token_endpoint_auth_method: client_secret_post
-databases:
-    - name: Username-Password-Authentication
-      strategy: auth0
-      enabled_clients:
-          - Deploy CLI
-          - Web
-      is_domain_connection: false
-      options:
-          mfa:
-              active: true
-              return_enroll_settings: true
-          passwordPolicy: good
-          passkey_options:
-              challenge_ui: both
-              local_enrollment_enabled: true
-              progressive_enrollment_enabled: true
-          strategy_version: 2
-          authentication_methods:
-              passkey:
-                  enabled: false
-              password:
-                  enabled: true
-          brute_force_protection: true
-      realms:
-          - Username-Password-Authentication
+databases: []
 connections:
-    - name: google-oauth2
-      strategy: google-oauth2
+    - name: discord
+      strategy: oauth2
+      display_name: Discord
       enabled_clients:
-          - Deploy CLI
           - Web
       is_domain_connection: false
       options:
-          email: true
-          scope:
-              - email
-              - profile
-          profile: true
+          scope: identify email
+          scripts:
+              fetchUserProfile: |-
+                  function fetchUserProfile(accessToken, context, callback) {
+                    request.get({
+                      url: 'https://discordapp.com/api/users/@me',
+                      headers: {
+                        'Authorization': 'Bearer ' + accessToken
+                      }
+                    },
+                    (err, resp, body) => {
+                      if (err) {
+                        return callback(err);
+                      }
+
+                      if (resp.statusCode !== 200) {
+                        return callback(new Error(`[Response code: ${resp.statusCode}] ${body}`));
+                      }
+
+                      let bodyParsed;
+                      try {
+                        bodyParsed = JSON.parse(body);
+                      } catch (jsonError) {
+                        return callback(new Error(body));
+                      }
+
+
+                      const profile = {
+                        user_id: bodyParsed.id,
+                        nickname: bodyParsed.username,
+                        name: bodyParsed.username,
+                      };
+
+                      if (bodyParsed.email) {
+                        profile.email = bodyParsed.email;
+                        profile.email_verified = bodyParsed.verified;
+                      }
+
+
+                      if (bodyParsed.avatar) {
+                        profile.picture = `https://cdn.discordapp.com/avatars/${bodyParsed.id}/${bodyParsed.avatar}.png`;
+                      }
+
+                      return callback(null, profile);
+                    });
+                  }
+          icon_url: >-
+              https://cdn.auth0.com/marketplace/catalog/content/assets/creators/discord/discord-avatar.png
+          tokenURL: https://discordapp.com/api/oauth2/token
+          client_id: "##DISCORD_CLIENT_ID##"
+          client_secret: ##DISCORD_CLIENT_SECRET##
+          authorizationURL: https://discordapp.com/api/oauth2/authorize
+          integration_name: discord
 tenant:
     enabled_locales:
         - de

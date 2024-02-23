@@ -13,8 +13,11 @@
         "dev:resetdb": {},
         "dev:startdb": {},
         "lint": {},
-        "pull": {},
+        "pull": {
+            "cache": false
+        },
         "start": {
+            "cache": false,
             "dependsOn": ["@synbase/database#wait-for-database", "^start"]
         },
         "wait-for-database": {}
