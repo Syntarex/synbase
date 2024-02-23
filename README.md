@@ -25,4 +25,4 @@ Wir sammeln Ideen was man auf synbase.io machen könnte.
 -   Prüfe ob favicon.png auf dem Handy gut aussieht
 -   Plausible selbst hosten
 -   .dockerignore in Unterverzeichnissen möglich?
--   Füge Palworld Admin Passwort als Env hinzu
+-   AUTH0 tenant.yaml enthält Platzhalter für URLs. Pulled man die tenant-Config neu, sind diese allerdings weg. how to fix?
