@@ -60,6 +60,7 @@ services:
             - PORT=8211
             - MULTITHREADING=true
             - COMMUNITY=${PALWORLD_COMMUNITY}
+            - ADMIN_PASSWORD=${PALWORLD_ADMIN_PASSWORD}
             - AUTO_UPDATE_ENABLED=true
             - DISABLE_GENERATE_SETTINGS=true
             - DELETE_OLD_BACKUPS=true
