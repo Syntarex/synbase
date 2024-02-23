@@ -91,6 +91,7 @@ connections:
       profile: true
 tenant:
   enabled_locales:
+    - de
     - en
   flags:
     revoke_refresh_token_grant: false
