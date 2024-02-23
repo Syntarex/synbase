@@ -15,7 +15,7 @@ const Home: NextPage = () => {
     useIntervalWhen(() => setAnimated(animated + 1), 1000, animated < 4);
 
     return (
-        <Stack height={"100vh"} pt={16} pb={4} px={4} alignItems={"center"} gap={8}>
+        <Stack height={"100vh"} pt={12} pb={4} px={4} alignItems={"center"} gap={8}>
             <Fade in={animated >= 0} timeout={2000}>
                 <Stack direction={"row"} flexWrap={"wrap"} alignItems={"center"} justifyContent={"center"} gap={4}>
                     <Image src={"/logo.svg"} alt={"Synbase"} width={200} height={200} />
