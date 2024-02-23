@@ -12,8 +12,7 @@
     },
     "devDependencies": {
         "@jcoreio/wait-for-postgres": "^2.0.0",
-        "prisma": "^5.9.1",
-        "ts-node": "^10.9.2"
+        "prisma": "^5.9.1"
     },
     "dependencies": {
         "@prisma/client": "^5.10.0"
