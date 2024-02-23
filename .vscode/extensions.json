@@ -10,6 +10,7 @@
         "ms-ceintl.vscode-language-pack-de",
         "ms-azuretools.vscode-docker",
         "ahmadalli.vscode-nginx-conf",
-        "prisma.prisma"
+        "prisma.prisma",
+        "auth0.vscode-labs"
     ]
 }
