@@ -30,7 +30,7 @@ const Home: NextPage = () => {
                 <Stack height={"100%"} alignItems={"center"} flexGrow={1} gap={2}>
                     <Typography>Trete dem Synbase Discord bei und werde glücklich.</Typography>
 
-                    <DiscordButton />
+                    <DiscordButton>Beitreten</DiscordButton>
                 </Stack>
             </Fade>
 
