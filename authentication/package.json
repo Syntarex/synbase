@@ -1,0 +1,11 @@
+{
+    "name": "@synbase/authentication",
+    "private": true,
+    "scripts": {
+        "pull": "a0deploy export --format=yaml --output_folder=auth0",
+        "start": "a0deploy import --input_file auth0/tenant.yaml"
+    },
+    "devDependencies": {
+        "auth0-deploy-cli": "^7.21.0"
+    }
+}

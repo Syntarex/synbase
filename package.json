@@ -8,11 +8,13 @@
         "dev": "dotenv -- turbo run dev",
         "dev:resetdb": "dotenv -- turbo run dev:resetdb",
         "lint": "dotenv -- turbo run lint",
+        "pull": "dotenv -- turbo run pull",
         "start": "dotenv -- turbo run start"
     },
     "workspaces": [
         "./web",
-        "./database"
+        "./database",
+        "./authentication"
     ],
     "devDependencies": {
         "@types/bun": "^1.0.5",
