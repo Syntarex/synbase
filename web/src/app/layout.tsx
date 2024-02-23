@@ -1,6 +1,7 @@
 import { LayoutProps } from "@/model/layout";
 import { synbaseTheme } from "@/style/theme";
 import { getEnv } from "@/util/env";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
 import { Container, CssBaseline, ThemeProvider, Typography } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import Database from "@synbase/database";
@@ -23,17 +24,19 @@ const RootLayout = async ({ children }: LayoutProps) => {
             </head>
 
             <body>
-                <AppRouterCacheProvider>
-                    <ThemeProvider theme={synbaseTheme}>
-                        <CssBaseline />
+                <UserProvider>
+                    <AppRouterCacheProvider>
+                        <ThemeProvider theme={synbaseTheme}>
+                            <CssBaseline />
 
-                        <Container>
-                            {children}
+                            <Container>
+                                {children}
 
-                            <Typography sx={{ display: "none" }}>Es gibt {profiles.length} Profile.</Typography>
-                        </Container>
-                    </ThemeProvider>
-                </AppRouterCacheProvider>
+                                <Typography sx={{ display: "none" }}>Es gibt {profiles.length} Profile.</Typography>
+                            </Container>
+                        </ThemeProvider>
+                    </AppRouterCacheProvider>
+                </UserProvider>
             </body>
         </html>
     );
