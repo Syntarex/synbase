@@ -16,6 +16,7 @@ export const DiscordButton = () => {
                         <SiDiscord />
                     </SvgIcon>
                 }
+                size={"large"}
                 color={"discord" as "inherit"} // TODO: https://mui.com/material-ui/customization/palette/#typescript 🥲
             >
                 Beitreten
