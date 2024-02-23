@@ -14,7 +14,7 @@
     "workspaces": [
         "./web",
         "./database",
-        "./authentication"
+        "./auth"
     ],
     "devDependencies": {
         "@types/bun": "^1.0.5",

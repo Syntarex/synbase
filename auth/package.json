@@ -1,5 +1,5 @@
 {
-    "name": "@synbase/authentication",
+    "name": "@synbase/auth",
     "private": true,
     "scripts": {
         "pull": "a0deploy export --format=yaml --output_folder=auth0",
