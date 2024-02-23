@@ -18,7 +18,7 @@ const Home: NextPage = () => {
         <Stack height={"100vh"} pt={12} pb={4} px={4} alignItems={"center"} gap={8}>
             <Fade in={animated >= 0} timeout={2000}>
                 <Stack direction={"row"} flexWrap={"wrap"} alignItems={"center"} justifyContent={"center"} gap={4}>
-                    <Image src={"/logo.svg"} alt={"Synbase"} width={200} height={200} />
+                    <Image src={"/logo.svg"} alt={"Synbase"} width={150} height={150} />
 
                     <Typography variant={"h2"} fontFamily={orbitron.style.fontFamily} fontWeight={800}>
                         Synbase
