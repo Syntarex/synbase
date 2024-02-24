@@ -20,7 +20,7 @@ const Home: NextPage = () => {
                 <Stack direction={"row"} flexWrap={"wrap"} alignItems={"center"} justifyContent={"center"} gap={4}>
                     <Image src={"/logo.svg"} alt={"Synbase"} width={150} height={150} />
 
-                    <Typography variant={"h2"} fontFamily={orbitron.style.fontFamily} fontWeight={800}>
+                    <Typography variant={"h1"} fontFamily={orbitron.style.fontFamily} fontWeight={800}>
                         Synbase
                     </Typography>
                 </Stack>
