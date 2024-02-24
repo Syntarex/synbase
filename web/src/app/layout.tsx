@@ -1,4 +1,4 @@
-import { LayoutProps } from "@/model/layout";
+import { LayoutProps } from "@/model/next";
 import { synbaseTheme } from "@/style/theme";
 import { getEnv } from "@/util/env";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
