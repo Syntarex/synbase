@@ -26,3 +26,4 @@ Wir sammeln Ideen was man auf synbase.io machen könnte.
 -   Plausible selbst hosten
 -   .dockerignore in Unterverzeichnissen möglich?
 -   AUTH0 tenant.yaml enthält Platzhalter für URLs. Pulled man die tenant-Config neu, sind diese allerdings weg. how to fix?
+-   Prisma Error-Handling in API Routen
