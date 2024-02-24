@@ -20,7 +20,7 @@ export const Test = ({ slug }: TestProps) => {
                         title: "Kurzer Beitrag zu MUI und TypeScript",
                         description: "Einführung in die Verwendung von MUI mit TypeScript",
                         content:
-                            "# Überschrift\n\n## H2 Überschrift\n\n### H3 Überschrift\nDas ist ein Test\n\n```code```\n\n_Fett_ __Kursiv__",
+                            "# Überschrift\n\n## H2 Überschrift\n\n### H3 Überschrift\n\n#### H4 Überschrift\n\n##### H5 Überschrift\n\n###### H6 Überschrift\n\nDas ist ein Test\n\n```code```\n\n_Fett_ __Kursiv__",
                         slug,
                     }),
                 })
