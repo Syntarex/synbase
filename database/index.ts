@@ -11,13 +11,13 @@ declare global {
     // Nutze var, sodass die Variable wirklich im globalen Kontext initialisiert wird.
     // let oder const würde die Variable auf dieses JavaScript-Modul einschränken.
     // eslint-disable-next-line no-var
-    var Database: undefined | ReturnType<typeof prismaClientSingleton>;
+    var DatabaseInstance: undefined | ReturnType<typeof prismaClientSingleton>;
 }
 
 /**
  * Ein globaler Datenbank-Client. 🚀
  */
-const Database = globalThis.Database ?? prismaClientSingleton();
+const Database = globalThis.DatabaseInstance ?? prismaClientSingleton();
 
 // Exportiere Datenbank-Client
 export default Database;
@@ -30,5 +30,5 @@ export * from "@prisma/client";
 // Die Verbindung zur Datenbank, wird hierbei nicht geschlossen.
 // Deshalb setze ich das Singleton, sodass die Verbindung, welche vor dem Neustart aufgebaut war, erhalten bleibt.
 if (process.env.NODE_ENV !== "production") {
-    globalThis.Database = Database;
+    globalThis.DatabaseInstance = Database;
 }
