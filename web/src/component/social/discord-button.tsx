@@ -2,11 +2,11 @@ import { SiDiscord } from "@icons-pack/react-simple-icons";
 import { Button, ButtonProps, SvgIcon } from "@mui/material";
 import Link from "next/link";
 import { HTMLAttributeAnchorTarget, ReactNode } from "react";
-import { UrlObject } from "url";
+import { Url } from "url";
 
 interface DiscordButtonProps {
     target?: HTMLAttributeAnchorTarget;
-    href?: UrlObject;
+    href?: Url;
     buttonProps?: ButtonProps;
     children?: ReactNode;
 }
