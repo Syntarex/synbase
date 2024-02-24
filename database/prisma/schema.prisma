@@ -1,13 +1,23 @@
 generator client {
-  provider      = "prisma-client-js"
-  binaryTargets = ["native", "debian-openssl-3.0.x"]
+    provider      = "prisma-client-js"
+    binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("POSTGRES_URL")
+    provider = "postgresql"
+    url      = env("POSTGRES_URL")
 }
 
 model Profile {
-  id String @id @default(uuid())
+    id String @id @default(uuid())
+}
+
+model BlogPost {
+    id          String   @id @default(uuid())
+    title       String
+    description String
+    content     String // Markdown
+    slug        String   @unique
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
 }
