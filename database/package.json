@@ -4,8 +4,8 @@
     "module": "index.ts",
     "scripts": {
         "build": "prisma generate",
-        "dev": "prisma migrate dev",
-        "dev:resetdb": "prisma migrate reset -f",
+        "dev": "prisma migrate dev --name update",
+        "dev:resetdb": "rimraf data && prisma migrate reset -f",
         "dev:startdb": "docker compose -f ../docker-compose.yml up database -d",
         "pull": "prisma db pull",
         "start": "prisma migrate deploy",
