@@ -1,16 +1,25 @@
 import "server-only";
 
 import { orbitron } from "@/style/font";
-import { Box, Container, Link, AppBar as MuiAppBar, Stack, Toolbar, Typography } from "@mui/material";
+import {
+    Box,
+    Container,
+    Link,
+    AppBar as MuiAppBar,
+    AppBarProps as MuiAppBarProps,
+    Stack,
+    Toolbar,
+    Typography,
+} from "@mui/material";
 import { Avatar } from "../auth/avatar";
 import { Loading } from "../common/loading";
 import { Logo } from "../common/logo";
 import { DiscordButton } from "../social/discord-button";
 import { Navigation } from "./navigation";
 
-export const AppBar = () => {
+export const AppBar = (props: MuiAppBarProps) => {
     return (
-        <MuiAppBar position={"static"}>
+        <MuiAppBar position={"static"} {...props}>
             <Container maxWidth={"xl"}>
                 <Toolbar disableGutters>
                     <Stack width={"100%"} direction={"row"} alignItems={"center"} gap={6}>

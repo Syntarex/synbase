@@ -27,9 +27,9 @@ const RootLayout = async ({ children }: LayoutProps) => {
                         <ThemeProvider theme={synbaseTheme}>
                             <CssBaseline />
 
-                            <AppBar />
+                            <AppBar sx={{ mb: 6 }} />
 
-                            <Container>{children}</Container>
+                            <Container component={"main"}>{children}</Container>
                         </ThemeProvider>
                     </AppRouterCacheProvider>
                 </UserProvider>

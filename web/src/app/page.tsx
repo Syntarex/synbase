@@ -5,9 +5,8 @@ import "@/style/font";
 import { orbitron } from "@/style/font";
 import { getEnv } from "@/util/env";
 import { Box, Fade, Stack, Typography } from "@mui/material";
-import { NextPage } from "next";
 
-const Home: NextPage = () => {
+const Home = () => {
     return (
         <Stack height={"100vh"} pt={12} pb={4} px={4} alignItems={"center"} gap={8}>
             <Fade in timeout={1000}>

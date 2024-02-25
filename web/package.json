@@ -3,7 +3,7 @@
     "private": true,
     "scripts": {
         "clean": "rimraf .next",
-        "dev": "next dev -p 443 --experimental-https --experimental-https-cert ../ssl.crt --experimental-https-key ../ssl.key",
+        "dev": "NODE_TLS_REJECT_UNAUTHORIZED=0 next dev -p 443 --experimental-https --experimental-https-cert ../ssl.crt --experimental-https-key ../ssl.key",
         "lint": "eslint src/*_/_.{js,ts,tsx} --no-error-on-unmatched-pattern",
         "start": "next build && next start"
     },

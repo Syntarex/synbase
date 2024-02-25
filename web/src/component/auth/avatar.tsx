@@ -30,7 +30,7 @@ export const Avatar = ({ href, renderOnUnauthenticated, avatarProps }: AvatarPro
     // Der Avatar
     const avatar = (
         <Fade in timeout={1000}>
-            <MuiAvatar alt={nickname ?? ""} src={picture ?? "/default-avatar.png"} {...avatarProps}>
+            <MuiAvatar alt={nickname ?? ""} src={picture ?? undefined} {...avatarProps}>
                 {nickname?.substring(0, 2)}
             </MuiAvatar>
         </Fade>
