@@ -1,3 +1,5 @@
+import "server-only";
+
 import { SiGithub } from "@icons-pack/react-simple-icons";
 import { Button, SvgIcon } from "@mui/material";
 import Link from "next/link";

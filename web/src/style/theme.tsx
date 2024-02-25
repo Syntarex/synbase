@@ -1,14 +1,24 @@
 "use client";
 
-import { SiDiscordHex, SiGithubHex } from "@icons-pack/react-simple-icons";
+import { SiDiscordHex, SiGithubHex, SiYoutubeHex } from "@icons-pack/react-simple-icons";
 import { createTheme } from "@mui/material";
 import { deDE } from "@mui/material/locale";
 import dayjs from "dayjs";
 import "dayjs/locale/de";
+import NextLink from "next/link";
+import { Ref, forwardRef } from "react";
 import { roboto } from "./font";
 
 // Setze Sprache von DayJS auf Deutsch
 dayjs.locale("de");
+
+/**
+ * Ein Komponenten-Proxy, welcher es ermöglicht, dass MuiLink einen NextLink als component entgegennehmen kann.
+ */
+// eslint-disable-next-line react/display-name, @typescript-eslint/no-explicit-any
+const LinkBehaviour = forwardRef((props: any, ref: Ref<HTMLAnchorElement>) => {
+    return <NextLink ref={ref} {...props} />;
+});
 
 // Erstelle Basis-Theme
 const theme = createTheme(
@@ -32,6 +42,20 @@ const theme = createTheme(
                 fontSize: "2rem",
             },
         },
+        components: {
+            // Setze NextLink als Link-Komponente
+            MuiLink: {
+                defaultProps: {
+                    component: LinkBehaviour,
+                },
+            },
+            // Setze, innerhalb von Buttons, NextLink als Link-Komponente
+            MuiButtonBase: {
+                defaultProps: {
+                    LinkComponent: LinkBehaviour,
+                },
+            },
+        },
     },
     deDE,
 );
@@ -51,6 +75,12 @@ export const synbaseTheme = createTheme(theme, {
                 main: SiGithubHex,
             },
             name: "github",
+        }),
+        youtube: theme.palette.augmentColor({
+            color: {
+                main: SiYoutubeHex,
+            },
+            name: "youtube",
         }),
     },
 });
