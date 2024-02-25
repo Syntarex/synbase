@@ -1,11 +1,9 @@
 import "server-only";
 
 import { orbitron } from "@/style/font";
-import { Menu } from "@mui/icons-material";
 import {
     Box,
     Container,
-    IconButton,
     Link,
     AppBar as MuiAppBar,
     AppBarProps as MuiAppBarProps,
@@ -17,6 +15,7 @@ import { Avatar } from "../auth/avatar";
 import { Loading } from "../common/loading";
 import { Logo } from "../common/logo";
 import { DiscordButton } from "../social/discord-button";
+import { MobileNavigation } from "./mobile-navigation";
 import { Navigation } from "./navigation";
 
 export const AppBar = (props: MuiAppBarProps) => {
@@ -24,28 +23,24 @@ export const AppBar = (props: MuiAppBarProps) => {
         <MuiAppBar position={"static"} {...props}>
             <Container maxWidth={"xl"}>
                 <Toolbar disableGutters>
-                    <Stack
-                        width={"100%"}
-                        direction={"row"}
-                        alignItems={"center"}
-                        justifyContent={"space-between"}
-                        gap={2}
-                    >
-                        <IconButton sx={{ display: { md: "none" } }}>
-                            <Menu />
-                        </IconButton>
+                    <Stack width={"100%"} direction={"row"} alignItems={"center"} gap={4}>
+                        <MobileNavigation boxProps={{ p: 4 }} iconButtonProps={{ sx: { display: { md: "none" } } }}>
+                            <Navigation direction={"column"} gap={4} />
+                        </MobileNavigation>
 
-                        <Link href={"/"} color={"text.primary"} underline={"none"}>
-                            <Stack direction={"row"} alignItems={"center"} gap={2}>
-                                <Logo size={32} boxProps={{ sx: { display: { xs: "none", md: "block" } } }} />
+                        <Box sx={{ width: { xs: "100%", md: "unset" } }}>
+                            <Link href={"/"} color={"text.primary"} underline={"none"}>
+                                <Stack direction={"row"} alignItems={"center"} justifyContent={"center"} gap={2}>
+                                    <Logo size={32} boxProps={{ sx: { display: { xs: "none", md: "block" } } }} />
 
-                                <Typography variant={"h4"} fontFamily={orbitron.style.fontFamily} fontWeight={600}>
-                                    Synbase
-                                </Typography>
-                            </Stack>
-                        </Link>
+                                    <Typography variant={"h4"} fontFamily={orbitron.style.fontFamily} fontWeight={600}>
+                                        Synbase
+                                    </Typography>
+                                </Stack>
+                            </Link>
+                        </Box>
 
-                        <Navigation sx={{ display: { xs: "none", md: "flex" } }} />
+                        <Navigation sx={{ display: { xs: "none", md: "flex" }, width: "100%" }} />
 
                         <Box>
                             <Loading>
