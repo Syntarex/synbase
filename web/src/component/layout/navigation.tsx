@@ -1,17 +1,13 @@
 import "server-only";
 
 import { getEnv } from "@/util/env";
-import { Button, Stack, SxProps, Tooltip } from "@mui/material";
+import { Button, Stack, StackProps, Tooltip } from "@mui/material";
 import { DiscordButton } from "../social/discord-button";
 import { SyncTubeButton } from "../social/synctube-button";
 
-interface NavigationProps {
-    sx?: SxProps;
-}
-
-export const Navigation = ({ sx }: NavigationProps) => {
+export const Navigation = (props: StackProps) => {
     return (
-        <Stack sx={sx} component={"nav"} direction={"row"} alignItems={"center"} gap={1}>
+        <Stack component={"nav"} direction={"row"} alignItems={"center"} gap={1} {...props}>
             <Tooltip title={"Willkommen in der tollsten Community der Welt."}>
                 <DiscordButton size={"small"}>Discord</DiscordButton>
             </Tooltip>

@@ -1,9 +1,11 @@
 import "server-only";
 
 import { orbitron } from "@/style/font";
+import { Menu } from "@mui/icons-material";
 import {
     Box,
     Container,
+    IconButton,
     Link,
     AppBar as MuiAppBar,
     AppBarProps as MuiAppBarProps,
@@ -22,10 +24,20 @@ export const AppBar = (props: MuiAppBarProps) => {
         <MuiAppBar position={"static"} {...props}>
             <Container maxWidth={"xl"}>
                 <Toolbar disableGutters>
-                    <Stack width={"100%"} direction={"row"} alignItems={"center"} gap={6}>
+                    <Stack
+                        width={"100%"}
+                        direction={"row"}
+                        alignItems={"center"}
+                        justifyContent={"space-between"}
+                        gap={2}
+                    >
+                        <IconButton sx={{ display: { md: "none" } }}>
+                            <Menu />
+                        </IconButton>
+
                         <Link href={"/"} color={"text.primary"} underline={"none"}>
                             <Stack direction={"row"} alignItems={"center"} gap={2}>
-                                <Logo size={32} />
+                                <Logo size={32} boxProps={{ sx: { display: { xs: "none", md: "block" } } }} />
 
                                 <Typography variant={"h4"} fontFamily={orbitron.style.fontFamily} fontWeight={600}>
                                     Synbase
@@ -33,7 +45,7 @@ export const AppBar = (props: MuiAppBarProps) => {
                             </Stack>
                         </Link>
 
-                        <Navigation sx={{ width: "100%", flexGrow: 1 }} />
+                        <Navigation sx={{ display: { xs: "none", md: "flex" } }} />
 
                         <Box>
                             <Loading>
