@@ -1,31 +1,44 @@
 "use client";
 
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { AvatarProps, Fade, Avatar as MuiAvatar, Tooltip } from "@mui/material";
-import { useEffect } from "react";
+import { Fade, Link, Avatar as MuiAvatar, AvatarProps as MuiAvatarProps, Skeleton, Tooltip } from "@mui/material";
+import { ReactNode } from "react";
+
+interface AvatarProps {
+    href?: string;
+    renderOnUnauthenticated?: ReactNode;
+    avatarProps?: Omit<MuiAvatarProps, "alt" | "src">;
+}
 
 /**
- * Zeigt den Avatar des aktuell eingeloggten Benutzers.
+ * Zeigt den Avatar des aktuell eingeloggten Benutzers. Ist der Benutzer nicht eingeloggt, wird ein Login-Button angezeigt.
  */
-export const Avatar = (props: Omit<AvatarProps, "alt" | "src">) => {
+export const Avatar = ({ href, renderOnUnauthenticated, avatarProps }: AvatarProps) => {
     const session = useUser();
 
-    useEffect(() => console.log("Avatar", session), [session]);
+    if (session.isLoading) {
+        return <Skeleton variant={"circular"} width={40} height={40} />;
+    }
 
-    // Nicht eingeloggt
+    // Rendere Fallback, wenn kein Benutzer eingeloggt ist
     if (!session.user) {
-        return null;
+        return renderOnUnauthenticated ?? null;
     }
 
     const { nickname = "Benutzer", picture } = session.user;
 
+    // Der Avatar
+    const avatar = (
+        <Fade in timeout={1000}>
+            <MuiAvatar alt={nickname ?? ""} src={picture ?? "/default-avatar.png"} {...avatarProps}>
+                {nickname?.substring(0, 2)}
+            </MuiAvatar>
+        </Fade>
+    );
+
     return (
-        <Tooltip title={`Eingeloggt als ${nickname ?? ""}`}>
-            <Fade in timeout={1000}>
-                <MuiAvatar alt={nickname ?? ""} src={picture ?? "/default-avatar.png"} {...props}>
-                    {nickname}
-                </MuiAvatar>
-            </Fade>
+        <Tooltip title={`Hallo ${nickname ?? ""}! Klicke um dich auszuloggen.`}>
+            {href ? <Link href={href}>{avatar}</Link> : avatar}
         </Tooltip>
     );
 };
