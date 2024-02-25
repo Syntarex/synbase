@@ -1,3 +1,4 @@
+import { AppBar } from "@/component/layout/app-bar";
 import { LayoutProps } from "@/model/next";
 import { synbaseTheme } from "@/style/theme";
 import { getEnv } from "@/util/env";
@@ -25,6 +26,8 @@ const RootLayout = async ({ children }: LayoutProps) => {
                     <AppRouterCacheProvider>
                         <ThemeProvider theme={synbaseTheme}>
                             <CssBaseline />
+
+                            <AppBar />
 
                             <Container>{children}</Container>
                         </ThemeProvider>
