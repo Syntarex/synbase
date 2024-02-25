@@ -2,9 +2,8 @@ import { LayoutProps } from "@/model/next";
 import { synbaseTheme } from "@/style/theme";
 import { getEnv } from "@/util/env";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
-import { Container, CssBaseline, ThemeProvider, Typography } from "@mui/material";
+import { Container, CssBaseline, ThemeProvider } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
-import Database from "@synbase/database";
 import { Metadata } from "next";
 import PlausibleProvider from "next-plausible";
 
@@ -15,8 +14,6 @@ export const metadata: Metadata = {
 };
 
 const RootLayout = async ({ children }: LayoutProps) => {
-    const profiles = await Database.profile.findMany();
-
     return (
         <html lang={"de"}>
             <head>
@@ -29,11 +26,7 @@ const RootLayout = async ({ children }: LayoutProps) => {
                         <ThemeProvider theme={synbaseTheme}>
                             <CssBaseline />
 
-                            <Container>
-                                {children}
-
-                                <Typography sx={{ display: "none" }}>Es gibt {profiles.length} Profile.</Typography>
-                            </Container>
+                            <Container>{children}</Container>
                         </ThemeProvider>
                     </AppRouterCacheProvider>
                 </UserProvider>
