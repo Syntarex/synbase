@@ -1,3 +1,4 @@
+import { getEnv } from "@/util/env";
 import { SiDiscord } from "@icons-pack/react-simple-icons";
 import { Button, ButtonProps, SvgIcon } from "@mui/material";
 import Link from "next/link";
@@ -14,9 +15,12 @@ interface DiscordButtonProps {
 /**
  * Ein Button, welcher bei Klick auf den Discord-Server weiterleitet.
  */
-export const DiscordButton = (props: DiscordButtonProps) => {
-    const { target, href = process.env.DISCORD_URL as string, buttonProps, children } = props;
-
+export const DiscordButton = ({
+    target,
+    href = getEnv<string>("DISCORD_URL"),
+    buttonProps,
+    children,
+}: DiscordButtonProps) => {
     return (
         <Link href={href} target={target}>
             <Button
