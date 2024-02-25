@@ -1,7 +1,8 @@
 import "server-only";
 
 import { orbitron } from "@/style/font";
-import { Container, Link, AppBar as MuiAppBar, Stack, Toolbar, Typography } from "@mui/material";
+import { Box, Container, Link, AppBar as MuiAppBar, Stack, Toolbar, Typography } from "@mui/material";
+import { Avatar } from "../auth/avatar";
 import { Logo } from "../common/logo";
 import { Navigation } from "./navigation";
 
@@ -10,7 +11,7 @@ export const AppBar = () => {
         <MuiAppBar position={"static"}>
             <Container maxWidth={"xl"}>
                 <Toolbar disableGutters>
-                    <Stack direction={"row"} alignItems={"center"} gap={6}>
+                    <Stack width={"100%"} direction={"row"} alignItems={"center"} gap={6}>
                         <Link href={"/"} color={"text.primary"} underline={"none"}>
                             <Stack direction={"row"} alignItems={"center"} gap={2}>
                                 <Logo size={32} />
@@ -21,7 +22,11 @@ export const AppBar = () => {
                             </Stack>
                         </Link>
 
-                        <Navigation sx={{ flexGrow: 1 }} />
+                        <Navigation sx={{ width: "100%", flexGrow: 1 }} />
+
+                        <Box>
+                            <Avatar />
+                        </Box>
                     </Stack>
                 </Toolbar>
             </Container>
