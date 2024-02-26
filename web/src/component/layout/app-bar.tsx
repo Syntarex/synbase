@@ -10,6 +10,7 @@ import {
     Skeleton,
     Stack,
     Toolbar,
+    Tooltip,
     Typography,
 } from "@mui/material";
 import { AuthRender } from "../auth/auth-render";
@@ -46,6 +47,7 @@ export const AppBar = (props: MuiAppBarProps) => {
 
                         <Box>
                             <Loading>
+                                {/* Wir verwenden hier einen <a>-Tag, damit Next.js die Route nicht prefetched  */}
                                 <AuthRender
                                     renderOnUnauthenticated={
                                         <a href={"/api/auth/login"}>
@@ -62,9 +64,11 @@ export const AppBar = (props: MuiAppBarProps) => {
                                     }
                                     renderOnLoading={<Skeleton variant={"circular"} width={40} height={40} />}
                                 >
-                                    <a href={"/api/auth/logout"}>
-                                        <Avatar sx={{ cursor: "pointer" }} />
-                                    </a>
+                                    <Tooltip title={"Klicke um dich auszuloggen."}>
+                                        <a href={"/api/auth/logout"}>
+                                            <Avatar />
+                                        </a>
+                                    </Tooltip>
                                 </AuthRender>
                             </Loading>
                         </Box>
