@@ -5,6 +5,7 @@ import { Test } from "@/component/test";
 import { PageProps } from "@/model/next";
 import { Paper, Stack, Typography } from "@mui/material";
 import Database from "@synbase/database";
+import dayjs from "dayjs";
 
 /**
  * Zeigt einen Blog-Beitrag an.
@@ -24,9 +25,19 @@ const BlogPost = async (props: PageProps<{ slug: string }>) => {
 
     return (
         <Stack spacing={4}>
-            <Typography variant={"h1"}>{blogPost.title}</Typography>
+            <Stack spacing={1}>
+                <Typography variant={"h1"}>{blogPost.title}</Typography>
+
+                <Stack direction={"row"} justifyContent={"space-between"}>
+                    <Typography variant={"body2"} fontWeight={600}>
+                        Syntarex, {dayjs(blogPost.createdAt).format("DD. MMMM YYYY")}
+                    </Typography>
+                </Stack>
+            </Stack>
+
             <Typography>{blogPost.description}</Typography>
-            <Paper>
+
+            <Paper sx={{ p: 4 }}>
                 <Markdown>{blogPost.content}</Markdown>
             </Paper>
         </Stack>

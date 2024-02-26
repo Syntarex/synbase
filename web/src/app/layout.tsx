@@ -1,10 +1,11 @@
 import { AppBar } from "@/component/layout/app-bar";
 import { Breadcrumbs } from "@/component/layout/breadcrumbs";
+import { GithubButton } from "@/component/social/github-button";
 import { LayoutProps } from "@/model/next";
 import { synbaseTheme } from "@/style/theme";
 import { getEnv } from "@/util/env";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
-import { Container, CssBaseline, Stack, ThemeProvider } from "@mui/material";
+import { Container, CssBaseline, Fade, Stack, ThemeProvider } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import dayjs from "dayjs";
 import "dayjs/locale/de";
@@ -40,6 +41,12 @@ const RootLayout = async ({ children }: LayoutProps) => {
                                     <Breadcrumbs />
 
                                     {children}
+
+                                    <Fade in timeout={3000}>
+                                        <Stack direction={"row"} justifyContent={"center"}>
+                                            <GithubButton />
+                                        </Stack>
+                                    </Fade>
                                 </Stack>
                             </Container>
                         </ThemeProvider>

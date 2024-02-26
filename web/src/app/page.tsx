@@ -1,9 +1,8 @@
 import { Logo } from "@/component/common/logo";
 import { DiscordButton } from "@/component/social/discord-button";
-import { GithubButton } from "@/component/social/github-button";
 import { orbitron } from "@/style/font";
 import { getEnv } from "@/util/env";
-import { Box, Fade, Stack, Typography } from "@mui/material";
+import { Fade, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 
 const Home = () => {
@@ -28,12 +27,6 @@ const Home = () => {
 
                     <DiscordButton href={getEnv<string>("DISCORD_URL")}>Beitreten</DiscordButton>
                 </Stack>
-            </Fade>
-
-            <Fade in timeout={3000}>
-                <Box>
-                    <GithubButton />
-                </Box>
             </Fade>
         </Stack>
     );
