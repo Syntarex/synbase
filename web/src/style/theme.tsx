@@ -3,14 +3,9 @@
 import { SiDiscordHex, SiGithubHex, SiYoutubeHex } from "@icons-pack/react-simple-icons";
 import { createTheme } from "@mui/material";
 import { deDE } from "@mui/material/locale";
-import dayjs from "dayjs";
-import "dayjs/locale/de";
 import NextLink from "next/link";
 import { Ref, forwardRef } from "react";
 import { roboto } from "./font";
-
-// Setze Sprache von DayJS auf Deutsch
-dayjs.locale("de");
 
 /**
  * Ein Komponenten-Proxy, welcher es ermöglicht, dass MuiLink einen NextLink als component entgegennehmen kann.
