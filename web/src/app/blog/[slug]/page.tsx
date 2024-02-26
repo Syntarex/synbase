@@ -1,4 +1,4 @@
-"use server";
+import "server-only";
 
 import { Markdown } from "@/component/common/markdown";
 import { Test } from "@/component/test";
@@ -9,7 +9,7 @@ import Database from "@synbase/database";
 /**
  * Zeigt einen Blog-Beitrag an.
  */
-const Blog = async (props: PageProps<{ slug: string }>) => {
+const BlogPost = async (props: PageProps<{ slug: string }>) => {
     const { slug } = props.params;
 
     const blogPost = await Database.blogPost.findUnique({
@@ -33,4 +33,4 @@ const Blog = async (props: PageProps<{ slug: string }>) => {
     );
 };
 
-export default Blog;
+export default BlogPost;
