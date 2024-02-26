@@ -26,7 +26,7 @@ export const BlogPostCard = ({ sx, value }: BlogPostCardProps) => {
 
             <CardContent>
                 <Typography variant={"body2"}>
-                    {dayjs(updatedAt).isAfter(createdAt) ? "Update am:" : "Erstellt am:"}
+                    {dayjs(updatedAt).isAfter(createdAt) ? "Update am:" : "Erstellt am:"}{" "}
                     {dayjs(updatedAt).format("DD.MM.YYYY HH:mm")}
                 </Typography>
             </CardContent>
