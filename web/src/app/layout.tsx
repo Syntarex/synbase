@@ -1,9 +1,10 @@
 import { AppBar } from "@/component/layout/app-bar";
+import { Breadcrumbs } from "@/component/layout/breadcrumbs";
 import { LayoutProps } from "@/model/next";
 import { synbaseTheme } from "@/style/theme";
 import { getEnv } from "@/util/env";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
-import { Container, CssBaseline, ThemeProvider } from "@mui/material";
+import { Container, CssBaseline, Stack, ThemeProvider } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import dayjs from "dayjs";
 import "dayjs/locale/de";
@@ -32,10 +33,14 @@ const RootLayout = async ({ children }: LayoutProps) => {
                         <ThemeProvider theme={synbaseTheme}>
                             <CssBaseline />
 
-                            <AppBar sx={{ mb: 6 }} />
+                            <AppBar sx={{ mb: 4 }} />
 
                             <Container component={"main"} maxWidth={"xl"}>
-                                {children}
+                                <Stack gap={4}>
+                                    <Breadcrumbs />
+
+                                    {children}
+                                </Stack>
                             </Container>
                         </ThemeProvider>
                     </AppRouterCacheProvider>

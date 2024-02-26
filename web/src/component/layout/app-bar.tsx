@@ -26,7 +26,7 @@ export const AppBar = (props: MuiAppBarProps) => {
         <MuiAppBar position={"static"} {...props}>
             <Container maxWidth={"xl"}>
                 <Toolbar disableGutters>
-                    <Stack width={"100%"} direction={"row"} alignItems={"center"} spacing={4}>
+                    <Stack width={"100%"} direction={"row"} alignItems={"center"} gap={4}>
                         <MobileNavigation boxProps={{ p: 4 }} iconButtonProps={{ sx: { display: { md: "none" } } }}>
                             <Navigation direction={"column"} spacing={4} />
                         </MobileNavigation>
