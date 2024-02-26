@@ -7,7 +7,7 @@ import { SyncTubeButton } from "../social/synctube-button";
 
 export const Navigation = (props: StackProps) => {
     return (
-        <Stack component={"nav"} direction={"row"} alignItems={"center"} gap={1} {...props}>
+        <Stack component={"nav"} direction={"row"} alignItems={"center"} spacing={1} {...props}>
             <DiscordButton size={"small"}>Discord</DiscordButton>
 
             <SyncTubeButton href={getEnv("SYNCTUBE_URL")} size={"small"}>

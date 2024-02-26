@@ -17,7 +17,7 @@ export const BlogPostCard = ({ sx, value }: BlogPostCardProps) => {
     const { createdAt, description, slug, title, updatedAt } = value;
 
     return (
-        <Card sx={{ minWidth: 300, ...sx }}>
+        <Card sx={sx}>
             <CardHeader title={title} subheader={description} />
 
             <CardMedia sx={{ "& > img": { width: "100%", height: "auto" } }}>

@@ -18,7 +18,7 @@ export const Markdown = ({ sx, children, hideLineNumbers }: MarkdownProps) => {
                 prismTheme={themes.github}
                 hideLineNumbers={hideLineNumbers}
                 options={{
-                    wrapper: ({ children }) => <Stack gap={2}>{children}</Stack>,
+                    wrapper: ({ children }) => <Stack spacing={2}>{children}</Stack>,
                 }}
             >
                 {children}

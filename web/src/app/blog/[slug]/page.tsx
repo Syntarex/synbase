@@ -23,7 +23,7 @@ const BlogPost = async (props: PageProps<{ slug: string }>) => {
     }
 
     return (
-        <Stack gap={4}>
+        <Stack spacing={4}>
             <Typography variant={"h1"}>{blogPost.title}</Typography>
             <Typography>{blogPost.description}</Typography>
             <Paper>
