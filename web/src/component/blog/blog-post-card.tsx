@@ -1,6 +1,6 @@
 import "server-only";
 
-import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, SxProps, Typography } from "@mui/material";
+import { Avatar, Card, CardContent, CardHeader, CardMedia, Link, Stack, SxProps, Typography } from "@mui/material";
 import { BlogPost } from "@synbase/database";
 import dayjs from "dayjs";
 import Image from "next/image";
@@ -14,28 +14,42 @@ interface BlogPostCardProps {
  * Zeigt eine Vorschau eines BlogPosts.
  */
 export const BlogPostCard = ({ sx, value }: BlogPostCardProps) => {
-    const { createdAt, description, slug, title, updatedAt } = value;
+    const { description, slug, title, updatedAt } = value;
 
     return (
-        <Card sx={sx}>
-            <CardHeader title={title} subheader={description} />
+        <Link sx={{ textDecoration: "none" }} href={`/blog/${slug}`}>
+            <Stack
+                sx={{
+                    "&:hover": { outlineColor: "primary.main", outlineStyle: "solid", outlineWidth: 2 },
+                    ...sx,
+                }}
+                component={Card}
+                alignItems={"center"}
+            >
+                <CardHeader sx={{ flexGrow: 1 }} title={title} subheader={description} />
 
-            <CardMedia sx={{ "& > img": { width: "100%", height: "auto" } }}>
-                <Image src={"/placeholder.png"} alt={title} width={1600} height={900} />
-            </CardMedia>
+                <CardMedia sx={{ "& > img": { width: "100%", height: "auto" } }}>
+                    <Image src={"/placeholder.png"} alt={title} width={1600} height={900} />
+                </CardMedia>
 
-            <CardContent>
-                <Typography variant={"body2"}>
-                    {dayjs(updatedAt).isAfter(createdAt) ? "Update am:" : "Erstellt am:"}{" "}
-                    {dayjs(updatedAt).format("DD.MM.YYYY HH:mm")}
-                </Typography>
-            </CardContent>
+                <Stack
+                    component={CardContent}
+                    direction={"row"}
+                    alignItems={"center"}
+                    justifyContent={"space-between"}
+                    width={"100%"}
+                >
+                    <Typography variant={"body2"}>{dayjs(updatedAt).format("DD. MMMM YYYY")}</Typography>
 
-            <CardActions>
-                <Button href={`/blog/${slug}`} size={"small"}>
-                    Lesen
-                </Button>
-            </CardActions>
-        </Card>
+                    <Stack direction={"row"} alignItems={"center"} spacing={0.5}>
+                        <Avatar sx={{ width: 24, height: 24 }} src={"/heart.png"} />
+
+                        <Typography variant={"body2"} fontWeight={600}>
+                            Syntarex
+                        </Typography>
+                    </Stack>
+                </Stack>
+            </Stack>
+        </Link>
     );
 };
