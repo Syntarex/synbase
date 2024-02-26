@@ -7,10 +7,12 @@ import {
     Link,
     AppBar as MuiAppBar,
     AppBarProps as MuiAppBarProps,
+    Skeleton,
     Stack,
     Toolbar,
     Typography,
 } from "@mui/material";
+import { AuthRender } from "../auth/auth-render";
 import { Avatar } from "../auth/avatar";
 import { Loading } from "../common/loading";
 import { Logo } from "../common/logo";
@@ -44,25 +46,26 @@ export const AppBar = (props: MuiAppBarProps) => {
 
                         <Box>
                             <Loading>
-                                <Avatar
-                                    href={"/api/auth/logout"}
-                                    avatarProps={{
-                                        sx: {
-                                            cursor: "pointer",
-                                        },
-                                    }}
+                                <AuthRender
                                     renderOnUnauthenticated={
-                                        <DiscordButton
-                                            sx={{ color: "white" }}
-                                            href={"/api/auth/login"}
-                                            variant={"text"}
-                                            size={"small"}
-                                            color={"primary"}
-                                        >
-                                            Einloggen
-                                        </DiscordButton>
+                                        <a href={"/api/auth/login"}>
+                                            <DiscordButton
+                                                sx={{ color: "white" }}
+                                                href={undefined}
+                                                variant={"text"}
+                                                size={"small"}
+                                                color={"primary"}
+                                            >
+                                                Einloggen
+                                            </DiscordButton>
+                                        </a>
                                     }
-                                />
+                                    renderOnLoading={<Skeleton variant={"circular"} width={40} height={40} />}
+                                >
+                                    <a href={"/api/auth/logout"}>
+                                        <Avatar sx={{ cursor: "pointer" }} />
+                                    </a>
+                                </AuthRender>
                             </Loading>
                         </Box>
                     </Stack>
