@@ -34,7 +34,9 @@ const RootLayout = async ({ children }: LayoutProps) => {
 
                             <AppBar sx={{ mb: 6 }} />
 
-                            <Container component={"main"}>{children}</Container>
+                            <Container component={"main"} maxWidth={"xl"}>
+                                {children}
+                            </Container>
                         </ThemeProvider>
                     </AppRouterCacheProvider>
                 </UserProvider>
