@@ -1,7 +1,7 @@
 import "server-only";
 
 import { BlogPostCard } from "@/component/blog/blog-post-card";
-import { Stack, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import Database from "@synbase/database";
 import { isEmpty } from "lodash";
 
@@ -16,15 +16,13 @@ const Blog = async () => {
     }
 
     return (
-        <Stack direction={"row"} flexWrap={"wrap"} gap={4}>
+        <Grid container spacing={4}>
             {blogPosts.map((blogPost) => (
-                <BlogPostCard
-                    key={blogPost.id}
-                    sx={{ width: { xs: "100%", md: 360 }, alignSelf: "stretch" }}
-                    value={blogPost}
-                />
+                <Grid item key={blogPost.id} xs={12} sm={12} md={4} xl={4}>
+                    <BlogPostCard sx={{ alignSelf: "stretch" }} value={blogPost} />
+                </Grid>
             ))}
-        </Stack>
+        </Grid>
     );
 };
 
