@@ -19,7 +19,7 @@ const Blog = async () => {
         <Grid container spacing={4}>
             {blogPosts.map((blogPost) => (
                 <Grid item key={blogPost.id} xs={12} sm={12} md={4} xl={4}>
-                    <BlogPostCard sx={{ alignSelf: "stretch" }} value={blogPost} />
+                    <BlogPostCard sx={{ height: "100%" }} value={blogPost} />
                 </Grid>
             ))}
         </Grid>
