@@ -34,7 +34,5 @@ WORKDIR /usr/src/app
 
 COPY --from=build /usr/src/app /usr/src/app
 
-RUN ln -sf /usr/src/app/Server /usr/bin/cloneheroserver
-
 EXPOSE 14242/udp
 ENTRYPOINT [ "./startup.sh" ]
