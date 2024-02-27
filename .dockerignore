@@ -3,14 +3,16 @@
 .next
 .turbo
 .vscode
-node_modules
 .dockerignore
 .editorconfig
 .gitattributes
 .gitignore
 next-env.d.ts
+node_modules
 README.md
 CHANGELOG.md
 *.log
 palworld
+clonehero
 database/data
+Dockerfile

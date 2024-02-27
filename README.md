@@ -28,3 +28,4 @@ Wir sammeln Ideen was man auf synbase.io machen könnte.
 -   AUTH0 tenant.yaml enthält Platzhalter für URLs. Pulled man die tenant-Config neu, sind diese allerdings weg. how to fix?
 -   Prisma Error-Handling in API Routen
 -   NODE_TLS_REJECT_UNAUTHORIZED=0 ist kake aber ist ein Workaround. https://github.com/oven-sh/bun/issues/7200
+-   Clone Hero Server konfigurierbar machen

@@ -16,6 +16,39 @@ services:
         healthcheck:
             test: ["CMD-SHELL", "pg_isready"]
 
+    palworld:
+        image: thijsvanloef/palworld-server-docker
+        pull_policy: always
+        restart: unless-stopped
+        container_name: palworld
+        volumes:
+            - ./palworld:/palworld
+        ports:
+            - 8211:8211/udp
+            - 27015:27015/udp
+            - 25575:25575/tcp
+        environment:
+            - PORT=8211
+            - MULTITHREADING=true
+            - COMMUNITY=${PALWORLD_COMMUNITY}
+            - ADMIN_PASSWORD=${PALWORLD_ADMIN_PASSWORD}
+            - AUTO_UPDATE_ENABLED=true
+            - DISABLE_GENERATE_SETTINGS=true
+            - DELETE_OLD_BACKUPS=true
+            - OLD_BACKUP_DAYS=7
+            - RCON_ENABLED=true
+            - RCON_PORT=25575
+
+    clonehero:
+        build:
+            context: ./
+            dockerfile: ./clonehero/Dockerfile
+        pull_policy: always
+        restart: unless-stopped
+        container_name: clonehero
+        ports:
+            - 14242:14242/udp
+
     web:
         build:
             context: ./
@@ -46,26 +79,3 @@ services:
         ports:
             - 80:80/tcp
             - 443:443/tcp
-
-    palworld:
-        image: thijsvanloef/palworld-server-docker
-        pull_policy: always
-        restart: unless-stopped
-        container_name: palworld
-        volumes:
-            - ./palworld:/palworld
-        ports:
-            - 8211:8211/udp
-            - 27015:27015/udp
-            - 25575:25575/tcp
-        environment:
-            - PORT=8211
-            - MULTITHREADING=true
-            - COMMUNITY=${PALWORLD_COMMUNITY}
-            - ADMIN_PASSWORD=${PALWORLD_ADMIN_PASSWORD}
-            - AUTO_UPDATE_ENABLED=true
-            - DISABLE_GENERATE_SETTINGS=true
-            - DELETE_OLD_BACKUPS=true
-            - OLD_BACKUP_DAYS=7
-            - RCON_ENABLED=true
-            - RCON_PORT=25575
