@@ -24,7 +24,6 @@ WORKDIR /usr/src/app
 RUN mv ./download/**/linux-arm64/* .
 RUN rm -r -f ./download
 RUN chmod +x ./Server
-RUN ln -sf ./Server /usr/bin/clonehero
 
 # Kopiere ausführbare Datei
 COPY ./clonehero/startup.sh ./startup.sh
