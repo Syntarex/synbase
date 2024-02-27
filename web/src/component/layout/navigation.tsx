@@ -21,6 +21,10 @@ export const Navigation = (props: StackProps) => {
             <Button href={"/palworld"} size={"small"}>
                 Palworld
             </Button>
+
+            <Button href={"/clonehero"} size={"small"}>
+                Clone Hero
+            </Button>
         </Stack>
     );
 };
