@@ -35,6 +35,4 @@ WORKDIR /usr/src/app
 COPY --from=build /usr/src/app /usr/src/app
 
 EXPOSE 14242/udp
-#ENTRYPOINT [ "ls", "-l" ]
-ENTRYPOINT [ "/bin/sh", "-c", "./startup.sh" ]
-#ENTRYPOINT ["printf synbaseclonehero\ntest1234\n0.0.0.0\n14242n | /usr/src/app/Server"]
+ENTRYPOINT [ "./startup.sh" ]
