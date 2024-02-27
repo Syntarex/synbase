@@ -21,7 +21,7 @@ RUN rm ./server.zip
 WORKDIR /usr/src/app
 
 # Kopiere Server für Debian
-RUN mv ./download/**/linux-arm64/* .
+RUN mv ./download/**/linux-x64/* .
 RUN rm -r -f ./download
 RUN chmod +x ./Server
 
