@@ -9,7 +9,8 @@ datasource db {
 }
 
 model Profile {
-    id String @id @default(uuid())
+    id  String @id @default(uuid())
+    sub String @unique
 }
 
 model BlogPost {
