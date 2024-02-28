@@ -2,12 +2,12 @@ import { RouteProps } from "@/model/next";
 import auth0 from "@/util/auth0";
 import Database from "@synbase/database";
 import { isString } from "lodash";
-import { NextApiRequest } from "next";
 import { AppConfigDynamic } from "next/dist/build/utils";
+import { NextRequest } from "next/server";
 
 export const dynamic: AppConfigDynamic = "force-dynamic";
 
-export const GET = async (req: NextApiRequest, { params }: RouteProps<{ id: string }>) => {
+export const GET = async (req: NextRequest, { params }: RouteProps<{ id: string }>) => {
     // Benutzer frägt /me ab
     if (params.id === "me") {
         // Frage Benutzer Session ab
