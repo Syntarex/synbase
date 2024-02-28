@@ -1,7 +1,11 @@
+import "server-only";
+
 import { initAuth0 } from "@auth0/nextjs-auth0";
 import { getEnv } from "./env";
 
-/** Eine, für die Web-Anwendung, konfigurierte Instanz des Auth0-SDKs. */
+/**
+ * Konfigurierte Instanz des Auth0-SDKs.
+ */
 export default initAuth0({
     issuerBaseURL: `https://${getEnv("AUTH0_DOMAIN")}`,
     clientID: getEnv("AUTH0_WEB_CLIENT_ID"),
