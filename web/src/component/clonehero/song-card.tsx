@@ -1,6 +1,19 @@
 import "server-only";
 
-import { Card, CardContent, CardHeader, Stack, SxProps, Tooltip, Typography } from "@mui/material";
+import { SiSpotify } from "@icons-pack/react-simple-icons";
+import { PlaylistAdd } from "@mui/icons-material";
+import {
+    Card,
+    CardActions,
+    CardContent,
+    CardHeader,
+    IconButton,
+    Stack,
+    SvgIcon,
+    SxProps,
+    Tooltip,
+    Typography,
+} from "@mui/material";
 import { Song } from "@synbase/clonehero";
 
 interface SongCardProps {
@@ -23,7 +36,7 @@ export const SongCard = ({ sx, value }: SongCardProps) => {
     const FormattedPlaylist = Playlist.split("\\")[0];
 
     return (
-        <Stack sx={sx} component={Card} direction={"row"} justifyContent={"space-between"}>
+        <Stack sx={sx} component={Card} direction={"row"} spacing={2}>
             {/*   TODO: Albumcover
             <CardMedia sx={{ "& > img": { width: "100%", height: "auto" } }}>
                 <Image src={"/placeholder.png"} alt={title} width={1600} height={900} />
@@ -39,6 +52,8 @@ export const SongCard = ({ sx, value }: SongCardProps) => {
                         </Typography>
                     </Tooltip>
                 }
+                flexGrow={1}
+                alignItems={"flex-start"}
             />
 
             <Stack component={CardContent} spacing={1} alignItems={"flex-end"}>
@@ -50,6 +65,22 @@ export const SongCard = ({ sx, value }: SongCardProps) => {
 
                 <Tooltip title={"Song-Paket"} placement={"left"}>
                     <Typography variant={"body2"}>{FormattedPlaylist}</Typography>
+                </Tooltip>
+            </Stack>
+
+            <Stack component={CardActions} alignItems={"center"} spacing={1}>
+                <Tooltip title={"Vorschau auf Spotify hören"}>
+                    <IconButton size={"small"}>
+                        <SvgIcon>
+                            <SiSpotify />
+                        </SvgIcon>
+                    </IconButton>
+                </Tooltip>
+
+                <Tooltip title={"TODO: Label"}>
+                    <IconButton size={"small"}>
+                        <PlaylistAdd />
+                    </IconButton>
                 </Tooltip>
             </Stack>
         </Stack>
