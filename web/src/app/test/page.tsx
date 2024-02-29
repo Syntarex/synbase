@@ -1,7 +1,9 @@
-import { Test } from "@/component/test";
+import "server-only";
 
-const TestPage = () => {
-    return <Test />;
+import { SongList } from "@/component/clonehero/song-list";
+
+const TestPage = async () => {
+    return <SongList />;
 };
 
 export default TestPage;
