@@ -14,7 +14,8 @@
     "workspaces": [
         "./web",
         "./database",
-        "./auth"
+        "./auth",
+        "./clonehero"
     ],
     "devDependencies": {
         "@types/bun": "^1.0.5",

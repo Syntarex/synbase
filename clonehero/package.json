@@ -1,0 +1,5 @@
+{
+    "name": "@synbase/clonehero",
+    "private": true,
+    "module": "index.ts"
+}
