@@ -1,1 +1,1 @@
-export { Song } from "./model/song";
+export type { Song } from "./model/song";
