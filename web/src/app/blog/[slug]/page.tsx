@@ -1,11 +1,11 @@
 import "server-only";
 
 import { Markdown } from "@/component/common/markdown";
-import { Test } from "@/component/test";
 import { PageProps } from "@/model/next";
 import { Paper, Stack, Typography } from "@mui/material";
 import Database from "@synbase/database";
 import dayjs from "dayjs";
+import { notFound } from "next/navigation";
 
 /**
  * Zeigt einen Blog-Beitrag an.
@@ -20,7 +20,7 @@ const BlogPost = async (props: PageProps<{ slug: string }>) => {
     });
 
     if (!blogPost) {
-        return <Test slug={slug} />;
+        return notFound();
     }
 
     return (
