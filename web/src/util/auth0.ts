@@ -1,6 +1,6 @@
 import "server-only";
 
-import { initAuth0 } from "@auth0/nextjs-auth0";
+import { initAuth0 } from "@auth0/nextjs-auth0/edge";
 import { getEnv } from "./env";
 
 /**
@@ -13,6 +13,8 @@ export default initAuth0({
     secret: getEnv("AUTH0_SESSION_SECRET"),
     baseURL: getEnv("WEB_URL"),
     authorizationParams: {
+        audience: getEnv("AUTH0_WEB_AUDIENCE"),
         connection: "discord",
+        scope: "openid profile email read:page:admin",
     },
 });
