@@ -1,7 +1,8 @@
 import "server-only";
 
 import { getEnv } from "@/util/env";
-import { Button, Stack, StackProps } from "@mui/material";
+import { Newspaper, SportsEsports } from "@mui/icons-material";
+import { Button, Divider, Stack, StackProps } from "@mui/material";
 import { DiscordButton } from "../social/discord-button";
 import { SyncTubeButton } from "../social/synctube-button";
 
@@ -14,16 +15,14 @@ export const Navigation = (props: StackProps) => {
                 SyncTube
             </SyncTubeButton>
 
-            <Button href={"/blog"} size={"small"}>
+            <Divider sx={{ height: 22 }} orientation={"vertical"} />
+
+            <Button href={"/blog"} startIcon={<Newspaper />} size={"small"}>
                 Blog
             </Button>
 
-            <Button href={"/palworld"} size={"small"}>
-                Palworld
-            </Button>
-
-            <Button href={"/clonehero"} size={"small"}>
-                Clone Hero
+            <Button href={"/gameserver"} startIcon={<SportsEsports />} size={"small"}>
+                Game Server
             </Button>
         </Stack>
     );
