@@ -1,7 +1,17 @@
 rules: []
 rulesConfigs: []
 pages: []
-resourceServers: []
+resourceServers:
+    - name: Synbase
+      identifier: ##AUTH0_WEB_AUDIENCE##
+      allow_offline_access: false
+      scopes:
+          - value: read:page:admin
+            description: Darf den Admin-Bereich betreten.
+      signing_alg: RS256
+      skip_consent_for_verifiable_first_party_clients: true
+      token_lifetime: 86400
+      token_lifetime_for_web: 7200
 clients:
     - name: Deploy CLI
       app_type: non_interactive
@@ -167,7 +177,12 @@ guardianPhoneFactorSelectedProvider:
     provider: auth0
 guardianPhoneFactorMessageTypes:
     message_types: []
-roles: []
+roles:
+    - name: Admin
+      description: Admins dürfen alles.
+      permissions:
+          - permission_name: read:page:admin
+            resource_server_identifier: ##AUTH0_WEB_AUDIENCE##
 branding:
     templates: []
 prompts:
