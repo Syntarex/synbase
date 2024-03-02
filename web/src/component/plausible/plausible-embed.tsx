@@ -9,7 +9,15 @@ import { Box, BoxProps } from "@mui/material";
  */
 export const PlausibleEmbed = (props: BoxProps) => {
     return (
-        <Box {...props}>
+        <Box
+            {...props}
+            sx={{
+                // Gleiche Padding innerhalb des Plausible iframes aus
+                marginLeft: "-1.5rem !important",
+                marginRight: "-1.5rem !important",
+                ...props.sx,
+            }}
+        >
             <iframe
                 plausible-embed={"true"}
                 src={
