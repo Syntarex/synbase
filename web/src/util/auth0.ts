@@ -1,8 +1,8 @@
 import "server-only";
 
-import { initAuth0 } from "@auth0/nextjs-auth0";
+import { Session, initAuth0 } from "@auth0/nextjs-auth0";
 import { without } from "lodash";
-import { RedirectType, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import { getEnv } from "./env";
 
 /**
@@ -23,15 +23,27 @@ const auth0 = initAuth0({
 
 export default auth0;
 
-// TODO: Loggt "nextjs-auth0 is attempting to set cookies from a server component,see https://github.com/auth0/nextjs-auth0#using-this-sdk-with-react-server-components"
+interface CheckScopesOptions {
+    existingSession?: Session;
+    redirectTo?: string;
+}
 
-export const checkScopes = async (...requiredScopes: string[]) => {
+// TODO: Loggt "nextjs-auth0 is attempting to set cookies from a server component,see https://github.com/auth0/nextjs-auth0#using-this-sdk-with-react-server-components"
+/**
+ * Prüft die Session des Benutzers auf Scopes. Fehlt ein Scope, wird der Benutzer
+ * @param requiredScopes Ein Array mit allen benötigten Scopes.
+ * @param existingSession Prüfe eine bereits bestehende Session.
+ */
+export const checkScopes = async (
+    requiredScopes: string[],
+    { existingSession, redirectTo = "/" }: CheckScopesOptions = {},
+) => {
     // Die Sitzung des Benutzers
-    const session = await auth0.getSession();
+    const session = existingSession ?? (await auth0.getSession());
 
     // Benutzer ist nicht angemeldet oder hat keine Scopes
     if (!session?.accessTokenScope) {
-        redirect("/", RedirectType.replace);
+        redirect(redirectTo);
     }
 
     // Die Scopes des Benutzers
@@ -42,6 +54,6 @@ export const checkScopes = async (...requiredScopes: string[]) => {
 
     // Dem Benutzer fehlen Scopes
     if (missingScopes.length > 0) {
-        redirect("/", RedirectType.replace);
+        redirect(redirectTo);
     }
 };
