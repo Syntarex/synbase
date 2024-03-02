@@ -3,6 +3,7 @@ import "server-only";
 import { withScopesRequired } from "./middleware/withScopesRequired";
 
 export const config = {
+    runtime: "experimental-edge",
     matcher: ["/admin"],
 };
 
