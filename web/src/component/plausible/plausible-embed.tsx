@@ -15,6 +15,7 @@ export const PlausibleEmbed = (props: BoxProps) => {
                 // Gleiche Padding innerhalb des Plausible iframes aus
                 marginLeft: "-1.5rem !important",
                 marginRight: "-1.5rem !important",
+                marginTop: "-1.5rem !important",
                 ...props.sx,
             }}
         >

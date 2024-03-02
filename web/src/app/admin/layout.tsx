@@ -6,8 +6,8 @@ import { Box, Stack, Tab, Tabs } from "@mui/material";
 
 const AdminLayout = async ({ children }: LayoutProps) => {
     return (
-        <Stack direction={"row"} spacing={4}>
-            <Tabs sx={{ maxWidth: 320 }} variant={"scrollable"} orientation={"vertical"}>
+        <Stack spacing={4}>
+            <Tabs variant={"scrollable"}>
                 <Tab href={"/admin"} label={"Plausible"} icon={<StackedLineChart />} />
                 <Tab href={"/admin/clonehero"} label={"Clone Hero"} icon={<QueueMusic />} />
             </Tabs>

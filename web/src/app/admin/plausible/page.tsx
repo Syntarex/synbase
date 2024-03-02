@@ -3,7 +3,7 @@ import "server-only";
 import { PlausibleEmbed } from "@/component/plausible/plausible-embed";
 import auth0, { checkScopes } from "@/util/auth0";
 
-const AdminPage = auth0.withPageAuthRequired(async () => {
+const PlausiblePage = auth0.withPageAuthRequired(async () => {
     await checkScopes(["read:page:admin"], {
         redirectTo: "/",
     });
@@ -11,4 +11,4 @@ const AdminPage = auth0.withPageAuthRequired(async () => {
     return <PlausibleEmbed sx={{ height: 1600 }} />;
 });
 
-export default AdminPage;
+export default PlausiblePage;
