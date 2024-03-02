@@ -10,7 +10,7 @@ export const dynamic: AppConfigDynamic = "force-dynamic";
 // TODO: Refactore
 // TODO: Komponente auslagern und dynamic entsprechend anpassen
 const GameServerPage = async () => {
-    // TODO: Port in Umgebungsvariable
+    // TODO: URL und Port in Umgebungsvariable
     // Ist der Palworld Server erreichbar
     const serverOnline = await checkUdp("synbase.io", 8211);
 

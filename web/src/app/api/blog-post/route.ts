@@ -2,7 +2,7 @@ import auth0 from "@/util/auth0";
 import Database from "@synbase/database";
 import { StatusCodes } from "http-status-codes";
 import { AppConfigDynamic } from "next/dist/build/utils";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export const dynamic: AppConfigDynamic = "force-dynamic";
 
@@ -17,7 +17,7 @@ export const POST = auth0.withApiAuthRequired(async (req: NextRequest) => {
 
     const blogPost = await Database.blogPost.create({ data });
 
-    return Response.json(blogPost, {
+    return NextResponse.json(blogPost, {
         status: StatusCodes.CREATED,
     });
 });

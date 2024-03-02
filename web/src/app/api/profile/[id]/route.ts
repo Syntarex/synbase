@@ -1,9 +1,10 @@
 import { RouteProps } from "@/model/next";
 import auth0 from "@/util/auth0";
 import Database from "@synbase/database";
+import { StatusCodes } from "http-status-codes";
 import { isString } from "lodash";
 import { AppConfigDynamic } from "next/dist/build/utils";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export const dynamic: AppConfigDynamic = "force-dynamic";
 
@@ -16,14 +17,7 @@ export const GET = async (req: NextRequest, { params }: RouteProps<{ id: string 
         // TODO: HttpErrors
         // Benutzer ist nicht eingeloggt
         if (!isString(session?.user.sub)) {
-            return new Response(
-                JSON.stringify({
-                    message: "buh",
-                }),
-                {
-                    status: 401,
-                },
-            );
+            return new NextResponse(null, { status: StatusCodes.UNAUTHORIZED });
         }
 
         // Profil des Benutzers
@@ -33,13 +27,13 @@ export const GET = async (req: NextRequest, { params }: RouteProps<{ id: string 
 
         // Benutzer hat ein Profil
         if (profile) {
-            return Response.json(profile);
+            return NextResponse.json(profile);
         }
 
         // Benutzer hat kein Profil, also erstelle eins
         const ensuredProfile = await Database.profile.create({ data: { sub: session.user.sub } });
 
-        return Response.json(ensuredProfile);
+        return NextResponse.json(ensuredProfile);
     }
 
     // Profil mit ID
@@ -47,5 +41,5 @@ export const GET = async (req: NextRequest, { params }: RouteProps<{ id: string 
         where: { id: params.id },
     });
 
-    return Response.json(profile);
+    return NextResponse.json(profile);
 };
