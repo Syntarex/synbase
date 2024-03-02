@@ -50,6 +50,11 @@ const theme = createTheme(
                     LinkComponent: LinkBehaviour,
                 },
             },
+            MuiTab: {
+                defaultProps: {
+                    LinkComponent: LinkBehaviour,
+                },
+            },
         },
     },
     deDE,
