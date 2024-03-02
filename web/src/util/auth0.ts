@@ -36,24 +36,25 @@ interface CheckScopesOptions {
  */
 export const checkScopes = async (
     requiredScopes: string[],
-    { existingSession, redirectTo = "/" }: CheckScopesOptions = {},
+    { existingSession, redirectTo }: CheckScopesOptions = {},
 ) => {
     // Die Sitzung des Benutzers
     const session = existingSession ?? (await auth0.getSession());
 
-    // Benutzer ist nicht angemeldet oder hat keine Scopes
-    if (!session?.accessTokenScope) {
-        redirect(redirectTo);
-    }
-
     // Die Scopes des Benutzers
-    const ownedScopes = session.accessTokenScope.split(" ");
+    const ownedScopes = (session?.accessTokenScope ?? "").split(" ");
 
     // Die Scopes die dem Benutzer fehlen
     const missingScopes = without(requiredScopes, ...ownedScopes);
 
     // Dem Benutzer fehlen Scopes
     if (missingScopes.length > 0) {
-        redirect(redirectTo);
+        if (redirectTo) {
+            redirect(redirectTo);
+        }
+
+        return false;
     }
+
+    return true;
 };

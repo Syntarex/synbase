@@ -4,7 +4,9 @@ import auth0, { checkScopes } from "@/util/auth0";
 import { Stack, Typography } from "@mui/material";
 
 const AdminPage = auth0.withPageAuthRequired(async () => {
-    await checkScopes(["read:page:admin"]);
+    await checkScopes(["read:page:admin"], {
+        redirectTo: "/",
+    });
 
     return (
         <Stack spacing={2}>
