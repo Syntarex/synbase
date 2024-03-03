@@ -1,7 +1,8 @@
 import "server-only";
 
 import { BlogPostCard } from "@/component/blog/blog-post-card";
-import { Grid, Typography } from "@mui/material";
+import { CardGrid } from "@/component/common/card-grid";
+import { Typography } from "@mui/material";
 import Database from "@synbase/database";
 import { isEmpty } from "lodash";
 
@@ -16,13 +17,11 @@ const Blog = async () => {
     }
 
     return (
-        <Grid container spacing={4}>
+        <CardGrid>
             {blogPosts.map((blogPost) => (
-                <Grid item key={blogPost.id} xs={12} sm={12} md={4} xl={4}>
-                    <BlogPostCard sx={{ height: "100%" }} value={blogPost} />
-                </Grid>
+                <BlogPostCard sx={{ height: "100%" }} value={blogPost} />
             ))}
-        </Grid>
+        </CardGrid>
     );
 };
 
