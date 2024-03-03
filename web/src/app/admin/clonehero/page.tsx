@@ -1,14 +1,16 @@
 import "server-only";
 
 import { SongList } from "@/component/clonehero/song-list";
-import auth0, { checkScopes } from "@/util/auth0";
+import { Stack, Typography } from "@mui/material";
 
-const AdminCloneHeroPage = auth0.withPageAuthRequired(async () => {
-    await checkScopes(["read:page:admin"], {
-        redirectTo: "/",
-    });
+const AdminCloneHeroPage = async () => {
+    return (
+        <Stack spacing={2}>
+            <Typography variant={"h1"}>Clone Hero Songs</Typography>
 
-    return <SongList />;
-});
+            <SongList />
+        </Stack>
+    );
+};
 
 export default AdminCloneHeroPage;

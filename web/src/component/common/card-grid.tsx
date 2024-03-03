@@ -17,7 +17,7 @@ export const CardGrid = ({ sx, children }: CardGridProps) => {
     return (
         <Grid container sx={sx} spacing={4}>
             {(isArray(children) ? children : [children]).map((each, index) => (
-                <Grid item key={`card-grid-${index}`} xs={12} sm={12} md={4} xl={4}>
+                <Grid item key={`card-grid-${index}`} sx={{ height: "100%" }} xs={12} sm={12} md={4} xl={4}>
                     {each}
                 </Grid>
             ))}

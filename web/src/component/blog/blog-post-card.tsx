@@ -19,6 +19,7 @@ import { ReactNode } from "react";
 
 interface BlogPostCardProps {
     sx?: SxProps;
+    href?: string;
     value: BlogPost;
     actions?: ReactNode;
 }
@@ -26,45 +27,57 @@ interface BlogPostCardProps {
 /**
  * Zeigt eine Vorschau eines BlogPosts.
  */
-export const BlogPostCard = ({ sx, value, actions }: BlogPostCardProps) => {
-    const { description, slug, title, updatedAt } = value;
+export const BlogPostCard = ({ sx, value, actions, href }: BlogPostCardProps) => {
+    const { description, title, updatedAt } = value;
+
+    const card = (
+        <Stack
+            sx={
+                href
+                    ? {
+                          "&:hover": { outlineColor: "primary.main", outlineStyle: "solid", outlineWidth: 2 },
+                          ...sx,
+                      }
+                    : sx
+            }
+            component={Card}
+            alignItems={"center"}
+        >
+            <CardHeader sx={{ flexGrow: 1 }} title={title} subheader={description} />
+
+            <CardMedia sx={{ "& > img": { width: "100%", height: "auto" } }}>
+                <Image src={"/placeholder.png"} alt={title} width={1600} height={900} />
+            </CardMedia>
+
+            <Stack
+                component={CardContent}
+                direction={"row"}
+                alignItems={"center"}
+                justifyContent={"space-between"}
+                width={"100%"}
+            >
+                <Typography variant={"body2"}>{dayjs(updatedAt).format("DD. MMMM YYYY")}</Typography>
+
+                <Stack direction={"row"} alignItems={"center"} spacing={0.5}>
+                    <Avatar sx={{ width: 24, height: 24 }} src={"/heart.png"} />
+
+                    <Typography variant={"body2"} fontWeight={600}>
+                        Syntarex
+                    </Typography>
+                </Stack>
+            </Stack>
+
+            {actions && <CardActions>{actions}</CardActions>}
+        </Stack>
+    );
+
+    if (!href) {
+        return card;
+    }
 
     return (
-        <Link sx={{ textDecoration: "none" }} href={`/blog/${slug}`}>
-            <Stack
-                sx={{
-                    "&:hover": { outlineColor: "primary.main", outlineStyle: "solid", outlineWidth: 2 },
-                    ...sx,
-                }}
-                component={Card}
-                alignItems={"center"}
-            >
-                <CardHeader sx={{ flexGrow: 1 }} title={title} subheader={description} />
-
-                <CardMedia sx={{ "& > img": { width: "100%", height: "auto" } }}>
-                    <Image src={"/placeholder.png"} alt={title} width={1600} height={900} />
-                </CardMedia>
-
-                <Stack
-                    component={CardContent}
-                    direction={"row"}
-                    alignItems={"center"}
-                    justifyContent={"space-between"}
-                    width={"100%"}
-                >
-                    <Typography variant={"body2"}>{dayjs(updatedAt).format("DD. MMMM YYYY")}</Typography>
-
-                    <Stack direction={"row"} alignItems={"center"} spacing={0.5}>
-                        <Avatar sx={{ width: 24, height: 24 }} src={"/heart.png"} />
-
-                        <Typography variant={"body2"} fontWeight={600}>
-                            Syntarex
-                        </Typography>
-                    </Stack>
-                </Stack>
-
-                {actions && <CardActions>{actions}</CardActions>}
-            </Stack>
+        <Link sx={{ textDecoration: "none" }} href={href}>
+            {card}
         </Link>
     );
 };
