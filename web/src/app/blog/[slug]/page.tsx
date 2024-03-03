@@ -10,7 +10,7 @@ import { notFound } from "next/navigation";
 /**
  * Zeigt einen Blog-Beitrag an.
  */
-const BlogPost = async (props: PageProps<{ slug: string }>) => {
+const BlogPostPage = async (props: PageProps<{ slug: string }>) => {
     const { slug } = props.params;
 
     const blogPost = await Database.blogPost.findUnique({
@@ -44,4 +44,4 @@ const BlogPost = async (props: PageProps<{ slug: string }>) => {
     );
 };
 
-export default BlogPost;
+export default BlogPostPage;

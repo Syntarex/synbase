@@ -9,7 +9,7 @@ import { isEmpty } from "lodash";
 /**
  * Zeigt einen Blog-Beitrag an.
  */
-const Blog = async () => {
+const BlogPage = async () => {
     const blogPosts = await Database.blogPost.findMany();
 
     if (isEmpty(blogPosts)) {
@@ -25,4 +25,4 @@ const Blog = async () => {
     );
 };
 
-export default Blog;
+export default BlogPage;
