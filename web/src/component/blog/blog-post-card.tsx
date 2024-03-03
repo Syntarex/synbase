@@ -30,6 +30,7 @@ interface BlogPostCardProps {
 export const BlogPostCard = ({ sx, value, actions, href }: BlogPostCardProps) => {
     const { description, title, updatedAt } = value;
 
+    // Die Karten-Vorschau
     const card = (
         <Stack
             sx={
@@ -71,10 +72,12 @@ export const BlogPostCard = ({ sx, value, actions, href }: BlogPostCardProps) =>
         </Stack>
     );
 
+    // Karte ist kein Link
     if (!href) {
         return card;
     }
 
+    // Karte ist ein Link
     return (
         <Link sx={{ textDecoration: "none" }} href={href}>
             {card}
