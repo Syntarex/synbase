@@ -1,19 +1,32 @@
 import "server-only";
 
-import { Avatar, Card, CardContent, CardHeader, CardMedia, Link, Stack, SxProps, Typography } from "@mui/material";
+import {
+    Avatar,
+    Card,
+    CardActions,
+    CardContent,
+    CardHeader,
+    CardMedia,
+    Link,
+    Stack,
+    SxProps,
+    Typography,
+} from "@mui/material";
 import { BlogPost } from "@synbase/database";
 import dayjs from "dayjs";
 import Image from "next/image";
+import { ReactNode } from "react";
 
 interface BlogPostCardProps {
     sx?: SxProps;
     value: BlogPost;
+    actions?: ReactNode;
 }
 
 /**
  * Zeigt eine Vorschau eines BlogPosts.
  */
-export const BlogPostCard = ({ sx, value }: BlogPostCardProps) => {
+export const BlogPostCard = ({ sx, value, actions }: BlogPostCardProps) => {
     const { description, slug, title, updatedAt } = value;
 
     return (
@@ -49,6 +62,8 @@ export const BlogPostCard = ({ sx, value }: BlogPostCardProps) => {
                         </Typography>
                     </Stack>
                 </Stack>
+
+                {actions && <CardActions>{actions}</CardActions>}
             </Stack>
         </Link>
     );
