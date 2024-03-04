@@ -9,8 +9,9 @@ datasource db {
 }
 
 model Profile {
-    id  String @id @default(uuid())
-    sub String @unique
+    id       String     @id @default(uuid())
+    sub      String     @unique
+    BlogPost BlogPost[]
 }
 
 model BlogPost {
@@ -19,6 +20,9 @@ model BlogPost {
     description String
     content     String
     slug        String   @unique
+    isDraft     Boolean  @default(true)
+    author      Profile  @relation(fields: [authorId], references: [id])
+    authorId    String
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
 }
