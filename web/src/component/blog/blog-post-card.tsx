@@ -42,7 +42,6 @@ export const BlogPostCard = ({ sx, value, actions, href }: BlogPostCardProps) =>
                     : sx
             }
             component={Card}
-            alignItems={"center"}
         >
             <CardHeader sx={{ flexGrow: 1 }} title={title} subheader={description} />
 
