@@ -28,4 +28,32 @@ Wir sammeln Ideen was man auf synbase.io machen könnte.
 -   AUTH0 tenant.yaml enthält Platzhalter für URLs. Pulled man die tenant-Config neu, sind diese allerdings weg. how to fix?
 -   Prisma Error-Handling in API Routen
 -   NODE_TLS_REJECT_UNAUTHORIZED=0 ist kake aber ist ein Workaround. https://github.com/oven-sh/bun/issues/7200
--   Clone Hero Server konfigurierbar machen
+-   Clone Hero Docker-Server konfigurierbar machen
+
+## Web-TODOs before launch
+
+-   Blog-Posts
+
+    -   Stylen
+    -   Paging
+    -   Autor richtig auslesen
+    -   Bearbeiten
+    -   Tags (als Kategorien und meta tags)
+    -   Bilder
+    -   Kommentar-Funktion
+
+-   Profile
+
+    -   Kann ich Profil-Daten von auth0 abfragen? Nickname/Bild
+    -   Seite zum Anzeigen von Profilen
+    -   Bearbeiten von eigenem Profil
+    -   Bannen von Profilen
+
+-   GameServer
+
+    -   Styling
+
+-   Generell
+    -   Titles für URLs auslagern
+    -   Titles in Breadcrumb verwenden
+    -   uploadthing
