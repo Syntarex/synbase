@@ -7,10 +7,13 @@ import { getEnv } from "@/util/env";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import { Container, CssBaseline, Fade, Stack, ThemeProvider } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import dayjs from "dayjs";
 import "dayjs/locale/de";
 import { Metadata } from "next";
 import PlausibleProvider from "next-plausible";
+import { extractRouterConfig } from "uploadthing/server";
+import { uploadRouter } from "./api/uploadthing/core";
 
 // Setze Sprache von DayJS auf Deutsch
 dayjs.locale("de");
@@ -30,6 +33,8 @@ const RootLayout = async ({ children }: LayoutProps) => {
 
             <body>
                 <UserProvider>
+                    <NextSSRPlugin routerConfig={extractRouterConfig(uploadRouter)} />
+
                     <AppRouterCacheProvider>
                         <ThemeProvider theme={synbaseTheme}>
                             <CssBaseline />

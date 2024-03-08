@@ -1,9 +1,9 @@
 import "server-only";
 
-import { SongList } from "@/component/clonehero/song-list";
+import { ImageUpload } from "@/component/common/image-upload";
 
 const TestPage = async () => {
-    return <SongList />;
+    return <ImageUpload />;
 };
 
 export default TestPage;
