@@ -11,6 +11,6 @@ export const log = (...data: unknown[]) => {
  * Loggt in die Server-Konsole.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const success = (...data: any[]) => {
+export const success = (...data: unknown[]) => {
     console.info("✔", ...data);
 };

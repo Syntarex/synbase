@@ -3,7 +3,13 @@
 /**
  * Loggt in die Browser-Konsole.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const log = (...data: any[]) => {
+export const log = (...data: unknown[]) => {
     console.log("🍉", ...data);
+};
+
+/**
+ * Loggt in die Browser-Konsole.
+ */
+export const fail = (...data: unknown[]) => {
+    console.error("⛈️", ...data);
 };
