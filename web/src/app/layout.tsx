@@ -3,7 +3,7 @@ import { Breadcrumbs } from "@/component/layout/breadcrumbs";
 import { GithubButton } from "@/component/social/github-button";
 import { LayoutProps } from "@/model/next";
 import { synbaseTheme } from "@/style/theme";
-import { getEnv } from "@/util/env";
+import { getEnv } from "@/util/server/env";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import { Container, CssBaseline, Fade, Stack, ThemeProvider } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";

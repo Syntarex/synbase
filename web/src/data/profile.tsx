@@ -1,6 +1,6 @@
 import "server-only";
 
-import { auth0 } from "@/util/server/auth/auth0";
+import { auth0 } from "@/util/server/auth0";
 import Database, { Profile } from "@synbase/database";
 
 /**

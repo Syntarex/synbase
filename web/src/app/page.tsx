@@ -1,7 +1,7 @@
 import { Logo } from "@/component/common/logo";
 import { DiscordButton } from "@/component/social/discord-button";
 import { orbitron } from "@/style/font";
-import { getEnv } from "@/util/env";
+import { getEnv } from "@/util/server/env";
 import { Fade, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 

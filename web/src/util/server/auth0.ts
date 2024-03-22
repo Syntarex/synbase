@@ -3,7 +3,7 @@ import "server-only";
 import { initAuth0 } from "@auth0/nextjs-auth0";
 import { without } from "lodash";
 import { redirect } from "next/navigation";
-import { getEnv } from "../../env";
+import { getEnv } from "./env";
 
 /**
  * Konfigurierte Instanz des Auth0-SDKs.

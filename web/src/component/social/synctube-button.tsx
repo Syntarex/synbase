@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getEnv } from "@/util/env";
+import { getEnv } from "@/util/server/env";
 import { SiYoutube } from "@icons-pack/react-simple-icons";
 import { Button, ButtonProps, SvgIcon } from "@mui/material";
 

@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getEnv } from "@/util/env";
+import { getEnv } from "@/util/server/env";
 import { Newspaper, SportsEsports } from "@mui/icons-material";
 import { Button, Divider, Stack, StackProps } from "@mui/material";
 import { DiscordButton } from "../social/discord-button";

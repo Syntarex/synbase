@@ -1,16 +1,14 @@
 "use client";
 
-import { log } from "@/util/log/client";
-import { Typography } from "@mui/material";
-import { useEffect } from "react";
+import { SxProps, Typography } from "@mui/material";
 
-interface TestProps {}
+interface TestProps {
+    sx?: SxProps;
+}
 
 /**
  * Einfach eine Test-Komponente, welche zum schnellen Prototyping verwendet werden kann.
  */
-export const Test = (props: TestProps) => {
-    useEffect(() => log("Test", props), [props]);
-
-    return <Typography>Test</Typography>;
+export const Test = ({ sx }: TestProps) => {
+    return <Typography sx={sx}>Test</Typography>;
 };

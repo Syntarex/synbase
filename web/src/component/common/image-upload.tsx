@@ -1,7 +1,7 @@
 "use client";
 
 import { UploadRouter } from "@/app/api/uploadthing/core";
-import { fail, log } from "@/util/log/client";
+import { fail } from "@/util/log";
 import { CloudUpload } from "@mui/icons-material";
 import { Button, FormControl, FormHelperText } from "@mui/material";
 import { generateReactHelpers, useDropzone } from "@uploadthing/react";
@@ -24,25 +24,14 @@ export const ImageUpload = () => {
 
     // Nutze UploadThing um Upload-Prozess zu vereinfachen
     const { isUploading, permittedFileInfo, startUpload } = useUploadThing("imageUploader", {
-        onBeforeUploadBegin: (files) => {
-            log("onBeforeUploadBegin");
-            return files;
-        },
-        onClientUploadComplete: (res) => {
-            log("onClientUploadComplete", res);
+        onClientUploadComplete: () => {
             setFiles([]);
             setUploadFailed(false);
-        },
-        onUploadBegin: (fileName) => {
-            log("onUploadBegin", fileName);
         },
         onUploadError: (error) => {
             setFiles([]);
             setUploadFailed(true);
             fail("onUploadError", error);
-        },
-        onUploadProgress: (progress) => {
-            log("onUploadProgress", progress);
         },
     });
 

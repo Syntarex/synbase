@@ -1,6 +1,5 @@
 import "server-only";
 
-// TODO: Funktioniert nur serverseitig. Wie kann ich Umgebungsvariablen auf clientseitig typensicher abfragen?
 /**
  * Gibt eine existierende Umgebungsvariable zurück.
  */

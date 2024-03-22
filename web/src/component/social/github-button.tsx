@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getEnv } from "@/util/env";
+import { getEnv } from "@/util/server/env";
 import { SiGithub } from "@icons-pack/react-simple-icons";
 import { Button, SvgIcon } from "@mui/material";
 

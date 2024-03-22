@@ -2,7 +2,7 @@ import "server-only";
 
 import { getMe } from "@/data/profile";
 import { BlogPostValidation } from "@/model/validation";
-import { auth0 } from "@/util/server/auth/auth0";
+import { auth0 } from "@/util/server/auth0";
 import Database, { Prisma } from "@synbase/database";
 import { StatusCodes } from "http-status-codes";
 import { AppConfigDynamic } from "next/dist/build/utils";

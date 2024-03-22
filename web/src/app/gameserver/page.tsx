@@ -1,6 +1,6 @@
 import "server-only";
 
-import { checkUdp } from "@/util/net";
+import { checkUdp } from "@/util/server/udp";
 import { CloudDone, CloudOff } from "@mui/icons-material";
 import { Card, CardHeader, Stack, Tooltip, Typography } from "@mui/material";
 import { AppConfigDynamic } from "next/dist/build/utils";
