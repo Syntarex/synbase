@@ -17,7 +17,7 @@ export const auth0 = initAuth0({
     authorizationParams: {
         audience: getEnv("AUTH0_WEB_AUDIENCE"),
         connection: "discord",
-        scope: "openid profile email read:page:admin", // TODO: Prüfe, ob es einen .default-scope gibt, der einfach alle Scopes erfrägt
+        scope: "openid profile email read:page:admin create:blog-post update:blog-post delete:blog-post", // TODO: Prüfe, ob es einen .default-scope gibt, der einfach alle Scopes erfrägt
     },
 });
 
@@ -29,7 +29,6 @@ interface CheckScopesOptions {
 /**
  * Prüft die Session des Benutzers auf Scopes.
  * @param requiredScopes Ein Array mit allen benötigten Scopes.
- * @param existingSession Prüfe eine bereits bestehende Session.
  */
 export const checkScopes = async (requiredScopes: string[], { redirectTo }: CheckScopesOptions = {}) => {
     // Die Sitzung des Benutzers

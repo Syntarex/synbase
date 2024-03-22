@@ -1,11 +1,9 @@
-import Database from "@synbase/database";
-import { AppConfigDynamic } from "next/dist/build/utils";
-import { NextResponse } from "next/server";
+import "server-only";
 
-export const dynamic: AppConfigDynamic = "force-dynamic";
+import { getProfiles } from "@/data/server/profile";
+import { buildRoute } from "@/util/server/api";
+import { Profile } from "@synbase/database";
 
-export const GET = async () => {
-    const profiles = await Database.profile.findMany();
-
-    return NextResponse.json(profiles);
-};
+export const GET = buildRoute<Profile[]>({
+    handler: async () => await getProfiles(),
+});

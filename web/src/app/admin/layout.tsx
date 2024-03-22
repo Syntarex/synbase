@@ -7,7 +7,7 @@ import { Box, Stack, Tab, Tabs } from "@mui/material";
 
 // TODO: Tabs zeigen nicht aktuelle Seite an
 const AdminLayout = async ({ children }: LayoutProps) => {
-    await checkScopes(["read:page:admin"], {
+    await checkScopes(["read:pages:admin"], {
         redirectTo: "/",
     });
 

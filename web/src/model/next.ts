@@ -8,13 +8,6 @@ export interface LayoutProps {
 }
 
 /**
- * Die Properties einer Next-route.
- */
-export interface RouteProps<Params = unknown> {
-    params: Params;
-}
-
-/**
  * Die Properties einer Next-page.
  */
 export interface PageProps<Params = unknown, SearchParams = unknown> {
