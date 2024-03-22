@@ -1,7 +1,7 @@
 import "server-only";
 
 import { LayoutProps } from "@/model/next";
-import { checkScopes } from "@/util/auth0";
+import { checkScopes } from "@/util/server/auth/auth0";
 import { Newspaper, QueueMusic, StackedLineChart } from "@mui/icons-material";
 import { Box, Stack, Tab, Tabs } from "@mui/material";
 

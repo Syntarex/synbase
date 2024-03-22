@@ -1,14 +1,14 @@
 import "server-only";
 
-import { Session, initAuth0 } from "@auth0/nextjs-auth0";
+import { initAuth0 } from "@auth0/nextjs-auth0";
 import { without } from "lodash";
 import { redirect } from "next/navigation";
-import { getEnv } from "./env";
+import { getEnv } from "../../env";
 
 /**
  * Konfigurierte Instanz des Auth0-SDKs.
  */
-const auth0 = initAuth0({
+export const auth0 = initAuth0({
     issuerBaseURL: `https://${getEnv("AUTH0_DOMAIN")}`,
     clientID: getEnv("AUTH0_WEB_CLIENT_ID"),
     clientSecret: getEnv("AUTH0_WEB_CLIENT_SECRET"),
@@ -21,25 +21,19 @@ const auth0 = initAuth0({
     },
 });
 
-export default auth0;
-
 interface CheckScopesOptions {
-    existingSession?: Session;
     redirectTo?: string;
 }
 
 // TODO: Loggt "nextjs-auth0 is attempting to set cookies from a server component,see https://github.com/auth0/nextjs-auth0#using-this-sdk-with-react-server-components"
 /**
- * Prüft die Session des Benutzers auf Scopes. Fehlt ein Scope, wird der Benutzer
+ * Prüft die Session des Benutzers auf Scopes.
  * @param requiredScopes Ein Array mit allen benötigten Scopes.
  * @param existingSession Prüfe eine bereits bestehende Session.
  */
-export const checkScopes = async (
-    requiredScopes: string[],
-    { existingSession, redirectTo }: CheckScopesOptions = {},
-) => {
+export const checkScopes = async (requiredScopes: string[], { redirectTo }: CheckScopesOptions = {}) => {
     // Die Sitzung des Benutzers
-    const session = existingSession ?? (await auth0.getSession());
+    const session = await auth0.getSession();
 
     // Die Scopes des Benutzers
     const ownedScopes = (session?.accessTokenScope ?? "").split(" ");

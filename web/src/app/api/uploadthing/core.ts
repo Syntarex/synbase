@@ -1,6 +1,6 @@
 import "server-only";
 
-import auth0 from "@/util/auth0";
+import { auth0 } from "@/util/server/auth/auth0";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 import { log } from "../../../util/log/server";
