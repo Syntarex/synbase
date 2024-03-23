@@ -1,5 +1,7 @@
+import { ErrorBoundary } from "@/component/common/error-boundary";
 import { AppBar } from "@/component/layout/app-bar";
 import { Breadcrumbs } from "@/component/layout/breadcrumbs";
+import { QueryClientProvider } from "@/component/provider/query-client-provider";
 import { GithubButton } from "@/component/social/github-button";
 import { LayoutProps } from "@/model/next";
 import { synbaseTheme } from "@/style/theme";
@@ -32,31 +34,35 @@ const RootLayout = async ({ children }: LayoutProps) => {
             </head>
 
             <body>
-                <UserProvider>
-                    <NextSSRPlugin routerConfig={extractRouterConfig(uploadRouter)} />
+                <ErrorBoundary>
+                    <UserProvider>
+                        <QueryClientProvider>
+                            <NextSSRPlugin routerConfig={extractRouterConfig(uploadRouter)} />
 
-                    <AppRouterCacheProvider>
-                        <ThemeProvider theme={synbaseTheme}>
-                            <CssBaseline />
+                            <AppRouterCacheProvider>
+                                <ThemeProvider theme={synbaseTheme}>
+                                    <CssBaseline />
 
-                            <AppBar sx={{ mb: 4 }} />
+                                    <AppBar sx={{ mb: 4 }} />
 
-                            <Container component={"main"} maxWidth={"xl"}>
-                                <Stack gap={4}>
-                                    <Breadcrumbs />
+                                    <Container component={"main"} maxWidth={"xl"}>
+                                        <Stack gap={4}>
+                                            <Breadcrumbs />
 
-                                    {children}
+                                            {children}
 
-                                    <Fade in timeout={3000}>
-                                        <Stack direction={"row"} justifyContent={"center"}>
-                                            <GithubButton />
+                                            <Fade in timeout={3000}>
+                                                <Stack direction={"row"} justifyContent={"center"}>
+                                                    <GithubButton />
+                                                </Stack>
+                                            </Fade>
                                         </Stack>
-                                    </Fade>
-                                </Stack>
-                            </Container>
-                        </ThemeProvider>
-                    </AppRouterCacheProvider>
-                </UserProvider>
+                                    </Container>
+                                </ThemeProvider>
+                            </AppRouterCacheProvider>
+                        </QueryClientProvider>
+                    </UserProvider>
+                </ErrorBoundary>
             </body>
         </html>
     );

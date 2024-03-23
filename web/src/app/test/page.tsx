@@ -1,9 +1,9 @@
 import "server-only";
 
-import { ImageUpload } from "@/component/common/image-upload";
+import { Test } from "@/component/test";
 
 const TestPage = async () => {
-    return <ImageUpload />;
+    return <Test />;
 };
 
 export default TestPage;

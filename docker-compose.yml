@@ -24,11 +24,11 @@ services:
         volumes:
             - ./palworld:/palworld
         ports:
-            - 8211:8211/udp
+            - ${PALWORLD_PORT}:${PALWORLD_PORT}/udp
             - 27015:27015/udp
             - 25575:25575/tcp
         environment:
-            - PORT=8211
+            - PORT=${PALWORLD_PORT}
             - MULTITHREADING=true
             - COMMUNITY=${PALWORLD_COMMUNITY}
             - ADMIN_PASSWORD=${PALWORLD_ADMIN_PASSWORD}

@@ -14,6 +14,11 @@ export const getBlogPost = cache({
     cacheFn: async (id: string) => await Database.blogPost.findUnique({ where: { id } }),
 });
 
+export const getBlogPostBySlug = cache({
+    cacheKey: "blog-posts",
+    cacheFn: async (slug: string) => await Database.blogPost.findUnique({ where: { slug } }),
+});
+
 export const createBlogPost = async (data: UpsertBlogPost) => {
     const result = await Database.blogPost.create({
         data,

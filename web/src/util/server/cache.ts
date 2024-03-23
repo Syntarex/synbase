@@ -3,7 +3,7 @@ import "server-only";
 import { toString } from "lodash";
 import { revalidateTag, unstable_cache } from "next/cache";
 import { success } from "../log";
-import { getQueryClient } from "./query";
+import { getQueryClient } from "./query-client";
 
 interface CacheOptions<Result, Param> {
     cacheKey: string;

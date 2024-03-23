@@ -19,7 +19,7 @@ const BlogPage = async () => {
     return (
         <CardGrid>
             {blogPosts.map((blogPost) => (
-                <BlogPostCard key={`blog-post-${blogPost.id}`} href={`/blog/${blogPost.slug}`} value={blogPost} />
+                <BlogPostCard key={`blog-post-${blogPost.id}`} value={blogPost} />
             ))}
         </CardGrid>
     );

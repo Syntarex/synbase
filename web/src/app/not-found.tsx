@@ -7,8 +7,8 @@ import Image from "next/image";
 
 const notFound = () => {
     return (
-        <Stack alignItems={"center"} spacing={4}>
-            <Stack direction={"row"} alignItems={"center"} spacing={4}>
+        <Stack alignItems={"center"} gap={4}>
+            <Stack direction={"row"} alignItems={"center"} gap={4}>
                 <Logo size={100} />
 
                 <Typography variant={"h1"} fontFamily={orbitron.style.fontFamily} fontWeight={800}>
@@ -16,7 +16,7 @@ const notFound = () => {
                 </Typography>
             </Stack>
 
-            <Typography>Diese Seite existiert noch nicht.</Typography>
+            <Typography>Diese Seite existiert nicht. 🥲</Typography>
 
             <Image src={"/heart.png"} alt={"Herz"} width={30} height={30} />
         </Stack>

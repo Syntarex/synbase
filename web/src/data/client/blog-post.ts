@@ -2,7 +2,7 @@
 
 import { GetBlogPosts, UpsertBlogPost } from "@/model/blog-post";
 import { api } from "@/util/client/api";
-import { getQueryClient } from "@/util/client/query";
+import { getQueryClient } from "@/util/client/query-client";
 import { BlogPost } from "@synbase/database";
 import { FetchQueryOptions, MutationOptions } from "@tanstack/react-query";
 

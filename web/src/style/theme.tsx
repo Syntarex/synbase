@@ -55,6 +55,11 @@ const theme = createTheme(
                     LinkComponent: LinkBehaviour,
                 },
             },
+            MuiFab: {
+                defaultProps: {
+                    color: "primary",
+                },
+            },
         },
     },
     deDE,

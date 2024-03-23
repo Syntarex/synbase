@@ -2,58 +2,48 @@ import "server-only";
 
 import { BlogPostCard } from "@/component/blog/blog-post-card";
 import { CardGrid } from "@/component/common/card-grid";
+import { FabButton } from "@/component/common/fab-button";
 import { Add, Delete, Edit, Visibility } from "@mui/icons-material";
-import { Box, Button, IconButton, Stack, Tooltip, Typography } from "@mui/material";
+import { CardActions, IconButton, Stack, Typography } from "@mui/material";
 import Database from "@synbase/database";
 
+// TODO: Edit- und Delete-Button
 const AdminBlogPage = async () => {
     const blogPosts = await Database.blogPost.findMany();
 
     return (
-        <Stack spacing={2}>
+        <Stack gap={2}>
             <Typography variant={"h1"}>Blog-Beiträge</Typography>
-
-            <Box>
-                <Button
-                    href={"/admin/blog/new"}
-                    variant={"contained"}
-                    color={"primary"}
-                    size={"large"}
-                    startIcon={<Add />}
-                >
-                    Verfassen
-                </Button>
-            </Box>
 
             <CardGrid>
                 {blogPosts.map((blogPost) => (
                     <BlogPostCard
                         key={`blog-post-${blogPost.id}`}
                         value={blogPost}
-                        actions={
-                            <>
-                                <Tooltip title={"In neuem Tab öffnen"}>
+                        slots={{
+                            cardActions: (
+                                <CardActions>
                                     <IconButton href={`/blog/${blogPost.slug}`} target={"_blank"}>
                                         <Visibility />
                                     </IconButton>
-                                </Tooltip>
 
-                                <Tooltip title={"Bearbeiten"}>
                                     <IconButton>
                                         <Edit />
                                     </IconButton>
-                                </Tooltip>
 
-                                <Tooltip title={"Löschen"}>
                                     <IconButton>
                                         <Delete />
                                     </IconButton>
-                                </Tooltip>
-                            </>
-                        }
+                                </CardActions>
+                            ),
+                        }}
                     />
                 ))}
             </CardGrid>
+
+            <FabButton href={"/admin/blog/new"}>
+                <Add />
+            </FabButton>
         </Stack>
     );
 };

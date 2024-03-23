@@ -1,38 +1,36 @@
 import "server-only";
 
 import { Markdown } from "@/component/common/markdown";
+import { getBlogPostBySlug } from "@/data/server/blog-post";
+import { getProfile } from "@/data/server/profile";
 import { PageProps } from "@/model/next";
 import { Paper, Stack, Typography } from "@mui/material";
-import Database from "@synbase/database";
 import dayjs from "dayjs";
 import { notFound } from "next/navigation";
 
+// TODO: Autor hinzufügen
 /**
  * Zeigt einen Blog-Beitrag an.
  */
-const BlogPostPage = async (props: PageProps<{ slug: string }>) => {
-    const { slug } = props.params;
+const BlogPostPage = async ({ params }: PageProps<{ slug: string }>) => {
+    const { slug } = params;
 
-    const blogPost = await Database.blogPost.findUnique({
-        where: {
-            slug,
-        },
-    });
+    const blogPost = await getBlogPostBySlug(slug);
 
     if (!blogPost) {
         return notFound();
     }
 
+    const author = await getProfile(blogPost.authorId);
+
     return (
-        <Stack spacing={4}>
-            <Stack spacing={1}>
+        <Stack gap={4}>
+            <Stack gap={1}>
                 <Typography variant={"h1"}>{blogPost.title}</Typography>
 
-                <Stack direction={"row"} justifyContent={"space-between"}>
-                    <Typography variant={"body2"} fontWeight={600}>
-                        Syntarex, {dayjs(blogPost.createdAt).format("DD. MMMM YYYY")}
-                    </Typography>
-                </Stack>
+                <Typography variant={"body2"} fontWeight={600}>
+                    {author ? author.sub : "Unbekannter Autor"}, {dayjs(blogPost.createdAt).format("DD. MMMM YYYY")}
+                </Typography>
             </Stack>
 
             <Typography>{blogPost.description}</Typography>

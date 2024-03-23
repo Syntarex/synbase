@@ -5,7 +5,7 @@ import { Stack, Typography } from "@mui/material";
 
 const AdminPlausiblePage = async () => {
     return (
-        <Stack spacing={2}>
+        <Stack gap={2}>
             <Typography variant={"h1"}>Statistiken</Typography>
 
             <PlausibleEmbed sx={{ height: 1600 }} />
