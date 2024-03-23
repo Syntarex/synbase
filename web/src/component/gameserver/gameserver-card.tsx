@@ -1,9 +1,10 @@
+import "server-only";
+
 import { checkUdp } from "@/util/server/udp";
 import { CloudDone, CloudOff } from "@mui/icons-material";
 import { Card, CardHeader, CardProps, Stack, Tooltip } from "@mui/material";
 import { toString } from "lodash";
 import { ReactNode } from "react";
-import "server-only";
 
 interface GameserverCardProps {
     title: string;
