@@ -1,17 +1,16 @@
 "use client";
 
 import { BlogPostForm } from "@/component/blog/blog-post-form";
+import { getProfileQuery } from "@/data/client/profile";
 import { Stack, Typography } from "@mui/material";
-import { Prisma } from "@synbase/database";
-import { useCallback } from "react";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 const AdminNewBlogPostPage = () => {
-    const onSubmit = useCallback(
-        (blogPost: Prisma.BlogPostCreateWithoutAuthorInput) =>
-            // TODO: Nutze React Query
-            fetch("/api/blog-post", { method: "POST", body: JSON.stringify(blogPost) }),
-        [],
-    );
+    const { data: me } = useSuspenseQuery(getProfileQuery("me"));
+
+    if (!me) {
+        return null;
+    }
 
     return (
         <Stack spacing={2}>
@@ -24,8 +23,8 @@ const AdminNewBlogPostPage = () => {
                     isDraft: true,
                     slug: "",
                     title: "",
+                    author: { connect: me },
                 }}
-                onSubmit={onSubmit}
             />
         </Stack>
     );

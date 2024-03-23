@@ -12,14 +12,14 @@ export const GET = buildRoute<BlogPost>({
 });
 
 export const PUT = buildRoute<BlogPost, UpsertBlogPost>({
-    requiredScopes: ["update:blog-posts"],
+    requiredScopes: ["create:blog-post"],
     paramsValidation: idParamValidation,
     bodyValidation: upsertBlogPostValidation,
     handler: async ({ body, params }) => await updateBlogPost(params.id, body),
 });
 
 export const DELETE = buildRoute<BlogPost>({
-    requiredScopes: ["delete:blog-posts"],
+    requiredScopes: ["create:blog-post"],
     paramsValidation: idParamValidation,
     handler: async ({ params }) => await deleteBlogPost(params.id),
 });

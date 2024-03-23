@@ -17,7 +17,7 @@ export const auth0 = initAuth0({
     authorizationParams: {
         audience: getEnv("AUTH0_WEB_AUDIENCE"),
         connection: "discord",
-        scope: "openid profile email read:page:admin create:blog-post update:blog-post delete:blog-post", // TODO: Prüfe, ob es einen .default-scope gibt, der einfach alle Scopes erfrägt
+        scope: "openid profile email read:page:admin create:blog-posts update:blog-posts delete:blog-posts", // TODO: Prüfe, ob es einen .default-scope gibt, der einfach alle Scopes erfrägt
     },
 });
 

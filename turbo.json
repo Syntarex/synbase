@@ -2,7 +2,9 @@
     "$schema": "https://turbo.build/schema.json",
     "globalDotEnv": [".env"],
     "pipeline": {
-        "clean": {},
+        "clean": {
+            "cache": false
+        },
         "build": {
             "dependsOn": ["clean", "lint", "^build"]
         },
@@ -10,8 +12,12 @@
             "cache": false,
             "dependsOn": ["@synbase/database#dev:startdb", "@synbase/database#wait-for-database", "^dev"]
         },
-        "dev:resetdb": {},
-        "dev:startdb": {},
+        "dev:resetdb": {
+            "cache": false
+        },
+        "dev:startdb": {
+            "cache": false
+        },
         "lint": {},
         "pull": {
             "cache": false
@@ -20,6 +26,8 @@
             "cache": false,
             "dependsOn": ["@synbase/database#wait-for-database", "^start"]
         },
-        "wait-for-database": {}
+        "wait-for-database": {
+            "cache": false
+        }
     }
 }

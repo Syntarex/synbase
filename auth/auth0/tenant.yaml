@@ -9,11 +9,11 @@ resourceServers:
       scopes:
           - value: read:pages:admin
             description: Darf den Admin-Bereich betreten.
-          - value: create:blog-post
+          - value: create:blog-posts
             description: Darf Blog-Beiträge erstellen.
-          - value: update:blog-post
+          - value: update:blog-posts
             description: Darf Blog-Beiträge bearbeiten.
-          - value: delete:blog-post
+          - value: delete:blog-posts
             description: Darf Blog-Beiträge löschen.
       signing_alg: RS256
       skip_consent_for_verifiable_first_party_clients: true
@@ -191,9 +191,9 @@ roles:
       permissions:
           - permission_name: read:pages:admin
             resource_server_identifier: ##AUTH0_WEB_AUDIENCE##
-          - permission_name: update:blog-posts
-            resource_server_identifier: ##AUTH0_WEB_AUDIENCE##
           - permission_name: create:blog-posts
+            resource_server_identifier: ##AUTH0_WEB_AUDIENCE##
+          - permission_name: update:blog-posts
             resource_server_identifier: ##AUTH0_WEB_AUDIENCE##
           - permission_name: delete:blog-posts
             resource_server_identifier: ##AUTH0_WEB_AUDIENCE##

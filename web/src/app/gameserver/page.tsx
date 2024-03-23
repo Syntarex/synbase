@@ -6,6 +6,7 @@ import { getEnv } from "@/util/server/env";
 import { CardContent, Stack, Typography } from "@mui/material";
 import { toNumber } from "lodash";
 
+// TODO: Beschreibungstexte
 const GameserverPage = async () => {
     return (
         <Stack gap={2}>
@@ -18,6 +19,14 @@ const GameserverPage = async () => {
                     port={toNumber(getEnv("PALWORLD_PORT"))}
                 >
                     <CardContent>Das ist der Palworld-Server</CardContent>
+                </GameserverCard>
+
+                <GameserverCard
+                    title={"Clone Hero"}
+                    ip={getEnv("CLONEHERO_HOST")}
+                    port={toNumber(getEnv("CLONEHERO_PORT"))}
+                >
+                    <CardContent>Das ist der CloneHero-Server</CardContent>
                 </GameserverCard>
             </CardGrid>
         </Stack>
