@@ -3,6 +3,7 @@ import "server-only";
 import { initAuth0 } from "@auth0/nextjs-auth0";
 import { without } from "lodash";
 import { redirect } from "next/navigation";
+import { warn } from "../log";
 import { getEnv } from "./env";
 
 /**
@@ -17,7 +18,7 @@ export const auth0 = initAuth0({
     authorizationParams: {
         audience: getEnv("AUTH0_WEB_AUDIENCE"),
         connection: "discord",
-        scope: "openid profile email read:page:admin create:blog-posts update:blog-posts delete:blog-posts", // TODO: Prüfe, ob es einen .default-scope gibt, der einfach alle Scopes erfrägt
+        scope: "openid profile email read:pages:admin create:blog-posts update:blog-posts delete:blog-posts", // TODO: Prüfe, ob es einen .default-scope gibt, der einfach alle Scopes erfrägt
     },
 });
 
@@ -42,6 +43,8 @@ export const checkScopes = async (requiredScopes: string[], { redirectTo }: Chec
 
     // Dem Benutzer fehlen Scopes
     if (missingScopes.length > 0) {
+        warn("Benutzer fehlen Scopes", missingScopes);
+
         if (redirectTo) {
             redirect(redirectTo);
         }
