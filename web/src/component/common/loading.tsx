@@ -1,7 +1,22 @@
-import "server-only";
+"use client";
 
-import { CircularProgress, CircularProgressProps } from "@mui/material";
-import { ReactNode, Suspense } from "react";
+import { CircularProgress, CircularProgressProps, Stack, Typography } from "@mui/material";
+import { sample } from "lodash";
+import { ReactNode, Suspense, useMemo } from "react";
+
+// Texte, welche beim Laden angezeigt werden können.
+const phrases = [
+    "Wir bereiten alles vor 👽",
+    "Synbase ist Liebe ♥️",
+    "Zeit ist relativ 🫠",
+    "Alles wird verkabelt 🪛",
+    "The art of doing nothing 🎨",
+    "AI übernimmt kurz die Welt 🤖",
+    "Zufälle machen das Leben spannend 🎲",
+    "Hallo du Mensch da draußen 👋🏼",
+    "Mir fällt nichts mehr ein 🥲",
+    "Komm mal Discord 🫶🏻",
+];
 
 interface LoadingProps {
     children?: ReactNode;
@@ -10,5 +25,20 @@ interface LoadingProps {
 }
 
 export const Loading = ({ children, circularProgressProps, fallback }: LoadingProps) => {
-    return <Suspense fallback={fallback ?? <CircularProgress {...circularProgressProps} />}>{children}</Suspense>;
+    const phrase = useMemo(() => sample(phrases), []);
+
+    return (
+        <Suspense
+            fallback={
+                fallback ?? (
+                    <Stack alignItems={"center"} gap={1}>
+                        <CircularProgress {...circularProgressProps} />
+                        <Typography variant={"subtitle2"}>{phrase}</Typography>
+                    </Stack>
+                )
+            }
+        >
+            {children}
+        </Suspense>
+    );
 };

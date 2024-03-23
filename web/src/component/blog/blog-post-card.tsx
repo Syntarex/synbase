@@ -1,17 +1,6 @@
 import "server-only";
 
-import {
-    Avatar,
-    Card,
-    CardActions,
-    CardContent,
-    CardHeader,
-    CardMedia,
-    Link,
-    Stack,
-    SxProps,
-    Typography,
-} from "@mui/material";
+import { Avatar, Card, CardContent, CardHeader, CardMedia, Link, Stack, SxProps, Typography } from "@mui/material";
 import { BlogPost } from "@synbase/database";
 import dayjs from "dayjs";
 import Image from "next/image";
@@ -67,7 +56,7 @@ export const BlogPostCard = ({ sx, value, actions, href }: BlogPostCardProps) =>
                 </Stack>
             </Stack>
 
-            {actions && <CardActions>{actions}</CardActions>}
+            {actions}
         </Stack>
     );
 

@@ -1,22 +1,27 @@
 "use client";
 
-import { Box, Stack, SxProps } from "@mui/material";
-import MuiMarkdown, { MuiMarkdownProps } from "mui-markdown";
+import { Box, BoxProps, Stack } from "@mui/material";
+import MuiMarkdown from "mui-markdown";
 import { Highlight, themes } from "prism-react-renderer";
 
-interface MarkdownProps extends Pick<MuiMarkdownProps, "hideLineNumbers"> {
-    sx?: SxProps;
+interface MarkdownProps {
+    /**
+     * Akzeptiert Markdown.
+     */
     children: string;
+    boxProps?: BoxProps;
 }
 
-export const Markdown = ({ sx, children, hideLineNumbers }: MarkdownProps) => {
+/**
+ * Rendert Markdown-Text als MUI-Komponenten.
+ */
+export const Markdown = ({ children, boxProps }: MarkdownProps) => {
     return (
-        <Box sx={sx}>
+        <Box {...boxProps}>
             <MuiMarkdown
                 Highlight={Highlight}
                 themes={themes}
                 prismTheme={themes.github}
-                hideLineNumbers={hideLineNumbers}
                 options={{
                     wrapper: ({ children }) => <Stack spacing={2}>{children}</Stack>,
                 }}

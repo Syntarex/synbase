@@ -19,7 +19,9 @@ const createQueryClient = () =>
 // Das Singleton des QueryClients auf clientseite
 let browserQueryClient: QueryClient | undefined = undefined;
 
-// Gibt einen QueryClient zurück
+/**
+ * Gibt einen clientseitig verwendbares QueryClient-Singleton zurück.
+ */
 export const getQueryClient = () => {
     // Serverseitig (Static Generation Rendering bei Build-Time des Projekts)
     if (typeof window === "undefined") {

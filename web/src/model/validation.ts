@@ -1,7 +1,6 @@
 import { Prisma } from "@synbase/database";
 import { boolean, object, string } from "yup";
 
-// TODO: Fehlermeldungen fehlen
 export const BlogPostValidation = object<Prisma.BlogPostCreateInput>({
     slug: string().required().max(60),
     title: string().required().max(60),

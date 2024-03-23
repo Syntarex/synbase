@@ -1,8 +1,8 @@
 import { Prisma } from "@synbase/database";
 import { boolean, object, string } from "yup";
-import { Where } from "./api";
+import { SearchParams } from "./api";
 
-export type GetBlogPosts = Where<Prisma.BlogPostWhereInput, "authorId">;
+export type GetBlogPosts = SearchParams<Prisma.BlogPostWhereInput, "authorId">;
 export type UpsertBlogPost = Pick<
     Prisma.BlogPostCreateInput,
     "id" | "author" | "content" | "description" | "isDraft" | "slug" | "title"

@@ -1,6 +1,6 @@
 "use client";
 
-import { SxProps, Typography } from "@mui/material";
+import { Box, SxProps } from "@mui/material";
 
 interface TestProps {
     sx?: SxProps;
@@ -10,5 +10,5 @@ interface TestProps {
  * Einfach eine Test-Komponente, welche zum schnellen Prototyping verwendet werden kann.
  */
 export const Test = ({ sx }: TestProps) => {
-    return <Typography sx={sx}>Test</Typography>;
+    return <Box sx={sx}>Test</Box>;
 };

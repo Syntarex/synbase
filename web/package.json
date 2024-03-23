@@ -36,6 +36,8 @@
     "react-dom": "^18.2.0",
     "rooks": "^7.14.1",
     "uploadthing": "^6.6.0",
+    "use-error-boundary": "^2.0.6",
+    "usehooks-ts": "^3.0.2",
     "yup": "^1.4.0"
   },
   "devDependencies": {

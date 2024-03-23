@@ -1,32 +1,19 @@
 "use client";
 
 import { Edit, Preview } from "@mui/icons-material";
-import {
-    FormControl,
-    FormLabel,
-    Paper,
-    Stack,
-    TextField,
-    TextFieldProps,
-    ToggleButton,
-    ToggleButtonGroup,
-} from "@mui/material";
+import { Paper, Stack, TextField, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { useState } from "react";
+import { InputProps } from "./form";
 import { Markdown } from "./markdown";
 
-interface MarkdownEditorProps extends Omit<TextFieldProps, "value"> {
-    value?: string;
-}
-
-export const MarkdownEditor = (props: MarkdownEditorProps) => {
+// TODO: JSDocs
+export const MarkdownEditor = (props: InputProps<string>) => {
     // Der Modus des Inhalts-Feldes
     const [contentMode, setContentMode] = useState<"edit" | "preview">("edit");
 
     return (
-        <FormControl disabled={props.disabled}>
+        <Stack>
             <Stack direction={"row"} alignItems={"flex-end"} justifyContent={"space-between"} spacing={1}>
-                <FormLabel error={props.error}>Inhalt</FormLabel>
-
                 <ToggleButtonGroup
                     exclusive
                     value={contentMode}
@@ -49,6 +36,6 @@ export const MarkdownEditor = (props: MarkdownEditorProps) => {
                     <Markdown>{props.value ?? ""}</Markdown>
                 </Paper>
             )}
-        </FormControl>
+        </Stack>
     );
 };

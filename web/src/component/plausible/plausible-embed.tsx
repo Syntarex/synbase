@@ -1,9 +1,10 @@
 "use client";
 
+import { ensure } from "@/util/string";
 import { Box, BoxProps } from "@mui/material";
 
+// TODO: Prüfen ob das TODO noch aktuell ist
 // TODO: Breite des iframe-Inhalts passt nicht und hat ein Padding
-// TODO: Embed-URL in Umgebungsvariable
 /**
  * Zeigt das Plausible Dashboard.
  */
@@ -21,9 +22,7 @@ export const PlausibleEmbed = (props: BoxProps) => {
         >
             <iframe
                 plausible-embed={"true"}
-                src={
-                    "https://plausible.io/share/synbase.io?auth=vGNcW5HXARZcTwYlWA6fn&embed=true&theme=dark&background=transparent"
-                }
+                src={ensure(process.env.PLAUSIBLE_IFRAME)}
                 loading={"lazy"}
                 style={{ width: "100%", height: "100%", border: 0 }}
             ></iframe>

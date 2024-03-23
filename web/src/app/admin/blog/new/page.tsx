@@ -1,6 +1,6 @@
 "use client";
 
-import { BlogPostEditor } from "@/component/blog/blog-post-editor";
+import { BlogPostForm } from "@/component/blog/blog-post-form";
 import { Stack, Typography } from "@mui/material";
 import { Prisma } from "@synbase/database";
 import { useCallback } from "react";
@@ -17,7 +17,7 @@ const AdminNewBlogPostPage = () => {
         <Stack spacing={2}>
             <Typography variant={"h1"}>Beitrag verfassen</Typography>
 
-            <BlogPostEditor
+            <BlogPostForm
                 value={{
                     content: "",
                     description: "",

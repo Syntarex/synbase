@@ -4,6 +4,9 @@ import { getEnv } from "@/util/server/env";
 import { SiYoutube } from "@icons-pack/react-simple-icons";
 import { Button, ButtonProps, SvgIcon } from "@mui/material";
 
+/**
+ * Ein Button, welcher auf den festen SyncTube-Raum weiterleitet.
+ */
 export const SyncTubeButton = (props: ButtonProps) => {
     const { href = getEnv("SYNCTUBE_URL") } = props;
 
@@ -13,7 +16,8 @@ export const SyncTubeButton = (props: ButtonProps) => {
             variant={"contained"}
             startIcon={
                 <SvgIcon>
-                    <SiYoutube />
+                    {/* TODO: Warum genau muss ich die beiden Properties angeben? */}
+                    <SiYoutube onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
                 </SvgIcon>
             }
             size={"large"}

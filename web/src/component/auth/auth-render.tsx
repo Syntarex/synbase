@@ -2,6 +2,7 @@
 
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { ReactNode } from "react";
+import { Loading } from "../common/loading";
 
 interface AuthRenderProps {
     children?: ReactNode;
@@ -12,7 +13,11 @@ interface AuthRenderProps {
 /**
  * Rendert Elemente, wenn Benutzer eingeloggt ist.
  */
-export const AuthRender = ({ children, renderOnLoading = null, renderOnUnauthenticated = null }: AuthRenderProps) => {
+export const AuthRender = ({
+    children,
+    renderOnLoading = <Loading />,
+    renderOnUnauthenticated = null,
+}: AuthRenderProps) => {
     const session = useUser();
 
     // Session lädt noch

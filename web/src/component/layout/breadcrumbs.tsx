@@ -6,7 +6,6 @@ import { compact, isEmpty } from "lodash";
 import { usePathname } from "next/navigation";
 import { useMemo } from "react";
 
-// TODO: Serverseitig möglich?
 // TODO: Zeigt nicht den Titel der Seite, sondern nur den Slug
 /**
  * Zeigt verlinkte Breadcrumbs zur aktuellen URL des Benutzers.

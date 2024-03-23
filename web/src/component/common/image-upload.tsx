@@ -1,9 +1,8 @@
 "use client";
 
 import { UploadRouter } from "@/app/api/uploadthing/core";
-import { fail } from "@/util/log";
 import { CloudUpload } from "@mui/icons-material";
-import { Button, FormControl, FormHelperText } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { generateReactHelpers, useDropzone } from "@uploadthing/react";
 import { isEmpty } from "lodash";
 import { useEffect, useState } from "react";
@@ -19,19 +18,16 @@ export const ImageUpload = () => {
     // Dateien zum Hochladen
     const [files, setFiles] = useState<File[]>([]);
 
-    // Gab es einen Upload-Fehler?
-    const [uploadFailed, setUploadFailed] = useState(false);
-
     // Nutze UploadThing um Upload-Prozess zu vereinfachen
     const { isUploading, permittedFileInfo, startUpload } = useUploadThing("imageUploader", {
         onClientUploadComplete: () => {
             setFiles([]);
-            setUploadFailed(false);
         },
         onUploadError: (error) => {
             setFiles([]);
-            setUploadFailed(true);
-            fail("onUploadError", error);
+
+            // TODO: Prüfen, ob ich das überhaupt tun muss
+            throw error;
         },
     });
 
@@ -55,19 +51,11 @@ export const ImageUpload = () => {
     });
 
     return (
-        <FormControl component={"div"} error={uploadFailed} {...getRootProps}>
+        <Box {...getRootProps}>
             <Button component={"label"} disabled={isUploading} variant={"contained"} startIcon={<CloudUpload />}>
                 Hochladen
                 <input {...getInputProps()} />
             </Button>
-
-            {!isUploading && permittedFileInfo?.config.image?.maxFileSize && (
-                <FormHelperText>
-                    {uploadFailed
-                        ? `Das hochgeladene Bild darf maximal ${permittedFileInfo.config.image.maxFileSize} groß sein.`
-                        : `Maximal ${permittedFileInfo.config.image.maxFileSize}`}
-                </FormHelperText>
-            )}
-        </FormControl>
+        </Box>
     );
 };

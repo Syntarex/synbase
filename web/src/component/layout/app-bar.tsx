@@ -47,7 +47,7 @@ export const AppBar = (props: MuiAppBarProps) => {
 
                         <Box>
                             <Loading>
-                                {/* Wir verwenden hier einen <a>-Tag, damit Next.js die Route nicht prefetched  */}
+                                {/* <a>-Tags, damit Next.js die Route nicht prefetched  */}
                                 <AuthRender
                                     renderOnUnauthenticated={
                                         <a href={"/api/auth/login"}>

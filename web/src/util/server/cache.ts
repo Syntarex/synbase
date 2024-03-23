@@ -1,3 +1,5 @@
+import "server-only";
+
 import { toString } from "lodash";
 import { revalidateTag, unstable_cache } from "next/cache";
 import { success } from "../log";
@@ -9,7 +11,11 @@ interface CacheOptions<Result, Param> {
     cacheTime?: number;
 }
 
-// TODO: JSDocs: Cached in QueryClient-Singleton und in NextJS-Cache
+/**
+ * Cached Daten, welche von `cacheFn` zurückgegeben werden zwischen.
+ * Der Cache kann mit `purgeCache` und dem entsprechenden `cacheKey` geleert werden.
+ * Die Daten werden außerdem in das serverseitig verfügbare Singleton von QueryClient gesetzt, sodass diese in Client-Komponenten prefetched sind.
+ */
 export function cache<Result = void, Param = void>({
     cacheKey,
     cacheFn,
@@ -39,7 +45,10 @@ export function cache<Result = void, Param = void>({
     };
 }
 
-// TODO: JSDocs
+/**
+ * Leert einen Cache.
+ * @param cacheKey Der `cacheKey`, welcher beim Erstellen des Caches, mithilfe von `cache()` angegeben wurde.
+ */
 export const purgeCache = (cacheKey: string) => {
     revalidateTag(cacheKey);
 };

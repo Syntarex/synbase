@@ -1,20 +1,20 @@
 import "server-only";
 
-import { Stack, SxProps } from "@mui/material";
+import { Stack, StackProps } from "@mui/material";
 import { Song } from "@synbase/clonehero";
 import { SongCard } from "./song-card";
 
 interface SongListProps {
-    sx?: SxProps;
+    stackProps?: StackProps;
 }
 
-export const SongList = async ({ sx }: SongListProps) => {
+export const SongList = async ({ stackProps }: SongListProps) => {
     // Lade die exportierten Clone Hero Songs
     const json = await import("@synbase/clonehero/songs.json");
     const songs: Song[] = json.default;
 
     return (
-        <Stack spacing={2}>
+        <Stack gap={2} {...stackProps}>
             {songs.map((song, index) => (
                 <SongCard key={`song-${index}`} value={song} />
             ))}

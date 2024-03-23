@@ -24,7 +24,7 @@ interface RouteDef<Output, Body, Params, SearchParams> {
 }
 
 /**
- * Erstellt eine API-Route.
+ * Erstellt eine API-Route und implementiert Standard-Verhalten.
  */
 export function buildRoute<
     Output extends object,

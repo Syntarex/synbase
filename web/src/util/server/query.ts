@@ -4,6 +4,6 @@ import { QueryClient } from "@tanstack/react-query";
 import { cache } from "react";
 
 /**
- * Serverseitiges Singleton des React Query Clients.
+ * Serverseitiges Singleton des React QueryClients.
  */
 export const getQueryClient = cache(() => new QueryClient());
