@@ -26,9 +26,8 @@ Wir sammeln Ideen was man auf synbase.io machen könnte.
 -   Plausible selbst hosten
 -   .dockerignore in Unterverzeichnissen möglich?
 -   AUTH0 tenant.yaml enthält Platzhalter für URLs. Pulled man die tenant-Config neu, sind diese allerdings weg. how to fix?
--   Prisma Error-Handling in API Routen
 -   NODE_TLS_REJECT_UNAUTHORIZED=0 ist kake aber ist ein Workaround. https://github.com/oven-sh/bun/issues/7200
--   Clone Hero Docker-Server konfigurierbar machen
+-   Aktuell ist next im Root-Package installiert damit die --turbo-Flag bei next dev funktioniert. Das ist echt ätzend.
 
 ## Web-TODOs before launch
 
