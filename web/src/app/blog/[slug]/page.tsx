@@ -2,7 +2,7 @@ import "server-only";
 
 import { Markdown } from "@/component/common/markdown";
 import { getBlogPostBySlug } from "@/data/server/blog-post";
-import { setBreadcrumb } from "@/data/server/breadcrumb";
+import { upsertBreadcrumb } from "@/data/server/breadcrumb";
 import { getProfile } from "@/data/server/profile";
 import { PageProps } from "@/model/next";
 import { Paper, Stack, Typography } from "@mui/material";
@@ -22,7 +22,7 @@ const BlogPostPage = async ({ params }: PageProps<{ slug: string }>) => {
         return notFound();
     }
 
-    await setBreadcrumb({ path: `/blog/${slug}`, title: blogPost.title });
+    await upsertBreadcrumb({ path: `/blog/${slug}`, title: blogPost.title });
 
     const author = await getProfile(blogPost.authorId);
 

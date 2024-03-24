@@ -1,10 +1,10 @@
 import "server-only";
 
-import { setBreadcrumb } from "@/data/server/breadcrumb";
+import { upsertBreadcrumb } from "@/data/server/breadcrumb";
 import { redirect } from "next/navigation";
 
 const AdminPage = async () => {
-    await setBreadcrumb({ path: "/admin", title: "Admin" });
+    await upsertBreadcrumb({ path: "/admin", title: "Admin" });
 
     redirect("/admin/plausible");
 };

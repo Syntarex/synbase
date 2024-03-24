@@ -1,11 +1,11 @@
 import "server-only";
 
 import { PlausibleEmbed } from "@/component/plausible/plausible-embed";
-import { setBreadcrumb } from "@/data/server/breadcrumb";
+import { upsertBreadcrumb } from "@/data/server/breadcrumb";
 import { Stack, Typography } from "@mui/material";
 
 const AdminPlausiblePage = async () => {
-    await setBreadcrumb({ path: "/admin/plausible", title: "Plausible" });
+    await upsertBreadcrumb({ path: "/admin/plausible", title: "Plausible" });
 
     return (
         <Stack gap={2}>
