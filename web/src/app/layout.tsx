@@ -1,3 +1,5 @@
+import "server-only";
+
 import { ErrorBoundary } from "@/component/common/error-boundary";
 import { Loading } from "@/component/common/loading";
 import { AppBar } from "@/component/layout/app-bar";
