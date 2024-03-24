@@ -5,13 +5,10 @@ import { getBlogPostQuery } from "@/data/client/blog-post";
 import { PageProps } from "@/model/next";
 import { Stack, Typography } from "@mui/material";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 
 // TODO: Delete-Button
 const AdminUpdateBlogPostPage = ({ params }: PageProps<{ id: string }>) => {
     const { data: blogPost } = useSuspenseQuery(getBlogPostQuery(params.id));
-
-    const { refresh } = useRouter();
 
     if (!blogPost) {
         return null;
@@ -31,7 +28,6 @@ const AdminUpdateBlogPostPage = ({ params }: PageProps<{ id: string }>) => {
                     title: blogPost.title,
                     isDraft: blogPost.isDraft,
                 }}
-                onSuccess={() => refresh()}
             />
         </Stack>
     );

@@ -1,7 +1,7 @@
 "use client";
 
 import { CircularProgress, CircularProgressProps, Stack, Typography } from "@mui/material";
-import { sample } from "lodash";
+import { isUndefined, sample } from "lodash";
 import { ReactNode, Suspense, useMemo } from "react";
 
 // Texte, welche beim Laden angezeigt werden können.
@@ -30,11 +30,13 @@ export const Loading = ({ children, circularProgressProps, fallback }: LoadingPr
     return (
         <Suspense
             fallback={
-                fallback ?? (
+                isUndefined(fallback) ? (
                     <Stack alignItems={"center"} gap={1}>
                         <CircularProgress {...circularProgressProps} />
                         <Typography variant={"subtitle2"}>{phrase}</Typography>
                     </Stack>
+                ) : (
+                    fallback
                 )
             }
         >

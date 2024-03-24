@@ -8,6 +8,12 @@ datasource db {
     url      = env("POSTGRES_URL")
 }
 
+model Breadcrumb {
+    id    String @id @default(uuid())
+    path  String @unique
+    title String
+}
+
 model Profile {
     id       String     @id @default(uuid())
     sub      String     @unique

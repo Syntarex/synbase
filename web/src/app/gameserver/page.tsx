@@ -3,6 +3,7 @@ import "server-only";
 import { ResponsiveImage } from "@/component/common/responsive-image";
 import { GameserverCard } from "@/component/gameserver/gameserver-card";
 import { CardGrid } from "@/component/layout/card-grid";
+import { setBreadcrumb } from "@/data/server/breadcrumb";
 import { getEnv } from "@/util/server/env";
 import { SiGoogledrive, SiSteam, SiXbox } from "@icons-pack/react-simple-icons";
 import { CloudDownload } from "@mui/icons-material";
@@ -10,6 +11,11 @@ import { Button, CardActions, CardContent, CardMedia, Stack, SvgIcon, Typography
 import { toNumber } from "lodash";
 
 const GameserverPage = async () => {
+    await setBreadcrumb({
+        path: "/gameserver",
+        title: "Game Server",
+    });
+
     return (
         <Stack gap={4}>
             <Typography variant={"h1"}>Game Server</Typography>

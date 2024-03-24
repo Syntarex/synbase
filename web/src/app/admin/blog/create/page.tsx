@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 const AdminCreateBlogPostPage = () => {
     const { data: me } = useSuspenseQuery(getProfileQuery("me"));
 
-    const { refresh } = useRouter();
+    const { replace } = useRouter();
 
     if (!me) {
         return null;
@@ -28,7 +28,7 @@ const AdminCreateBlogPostPage = () => {
                     title: "",
                     authorId: me.id,
                 }}
-                onSuccess={() => refresh()}
+                onSuccess={(blogPost) => replace(`/admin/blog/${blogPost.id}`)}
             />
         </Stack>
     );
