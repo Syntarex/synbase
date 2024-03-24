@@ -15,10 +15,9 @@ export const getBreadcrumbs = cache({
 /**
  * Speichert einen Titel, welcher für einen Pfad angezeigt wird.
  */
-export const upsertBreadcrumb = async (data: Prisma.BreadcrumbCreateInput) => {
+export const upsertBreadcrumb = async (data: Prisma.BreadcrumbCreateInput) =>
     await Database.breadcrumb.upsert({
         create: data,
         update: data,
         where: { path: data.path },
     });
-};
