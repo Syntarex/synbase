@@ -6,7 +6,7 @@ import { waitForPostgres } from "@jcoreio/wait-for-postgres";
  * database wird gestartet -> Skript wartet auf Erreichbarkeit -> Prisma migriert Schema ->  web wird gestartet
  */
 try {
-    console.log(
+    console.info(
         `Warte auf Datenbank: ${process.env.POSTGRES_URL?.replace(process.env.POSTGRES_PASSWORD as string, "<passwordhidden>")}`,
     );
 
@@ -18,7 +18,7 @@ try {
         timeout: 120 * 1000, // 2 Minuten
     });
 
-    console.log("Datenbank ist erreichbar 🚀");
+    console.info("Datenbank ist erreichbar 🚀");
 } catch (ex) {
     throw new Error(`Wir haben gewartet und gewartet.. Die Datenbank ist einfach nicht erreichbar. 😢`);
 }

@@ -1,10 +1,12 @@
+import "server-only";
+
 import { Logo } from "@/component/common/logo";
 import { DiscordButton } from "@/component/social/discord-button";
 import { orbitron } from "@/style/font";
 import { Fade, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 
-const Home = () => {
+const Home = async () => {
     return (
         <Stack pt={8} pb={4} px={4} alignItems={"center"} gap={8}>
             <Fade in timeout={1000}>
