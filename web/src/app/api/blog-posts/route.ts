@@ -11,7 +11,7 @@ export const GET = buildRoute<BlogPost[]>({
 });
 
 export const POST = buildRoute<BlogPost, UpsertBlogPost>({
-    requiredScopes: ["create:blog-post"],
+    requiredScopes: ["create:blog-posts"],
     bodyValidation: upsertBlogPostValidation,
     handler: async ({ body }) => await createBlogPost(body),
 });

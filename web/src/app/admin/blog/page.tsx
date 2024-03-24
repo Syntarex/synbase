@@ -3,13 +3,17 @@ import "server-only";
 import { BlogPostCard } from "@/component/blog/blog-post-card";
 import { CardGrid } from "@/component/common/card-grid";
 import { FabButton } from "@/component/common/fab-button";
-import { Add, Delete, Edit, Visibility } from "@mui/icons-material";
+import { getBlogPosts } from "@/data/server/blog-post";
+import { GetBlogPosts } from "@/model/blog-post";
+import { PageProps } from "@/model/next";
+import { Add, Edit, Visibility } from "@mui/icons-material";
 import { CardActions, IconButton, Stack, Typography } from "@mui/material";
-import Database from "@synbase/database";
+import { AppConfigDynamic } from "next/dist/build/utils";
 
-// TODO: Edit- und Delete-Button
-const AdminBlogPage = async () => {
-    const blogPosts = await Database.blogPost.findMany();
+export const dynamic: AppConfigDynamic = "force-dynamic";
+
+const AdminBlogPage = async ({ searchParams }: PageProps<unknown, GetBlogPosts>) => {
+    const blogPosts = await getBlogPosts(searchParams);
 
     return (
         <Stack gap={2}>
@@ -27,12 +31,8 @@ const AdminBlogPage = async () => {
                                         <Visibility />
                                     </IconButton>
 
-                                    <IconButton>
+                                    <IconButton href={`/admin/blog/${blogPost.id}`}>
                                         <Edit />
-                                    </IconButton>
-
-                                    <IconButton>
-                                        <Delete />
                                     </IconButton>
                                 </CardActions>
                             ),
@@ -41,7 +41,7 @@ const AdminBlogPage = async () => {
                 ))}
             </CardGrid>
 
-            <FabButton href={"/admin/blog/new"}>
+            <FabButton href={"/admin/blog/create"}>
                 <Add />
             </FabButton>
         </Stack>

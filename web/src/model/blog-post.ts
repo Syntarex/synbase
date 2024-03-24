@@ -4,8 +4,8 @@ import { SearchParams } from "./api";
 
 export type GetBlogPosts = SearchParams<Prisma.BlogPostWhereInput, "authorId">;
 export type UpsertBlogPost = Pick<
-    Prisma.BlogPostCreateInput,
-    "id" | "author" | "content" | "description" | "isDraft" | "slug" | "title"
+    Prisma.BlogPostUncheckedCreateInput,
+    "id" | "authorId" | "content" | "description" | "isDraft" | "slug" | "title"
 >;
 
 export const getBlogPostsValidation = object<GetBlogPosts>({
@@ -18,4 +18,5 @@ export const upsertBlogPostValidation = object<UpsertBlogPost>({
     isDraft: boolean().required(),
     slug: string().required().min(4).max(60),
     title: string().required().min(4).max(60),
+    authorId: string().required().uuid(),
 });

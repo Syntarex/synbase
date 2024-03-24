@@ -2,15 +2,17 @@ import "server-only";
 
 import { BlogPostCard } from "@/component/blog/blog-post-card";
 import { CardGrid } from "@/component/common/card-grid";
-import { Typography } from "@mui/material";
-import Database from "@synbase/database";
+import { getBlogPosts } from "@/data/server/blog-post";
+import { GetBlogPosts } from "@/model/blog-post";
+import { PageProps } from "@/model/next";
+import { Button, CardActions, Typography } from "@mui/material";
 import { isEmpty } from "lodash";
 
 /**
  * Zeigt einen Blog-Beitrag an.
  */
-const BlogPage = async () => {
-    const blogPosts = await Database.blogPost.findMany();
+const BlogPage = async ({ searchParams }: PageProps<unknown, GetBlogPosts>) => {
+    const blogPosts = await getBlogPosts(searchParams);
 
     if (isEmpty(blogPosts)) {
         return <Typography>Hier entsteht etwas tolles. 🫶</Typography>;
@@ -19,7 +21,17 @@ const BlogPage = async () => {
     return (
         <CardGrid>
             {blogPosts.map((blogPost) => (
-                <BlogPostCard key={`blog-post-${blogPost.id}`} value={blogPost} />
+                <BlogPostCard
+                    key={`blog-post-${blogPost.id}`}
+                    value={blogPost}
+                    slots={{
+                        cardActions: (
+                            <CardActions>
+                                <Button href={`/blog/${blogPost.slug}`}>Lesen</Button>
+                            </CardActions>
+                        ),
+                    }}
+                />
             ))}
         </CardGrid>
     );

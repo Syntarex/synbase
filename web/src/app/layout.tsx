@@ -1,4 +1,5 @@
 import { ErrorBoundary } from "@/component/common/error-boundary";
+import { Loading } from "@/component/common/loading";
 import { AppBar } from "@/component/layout/app-bar";
 import { Breadcrumbs } from "@/component/layout/breadcrumbs";
 import { QueryClientProvider } from "@/component/provider/query-client-provider";
@@ -49,7 +50,7 @@ const RootLayout = async ({ children }: LayoutProps) => {
                                         <Stack gap={4}>
                                             <Breadcrumbs />
 
-                                            {children}
+                                            <Loading>{children}</Loading>
 
                                             <Fade in timeout={3000}>
                                                 <Stack direction={"row"} justifyContent={"center"}>

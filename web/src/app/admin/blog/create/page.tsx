@@ -4,9 +4,12 @@ import { BlogPostForm } from "@/component/blog/blog-post-form";
 import { getProfileQuery } from "@/data/client/profile";
 import { Stack, Typography } from "@mui/material";
 import { useSuspenseQuery } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
-const AdminNewBlogPostPage = () => {
+const AdminCreateBlogPostPage = () => {
     const { data: me } = useSuspenseQuery(getProfileQuery("me"));
+
+    const { refresh } = useRouter();
 
     if (!me) {
         return null;
@@ -23,11 +26,12 @@ const AdminNewBlogPostPage = () => {
                     isDraft: true,
                     slug: "",
                     title: "",
-                    author: { connect: me },
+                    authorId: me.id,
                 }}
+                onSuccess={() => refresh()}
             />
         </Stack>
     );
 };
 
-export default AdminNewBlogPostPage;
+export default AdminCreateBlogPostPage;
