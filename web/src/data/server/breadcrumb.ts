@@ -1,6 +1,6 @@
 import "server-only";
 
-import { cache } from "@/util/server/cache";
+import { cache, purgeCache } from "@/util/server/cache";
 import Database, { Prisma } from "@synbase/database";
 
 /**
@@ -15,9 +15,14 @@ export const getBreadcrumbs = cache({
 /**
  * Speichert einen Titel, welcher für einen Pfad angezeigt wird.
  */
-export const upsertBreadcrumb = async (data: Prisma.BreadcrumbCreateInput) =>
-    await Database.breadcrumb.upsert({
+export const upsertBreadcrumb = async (data: Prisma.BreadcrumbCreateInput) => {
+    const result = await Database.breadcrumb.upsert({
         create: data,
         update: data,
         where: { path: data.path },
     });
+
+    purgeCache("breadcrumbs");
+
+    return result;
+};
