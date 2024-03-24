@@ -36,8 +36,6 @@ services:
             - DISABLE_GENERATE_SETTINGS=true
             - DELETE_OLD_BACKUPS=true
             - OLD_BACKUP_DAYS=7
-            - RCON_ENABLED=true
-            - RCON_PORT=25575
 
     clonehero:
         build:
