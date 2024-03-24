@@ -12,6 +12,7 @@ export const getBreadcrumbs = cache({
     cacheFn: async () => await Database.breadcrumb.findMany(),
 });
 
+// TODO: benutzer muss Seite erst neuladen damit ein neuer Breadcrumb am Start ist
 /**
  * Speichert einen Titel, welcher für einen Pfad angezeigt wird.
  * @param path Der relative Pfad zur Seite für welche ein Breadcrumb erzeugt wird.
