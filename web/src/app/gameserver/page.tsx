@@ -1,8 +1,8 @@
 import "server-only";
 
-import { CardGrid } from "@/component/common/card-grid";
 import { ResponsiveImage } from "@/component/common/responsive-image";
 import { GameserverCard } from "@/component/gameserver/gameserver-card";
+import { CardGrid } from "@/component/layout/card-grid";
 import { getEnv } from "@/util/server/env";
 import { SiGoogledrive, SiSteam, SiXbox } from "@icons-pack/react-simple-icons";
 import { CloudDownload } from "@mui/icons-material";

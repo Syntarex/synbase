@@ -1,8 +1,8 @@
 import "server-only";
 
 import { BlogPostCard } from "@/component/blog/blog-post-card";
-import { CardGrid } from "@/component/common/card-grid";
 import { FabButton } from "@/component/common/fab-button";
+import { CardGrid } from "@/component/layout/card-grid";
 import { getBlogPosts } from "@/data/server/blog-post";
 import { GetBlogPosts } from "@/model/blog-post";
 import { PageProps } from "@/model/next";
