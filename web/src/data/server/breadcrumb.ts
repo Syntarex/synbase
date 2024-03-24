@@ -12,9 +12,6 @@ export const getBreadcrumbs = cache({
 });
 
 // TODO: benutzer muss Seite erst neuladen damit ein neuer Breadcrumb am Start ist
-/**
- * Speichert einen Titel, welcher für einen Pfad angezeigt wird.
- */
 export const upsertBreadcrumb = async (data: Prisma.BreadcrumbCreateInput) => {
     const result = await Database.breadcrumb.upsert({
         create: data,
