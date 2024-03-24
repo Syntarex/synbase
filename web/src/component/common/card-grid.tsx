@@ -1,23 +1,23 @@
 import "server-only";
 
-import { Grid, SxProps } from "@mui/material";
+import { Grid, GridProps } from "@mui/material";
 import { isArray } from "lodash";
 import { ReactNode } from "react";
 
 interface CardGridProps {
-    sx?: SxProps;
     children?: ReactNode;
+    gridProps?: GridProps;
 }
 
-export const CardGrid = ({ sx, children }: CardGridProps) => {
+export const CardGrid = ({ children, gridProps }: CardGridProps) => {
     if (!children) {
         return null;
     }
 
     return (
-        <Grid container sx={sx} gap={4}>
+        <Grid container gap={4} alignItems={"stretch"} {...gridProps}>
             {(isArray(children) ? children : [children]).map((each, index) => (
-                <Grid item key={`card-grid-${index}`} sx={{ height: "100%" }} xs={12} sm={12} md={4} xl={4}>
+                <Grid item key={`card-grid-${index}`} xs={12} sm={12} md={4} xl={4}>
                     {each}
                 </Grid>
             ))}

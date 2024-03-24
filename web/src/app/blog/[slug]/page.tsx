@@ -35,7 +35,7 @@ const BlogPostPage = async ({ params }: PageProps<{ slug: string }>) => {
 
             <Typography>{blogPost.description}</Typography>
 
-            <Paper sx={{ p: 4 }}>
+            <Paper sx={{ p: 2 }}>
                 <Markdown>{blogPost.content}</Markdown>
             </Paper>
         </Stack>

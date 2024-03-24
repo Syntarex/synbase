@@ -18,7 +18,7 @@ const AdminUpdateBlogPostPage = ({ params }: PageProps<{ id: string }>) => {
     }
 
     return (
-        <Stack spacing={2}>
+        <Stack gap={4}>
             <Typography variant={"h1"}>Beitrag bearbeiten</Typography>
 
             <BlogPostForm

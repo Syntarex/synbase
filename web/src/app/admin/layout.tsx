@@ -12,7 +12,7 @@ const AdminLayout = async ({ children }: LayoutProps) => {
     });
 
     return (
-        <Stack spacing={4}>
+        <Stack gap={4}>
             <Tabs variant={"scrollable"}>
                 <Tab href={"/admin/plausible"} label={"Statistiken"} icon={<StackedLineChart />} />
                 <Tab href={"/admin/clonehero"} label={"Clone Hero"} icon={<QueueMusic />} />

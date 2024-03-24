@@ -3,8 +3,8 @@ import "server-only";
 import { Avatar, Card, CardContent, CardHeader, CardMedia, CardProps, Stack, Typography } from "@mui/material";
 import { BlogPost } from "@synbase/database";
 import dayjs from "dayjs";
-import Image from "next/image";
 import { ReactNode } from "react";
+import { ResponsiveImage } from "../common/responsive-image";
 
 interface BlogPostCardProps {
     value: BlogPost;
@@ -24,21 +24,15 @@ export const BlogPostCard = ({ value, slots = {}, cardProps }: BlogPostCardProps
         <Stack component={Card} {...cardProps}>
             <CardHeader sx={{ flexGrow: 1 }} title={title} subheader={description} />
 
-            <CardMedia sx={{ "& > img": { width: "100%", height: "auto" } }}>
+            <CardMedia>
                 {/* TODO: blog-Post Bild */}
-                <Image src={"/placeholder.png"} alt={title} width={1600} height={900} />
+                <ResponsiveImage src={"/placeholder.png"} alt={title} width={900} height={900} />
             </CardMedia>
 
-            <Stack
-                component={CardContent}
-                direction={"row"}
-                alignItems={"center"}
-                justifyContent={"space-between"}
-                width={"100%"}
-            >
+            <Stack component={CardContent} direction={"row"} alignItems={"center"} justifyContent={"space-between"}>
                 <Typography variant={"body2"}>{dayjs(updatedAt).format("DD. MMMM YYYY")}</Typography>
 
-                <Stack direction={"row"} alignItems={"center"} spacing={0.5}>
+                <Stack direction={"row"} alignItems={"center"} gap={0.5}>
                     <Avatar sx={{ width: 24, height: 24 }} src={"/heart.png"} />
 
                     <Typography variant={"body2"} fontWeight={600}>

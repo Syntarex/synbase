@@ -37,6 +37,9 @@ const AdminBlogPage = async ({ searchParams }: PageProps<unknown, GetBlogPosts>)
                                 </CardActions>
                             ),
                         }}
+                        cardProps={{
+                            sx: { height: "100%" },
+                        }}
                     />
                 ))}
             </CardGrid>

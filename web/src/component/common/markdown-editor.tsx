@@ -13,7 +13,7 @@ export const MarkdownEditor = (props: InputProps<string>) => {
 
     return (
         <Stack>
-            <Stack direction={"row"} alignItems={"flex-end"} justifyContent={"space-between"} spacing={1}>
+            <Stack direction={"row"} alignItems={"flex-end"} justifyContent={"space-between"} gap={1}>
                 <ToggleButtonGroup
                     exclusive
                     value={contentMode}

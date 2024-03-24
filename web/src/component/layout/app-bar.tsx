@@ -28,12 +28,12 @@ export const AppBar = (props: MuiAppBarProps) => {
                 <Toolbar disableGutters>
                     <Stack width={"100%"} direction={"row"} alignItems={"center"} gap={4}>
                         <MobileNavigation boxProps={{ p: 4 }} iconButtonProps={{ sx: { display: { md: "none" } } }}>
-                            <Navigation direction={"column"} spacing={4} />
+                            <Navigation direction={"column"} gap={4} />
                         </MobileNavigation>
 
                         <Box sx={{ width: { xs: "100%", md: "unset" } }}>
                             <Link href={"/"} color={"text.primary"} underline={"none"}>
-                                <Stack direction={"row"} alignItems={"center"} justifyContent={"center"} spacing={2}>
+                                <Stack direction={"row"} alignItems={"center"} justifyContent={"center"} gap={2}>
                                     <Logo size={32} boxProps={{ sx: { display: { xs: "none", md: "block" } } }} />
 
                                     <Typography variant={"h4"} fontFamily={orbitron.style.fontFamily} fontWeight={600}>

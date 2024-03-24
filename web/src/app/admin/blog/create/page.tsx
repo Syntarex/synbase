@@ -16,7 +16,7 @@ const AdminCreateBlogPostPage = () => {
     }
 
     return (
-        <Stack spacing={2}>
+        <Stack gap={4}>
             <Typography variant={"h1"}>Beitrag verfassen</Typography>
 
             <BlogPostForm

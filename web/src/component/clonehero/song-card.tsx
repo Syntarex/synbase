@@ -41,7 +41,7 @@ export const SongCard = ({ value, stackProps, slots = {} }: SongCardProps) => {
                 alignItems={"flex-start"}
             />
 
-            <Stack component={CardContent} spacing={1} alignItems={"flex-end"}>
+            <Stack component={CardContent} gap={1} alignItems={"flex-end"}>
                 <Tooltip title={"Genre | Länge"} placement={"left"}>
                     <Typography variant={"body2"} fontWeight={600}>
                         {Genre} | {FormattedSongLength}

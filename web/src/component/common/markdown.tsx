@@ -23,7 +23,7 @@ export const Markdown = ({ children, boxProps }: MarkdownProps) => {
                 themes={themes}
                 prismTheme={themes.github}
                 options={{
-                    wrapper: ({ children }) => <Stack spacing={2}>{children}</Stack>,
+                    wrapper: ({ children }) => <Stack gap={2}>{children}</Stack>,
                 }}
             >
                 {children}
