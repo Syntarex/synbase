@@ -14,7 +14,7 @@ export const GET = buildRoute<BlogPost>({
 export const PUT = buildRoute<BlogPost, UpsertBlogPost>({
     requiredScopes: ["update:blog-posts"],
     paramsValidation: idParamValidation,
-    bodyValidation: upsertBlogPostValidation,
+    bodyValidation: upsertBlogPostValidation.partial(),
     handler: async ({ body, params }) => await updateBlogPost(params.id, body),
 });
 
