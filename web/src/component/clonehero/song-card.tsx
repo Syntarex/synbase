@@ -1,8 +1,7 @@
 import "server-only";
 
-import { formatSongLength } from "@/util/clonehero";
+import { Song } from "@/model/clonehero";
 import { Card, CardContent, CardHeader, Stack, StackProps, Tooltip, Typography } from "@mui/material";
-import { Song } from "@synbase/clonehero";
 import { ReactNode } from "react";
 
 interface SongCardProps {
@@ -15,9 +14,6 @@ interface SongCardProps {
 
 export const SongCard = ({ value, stackProps, slots = {} }: SongCardProps) => {
     const { Name, Artist, Album, Year, Genre, Playlist, songlength } = value;
-
-    // Die Länge des Songs
-    const FormattedSongLength = formatSongLength(songlength);
 
     // Playlist ist im Format Playlist\Kapitel\Abschnitt eingeteilt
     // Der Playlist-Name
@@ -44,7 +40,7 @@ export const SongCard = ({ value, stackProps, slots = {} }: SongCardProps) => {
             <Stack component={CardContent} gap={1} alignItems={"flex-end"}>
                 <Tooltip title={"Genre | Länge"} placement={"left"}>
                     <Typography variant={"body2"} fontWeight={600}>
-                        {Genre} | {FormattedSongLength}
+                        {Genre} | {songlength}
                     </Typography>
                 </Tooltip>
 
