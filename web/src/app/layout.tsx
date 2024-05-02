@@ -33,7 +33,11 @@ const RootLayout = async ({ children }: LayoutProps) => {
     return (
         <html lang={"de"}>
             <head>
-                <PlausibleProvider domain={getEnv("PLAUSIBLE_DOMAIN")} />
+                <PlausibleProvider
+                    selfHosted
+                    customDomain={getEnv("PLAUSIBLE_HOST")}
+                    domain={getEnv("PLAUSIBLE_DOMAIN")}
+                />
             </head>
 
             <body>
