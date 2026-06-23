@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+@plugin "@iconify/tailwind4" {
+    prefix: false;
+    scale: 1;
+}
