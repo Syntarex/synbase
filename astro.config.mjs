@@ -1,10 +1,11 @@
+import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
 import https from "@vitejs/plugin-basic-ssl";
 import { defineConfig } from "astro/config";
 import favicon from "astro-favicons";
 
 const plugins = [tailwindcss(), https()];
-const integrations = [favicon()];
+const integrations = [react(), favicon()];
 
 /** @type {import('astro').AstroConfig} */
 export default defineConfig({
